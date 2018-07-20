@@ -44,7 +44,7 @@ public class Printer {
     }
 
     private String[] getHeader() {
-        String[] header = String[3];
+        String[] header = new String[3];
         String header1 = "";
         for(int i =0; i <= BOARDCHARWIDTH * 3 / 4; i++) {
             if(i < BOARDCHARWIDTH / 4) {
