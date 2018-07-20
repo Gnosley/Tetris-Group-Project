@@ -1,4 +1,4 @@
-import java.util.Scanner
+import java.util.Scanner;
 
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play

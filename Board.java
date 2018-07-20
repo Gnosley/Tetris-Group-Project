@@ -43,7 +43,14 @@ public class Board{
         return copyBoard;
     }
 
-    public boolean check(Tetromino movedTetromino) {
+    /**
+     * checkBoard method. Itertaes through tetromino block array and checks
+     * current board for collisions.
+     *
+     * @param  movedTetromino position of the moved tetromino
+     * @return                boolean indicating if new position is clear
+     */
+    public boolean checkBoard(Tetromino movedTetromino) {
         boolean canMove = false;
         Block[] blockArray = movedTetromino.getBlockArray();
         for(int block = 0; block < blockArray.length; block++){
@@ -56,6 +63,18 @@ public class Board{
         }
 		return canMove;
 	}
-
+    /**
+     * Checks if game is over (top row of board contains not-null piece)
+     * @return gameover boolean
+     */
+    public boolean isGameDone();{
+        boolean gameOver = false;
+        for(int col = 0; col < gameBoard[0].length; col++){
+            if(gameBoard[0][col] != null){
+                gameOver = true;
+            }
+        }
+    return gameOver;
+    }
 
 }
