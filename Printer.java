@@ -8,21 +8,21 @@ public class Printer {
     // Block Character
     private final String BLOCKCHAR = "\u2588";
     // Vertical Character
-    private final String VCHAR = "\u2588";
+    private final String VCHAR = "\u2551";
     // Horizontal Character
-    private final String HCHAR = "\u2554";
+    private final String HCHAR = "\u2550";
     // Top Right Character
-    private final String TRCHAR = "\u2554";
+    private final String TRCHAR = "\u2557";
     // Top Left Character
     private final String TLCHAR = "\u2554";
     // Bottom Right Character
-    private final String BRCHAR = "\u2554";
+    private final String BRCHAR = "\u255D";
     // Bottom Left Character
-    private final String BLCHAR = "\u2554";
+    private final String BLCHAR = "\u255A";
     // Horizontal to Vertical Upper Split
-    private final String HVUSPLIT = "\u2554";
+    private final String HVUSPLIT = "\u2569";
     // Vertical to Horizontal Right Split
-    private final String VHRSPLIT = "\u2554";
+    private final String VHRSPLIT = "\u2560";
 
     public void print(Tetromino currentTetromino,
                       Tetromino nextTetromino,
@@ -64,8 +64,9 @@ public class Printer {
         return header;
     }
 
-    public void main(String[] args) {
-        System.out.println(getHeader()[0]);
+    public static void main(String[] args) {
+        Printer printer = new Printer();
+        System.out.println(printer.getHeader()[0]);
     }
 
 }
