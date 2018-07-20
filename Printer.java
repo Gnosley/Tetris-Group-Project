@@ -24,24 +24,23 @@ public class Printer {
     // Vertical to Horizontal Right Split
     private final String VHRSPLIT = "\u2560";
 
-    public void print(Tetromino currentTetromino,
-                      Tetromino nextTetromino,
-                      Board board) {
-        
-    }
+    // public void print(Tetromino currentTetromino,
+    //                   Tetromino nextTetromino,
+    //                   Board board) {
+    // }
 
-    private Block[][] combine(Tetromino currentTetromino, Board board) {
-        Block[][] boardArray = board.getCurrentBoard();
-        Block[] tetromino = currentTetromino.getBlockArray();
+    // private Block[][] combine(Tetromino currentTetromino, Board board) {
+    //     Block[][] boardArray = board.getCurrentBoard();
+    //     Block[] tetromino = currentTetromino.getBlockArray();
 
-        for(Block block:tetromino) {
-            int x = block.getXPosition();
-            int y = block.getYPosition();
-            boardArray[y][x] = block;
-        }
+    //     for(Block block:tetromino) {
+    //         int x = block.getXPosition();
+    //         int y = block.getYPosition();
+    //         boardArray[y][x] = block;
+    //     }
 
-        return boardArray;
-    }
+    //     return boardArray;
+    // }
 
     private String[] getHeader() {
         String[] header = new String[3];
