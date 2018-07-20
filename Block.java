@@ -2,6 +2,11 @@ public class Block{
     private int color = 0;
     private int[] position ; // position is an array. [x, y]
 
+    public Block(int color, int x, int y) {
+        int[] position = {x, y};
+        this(color, position);
+    }
+
     public Block(int color, int[] position) {
         this.color = color;
         this.position = position;
