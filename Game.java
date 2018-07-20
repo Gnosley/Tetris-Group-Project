@@ -3,16 +3,14 @@ import java.util.Scanner;
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
-    private Printer printer; // The printer object, which is what will produce
-                             // graphics for text based game
 
-    public Game(boolean doPrettyPrint) {
+    public Game() {
 
         // the default constructor should generate a random tetromino.
         currentTetromino = new Tetromino();
         nextTetromino = new Tetromino();
 
-        printer = new Printer(doPrettyPrint);
+        // printer = new Printer(doPrettyPrint);
     }
 
 
@@ -23,7 +21,12 @@ public class Game {
         if (args[0].equals("pretty")) {
             doPrettyPrint = true;
         }
-        Game game = new Game(doPrettyPrint);
+
+        // The printer object, which is what will
+        // produce graphics for text based game
+        Printer printer = new Printer(doPrettyPrint); 
+
+        Game game = new Game();
 
         // initialize keyboard input
         Scanner input = new Scanner(System.in);
