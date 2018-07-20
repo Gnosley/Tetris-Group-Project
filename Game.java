@@ -42,7 +42,7 @@ public class Game {
 
             // board needs to check if there are any blocks in the board with a
             // y coordinate <= (board.height - 20). Returns true if there is.
-            gameDone = game.board.isGameDone();
+            gameDone = board.isGameDone();
 
             // Prints the board at the end of every turn.
             printer.print(currentTetromino, nextTetromino, board);
