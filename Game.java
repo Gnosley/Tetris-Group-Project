@@ -63,12 +63,12 @@ public class Game {
         // Tetromino.doMove() should return a NEW tetromino with the move applied
         Tetromino movedTetromino = this.currentTetromino.doMove(moveType);
 
-        // board.check() returns true if no blocks are currently in the way and
+        // board.checkBoard() returns true if no blocks are currently in the way and
         // no blocks in the given tetromino are out of board bounds.
-        if (board.check(movedTetromino)) {
+        if (board.checkBoard(movedTetromino)) {
             currentTetromino = movedTetromino;
         }
-        else if (moveType == 's' && board.check(movedTetromino) == false) {
+        else if (moveType == 's' && board.checkBoard(movedTetromino) == false) {
             board.update(currentTetromino); // if moving down causes it to hit a
                                             // block or go out of bounds, add
                                             // the current blocks in the
