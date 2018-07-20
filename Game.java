@@ -60,7 +60,7 @@ public class Game {
         // d moves the block right.
         // Right now this assumes valid character... WILL FIX.
 
-        // Tetromino.doMove() should return a NEW tetromino with the move applied.
+        // Tetromino.doMove() should return a NEW tetromino with the move applied
         Tetromino movedTetromino = this.currentTetromino.doMove(moveType);
 
         // board.check() returns true if no blocks are currently in the way and
