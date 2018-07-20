@@ -38,7 +38,7 @@ public class Game {
         while(!gameDone) {
             char gameMove = input.next().charAt(0);
 
-            game.tryMove(gameMove);
+            game.tryMove(gameMove, board);
 
             // board needs to check if there are any blocks in the board with a
             // y coordinate <= (board.height - 20). Returns true if there is.
@@ -51,7 +51,7 @@ public class Game {
 
     }
 
-    private void tryMove(char moveType) {
+    private void tryMove(char moveType, Board board) {
         // Possible chars are q, e, a, s, d.
         // q rotates counter-clockwise.
         // e rotates clockwise.
