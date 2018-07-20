@@ -1,15 +1,18 @@
 public class Block{
     private int color = 0;
-    private int[] position ; // position is an array. [x, y]
+    private int xPostition;
+    private int yPostition;
 
     public Block(int color, int x, int y) {
-        int[] position = {x, y};
-        this(color, position);
+        xPosition = x;
+        yPosition = y;
+        this.color = color;
     }
 
     public Block(int color, int[] position) {
         this.color = color;
-        this.position = position;
+        xPosition = position[0];
+        yPosition = position[1];
     }
 
     public void setColor(int color) {
@@ -20,12 +23,19 @@ public class Block{
         return this.color;
     }
 
-    public void setPosition(int[] position) {
-        this.position = position;
+    public void setXPosition(int x) {
+        xPosition = x;
     }
 
-    public int getPosition() {
-        return position; // privacy leak, but will deal with it.
+    public void setYPosition(int y) {
+        yPosition = y;
     }
 
+    public int getXPosition() {
+        return xPosition;
+    }
+
+    public int getYPosition() {
+        return yPosition;
+    }
 }
