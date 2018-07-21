@@ -4,14 +4,14 @@ public class Printer {
     private final int BOARDHEIGHT = 24;
     private final int PREVIEWTOP = 6;
     private final int PREVIEWBOT = 13;
-    private final int PREVIEWWIDTH = 4;
     // How many characters wide each block should be
     private final int BLOCKWIDTH = 2;
+    private final int PREVIEWWIDTH = 4 * BLOCKWIDTH;
     private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH + 2;
     // Block Character
     private final String BLOCKCHAR = "\u2588";
     // Spacing between Blocks
-    private final String BLOCKSPC = ""; // \u200A works well in emacs
+    private final String BLOCKSPC = "\u200A"; // \u200A works well in emacs
     // Vertical Character
     private final String VCHAR = "\u2551";
     // Horizontal Character
@@ -51,6 +51,11 @@ public class Printer {
             if (curRow <= controlStrings.length) {
                 rowString += controlStrings[curRow - 1];
             }
+
+            if (curRow == PREVIEWTOP) {
+                rowString += getPreviewTopBot(TRCHAR);
+            }
+
             if (curRow > PREVIEWTOP && curRow < PREVIEWBOT) {
                 if (curRow == PREVIEWTOP + 1 || curRow == PREVIEWBOT - 1) {
                     rowString += getPreviewRowString(new Block[4]);
@@ -60,6 +65,11 @@ public class Printer {
                     rowString += getPreviewRowString(previewArray[pIndex]);
                 }
             }
+
+            if (curRow == PREVIEWBOT) {
+                rowString += getPreviewTopBot(BRCHAR);
+            }
+
             outString[curRow] = rowString;
         }
 
@@ -104,6 +114,18 @@ public class Printer {
         }
         previewRowString += BLOCKSPC + VCHAR;
         return previewRowString;
+    }
+
+    public String getPreviewTopBot(String endPiece) {
+        String top = BLOCKSPC;
+        for(int i = 0; i < PREVIEWWIDTH; i++) {
+            if (i % 2 == 0) {
+                top += BLOCKSPC;
+            }
+            top += HCHAR;
+        }
+        top += BLOCKSPC + endPiece;
+        return top;
     }
 
     public String getBoardTop() {
