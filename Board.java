@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Board{
-    private Block[][] gameBoard;
+    private Block[][] gameBoard = new Block[24][10];
 
     /**
      * TetrisBoard object constructor.
