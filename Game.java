@@ -20,8 +20,10 @@ public class Game {
         Board board = new Board();
 
         boolean doPrettyPrint = false;
-        if (args[0].equals("pretty")) {
-            doPrettyPrint = true;
+        for (String arg:args) {
+            if (arg.equals("pretty")) {
+                doPrettyPrint = true;
+            }
         }
 
         // The printer object, which is what will
@@ -35,7 +37,7 @@ public class Game {
 
 
         // Print initial board.
-        printer.print(currentTetromino, nextTetromino, board);
+        printer.print(game.currentTetromino, game.nextTetromino, board);
 
         boolean gameDone = false;
 
@@ -74,7 +76,7 @@ public class Game {
             currentTetromino = movedTetromino;
         }
         else if (moveType == 's' && board.checkMove(movedTetromino) == false) {
-            board.update(currentTetromino); // if moving down causes it to hit a
+            board.updateBoard(currentTetromino); // if moving down causes it to hit a
                                             // block or go out of bounds, add
                                             // the current blocks in the
                                             // tetromino to the board.
