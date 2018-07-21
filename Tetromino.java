@@ -43,20 +43,22 @@ public class Tetromino {
     private int xReferencePosition;
     private int yReferencePosition;
     private int size;
+    private int type;
 
     public Tetromino(int xRef, int yRef) {
         xReferencePosition = xRef;
         yReferencePosition = yRef;
-        int tetroType = randomNum(0, 6);
-        size = tetrominoData[tetroType][0][1];
-        tetrominoArray = generateTetrominoArray(tetroType);
+        type = randomNum(0, 6);
+        size = tetrominoData[type][0][1];
+        tetrominoArray = generateTetrominoArray(type);
     }
 
     public Tetromino(Tetromino tetromino) {
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
-        this.tetrominoArray = tetromino.getBlockArray();
+        this.tetrominoArray = generateTetrominoArray(type);
         this.size = tetromino.getSize();
+        this.type = tetromino.getType();
     }
 
     private int randomNum(int start, int end) {
@@ -143,7 +145,7 @@ public class Tetromino {
 
     public Block[] getBlockArray() {
         Block[] copy = Arrays.copyOf(tetrominoArray, tetrominoArray.length);
-        return copy; // fix with Arrays.copyOf();
+        return copy;
     }
 
     public int getXReference() {
@@ -156,6 +158,10 @@ public class Tetromino {
 
     public int getSize() {
         return size;
+    }
+
+    public int getType() {
+        return type;
     }
 
 }
