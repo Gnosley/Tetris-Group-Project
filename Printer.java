@@ -36,10 +36,21 @@ public class Printer {
         Block[][] previewArray = createPreviewArray(nextTetromino);
         String[] outString = new String[22];
         outString[0] = getBoardTop();
+
+        String[] controlStrings = new String[5];
+        controlStrings[0] = "Controls:\t'a' - move left";
+        controlStrings[1] = "\t\t's' - move down";
+        controlStrings[2] = "\t\t'd' - move right";
+        controlStrings[3] = "\t\t'e' - rotate clockwise";
+        controlStrings[4] = "\t\t'q' - rotate counter-clockwise";
+
         for (int i = 4; i < BOARDHEIGHT; i++) {
             String rowString = "";
             int curRow = i - 3;
             rowString += getBoardRow(combinedBoard[i], curRow);
+            if (curRow <= controlStrings.length) {
+                rowString += controlStrings[curRow - 1];
+            }
             if (curRow > PREVIEWTOP && curRow < PREVIEWBOT) {
                 if (curRow == PREVIEWTOP + 1 || curRow == PREVIEWBOT - 1) {
                     rowString += getPreviewRowString(new Block[4]);
@@ -53,6 +64,7 @@ public class Printer {
         }
 
         outString[21] = getBoardBot();
+
 
         for(String row:outString) {
             System.out.println(row);
