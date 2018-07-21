@@ -67,8 +67,7 @@ public class Tetromino {
 
     private Block[] generateTetrominoArray(int num) {
         if(num < 0 || num > 6) num = 0;
-        int color = tetrominoData[num][0][0]; // [type][0 = info][0 = color]
-        // size = tetrominoData[num][0][1];  // [type][0 = info][1 = color]
+        int color = tetrominoData[num][0][0]; 
         Block[] tetrominoArray = new Block[4];
         for (int i=1; i< tetrominoData[num].length; i++) {
             int x = tetrominoData[num][i][0];
