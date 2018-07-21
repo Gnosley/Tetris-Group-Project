@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Tetromino {
     // {color, size} {block1} {block 2} {block 3} {block 4}
     private final int[][][] tetrominoData = {
@@ -140,7 +142,9 @@ public class Tetromino {
     }
 
     public Block[] getBlockArray() {
-        return this.tetrominoArray; // fix with Arrays.copyOf();
+        Block[] copy = Arrays.copyOf(tetrominoArray, tetrominoArray.length);
+        System.out.println(copy == tetrominoArray);
+        return copy; // fix with Arrays.copyOf();
     }
 
     public int getXReference() {
