@@ -26,7 +26,7 @@ public class Game {
 
         // The printer object, which is what will
         // produce graphics for text based game
-        Printer printer = new Printer(doPrettyPrint); 
+        // Printer printer = new Printer(doPrettyPrint); 
 
         Game game = new Game();
 
@@ -35,7 +35,7 @@ public class Game {
 
 
         // Print initial board.
-        printer.print(currentTetromino, nextTetromino, board);
+        Printer.print(currentTetromino, nextTetromino, board);
 
         boolean gameDone = false;
 
@@ -50,7 +50,7 @@ public class Game {
             gameDone = board.isGameDone();
 
             // Prints the board at the end of every turn.
-            printer.print(currentTetromino, nextTetromino, board);
+            Printer.print(currentTetromino, nextTetromino, board);
         }
         System.out.println("Game Over!");
 
