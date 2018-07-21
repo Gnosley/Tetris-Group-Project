@@ -40,17 +40,21 @@ public class Tetromino {
     private Block[] tetrominoArray;
     private int xReferencePosition;
     private int yReferencePosition;
+    private int size;
 
     public Tetromino(int xRef, int yRef) {
         xReferencePosition = xRef;
         yReferencePosition = yRef;
-        tetrominoArray = generateTetrominoArray(randomNum(0, 6));
+        int tetroType = randomNum(0, 6);
+        size = tetroMinoData[tetroType][0][1];
+        tetrominoArray = generateTetrominoArray(tetroType);
     }
 
     public Tetromino(Tetromino tetromino) {
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
+        this.size = tetromino.getSize();
     }
 
     private int randomNum(int start, int end) {
@@ -64,7 +68,7 @@ public class Tetromino {
     private Block[] generateTetrominoArray(int num) {
         if(num < 0 || num > 6) num = 0;
         int color = tetrominoData[num][0][0]; // [type][0 = info][0 = color]
-        int size = tetrominoData[num][0][1];  // [type][0 = info][1 = color]
+        // size = tetrominoData[num][0][1];  // [type][0 = info][1 = color]
         Block[] tetrominoArray = new Block[4];
         for (int i=1; i< tetrominoData[num].length; i++) {
             int x = tetrominoData[num][i][0];
@@ -78,15 +82,31 @@ public class Tetromino {
         return tetrominoArray;
     }
 
-    // TODO
+    // DONE not tested
     private void rotate(char direction) {
-        if (direction == 'q') {
-            return;
-        } else if (direction == 'e') {
-            return;
-        }
         // We can rotate counter clockwise by {x, y} -> {y, size - 1 - x}
         // We can rotate clockwise by {x, y} -> {size - 1 - y, x}
+        int rotSize = size - 1; // for the function to rotate we need size - 1
+        for(Block block:tetrominoArray) {
+            int x = block.getXPosition();
+            int y = block.getYPosition();
+            int newX = y - yReferencePosition; // subtract reference positions
+            int newY = x - xReferencePosition; // for rotation maths to work.
+
+            // counter clockwise
+            if (direction == 'q') {
+                newY = rotSize - newY;
+            }
+
+            // clockwise
+            else if (direction == 'e') {
+                newX = rotSize - newX;
+            }
+            newX += xReferencePosition;
+            newY += yReferencePosition;
+            block.setXPosition(newX);
+            block.setYPosition(newY);
+        }
     }
 
     private void move(char direction) {
@@ -130,6 +150,10 @@ public class Tetromino {
 
     public int getYReference() {
         return yReferencePosition;
+    }
+
+    public int getSize() {
+        return size;
     }
 
 }
