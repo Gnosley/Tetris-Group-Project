@@ -79,8 +79,8 @@ public class Board{
     public boolean checkMove(Tetromino movedTetromino) {
         boolean canMove = false;
         Block[] blockArray = movedTetromino.getBlockArray();
-        for(int block = 0; block < blockArray.length; block++){
-            if(gameBoard[blockArray[block].getXPosition()][blockArray[block].getYPosition()] == null){
+        for(int b = 0; b < blockArray.length; b++){
+            if(gameBoard[blockArray[b].getYPosition()][blockArray[b].getXPosition()] == null){
                 canMove = true;
             }
             else{
