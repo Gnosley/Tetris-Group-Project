@@ -96,7 +96,7 @@ public class Printer {
 
     public String getBoardTop() {
         String top = TLCHAR;
-        for(int i = 0; i < BOARDWIDTH; i++) {
+        for(int i = 0; i < BOARDCHARWIDTH - 2; i++) {
             if (i % 2 == 0) {
                 top += BLOCKSPC;
             }
@@ -108,7 +108,7 @@ public class Printer {
 
     public String getBoardBot() {
         String bot = BLCHAR;
-        for(int i = 0; i < BOARDWIDTH; i++) {
+        for(int i = 0; i < BOARDCHARWIDTH - 2; i++) {
             if (i % 2 == 0) {
                 bot += BLOCKSPC;
             }
