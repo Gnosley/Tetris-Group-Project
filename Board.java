@@ -79,14 +79,19 @@ public class Board{
     public boolean checkMove(Tetromino movedTetromino) {
         boolean canMove = false;
         Block[] blockArray = movedTetromino.getBlockArray();
-        for(int b = 0; b < blockArray.length; b++){
-            if(gameBoard[blockArray[b].getYPosition()][blockArray[b].getXPosition()] == null){
-                canMove = true;
+        try{
+            for(int b = 0; b < blockArray.length; b++){
+                if(gameBoard[blockArray[b].getYPosition()][blockArray[b].getXPosition()] == null){
+                    canMove = true;
+                }
+                else{
+                    canMove = false;
+                }
             }
-            else{
-                canMove = false;
-            }
+        } catch(ArrayIndexOutOfBoundsException e){
+            canMove = false;
         }
+
 		return canMove;
 	}
 
