@@ -29,35 +29,47 @@ public class Printer {
     // Vertical to Horizontal Right Split
     private final String VHRSPLIT = "\u2560";
 
-    public void print(Tetromino currentTetromino,
-                      Tetromino nextTetromino,
-                      Board board) {
-        Block[][] combinedBoard = combine(currentTetromino, board);
-        Block[][] previewArray = createPreviewArray(nextTetromino);
-        String[] outString = new String[22];
-        outString[0] = getBoardTop;
-        for (int i = 4; i < BOARDHEIGHT; i++) {
-            String rowString = "";
-            int curRow = i - 3;
-            rowString += getBoardRow(combinedBoard[i], curRow);
-            if (curRow > PREVIEWTOP && curRow < PREVIEWBOT) {
-                if (curRow == PREVIEWTOP + 1 || curRow == PREVIEWBOT - 1) {
-                    rowString += getPreviewRowString(new Block[4]);
+    public void print(Tetromino currentTetromino, Tetromino nextTetromino, Board board) {
+        Block[][] boardArray = board.getCurrentBoard();
+        for(Block[] row:boardArray) {
+            for(Block block:row) {
+                if(block == null){
+                    System.out.print(" | ");
                 }
-                else {
-                    int pIndex = curRow - PREVIEWTOP - 2;
-                    rowString += getPreviewRowString(previewArray[pIndex]);
-                }
+                else System.out.print(" " + block.getColor() + " ");
             }
-            outString[curRow] = rowString;
-        }
-
-        outString[21] = getBoardBot;
-
-        for(String row:outString) {
-            System.out.println(row);
+            System.out.println();
         }
     }
+    // public void print(Tetromino currentTetromino,
+    //                   Tetromino nextTetromino,
+    //                   Board board) {
+    //     Block[][] combinedBoard = combine(currentTetromino, board);
+    //     Block[][] previewArray = createPreviewArray(nextTetromino);
+    //     String[] outString = new String[22];
+    //     outString[0] = getBoardTop();
+    //     for (int i = 4; i < BOARDHEIGHT; i++) {
+    //         String rowString = "";
+    //         int curRow = i - 3;
+    //         rowString += getBoardRow(combinedBoard[i], curRow);
+    //         if (curRow > PREVIEWTOP && curRow < PREVIEWBOT) {
+    //             if (curRow == PREVIEWTOP + 1 || curRow == PREVIEWBOT - 1) {
+    //                 rowString += getPreviewRowString(new Block[4]);
+    //             }
+    //             else {
+    //                 int pIndex = curRow - PREVIEWTOP - 2;
+    //                 rowString += getPreviewRowString(previewArray[pIndex]);
+    //             }
+    //         }
+    //         outString[curRow] = rowString;
+    //     }
+
+    //     outString[21] = getBoardBot();
+
+    //     for(String row:outString) {
+    //         System.out.println(row);
+    //     }
+    // }
 
     private Block[][] combine(Tetromino currentTetromino, Board board) {
         Block[][] boardArray = board.getCurrentBoard();
