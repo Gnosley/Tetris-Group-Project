@@ -35,6 +35,10 @@ public class Board{
 
     }
 
+    /**
+     * Private updateBoard method to avoid direct access
+     * @param changedBoard board to update with
+     */
     private void updateBoardPrivate(Block[][] changedBoard){
         this.gameBoard = changedBoard;
     }
@@ -100,7 +104,11 @@ public class Board{
         return gameOver;
     }
 
-    public boolean checkBoard(){
+    /**
+     * Checks board for full rows
+     * @return boolean
+     */
+    private boolean checkBoard(){
         boolean doneBoardCheck = false;
         for(int row = 0; row < this.gameBoard.length; row++){
             if(this.checkRowFull(row)){
@@ -134,7 +142,11 @@ public class Board{
         }
     }
 
-    public void clearRow(int rowClear){
+    /**
+     * Clears full row
+     * @param rowClear specified row
+     */
+    private void clearRow(int rowClear){
         Board tempBoard = new Board();
         tempBoard.gameBoard = this.copyBoard();
         for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
