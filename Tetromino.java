@@ -46,7 +46,7 @@ public class Tetromino {
         xReferencePosition = xRef;
         yReferencePosition = yRef;
         int tetroType = randomNum(0, 6);
-        size = tetroMinoData[tetroType][0][1];
+        size = tetrominoData[tetroType][0][1];
         tetrominoArray = generateTetrominoArray(tetroType);
     }
 
