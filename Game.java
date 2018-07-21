@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
+    private static final int startingX = 3;
+    private static final int startingY = 0;
 
     public Game() {
 
         // the default constructor should generate a random tetromino.
-        currentTetromino = new Tetromino();
-        nextTetromino = new Tetromino();
+        currentTetromino = new Tetromino(startingX, startingY);
+        nextTetromino = new Tetromino(startingX, startingY);
 
         // printer = new Printer(doPrettyPrint);
     }
@@ -78,7 +80,7 @@ public class Game {
                                             // tetromino to the board.
 
             currentTetromino = nextTetromino;
-            nextTetromino = new Tetromino(); // initialize a new random Tetromino
+            nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
     }
 }
