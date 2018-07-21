@@ -79,19 +79,18 @@ public class Board{
     public boolean checkMove(Tetromino movedTetromino) {
         boolean canMove = false;
         Block[] blockArray = movedTetromino.getBlockArray();
-        //try{
+        try{
             for(int b = 0; b < blockArray.length; b++){
-                int blockYPos = blockArray[b].getYPosition();
-                int blockXPos = blockArray[b].getXPosition();
-                if((blockYPos < 24) && (blockXPos > 0 && blockXPos < 10)){
-                    if(gameBoard[blockYPos][blockXPos] == null){
-                        canMove = true;
-                    }
+                if(gameBoard[blockArray[b].getYPosition()][blockArray[b].getXPosition()] == null){
+                    canMove = true;
                 }
+                else{
+                    canMove = false;
+                }
+            }
+        } catch(ArrayIndexOutOfBoundsException e){
+            canMove = false;
         }
-        //} catch(ArrayIndexOutOfBoundsException e){
-            //canMove = false;
-        //}
 
 		return canMove;
 	}
@@ -174,4 +173,6 @@ public class Board{
             }
         }
     }
+
+
 }
