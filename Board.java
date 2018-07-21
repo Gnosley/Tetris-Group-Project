@@ -1,7 +1,9 @@
 import java.util.Arrays;
 
 public class Board{
-    private Block[][] gameBoard = new Block[24][10];
+    private final static int WIDTH = 10;
+    private final static int HEIGHT = 24;
+    private Block[][] gameBoard = new Block[HEIGHT][WIDTH];
 
     /**
      * TetrisBoard object constructor.
@@ -9,7 +11,7 @@ public class Board{
      * start of newgame)
      */
     public void Board(){
-        Block[][] newBoard = new Block[24][10];
+        Block[][] newBoard = new Block[HEIGHT][WIDTH];
         this.gameBoard = newBoard;
     }
 
@@ -139,7 +141,7 @@ public class Board{
                 counter++;
             }
         }
-        if(counter == 10){  //if all 10 blocks are full
+        if(counter == WIDTH){  //if all 10 blocks are full
             return true;
         }
         else{
