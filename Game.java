@@ -72,10 +72,11 @@ public class Game {
 
         // board.checkBoard() returns true if no blocks are currently in the way and
         // no blocks in the given tetromino are out of board bounds.
-        if (board.checkMove(movedTetromino)) {
+        boolean canMove = board.checkMove(movedTetromino);
+        if (canMove) {
             currentTetromino = movedTetromino;
         }
-        else if (moveType == 's' && board.checkMove(movedTetromino) == false) {
+        else if (moveType == 's' && !canMove) {
             board.updateBoard(currentTetromino); // if moving down causes it to hit a
                                             // block or go out of bounds, add
                                             // the current blocks in the
