@@ -143,7 +143,6 @@ public class Tetromino {
 
     public Block[] getBlockArray() {
         Block[] copy = Arrays.copyOf(tetrominoArray, tetrominoArray.length);
-        System.out.println(copy == tetrominoArray);
         return copy; // fix with Arrays.copyOf();
     }
 
