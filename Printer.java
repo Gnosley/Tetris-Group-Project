@@ -35,7 +35,7 @@ public class Printer {
         Block[][] combinedBoard = combine(currentTetromino, board);
         Block[][] previewArray = createPreviewArray(nextTetromino);
         String[] outString = new String[22];
-        outString[0] = getBoardTop;
+        outString[0] = getBoardTop();
         for (int i = 4; i < BOARDHEIGHT; i++) {
             String rowString = "";
             int curRow = i - 3;
@@ -52,7 +52,7 @@ public class Printer {
             outString[curRow] = rowString;
         }
 
-        outString[21] = getBoardBot;
+        outString[21] = getBoardBot();
 
         for(String row:outString) {
             System.out.println(row);
