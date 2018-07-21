@@ -1,7 +1,7 @@
 public class Block{
     private int color = 0;
-    private int xPostition;
-    private int yPostition;
+    private int xPosition;
+    private int yPosition;
 
     public Block(int color, int x, int y) {
         xPosition = x;
