@@ -5,11 +5,12 @@ public class Board{
 
     /**
      * TetrisBoard object constructor.
-     * Initializes new board. (should only be called for start of newgame)
+     * Initializes new board. (should only be called outside of class for
+     * start of newgame)
      */
     public void Board(){
-        Block[][] board = new Block[24][10];
-        this.gameBoard = gameBoard;
+        Block[][] newBoard = new Block[24][10];
+        this.gameBoard = newBoard;
     }
 
     /**
@@ -17,40 +18,61 @@ public class Board{
      * @param gameBoard board used to update instance variable
      */
     public void updateBoard(Tetromino currentTetromino){
-        this.gameBoard = gameBoard;
+        Board tempBoard = new Board();
+        tempBoard.gameBoard = this.copyBoard();
+        Block[] currentTetArray = currentTetromino.getBlockArray();
+        for(int b = 0; b < currentTetArray.length; b++){
+            int x = currentTetArray[b].getXPosition();
+            int y = currentTetArray[b].getYPosition();
+            tempBoard.gameBoard[x][y] = currentTetArray[b];
+        }
+        this.updateBoardPrivate(tempBoard.gameBoard);
+        boolean doneBoardCheck = false;
+        do{
+            doneBoardCheck = this.checkBoard();
+        }
+        while(!doneBoardCheck);
+
     }
+
+    private void updateBoardPrivate(Block[][] changedBoard){
+        this.gameBoard = changedBoard;
+    }
+
+
     /**
      * Copy method for gameBoard. Prevents privacy leaks when board is being
      * passed around.
-     * @param  gameBoard current gameBoard (instance variable)
      * @return           copy of gameBoard
      */
-    private Block[][] copyBoard(Block[][] gameBoard){
-        Block[][] tempBoard = new board();
-        for(int row = 0; row < tempBoard.length; row++){
-            for(int col = 0; col < tempBoard[0].length; col++){
-                tempBoard[row][col] = gameBoard[row][col];
+    private Block[][] copyBoard(){
+        Board tempBoard = new Board();
+        for(int row = 0; row < tempBoard.gameBoard.length; row++){
+            for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
+                tempBoard.gameBoard[row][col] = this.gameBoard[row][col];
             }
         }
-        return tempBoard;
+        return tempBoard.gameBoard;
     }
+
     /**
      * Getter method for the current gameBoard
      * @return copy of the current Board
      */
     public Block[][] getCurrentBoard(){
-        Block[][] copyBoard = copyBoard(this.gameBoard);
-        return copyBoard;
+        Board copyBoard = new Board();
+        copyBoard.gameBoard = this.copyBoard();
+        return copyBoard.gameBoard;
     }
 
     /**
-     * checkBoard method. Itertaes through tetromino block array and checks
+     * checkMove method. Itertaes through tetromino block array and checks
      * current board for collisions.
      *
      * @param  movedTetromino position of the moved tetromino
      * @return                boolean indicating if new position is clear
      */
-    public boolean checkBoard(Tetromino movedTetromino) {
+    public boolean checkMove(Tetromino movedTetromino) {
         boolean canMove = false;
         Block[] blockArray = movedTetromino.getBlockArray();
         for(int block = 0; block < blockArray.length; block++){
@@ -63,18 +85,77 @@ public class Board{
         }
 		return canMove;
 	}
+
     /**
      * Checks if game is over (top row of board contains not-null piece)
      * @return gameover boolean
      */
-    public boolean isGameDone();{
+    public boolean isGameDone(){
         boolean gameOver = false;
         for(int col = 0; col < gameBoard[0].length; col++){
-            if(gameBoard[0][col] != null){
+            if(gameBoard[3][col] != null){   //ignores top 4 rows (outside of playable area)
                 gameOver = true;
             }
         }
-    return gameOver;
+        return gameOver;
     }
+
+    public boolean checkBoard(){
+        boolean doneBoardCheck = false;
+        for(int row = 0; row < this.gameBoard.length; row++){
+            if(this.checkRowFull(row)){
+                this.clearRow(row);  //if row is full, clear it
+            }
+            else{
+                doneBoardCheck = true;
+            }
+        }
+        return doneBoardCheck;
+    }
+
+
+/**
+ * Checks if specified row is full
+ * @param  rowCheck board row to check
+ * @return          boolean (True = full)
+ */
+    private boolean checkRowFull(int rowCheck){
+        int counter = 0;
+        for(int col = 0; col < this.gameBoard[0].length; col++){
+            if(this.gameBoard[rowCheck][col] != null){
+                counter++;
+            }
+        }
+        if(counter == 10){  //if all 10 blocks are full
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void clearRow(int rowClear){
+        Board tempBoard = new Board();
+        tempBoard.gameBoard = this.copyBoard();
+        for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
+            tempBoard.gameBoard[rowClear][col] = null;    //fills row with null
+        }
+        tempBoard.dropRow(rowClear);
+        this.updateBoardPrivate(tempBoard.gameBoard);
+
+    }
+
+/**
+ * Drops indicated row after clearing
+ * @param rowClear specified row to drop into (recently cleared)
+ */
+    private void dropRow(int rowCleared){
+        for(int row = rowCleared; row >= 0; row--){
+            for(int col = 0; col < this.gameBoard[0].length; col++){
+                this.gameBoard[row][col] = this.gameBoard[row-1][col]; //fills backwards
+            }
+        }
+    }
+
 
 }
