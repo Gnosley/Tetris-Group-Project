@@ -2,11 +2,16 @@ public class Printer {
 
     private final int BOARDWIDTH = 10;
     private final int BOARDHEIGHT = 24;
+    private final int PREVIEWTOP = 6;
+    private final int PREVIEWBOT = 13;
+    private final int PREVIEWWIDTH = 4;
     // How many characters wide each block should be
     private final int BLOCKWIDTH = 2;
-    private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH;
+    private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH + 2;
     // Block Character
     private final String BLOCKCHAR = "\u2588";
+    // Spacing between Blocks
+    private final String BLOCKSPC = ""; // \u200A works well in emacs
     // Vertical Character
     private final String VCHAR = "\u2551";
     // Horizontal Character
@@ -24,48 +29,119 @@ public class Printer {
     // Vertical to Horizontal Right Split
     private final String VHRSPLIT = "\u2560";
 
-    // public void print(Tetromino currentTetromino,
-    //                   Tetromino nextTetromino,
-    //                   Board board) {
-    // }
-
-    // private Block[][] combine(Tetromino currentTetromino, Board board) {
-    //     Block[][] boardArray = board.getCurrentBoard();
-    //     Block[] tetromino = currentTetromino.getBlockArray();
-
-    //     for(Block block:tetromino) {
-    //         int x = block.getXPosition();
-    //         int y = block.getYPosition();
-    //         boardArray[y][x] = block;
-    //     }
-
-    //     return boardArray;
-    // }
-
-    private String[] getHeader() {
-        String[] header = new String[3];
-        String header1 = "";
-        for(int i =0; i <= BOARDCHARWIDTH * 3 / 4; i++) {
-            if(i < BOARDCHARWIDTH / 4) {
-                header1 += " ";
+    public void print(Tetromino currentTetromino,
+                      Tetromino nextTetromino,
+                      Board board) {
+        Block[][] combinedBoard = combine(currentTetromino, board);
+        Block[][] previewArray = createPreviewArray(nextTetromino);
+        String[] outString = new String[22];
+        outString[0] = getBoardTop;
+        for (int i = 4; i < BOARDHEIGHT; i++) {
+            String rowString = "";
+            int curRow = i - 3;
+            rowString += getBoardRow(combinedBoard[i], curRow);
+            if (curRow > PREVIEWTOP && curRow < PREVIEWBOT) {
+                if (curRow == PREVIEWTOP + 1 || curRow == PREVIEWBOT - 1) {
+                    rowString += getPreviewRowString(new Block[4]);
+                }
+                else {
+                    int pIndex = curRow - PREVIEWTOP - 2;
+                    rowString += getPreviewRowString(previewArray[pIndex]);
+                }
             }
-            else if (i == BOARDCHARWIDTH / 4) {
-                header1 += TLCHAR;
-            }
-            else if (i > BOARDCHARWIDTH / 4 && i < BOARDCHARWIDTH * 3 / 4) {
-                header1 += HCHAR;
-            }
-            else if (i == BOARDCHARWIDTH * 3 / 4) {
-                header1 += TRCHAR;
-            }
+            outString[curRow] = rowString;
         }
-        header[0] = header1;
-        return header;
+
+        outString[21] = getBoardBot;
+
+        for(String row:outString) {
+            System.out.println(row);
+        }
     }
 
-    public static void main(String[] args) {
-        Printer printer = new Printer();
-        System.out.println(printer.getHeader()[0]);
+    private Block[][] combine(Tetromino currentTetromino, Board board) {
+        Block[][] boardArray = board.getCurrentBoard();
+        Block[] tetrominoArray = currentTetromino.getBlockArray();
+
+        for(Block block:tetrominoArray) {
+            int x = block.getXPosition();
+            int y = block.getYPosition();
+            boardArray[y][x] = block;
+        }
+
+        return boardArray;
+    }
+
+    public Block[][] createPreviewArray(Tetromino nextTetromino) {
+        int xRef = nextTetromino.getXReference();
+        int yRef = nextTetromino.getYReference();
+        Block[] nextTetrominoArray = nextTetromino.getBlockArray();
+        Block[][] previewArray = new Block[4][4];
+        for(Block block:nextTetrominoArray) {
+            int x = block.getXPosition();
+            int y = block.getYPosition();
+            previewArray[y - yRef][x - xRef] = block;
+        }
+        return previewArray;
+    }
+
+    public String getPreviewRowString(Block[] previewRow) {
+        String previewRowString = BLOCKSPC;
+        for(Block block:previewRow) {
+            previewRowString += getBlockString(block);
+        }
+        previewRowString += BLOCKSPC + VCHAR;
+        return previewRowString;
+    }
+
+    public String getBoardTop() {
+        String top = TLCHAR;
+        for(int i = 0; i < BOARDWIDTH; i++) {
+            if (i % 2 == 0) {
+                top += BLOCKSPC;
+            }
+            top += HCHAR;
+        }
+        top += BLOCKSPC + TRCHAR;
+        return top;
+    }
+
+    public String getBoardBot() {
+        String bot = BLCHAR;
+        for(int i = 0; i < BOARDWIDTH; i++) {
+            if (i % 2 == 0) {
+                bot += BLOCKSPC;
+            }
+            bot += HCHAR;
+        }
+        bot += BLOCKSPC + BRCHAR;
+        return bot;
+    }
+
+    public String getBoardRow(Block[] boardRow, int rowNum) {
+        String rowString = VCHAR;
+        for(Block block:boardRow) {
+            rowString += getBlockString(block);
+        }
+        rowString += BLOCKSPC;
+        if (rowNum == PREVIEWBOT || rowNum == PREVIEWTOP) {
+            rowString += VHRSPLIT;
+        }
+        else rowString += VCHAR;
+        return rowString;
+    }
+
+    private String getBlockString(Block block) {
+        String blockStr = BLOCKSPC;
+        if (block != null) {
+            blockStr += ANSI.color(block.getColor());
+        }
+        else blockStr += ANSI.BLACK;
+        for (int i =0; i<BLOCKWIDTH; i++) {
+            blockStr += BLOCKCHAR;
+        }
+        blockStr += ANSI.RESET;
+        return blockStr;
     }
 
 }
