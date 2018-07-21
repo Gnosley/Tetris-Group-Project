@@ -19,7 +19,7 @@ public class Board{
      */
     public void updateBoard(Tetromino currentTetromino){
         Board tempBoard = new Board();
-        tempBoard.gameBoard = this.copyBoard();
+        tempBoard.gameBoard = copyBoard(this.gameBoard);
         Block[] currentTetArray = currentTetromino.getBlockArray();
         for(int b = 0; b < currentTetArray.length; b++){
             int x = currentTetArray[b].getXPosition();
@@ -49,11 +49,11 @@ public class Board{
      * passed around.
      * @return           copy of gameBoard
      */
-    private Block[][] copyBoard(){
+    private Block[][] copyBoard(Block[][] gameBoard){
         Board tempBoard = new Board();
         for(int row = 0; row < tempBoard.gameBoard.length; row++){
             for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
-                tempBoard.gameBoard[row][col] = this.gameBoard[row][col];
+                tempBoard.gameBoard[row][col] = gameBoard[row][col];
             }
         }
         return tempBoard.gameBoard;
@@ -65,7 +65,7 @@ public class Board{
      */
     public Block[][] getCurrentBoard(){
         Board copyBoard = new Board();
-        copyBoard.gameBoard = this.copyBoard();
+        copyBoard.gameBoard = copyBoard(this.gameBoard);
         return copyBoard.gameBoard;
     }
 
@@ -148,7 +148,7 @@ public class Board{
      */
     private void clearRow(int rowClear){
         Board tempBoard = new Board();
-        tempBoard.gameBoard = this.copyBoard();
+        tempBoard.gameBoard = copyBoard(this.gameBoard);
         for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
             tempBoard.gameBoard[rowClear][col] = null;    //fills row with null
         }
