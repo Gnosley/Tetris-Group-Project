@@ -65,7 +65,10 @@ public class Game {
         // a moves the block left.
         // s moves the block down.
         // d moves the block right.
-        // Right now this assumes valid character... WILL FIX.
+        switch(moveType) {
+        case 'q': case 'e': case 'a': case 's': case 'd': break;
+        default: return;
+        }
 
         // Tetromino.doMove() should return a NEW tetromino with the move applied
         Tetromino movedTetromino = currentTetromino.doMove(moveType);
