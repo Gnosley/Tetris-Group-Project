@@ -15,6 +15,12 @@ public class Block{
         yPosition = position[1];
     }
 
+    public Block(Block block) {
+        this.color = block.getColor();
+        this.xPosition = block.getXPosition();
+        this.yPosition = block.getYPosition();
+    }
+
     public void setColor(int color) {
         this.color = color;
     }
