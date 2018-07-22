@@ -95,19 +95,19 @@ public class Board{
                 }
                 else{
                     if(gameBoard[blockYPos][blockXPos] == null){
+                        checkArray[b] = true;
                         canMove = true;
                     }
                 }
-                checkArray[b] = canMove;
+
         }
         for(int i = 0; i < checkArray.length; i++){
             if(!checkArray[i]){
                 canMove = false;
-                break;
+                return canMove;
             }
         }
-
-		return canMove;
+    return canMove;
 	}
 
     /**
