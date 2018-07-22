@@ -102,6 +102,12 @@ public class Tetromino {
         return tetrominoArray;
     }
 
+    /**
+	 * Changes the rotation of the block
+	 * 
+	 * @param direction:
+	 *            char, either 'q' or 'e' to be CCW or CW rotation
+	 */
     private void rotate(char direction) {
         // We can rotate counter clockwise by {x, y} -> {y, size - 1 - x}
         // We can rotate clockwise by {x, y} -> {size - 1 - y, x}
@@ -128,55 +134,89 @@ public class Tetromino {
         }
     }
 
+    /**
+	 * Decides what translation is being asked to do via a character switch.
+	 * Performs the method via setting the block position to the old position + the movement
+	 * 
+	 * @param moveType:
+	 *            char that indicates the direction of translation
+	 */
     private void move(char direction) {
         int xMovement = 0;
         int yMovement = 0;
 
         switch(direction) {
-            case 'a': xMovement = -1; break;
-            case 's': yMovement = 1; break;
-            case 'd': xMovement = 1; break;
+            case 'a': xMovement = -1; break;    //change is moving the x coordinate 1 left
+            case 's': yMovement = 1; break;     //change is moving the x coordinate 1 right
+            case 'd': xMovement = 1; break;     //change is moving the y coordinate 1 down
         }
 
-        xReferencePosition += xMovement;
+        xReferencePosition += xMovement;        //apply changes to the reference
         yReferencePosition += yMovement;
 
-        for(Block block:tetrominoArray) {
+        for(Block block:tetrominoArray) {       //set position of each block
             block.setXPosition(block.getXPosition() + xMovement);
             block.setYPosition(block.getYPosition() + yMovement);
         }
     }
 
+    /**
+	 * Decides what move is being asked to do via a character switch. Performs the
+	 * method.
+	 * 
+	 * @param moveType:
+	 *            char that indicates the action asked
+     */
     public Tetromino doMove(char moveType) {
         Tetromino movedTetromino = new Tetromino(this);
         switch(moveType) {
-            case 'a':
-            case 's':
-            case 'd': movedTetromino.move(moveType); break;
-            case 'q':
-            case 'e': movedTetromino.rotate(moveType); break;
+            case 'a':   //left indication
+            case 's':   //down indication
+            case 'd':   //right indication
+                        movedTetromino.move(moveType); break;
+            case 'q':   //CCW rotation indication
+            case 'e':   //CW rotation indiciation
+                        movedTetromino.rotate(moveType); break;
         }
         return movedTetromino;
     }
 
+    /**
+	 * Method to copy information of the private tetrominoArray
+	 * 
+	 * @return copy: Block[] copy constructor to extract information without a privacy leak
+	 */
     public Block[] getBlockArray() {
-        // Block[] copy = Arrays.copyOf(tetrominoArray, tetrominoArray.length);
         Block[] copy = new Block[tetrominoArray.length];
         for(int i=0; i < tetrominoArray.length; i++) {
             copy[i] = new Block(tetrominoArray[i]);
         }
-
         return copy;
     }
 
+    /**
+	 * Accesses the private variable "xReferencePosition"
+	 * 
+	 * @return xReferencePosition: int of x index position on board
+	 */
     public int getXReference() {
         return xReferencePosition;
     }
 
+    /**
+	 * Accesses the private variable "yReferencePosition"
+	 * 
+	 * @return yReferencePosition: int of y index position on board
+	 */
     public int getYReference() {
         return yReferencePosition;
     }
-
+    
+    /**
+    *Accesses the private variable "size"
+    *
+    *@return size: int of bloack array size
+    */
     public int getSize() {
         return size;
     }
