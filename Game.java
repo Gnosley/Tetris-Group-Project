@@ -4,8 +4,6 @@ import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
 import java.io.IOException;
 
-import java.util.Scanner;
-
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
@@ -56,10 +54,6 @@ public class Game {
 
         Game game = new Game();
 
-        // initialize keyboard input
-        // Scanner input = new Scanner(System.in);
-
-
         // Print initial board.
         printer.print(game.currentTetromino, game.nextTetromino, board);
 
@@ -69,11 +63,17 @@ public class Game {
         while(!gameDone) {
             // char gameMove = input.next().charAt(0);
             char gameMove = '-';
+            int inGameMove = 0;
             try{
-                gameMove = (char)game.reader.read();
+                inGameMove = game.reader.read();
             }
             catch(IOException e){
                 System.out.println("Couldn't read character for move.");
+            }
+            gameMove = (char)inGameMove;
+
+            if (inGameMove == 27) { // 27 == ESC
+                break; // end game if escape is pressed.
             }
 
             game.tryMove(gameMove, board);
