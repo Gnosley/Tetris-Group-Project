@@ -88,10 +88,14 @@ public class Board{
                     canMove = false;
                     return canMove;
                 }
-                if((blockXPos > 0 && blockXPos < 10)){
+                else if((blockXPos < 0 || blockXPos > 10)){
+                    canMove = false;
+                    return canMove;
+
+                }
+                else{
                     if(gameBoard[blockYPos][blockXPos] == null){
                         canMove = true;
-
                     }
                 }
                 checkArray[b] = canMove;
