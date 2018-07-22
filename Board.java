@@ -168,4 +168,12 @@ public class Board{
             }
         }
     }
+    /**
+     * Resets game gameStatistics variable
+     */
+    public void resetGameStatistics(){
+        this.gameStatistics[0] = 0;
+        this.gameStatistics[1] = 0;
+    }
+
 }
