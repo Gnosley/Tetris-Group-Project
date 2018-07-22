@@ -6,7 +6,7 @@ public class Tetromino {
     private final int[][][] tetrominoData = {
         // I-Tetromino
         {
-            {0, 4}, {0, 1}, {1, 1}, {2, 1}, {3, 1}
+            {0, 4}, {1, 0}, {1, 1}, {1, 2}, {1, 3}
         },
 
         // O-Tetromino

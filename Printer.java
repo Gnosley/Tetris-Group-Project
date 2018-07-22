@@ -1,3 +1,4 @@
+import org.jline.terminal.Terminal;
 public class Printer {
 
     private final int BOARDWIDTH = 10;
@@ -31,7 +32,10 @@ public class Printer {
 
     public void print(Tetromino currentTetromino,
                       Tetromino nextTetromino,
-                      Board board) {
+                      Board board,
+                      Terminal terminal,
+                      long gameScore,
+                      long linesCleared) {
         Block[][] combinedBoard = combine(currentTetromino, board);
         Block[][] previewArray = createPreviewArray(nextTetromino);
         String[] outString = new String[22];
@@ -70,15 +74,36 @@ public class Printer {
                 rowString += getPreviewTopBot(BRCHAR);
             }
 
+            if (curRow > PREVIEWBOT && curRow < 14 + getTetrisWord().length) {
+
+                rowString += "   " + (getTetrisWord()[curRow - 14]);
+            }
+
+            if (curRow == 19) {
+                rowString += "\t    Game Score:  "
+                    + ANSI.YELLOW
+                    + String.format("%09d", gameScore)
+                    + ANSI.RESET;
+            }
+
+            if (curRow == 20) {
+                rowString += "\t Lines Cleared:  "
+                    + ANSI.BRIGHT_YELLOW
+                    + String.format("%09d", linesCleared)
+                    + ANSI.RESET;
+            }
+
             outString[curRow] = rowString;
         }
 
         outString[21] = getBoardBot();
 
 
+        terminal.writer().print(ANSI.CLEARSCREEN);
         for(String row:outString) {
-            System.out.println(row);
+            terminal.writer().println(row);
         }
+        terminal.flush();
     }
 
     private Block[][] combine(Tetromino currentTetromino, Board board) {
@@ -176,6 +201,16 @@ public class Printer {
         }
         blockStr += ANSI.RESET;
         return blockStr;
+    }
+
+    private String[] getTetrisWord() {
+        String[] tetris = new String[4];
+        // http://patorjk.com/software/taag/#p=display&v=3&f=Small%20Slant&t=TETRIS
+        tetris[0] = " ___________________  ________"; 
+        tetris[1] = "/_  __/ __/_  __/ _ \\/  _/ __/";
+        tetris[2] = " / / / _/  / / / , _// /_\\ \\  ";
+        tetris[3] = "/_/ /___/ /_/ /_/|_/___/___/  ";
+        return tetris;
     }
 
 }
