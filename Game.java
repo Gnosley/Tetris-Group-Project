@@ -120,7 +120,7 @@ public class Game {
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
     }
-    public int getGameScore(){
+    public long getGameScore(){
         return this.gameScore;
     }
     public updateGameScore(){
