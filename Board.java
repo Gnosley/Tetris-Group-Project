@@ -1,53 +1,44 @@
 import java.util.Arrays;
-
+/**
+ * Board class for Tetris implimentation.
+ *
+ * Natalie Dean (CPSC 233, SUM18, T02 Team 6)
+ */
 public class Board{
     private Block[][] gameBoard = new Block[24][10];
 
     /**
-     * TetrisBoard object constructor.
-     * Initializes new board. (should only be called outside of class for
-     * start of newgame)
-     */
-    public void Board(){
-        Block[][] newBoard = new Block[24][10];
-        this.gameBoard = newBoard;
-    }
-
-    /**
-     * Update method for the gameboard
-     * @param gameBoard board used to update instance variable
+     * Update method for Board. Takes in a tetromino object and adds it to the
+     * current board.
+     * @param currentTetromino Tetromino object to add to the board.
      */
     public void updateBoard(Tetromino currentTetromino){
-        Board tempBoard = new Board();
-        tempBoard.gameBoard = copyBoard(this.gameBoard);
-        Block[] currentTetArray = currentTetromino.getBlockArray();
-        for(int b = 0; b < currentTetArray.length; b++){
-            int x = currentTetArray[b].getXPosition();
-            int y = currentTetArray[b].getYPosition();
-            tempBoard.gameBoard[y][x] = currentTetArray[b];
+        Block[] tetrominoBlockArray = currentTetromino.getBlockArray();
+        for(int b = 0; b < tetrominoBlockArray.length; b++){
+            this.gameBoard[tetrominoBlockArray[b].getYPosition()][tetrominoBlockArray[b].getXPosition()] = tetrominoBlockArray[b];
         }
-        this.updateBoardPrivate(tempBoard.gameBoard);
+        //after new piece played, loop checking board for any rows to clear until done
         boolean doneBoardCheck = false;
         do{
             doneBoardCheck = this.checkBoard();
         }
         while(!doneBoardCheck);
-
     }
 
     /**
-     * Private updateBoard method to avoid direct access
-     * @param changedBoard board to update with
+     * Getter method for the current gameBoard. Returns copy to avoid privacy leak
+     * @return copy of the current Board
      */
-    private void updateBoardPrivate(Block[][] changedBoard){
-        this.gameBoard = changedBoard;
+    public Block[][] getCurrentBoard(){
+        Board copyBoard = new Board();
+        copyBoard.gameBoard = copyBoard(this.gameBoard);
+        return copyBoard.gameBoard;
     }
 
-
     /**
-     * Copy method for gameBoard. Prevents privacy leaks when board is being
-     * passed around.
-     * @return           copy of gameBoard
+     * Creates copy of specified gameBoard
+     * @param  gameBoard gameBoard to be copied (Block[][])
+     * @return           copy of gameBoard attribute (Block[][])
      */
     private Block[][] copyBoard(Block[][] gameBoard){
         Board tempBoard = new Board();
@@ -60,18 +51,9 @@ public class Board{
     }
 
     /**
-     * Getter method for the current gameBoard
-     * @return copy of the current Board
-     */
-    public Block[][] getCurrentBoard(){
-        Board copyBoard = new Board();
-        copyBoard.gameBoard = copyBoard(this.gameBoard);
-        return copyBoard.gameBoard;
-    }
-
-    /**
      * checkMove method. Itertaes through tetromino block array and checks
-     * current board for collisions.
+     *  current board for collisions. Returns boolean to board indicating if it
+     *  is possible for the tetromino can be played in the location.
      *
      * @param  movedTetromino position of the moved tetromino
      * @return                boolean indicating if new position is clear
@@ -79,39 +61,32 @@ public class Board{
     public boolean checkMove(Tetromino movedTetromino) {
         boolean canMove = false;
         boolean[] checkArray = new boolean[4];
-        Block[] blockArray = movedTetromino.getBlockArray();
-        //try{
-            for(int b = 0; b < blockArray.length; b++){
-                int blockYPos = blockArray[b].getYPosition();
-                int blockXPos = blockArray[b].getXPosition();
-                if(blockYPos == 24){
-                    canMove = false;
-                    return canMove;
+        Block[] tetrominoBlockArray = movedTetromino.getBlockArray();
+        for(int b = 0; b < tetrominoBlockArray.length; b++){
+            int blockYPos = tetrominoBlockArray[b].getYPosition();
+            int blockXPos = tetrominoBlockArray[b].getXPosition();
+            //checks blocks are within bounds of board
+            if((blockYPos < 24) && (blockXPos >= 0 && blockXPos <= 9)) {
+                //checks block positions are not currently occupied
+                if(gameBoard[blockYPos][blockXPos] == null){
+                    checkArray[b] = true; //updates checkArray with true if move for the specific block is valid.
                 }
-                else if((blockXPos < 0 || blockXPos > 9)){
-                    canMove = false;
-                    return canMove;
-
-                }
-                else{
-                    if(gameBoard[blockYPos][blockXPos] == null){
-                        checkArray[b] = true;
-                        canMove = true;
-                    }
-                }
-
-        }
-        for(int i = 0; i < checkArray.length; i++){
-            if(!checkArray[i]){
-                canMove = false;
-                return canMove;
+            }
+            else{
+                //one of the blocks is outside of the bounds of the board
+                return canMove = false;
             }
         }
-    return canMove;
+        for(int i = 0; i < checkArray.length; i++){
+            if(!checkArray[i]){ //check for invalid move
+                return canMove = false;
+            }
+        }
+        return canMove = true; //otherwise, return move is valid
 	}
 
     /**
-     * Checks if game is over (top row of board contains not-null piece)
+     * Checks if game is over (top row of playable board does not contain any null objects)
      * @return gameover boolean
      */
     public boolean isGameDone(){
@@ -125,8 +100,8 @@ public class Board{
     }
 
     /**
-     * Checks board for full rows
-     * @return boolean
+     * Checks board by running iterating over board rows and calling checkRowFull method to determined if there are any full rows and calling clearRow method when appropriate.
+     * @return boolean indicating it is fisnished checking and clearing current board state
      */
     private boolean checkBoard(){
         boolean doneBoardCheck = false;
@@ -141,12 +116,11 @@ public class Board{
         return doneBoardCheck;
     }
 
-
-/**
- * Checks if specified row is full
- * @param  rowCheck board row to check
- * @return          boolean (True = full)
- */
+    /**
+     * Checks if specified row is full (no null objects)
+     * @param  rowCheck board row to check
+     * @return          boolean (True = full)
+     */
     private boolean checkRowFull(int rowCheck){
         int counter = 0;
         for(int col = 0; col < this.gameBoard[0].length; col++){
@@ -163,24 +137,25 @@ public class Board{
     }
 
     /**
-     * Clears full row
+     * Clears full row & calls dropRow to fill resulting space.
      * @param rowClear specified row
      */
     private void clearRow(int rowClear){
         Board tempBoard = new Board();
         tempBoard.gameBoard = copyBoard(this.gameBoard);
         for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
-            tempBoard.gameBoard[rowClear][col] = null;    //fills row with null
+            tempBoard.gameBoard[rowClear][col] = null;
         }
         tempBoard.dropRow(rowClear);
-        this.updateBoardPrivate(tempBoard.gameBoard);
+        this.gameBoard = tempBoard.gameBoard;
+
 
     }
 
-/**
- * Drops indicated row after clearing
- * @param rowClear specified row to drop into (recently cleared)
- */
+    /**
+     * Drops indicated row after clearing
+     * @param rowClear specified row to drop into (recently cleared)
+     */
     private void dropRow(int rowCleared){
         for(int row = rowCleared; row > 0; row--){
             for(int col = 0; col < this.gameBoard[0].length; col++){
