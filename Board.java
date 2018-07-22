@@ -117,7 +117,7 @@ public class Board{
     public boolean isGameDone(){
         boolean gameOver = false;
         for(int col = 0; col < this.gameBoard[0].length; col++){
-            if(this.gameBoard[5][col] != null){   //ignores top 4 rows (outside of playable area)
+            if(this.gameBoard[4][col] != null){   //ignores top 4 rows (outside of playable area)
                 return true;
             }
         }
