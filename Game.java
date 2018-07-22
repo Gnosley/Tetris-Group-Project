@@ -12,7 +12,7 @@ public class Game {
     private static final int startingX = 3;
     private static final int startingY = 0;
     private long gameScore = 0;
-    private int linesCleared = 0;
+    private long linesCleared = 0;
 
     private Terminal terminal; // the terminal for instant input
     private NonBlockingReader reader;
@@ -115,7 +115,9 @@ public class Game {
                                             // block or go out of bounds, add
                                             // the current blocks in the
                                             // tetromino to the board.
-
+            long[] gameStatistics = board.getGameStatistics();
+            this.updateGameScore(gameStatistics[0]);
+            this.updateLinesCleared(gameStatistics[1]);
             currentTetromino = nextTetromino;
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
@@ -123,14 +125,13 @@ public class Game {
     public long getGameScore(){
         return this.gameScore;
     }
-    public void updateGameScore(){
-        this.linesCleared += 100;
+    public void updateGameScore(long gameScore){
+        this.gameScore += gameScore;
     }
-    public int getLinesCleared(){
-        return this.gameScore;
+    public long getLinesCleared(){
+        return this.linesCleared;
     }
-    public void updateLinesCleared(){
-        this.linesCleared += 1;
+    public void updateLinesCleared(long linesCleared){
+        this.linesCleared += linesCleared;
     }
 }
-
