@@ -11,6 +11,8 @@ public class Game {
     private Tetromino nextTetromino; // the tetromino to be played next
     private static final int startingX = 3;
     private static final int startingY = 0;
+    private long gameScore = 0;
+    private int linesCleared = 0;
 
     private Terminal terminal; // the terminal for instant input
     private NonBlockingReader reader;
