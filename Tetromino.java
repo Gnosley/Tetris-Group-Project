@@ -56,7 +56,7 @@ public class Tetromino {
     public Tetromino(Tetromino tetromino) {
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
-        this.tetrominoArray = generateTetrominoArray(type);
+        this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
         this.type = tetromino.getType();
     }
@@ -144,7 +144,12 @@ public class Tetromino {
     }
 
     public Block[] getBlockArray() {
-        Block[] copy = Arrays.copyOf(tetrominoArray, tetrominoArray.length);
+        // Block[] copy = Arrays.copyOf(tetrominoArray, tetrominoArray.length);
+        Block[] copy = new Block[tetrominoArray.length];
+        for(int i=0; i < tetrominoArray.length; i++) {
+            copy[i] = new Block(tetrominoArray[i]);
+        }
+
         return copy;
     }
 
