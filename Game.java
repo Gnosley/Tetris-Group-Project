@@ -68,7 +68,7 @@ public class Game {
         // Right now this assumes valid character... WILL FIX.
 
         // Tetromino.doMove() should return a NEW tetromino with the move applied
-        Tetromino movedTetromino = this.currentTetromino.doMove(moveType);
+        Tetromino movedTetromino = currentTetromino.doMove(moveType);
 
         // board.checkBoard() returns true if no blocks are currently in the way and
         // no blocks in the given tetromino are out of board bounds.
