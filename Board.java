@@ -1,9 +1,7 @@
 import java.util.Arrays;
 
 public class Board{
-    private final static int WIDTH = 10;
-    private final static int HEIGHT = 24;
-    private Block[][] gameBoard = new Block[HEIGHT][WIDTH];
+    private Block[][] gameBoard = new Block[24][10];
 
     /**
      * TetrisBoard object constructor.
@@ -11,7 +9,7 @@ public class Board{
      * start of newgame)
      */
     public void Board(){
-        Block[][] newBoard = new Block[HEIGHT][WIDTH];
+        Block[][] newBoard = new Block[24][10];
         this.gameBoard = newBoard;
     }
 
@@ -26,7 +24,7 @@ public class Board{
         for(int b = 0; b < currentTetArray.length; b++){
             int x = currentTetArray[b].getXPosition();
             int y = currentTetArray[b].getYPosition();
-            tempBoard.gameBoard[x][y] = currentTetArray[b];
+            tempBoard.gameBoard[y][x] = currentTetArray[b];
         }
         this.updateBoardPrivate(tempBoard.gameBoard);
         boolean doneBoardCheck = false;
@@ -80,20 +78,30 @@ public class Board{
      */
     public boolean checkMove(Tetromino movedTetromino) {
         boolean canMove = false;
+        boolean[] checkArray = new boolean[4];
         Block[] blockArray = movedTetromino.getBlockArray();
         //try{
             for(int b = 0; b < blockArray.length; b++){
                 int blockYPos = blockArray[b].getYPosition();
                 int blockXPos = blockArray[b].getXPosition();
-                if((blockYPos < 24) && (blockXPos > 0 && blockXPos < 10)){
+                if(blockYPos == 24){
+                    canMove = false;
+                    return canMove;
+                }
+                if((blockXPos > 0 && blockXPos < 10)){
                     if(gameBoard[blockYPos][blockXPos] == null){
                         canMove = true;
+
                     }
                 }
+                checkArray[b] = canMove;
         }
-        //} catch(ArrayIndexOutOfBoundsException e){
-            //canMove = false;
-        //}
+        for(int i = 0; i < checkArray.length; i++){
+            if(!checkArray[i]){
+                canMove = false;
+                break;
+            }
+        }
 
 		return canMove;
 	}
@@ -142,7 +150,7 @@ public class Board{
                 counter++;
             }
         }
-        if(counter == WIDTH){  //if all 10 blocks are full
+        if(counter == 10){  //if all 10 blocks are full
             return true;
         }
         else{
