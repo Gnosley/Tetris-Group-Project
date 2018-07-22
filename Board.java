@@ -88,7 +88,7 @@ public class Board{
                     canMove = false;
                     return canMove;
                 }
-                else if((blockXPos < 0 || blockXPos > 10)){
+                else if((blockXPos < 0 || blockXPos > 9)){
                     canMove = false;
                     return canMove;
 
