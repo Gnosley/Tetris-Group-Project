@@ -120,6 +120,7 @@ public class Game {
             long[] gameStatistics = board.getGameStatistics();
             this.updateGameScore(gameStatistics[0]);
             this.updateLinesCleared(gameStatistics[1]);
+            board.resetGameStatistics();
             currentTetromino = nextTetromino;
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
