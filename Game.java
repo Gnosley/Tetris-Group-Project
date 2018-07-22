@@ -34,19 +34,11 @@ public class Game {
             System.out.println("There was an Error");
         }
 
-        // printer = new Printer(doPrettyPrint);
     }
 
 
     public static void main(String[] args) {
         Board board = new Board();
-
-        boolean doPrettyPrint = false;
-        for (String arg:args) {
-            if (arg.equals("pretty")) {
-                doPrettyPrint = true;
-            }
-        }
 
         // The printer object, which is what will
         // produce graphics for text based game
@@ -55,7 +47,12 @@ public class Game {
         Game game = new Game();
 
         // Print initial board.
-        printer.print(game.currentTetromino, game.nextTetromino, board);
+        printer.print(game.currentTetromino,
+                      game.nextTetromino,
+                      board,
+                      game.terminal,
+                      game.gameScore,
+                      game.linesCleared);
 
         boolean gameDone = false;
 
@@ -83,7 +80,12 @@ public class Game {
             gameDone = board.isGameDone();
 
             // Prints the board at the end of every turn.
-            printer.print(game.currentTetromino, game.nextTetromino, board);
+            printer.print(game.currentTetromino,
+                          game.nextTetromino,
+                          board,
+                          game.terminal,
+                          game.gameScore,
+                          game.linesCleared);
         }
         System.out.println("Game Over!");
 
