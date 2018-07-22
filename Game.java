@@ -1,3 +1,9 @@
+// imports for reading characters from the command line.
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.NonBlockingReader;
+import java.io.IOException;
+
 import java.util.Scanner;
 
 public class Game {
@@ -6,11 +12,27 @@ public class Game {
     private static final int startingX = 3;
     private static final int startingY = 0;
 
+    private Terminal terminal; // the terminal for instant input
+    private NonBlockingReader reader;
+
     public Game() {
 
         // the default constructor should generate a random tetromino.
         currentTetromino = new Tetromino(startingX, startingY);
         nextTetromino = new Tetromino(startingX, startingY);
+
+        try{
+            terminal = TerminalBuilder.builder()
+                .jansi(true)
+                .system(true)
+                .build();
+
+            terminal.enterRawMode(); // Don't require new line for input.
+            reader = terminal.reader();
+        }
+        catch (IOException e) {
+            System.out.println("There was an Error");
+        }
 
         // printer = new Printer(doPrettyPrint);
     }
@@ -33,7 +55,7 @@ public class Game {
         Game game = new Game();
 
         // initialize keyboard input
-        Scanner input = new Scanner(System.in);
+        // Scanner input = new Scanner(System.in);
 
 
         // Print initial board.
@@ -43,7 +65,14 @@ public class Game {
 
         // While loop runs each turn
         while(!gameDone) {
-            char gameMove = input.next().charAt(0);
+            // char gameMove = input.next().charAt(0);
+            char gameMove = '-';
+            try{
+                gameMove = (char)game.reader.read();
+            }
+            catch(IOException e){
+                System.out.println("Couldn't read character for move.");
+            }
 
             game.tryMove(gameMove, board);
 
