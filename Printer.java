@@ -6,7 +6,7 @@ public class Printer {
     private final int PREVIEWBOT = 13;
     // How many characters wide each block should be
     private final int BLOCKWIDTH = 2;
-    private final int PREVIEWWIDTH = 4 * BLOCKWIDTH;
+    private final int PREVIEWWIDTH = 5 * BLOCKWIDTH;
     private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH + 2;
     // Block Character
     private final String BLOCKCHAR = "\u2588";
@@ -108,7 +108,7 @@ public class Printer {
     }
 
     public String getPreviewRowString(Block[] previewRow) {
-        String previewRowString = BLOCKSPC;
+        String previewRowString = BLOCKSPC + getBlockString(null);
         for(Block block:previewRow) {
             previewRowString += getBlockString(block);
         }
