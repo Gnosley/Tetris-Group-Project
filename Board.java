@@ -182,7 +182,7 @@ public class Board{
  * @param rowClear specified row to drop into (recently cleared)
  */
     private void dropRow(int rowCleared){
-        for(int row = rowCleared; row >= 0; row--){
+        for(int row = rowCleared; row > 0; row--){
             for(int col = 0; col < this.gameBoard[0].length; col++){
                 this.gameBoard[row][col] = this.gameBoard[row-1][col]; //fills backwards
             }
