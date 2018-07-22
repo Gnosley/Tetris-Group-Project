@@ -148,6 +148,8 @@ public class Board{
         }
         tempBoard.dropRow(rowClear);
         this.gameBoard = tempBoard.gameBoard;
+        game.updateGameScore();   //100pts for line cleared
+        game.updateLinesCleared();
 
 
     }
