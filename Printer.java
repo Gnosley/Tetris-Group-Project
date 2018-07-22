@@ -70,12 +70,18 @@ public class Printer {
                 rowString += getPreviewTopBot(BRCHAR);
             }
 
+            if (curRow > PREVIEWBOT && curRow < 14 + getTetrisWord().length) {
+
+                rowString += (getTetrisWord()[curRow - 14]);
+            }
+
             outString[curRow] = rowString;
         }
 
         outString[21] = getBoardBot();
 
 
+        System.out.print(ANSI.CLEARSCREEN);
         for(String row:outString) {
             System.out.println(row);
         }
@@ -176,6 +182,15 @@ public class Printer {
         }
         blockStr += ANSI.RESET;
         return blockStr;
+    }
+
+    private String[] getTetrisWord() {
+        String[] tetris = new String[4];
+        tetris[0] = "\t ___________________  ________"; // http://patorjk.com/software/taag/#p=display&v=3&f=Small%20Slant&t=TETRIS
+        tetris[1] = "\t/_  __/ __/_  __/ _ \\/  _/ __/";
+        tetris[2] = "\t / / / _/  / / / , _// /_\\ \\  ";
+        tetris[3] = "\t/_/ /___/ /_/ /_/|_/___/___/  ";
+        return tetris;
     }
 
 }
