@@ -118,4 +118,17 @@ public class Game {
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
     }
+    public int getGameScore(){
+        return this.gameScore;
+    }
+    public updateGameScore(){
+        this.linesCleared += 100;
+    }
+    public int getLinesCleared(){
+        return this.gameScore;
+    }
+    public updateLinesCleared(){
+        this.linesCleared += 1;
+    }
 }
+
