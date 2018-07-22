@@ -123,13 +123,13 @@ public class Game {
     public long getGameScore(){
         return this.gameScore;
     }
-    public updateGameScore(){
+    public void updateGameScore(){
         this.linesCleared += 100;
     }
     public int getLinesCleared(){
         return this.gameScore;
     }
-    public updateLinesCleared(){
+    public void updateLinesCleared(){
         this.linesCleared += 1;
     }
 }
