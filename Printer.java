@@ -11,7 +11,7 @@ public class Printer {
     // Block Character
     private final String BLOCKCHAR = "\u2588";
     // Spacing between Blocks
-    private final String BLOCKSPC = "\u200A"; // \u200A works well in emacs
+    private final String BLOCKSPC = ""; // \u200A works well in emacs
     // Vertical Character
     private final String VCHAR = "\u2551";
     // Horizontal Character
