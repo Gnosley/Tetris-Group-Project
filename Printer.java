@@ -3,33 +3,49 @@ public class Printer {
 
     private final int BOARDWIDTH = 10;
     private final int BOARDHEIGHT = 24;
-    private final int PREVIEWTOP = 6;
-    private final int PREVIEWBOT = 13;
-    // How many characters wide each block should be
-    private final int BLOCKWIDTH = 2;
-    private final int PREVIEWWIDTH = 5 * BLOCKWIDTH;
-    private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH + 2;
+
+
+    private final int PREVIEWTOP = 6; // where the preview window starts (which row)
+    private final int PREVIEWBOT = 13;// where the preview window ends (which row)
+
+    private final int BLOCKWIDTH = 2; // How many characters wide each block should be
+
+    private final int PREVIEWWIDTH = 5 * BLOCKWIDTH; // Preview window width
+    private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH + 2;//board width
+
     // Block Character
     private final String BLOCKCHAR = "\u2588";
-    // Spacing between Blocks
+
+    // Spacing between Blocks: "" is no spacing
     private final String BLOCKSPC = ""; // \u200A works well in emacs
+
     // Vertical Character
     private final String VCHAR = "\u2551";
+
     // Horizontal Character
     private final String HCHAR = "\u2550";
+
     // Top Right Character
     private final String TRCHAR = "\u2557";
+
     // Top Left Character
     private final String TLCHAR = "\u2554";
+
     // Bottom Right Character
     private final String BRCHAR = "\u255D";
+
     // Bottom Left Character
     private final String BLCHAR = "\u255A";
+
     // Horizontal to Vertical Upper Split
     private final String HVUSPLIT = "\u2569";
+
     // Vertical to Horizontal Right Split
     private final String VHRSPLIT = "\u2560";
 
+    /**
+     * Call this function with all the game data to print out the current game state to console with pretty colors.
+     */
     public void print(Tetromino currentTetromino,
                       Tetromino nextTetromino,
                       Board board,
@@ -206,6 +222,7 @@ public class Printer {
 
     private String[] getTetrisWord() {
         String[] tetris = new String[4];
+        // taken from:
         // http://patorjk.com/software/taag/#p=display&v=3&f=Small%20Slant&t=TETRIS
         tetris[0] = " ___________________  ________"; 
         tetris[1] = "/_  __/ __/_  __/ _ \\/  _/ __/";
