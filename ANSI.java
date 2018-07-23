@@ -11,6 +11,21 @@ public class ANSI {
     public static final String WHITE = "\u001B[37m";
     public static final String BRIGHT_YELLOW = "\u001B[93m"; // Yellow
 
+    /**
+     * Takes an int and returns a String for an ANSI escape sequence. Maps as follows:
+     * <ul> <li> 0 => cyan </li>
+     *      <li> 1 => bright yellow </li>
+     *      <li> 2 => purple </li>
+     *      <li> 3 => green </li>
+     *      <li> 4 => red </li>
+     *      <li> 5 => blue </li>
+     *      <li> 6 => yellow </li>
+     *      <li> n>6 => "" </li>
+     * </ul>
+     *
+     * @param colorNum The int of the color wanted.
+     * @return String with an ANSI escape sequence for a color.
+     */
     public static String color(int colorNum){
         String[] colorCodes = {
             CYAN,

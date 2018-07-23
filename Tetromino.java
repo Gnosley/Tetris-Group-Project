@@ -83,7 +83,7 @@ public class Tetromino {
      * @param type:
      *            int of what type the tetromino is (i,o,t,s,z,j,l)
      */
-    public Block[] generateTetrominoArray(int type) {
+    private Block[] generateTetrominoArray(int type) {
         if (type < 0 || type > 6) type = 0; // only 7 tetromino types
 
         int color = tetrominoData[type][0][0];

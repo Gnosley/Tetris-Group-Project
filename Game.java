@@ -1,4 +1,5 @@
-// imports for reading characters from the command line.
+// imports for reading characters from the command line and enabling colors on
+// Windows 10.
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
@@ -7,17 +8,23 @@ import java.io.IOException;
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
-    private static final int startingX = 3;
-    private static final int startingY = 0;
+
+    private static final int startingX = 3; // where a tetromino should start on
+    private static final int startingY = 0; // the board
     private long gameScore = 0;
     private long linesCleared = 0;
 
-    private Terminal terminal; // the terminal for instant input
-    private NonBlockingReader reader;
+    private Terminal terminal;        // the terminal and
+    private NonBlockingReader reader; // reader for instant input
 
+
+    /**
+     * This constructor initializes the terminal input/output to work correctly
+     * and generates two new Tetrominos.
+     */
     public Game() {
 
-        // the default constructor should generate a random tetromino.
+        // generate two new tetrominos at the start of the game
         currentTetromino = new Tetromino(startingX, startingY);
         nextTetromino = new Tetromino(startingX, startingY);
 
@@ -37,6 +44,9 @@ public class Game {
     }
 
 
+    /**
+     * Run Game from the command line to play a game of Tetris.
+     */
     public static void main(String[] args) {
         Board board = new Board();
 
@@ -59,21 +69,24 @@ public class Game {
         // While loop runs each turn
         while(!gameDone) {
             // char gameMove = input.next().charAt(0);
-            char gameMove = '-';
-            int inGameMove = 0;
+            int gameMove = 0;
             try{
-                inGameMove = game.reader.read();
+                gameMove = game.reader.read();
+
+                // check if user wants to quit
+                if (gameMove == 27) {
+                    // game.reader.read() returns many keys other than Escape as
+                    // 27. So check if the user presses escape twice.
+                    int nextInput = game.reader.read();
+                    if (nextInput == 27) {
+                        break; // end game if escape is pressed twice.
+                    }
+                }
             }
             catch(IOException e){
                 System.out.println("Couldn't read character for move.");
             }
-            gameMove = (char)inGameMove;
-
-            if (inGameMove == 27) { // 27 == ESC
-                break; // end game if escape is pressed.
-            }
-
-            game.tryMove(gameMove, board);
+            game.tryMove((char)gameMove, board);
 
             // board needs to check if there are any blocks in the board with a
             // y coordinate <= (board.height - 20). Returns true if there is.
@@ -125,6 +138,7 @@ public class Game {
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
     }
+
     public long getGameScore(){
         return this.gameScore;
     }
