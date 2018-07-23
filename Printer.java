@@ -119,7 +119,7 @@ public class Printer {
         return boardArray;
     }
 
-    public Block[][] createPreviewArray(Tetromino nextTetromino) {
+    private Block[][] createPreviewArray(Tetromino nextTetromino) {
         int xRef = nextTetromino.getXReference();
         int yRef = nextTetromino.getYReference();
         Block[] nextTetrominoArray = nextTetromino.getBlockArray();
@@ -132,7 +132,7 @@ public class Printer {
         return previewArray;
     }
 
-    public String getPreviewRowString(Block[] previewRow) {
+    private String getPreviewRowString(Block[] previewRow) {
         String previewRowString = BLOCKSPC + getBlockString(null);
         for(Block block:previewRow) {
             previewRowString += getBlockString(block);
@@ -141,7 +141,7 @@ public class Printer {
         return previewRowString;
     }
 
-    public String getPreviewTopBot(String endPiece) {
+    private String getPreviewTopBot(String endPiece) {
         String top = BLOCKSPC;
         for(int i = 0; i < PREVIEWWIDTH; i++) {
             if (i % 2 == 0) {
@@ -153,7 +153,7 @@ public class Printer {
         return top;
     }
 
-    public String getBoardTop() {
+    private String getBoardTop() {
         String top = TLCHAR;
         for(int i = 0; i < BOARDCHARWIDTH - 2; i++) {
             if (i % 2 == 0) {
@@ -165,7 +165,7 @@ public class Printer {
         return top;
     }
 
-    public String getBoardBot() {
+    private String getBoardBot() {
         String bot = BLCHAR;
         for(int i = 0; i < BOARDCHARWIDTH - 2; i++) {
             if (i % 2 == 0) {
@@ -177,7 +177,7 @@ public class Printer {
         return bot;
     }
 
-    public String getBoardRow(Block[] boardRow, int rowNum) {
+    private String getBoardRow(Block[] boardRow, int rowNum) {
         String rowString = VCHAR;
         for(Block block:boardRow) {
             rowString += getBlockString(block);
