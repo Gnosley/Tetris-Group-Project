@@ -100,6 +100,7 @@ public class Printer {
 
 
         terminal.writer().print(ANSI.CLEARSCREEN);
+        terminal.writer().println("\t\t\t   Press Esc twice to quit!");
         for(String row:outString) {
             terminal.writer().println(row);
         }
