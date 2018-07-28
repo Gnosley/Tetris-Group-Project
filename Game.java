@@ -21,6 +21,7 @@ public class Game {
     private NonBlockingReader reader; // reader for instant input
 	
 	private boolean heldYet = false;  // if there is already a held piece
+	private boolean heldTurn = false; // if the piece this turn was already held
 
 
     /**
@@ -127,16 +128,19 @@ public class Game {
 		
         //if the hold character is pressed, it will switch out the current tetromino for the held one
 		if(moveType == 'h') {
-			if (heldYet == false) {		// no tetromino is held yet, so it grabs a new one
-				storedTetromino = new Tetromino (currentTetromino);
-				currentTetromino = new Tetromino (nextTetromino);
-				nextTetromino = new Tetromino (startingX, startingY);
-				heldYet = true;
-			}
-			else {						// a tetromino is already held, so it replaces current with that one
-				proxyTetromino = new Tetromino (currentTetromino);
-				currentTetromino = new Tetromino (startingX, startingY, storedTetromino.getType());
-				storedTetromino = new Tetromino (proxyTetromino);
+			if (heldTurn == false) {
+				if (heldYet == false) {		// no tetromino is held yet, so it grabs a new one
+					storedTetromino = new Tetromino (currentTetromino);
+					currentTetromino = new Tetromino (nextTetromino);
+					nextTetromino = new Tetromino (startingX, startingY);
+					heldYet = true;
+				}
+				else {						// a tetromino is already held, so it replaces current with that one
+					proxyTetromino = new Tetromino (currentTetromino);
+					currentTetromino = new Tetromino (startingX, startingY, storedTetromino.getType());
+					storedTetromino = new Tetromino (proxyTetromino);
+				}
+				heldTurn = true;			// a tetromino has already been held for this drop
 			}
 		}
 		
@@ -168,6 +172,7 @@ public class Game {
             board.resetGameStatistics();
             currentTetromino = new Tetromino (nextTetromino);
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
+			heldTurn = false;				// can hold the tetromino again
 
         }
     }
