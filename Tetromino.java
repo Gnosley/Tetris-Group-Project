@@ -84,7 +84,7 @@ public class Tetromino {
 
     /**
      * Copy constructor after each movement or movement check
-     * 
+     *
      * @param tetromino:
      *            old Tetromino that needs to be copied
      */
@@ -124,7 +124,7 @@ public class Tetromino {
 
     /**
 	 * Changes the rotation of the block
-	 * 
+	 *
 	 * @param direction:
 	 *            char, either 'q' or 'e' to be CCW or CW rotation
 	 */
@@ -157,7 +157,7 @@ public class Tetromino {
     /**
 	 * Decides what translation is being asked to do via a character switch.
 	 * Performs the method via setting the block position to the old position + the movement
-	 * 
+	 *
 	 * @param moveType:
 	 *            char that indicates the direction of translation
 	 */
@@ -183,7 +183,7 @@ public class Tetromino {
     /**
 	 * Decides what move is being asked to do via a character switch. Performs the
 	 * method.
-	 * 
+	 *
 	 * @param moveType:
 	 *            char that indicates the action asked
      */
@@ -203,7 +203,7 @@ public class Tetromino {
 
     /**
 	 * Method to copy information of the private tetrominoArray
-	 * 
+	 *
 	 * @return copy: Block[] copy constructor to extract information without a privacy leak
 	 */
     public Block[] getBlockArray() {
@@ -216,7 +216,7 @@ public class Tetromino {
 
     /**
 	 * Accesses the private variable "xReferencePosition"
-	 * 
+	 *
 	 * @return xReferencePosition: int of x index position on board
 	 */
     public int getXReference() {
@@ -225,13 +225,13 @@ public class Tetromino {
 
     /**
 	 * Accesses the private variable "yReferencePosition"
-	 * 
+	 *
 	 * @return yReferencePosition: int of y index position on board
 	 */
     public int getYReference() {
         return yReferencePosition;
     }
-    
+
     /**
     *Accesses the private variable "size"
     *

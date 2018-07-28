@@ -48,21 +48,23 @@ public class Printer {
      */
     public void print(Tetromino currentTetromino,
                       Tetromino nextTetromino,
+                      Tetromino ghostTetromino,
                       Board board,
                       Terminal terminal,
                       long gameScore,
                       long linesCleared) {
-        Block[][] combinedBoard = combine(currentTetromino, board);
+        Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, board);
         Block[][] previewArray = createPreviewArray(nextTetromino);
         String[] outString = new String[22];
         outString[0] = getBoardTop();
 
-        String[] controlStrings = new String[5];
+        String[] controlStrings = new String[6];
         controlStrings[0] = "Controls:\t'a' - move left";
         controlStrings[1] = "\t\t's' - move down";
         controlStrings[2] = "\t\t'd' - move right";
         controlStrings[3] = "\t\t'e' - rotate clockwise";
         controlStrings[4] = "\t\t'q' - rotate counter-clockwise";
+        controlStrings[5] = "\t\t'f' - drop";
 
         for (int i = 4; i < BOARDHEIGHT; i++) {
             String rowString = "";
@@ -123,11 +125,17 @@ public class Printer {
         terminal.flush();
     }
 
-    private Block[][] combine(Tetromino currentTetromino, Board board) {
+    private Block[][] combine(Tetromino currentTetromino, Tetromino ghostTetromino, Board board) {
         Block[][] boardArray = board.getCurrentBoard();
-        Block[] tetrominoArray = currentTetromino.getBlockArray();
+        Block[] cTetrominoArray = currentTetromino.getBlockArray();
+        Block[] gTetrominoArray = ghostTetromino.getBlockArray();
 
-        for(Block block:tetrominoArray) {
+        for(Block block:cTetrominoArray) {
+            int x = block.getXPosition();
+            int y = block.getYPosition();
+            boardArray[y][x] = block;
+        }
+        for(Block block:gTetrominoArray) {
             int x = block.getXPosition();
             int y = block.getYPosition();
             boardArray[y][x] = block;
@@ -224,7 +232,7 @@ public class Printer {
         String[] tetris = new String[4];
         // taken from:
         // http://patorjk.com/software/taag/#p=display&v=3&f=Small%20Slant&t=TETRIS
-        tetris[0] = " ___________________  ________"; 
+        tetris[0] = " ___________________  ________";
         tetris[1] = "/_  __/ __/_  __/ _ \\/  _/ __/";
         tetris[2] = " / / / _/  / / / , _// /_\\ \\  ";
         tetris[3] = "/_/ /___/ /_/ /_/|_/___/___/  ";
