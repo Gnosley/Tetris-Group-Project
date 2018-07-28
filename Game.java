@@ -24,15 +24,11 @@ public class Game {
      * and generates two new Tetrominos.
      */
     public Game(Board board) {
-        System.out.println("4");
         // generate three new tetrominos at the start of the game
         currentTetromino = new Tetromino(startingX, startingY);
         ghostTetromino = new Tetromino(currentTetromino);   //creates ghost
-        System.out.println("PRE POSITION");
         positionGhostTetromino(ghostTetromino, board);
-        System.out.println("Post POSITION");
         nextTetromino = new Tetromino(startingX, startingY);
-        System.out.println("3");
 
 
         try{
@@ -160,15 +156,12 @@ public class Game {
     }
 
     private void positionGhostTetromino(Tetromino ghostTetromino, Board board){
-        Tetromino movedGhostTetromino = this.doMove('d');
+        Tetromino movedGhostTetromino = ghostTetromino.doMove('d');
         boolean canGMove = board.checkMove(movedGhostTetromino);
         do{
             ghostTetromino = movedGhostTetromino;
             movedGhostTetromino = ghostTetromino.doMove('d');
             canGMove = board.checkMove(movedGhostTetromino);
-            System.out.println(canGMove);
-
-        }while (canGMove);
-
+        } while (canGMove);
     }
 }
