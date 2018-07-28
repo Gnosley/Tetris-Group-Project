@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 /**
  * Board class for Tetris implimentation.
@@ -7,6 +8,7 @@ import java.util.Arrays;
 public class Board{
     private Block[][] gameBoard = new Block[24][10];
     private long[] gameStatistics = new long[2];
+    private ArrayList<Integer> rowsToClear = new ArrayList<>();
 
     public long[] getGameStatistics(){
         return this.gameStatistics;
@@ -155,6 +157,7 @@ public class Board{
         this.gameBoard = tempBoard.gameBoard;
         this.gameStatistics[0] += 100; //100pts for line cleared
         this.gameStatistics[1] += 1;
+        rowsToClear.add(rowClear);
     }
 
     /**
@@ -176,4 +179,11 @@ public class Board{
         this.gameStatistics[1] = 0;
     }
 
+    public ArrayList<Integer> getRowsToClear() {
+        return this.rowsToClear;
+    }
+
+    public void resetRowsToClear() {
+        rowsToClear.clear();
+    }
 }
