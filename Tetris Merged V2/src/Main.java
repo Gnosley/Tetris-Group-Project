@@ -12,14 +12,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Resources/TetrisMenu.fxml"));
             Scene scene = new Scene(root, 600, 540);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String[] args) {

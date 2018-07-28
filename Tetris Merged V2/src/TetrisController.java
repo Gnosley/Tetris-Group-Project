@@ -3,17 +3,28 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+//TODO
+//Need to create a rectangle array that stores [Rectangle, row] when the blocks are placed.
+//Need to create a ScreenCoordinate method
+//Clear blocks method
 
 public class TetrisController {
     @FXML
@@ -31,7 +42,7 @@ public class TetrisController {
 
     private double currentRotate;
 
-    public TetrisController controlTest;
+    //public TetrisController controlTest;
 
     private long startTime = 0;
 
@@ -46,10 +57,14 @@ public class TetrisController {
     private int gameScore = 0;
     private int linesCleared = 0;
     private boolean gameDone = false;
+    private int currentDifficulty;
+    private int dropSpeed;
+    private Rectangle[][] blockFXArray;
+    private boolean dontUpdate;
 
-    @FXML
-    protected void handleNewGameButtonAction(MouseEvent event) {
-        //newGame.setFill(Color.web("11EFDD"));
+    public void initialize() {
+        this.blockFXArray = new Rectangle[24][10];
+        dontUpdate = false;
     }
 
     /**
@@ -69,7 +84,6 @@ public class TetrisController {
                 case LEFT:
                     tryMove('a', board);
                     currentTetrominoGraphic.setLayoutX(currentTetromino.getXReference() * 20 + 160);
-
                     break;
                 case RIGHT:
                     tryMove('d', board);
@@ -82,7 +96,6 @@ public class TetrisController {
                     break;
                 case UP:
                     tryMove('e', board);
-                    System.out.println(currentTetromino.getRotation());
                     currentTetrominoGraphic.setRotate(currentTetromino.getRotation());
                     break;
                 case ENTER:
@@ -126,19 +139,27 @@ public class TetrisController {
                                 }
                             });
                         }
-                }, 0, 200);
+                }, 0, 300);
     }
 
+    /**
+     * Generates a new Tetromino
+     * Loads a FXML file for a new Tetromino and for the next Tetromino then sets their position
+     */
     public void generateTetromino() {
-//        System.out.println(game.getCurrentTetromino().getType());
+
+        //String array containing the resource URLs of the Tetromino FXMLs
         String[] tetrominoFXML_URL = new String[]{"Resources/ITetromino.fxml","Resources/OTetromino.fxml","Resources/TTetromino.fxml",
                                             "Resources/STetromino.fxml" ,"Resources/ZTetromino.fxml","Resources/JTetromino.fxml","Resources/LTetromino.fxml"};
 
+        //Remove the old Tetromino from the next Tetromino display box
         playArea.getChildren().remove(nextTetrominoGraphic);
 
+        //Get the type of the new and next Tetrominos
         int newTetNum = currentTetromino.getType();
         int nextTetNum = nextTetromino.getType();
 
+        //Load the FXML file for the new Tetromino
         try {
             StackPane newTetromino = FXMLLoader.load(TetrisController.class.getResource(tetrominoFXML_URL[newTetNum]));
             playArea.getChildren().add(newTetromino);
@@ -147,6 +168,7 @@ public class TetrisController {
             e.printStackTrace();
         }
 
+        //Load the FXML file for the next Tetromino
         try {
             StackPane nextTetromino = FXMLLoader.load(TetrisController.class.getResource(tetrominoFXML_URL[nextTetNum]));
             playArea.getChildren().add(nextTetromino);
@@ -155,35 +177,119 @@ public class TetrisController {
             e.printStackTrace();
         }
 
+        //Sets the new Tetromino to the starting location
         currentTetrominoGraphic.setLayoutX(currentTetromino.getXReference()*20+160);
         currentTetrominoGraphic.setLayoutY(currentTetromino.getYReference()*20+20);
 
+        //Sets the next Tetromino to the display box location
         nextTetrominoGraphic.setLayoutX(420);
         nextTetrominoGraphic.setLayoutY(120);
     }
 
-//    private void replaceI() throws IOException {
-//        Rectangle block = FXMLLoader.load(getClass().getResource("Block.fxml"));
-//        Rectangle block2 = FXMLLoader.load(getClass().getResource("Block.fxml"));
-//        Rectangle block3 = FXMLLoader.load(getClass().getResource("Block.fxml"));
-//        Rectangle block4 = FXMLLoader.load(getClass().getResource("Block.fxml"));
-//        playArea.getChildren().add(block);
-//        playArea.getChildren().add(block2);
-//        playArea.getChildren().add(block3);
-//        playArea.getChildren().add(block4);
-//        block.setLayoutX(iPiece.getLayoutX());
-//        block.setLayoutY(iPiece.getLayoutY());
-//        block2.setLayoutX(iPiece.getLayoutX());
-//        block2.setLayoutY(iPiece.getLayoutY()+20);
-//        block3.setLayoutX(iPiece.getLayoutX());
-//        block3.setLayoutY(iPiece.getLayoutY()+40);
-//        block4.setLayoutX(iPiece.getLayoutX());
-//        block4.setLayoutY(iPiece.getLayoutY()+60);
-////        block.setLayoutX(100);
-////        block.setLayoutY(0);
-//        block.setFill(Color.web("000000"));
-//        playArea.getChildren().remove(iPiece);
-//    }
+    private void addBlock(int layoutX, int layoutY, int blockColor) {
+
+        String[] tetrominoColor = new String[]{"1eeaff","fffe21","ff1ee6","1eff5e" ,"ff1e1e","231eff","ff8c1e"};
+
+        Rectangle block = null;
+        try {
+            block = FXMLLoader.load(getClass().getResource("Resources/Block.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        int[] gridCoords = getGridCoordinates(layoutY, layoutX);
+
+
+        if (blockFXArray[gridCoords[1]][gridCoords[0]] == null){
+            playArea.getChildren().add(block);
+            blockFXArray[gridCoords[1]][gridCoords[0]] = block;
+        }
+
+
+        block.setLayoutX(layoutX);
+        block.setLayoutY(layoutY);
+        block.setFill(Color.web(tetrominoColor[blockColor]));
+
+
+    }
+
+
+
+    public int[] getScreenCoordinates(int row, int col) {
+        int xCoord = col * 20 + 160;
+        int yCoord = row * 20 + 20;
+        int[] screenCoords = new int[2];
+        screenCoords[0] = xCoord;
+        screenCoords[1] = yCoord;
+        return screenCoords;
+    }
+
+    public int[] getGridCoordinates(int row, int col) {
+        int xCoord = (col - 160)/20;
+        int yCoord = (row - 20)/20;
+        int[] gridCoords = new int[2];
+        gridCoords[0] = xCoord;
+        gridCoords[1] = yCoord;
+        return gridCoords;
+    }
+
+    public void updateBoardFX() {
+        Block[][] currentBoard = board.getCurrentBoard();
+        for(int row = 0; row < currentBoard.length; row++){
+            for(int col = 0; col < currentBoard[0].length; col++){
+                if (currentBoard[row][col] != null) {
+                    int blockColor = currentBoard[row][col].getColor();
+                    int[] screenCoords = getScreenCoordinates(row,col);
+                    addBlock(screenCoords[0], screenCoords[1], blockColor);
+                }
+
+            }
+        }
+    }
+
+    public void clearRows() {
+        board.getRowsToClear();
+        Boolean graphicsDone = false;
+        int counter;
+
+        System.out.println(board.getRowsToClear());
+        System.out.println(playArea.getChildren());
+
+        //for(int flash = 0; flash < 10; flash++) {
+        for (int row = 0; row < 24; row++) {
+            //for (Integer row : board.getRowsToClear()) {
+                for (int col = 0; col < 10; col++) {
+                    //if (flash % 2 == 0) {
+                        System.out.println(row);
+                        System.out.println(col);
+                        System.out.println(blockFXArray[row][col]);
+                        //blockFXArray[row][col].setFill(Color.web("FF0000"));
+//                        try {
+//                            Thread.sleep(50);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        blockFXArray[row][col].setFill(Color.web("00FF00"));
+//                        try {
+//                            Thread.sleep(50);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+                        playArea.getChildren().remove(blockFXArray[row][col]);
+                        blockFXArray[row][col] = null;
+                    //}
+
+                }
+            }
+
+        //}
+
+        //for
+        updateBoardFX();
+        board.resetRowsToClear();
+    }
 
     public void tryMove(char moveType, Board board) {
         // Possible chars are q, e, a, s, d.
@@ -212,11 +318,22 @@ public class TetrisController {
             // the current blocks in the
             // tetromino to the board.
 
+            //Remove placed Tetromino
+            playArea.getChildren().remove(currentTetrominoGraphic);
+
+            ArrayList<Integer> test = board.getRowsToClear();
+
             currentTetromino = nextTetromino;
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
             generateTetromino();
+            updateBoardFX();
+            if(board.getRowsToClear().size() > 0) {
+                clearRows();
+            }
+
         }
     }
+
     public long getGameScore(){
         return this.gameScore;
     }

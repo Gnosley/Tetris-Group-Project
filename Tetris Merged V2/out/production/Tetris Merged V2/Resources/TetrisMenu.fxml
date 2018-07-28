@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="MenuController">
+   <children>
+      <StackPane layoutX="200.0" layoutY="168.0" prefHeight="53.0" prefWidth="200.0">
+         <children>
+            <Rectangle fx:id="newGame" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff" height="54.0" onMouseClicked="#handleNewGameButtonAction" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="200.0">
+               <effect>
+                  <Bloom />
+               </effect></Rectangle>
+            <Label mouseTransparent="true" text="New Game" />
+         </children>
+      </StackPane>
+      <Rectangle fx:id="difficultyButton1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="60.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="480.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="120.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="180.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="240.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="300.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="360.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="difficultyButton7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="420.0" layoutY="267.0" onMouseClicked="#mouseClickButton" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+         <effect>
+            <Bloom />
+         </effect>
+      </Rectangle>
+      <Text layoutX="77.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+      <Text layoutX="137.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+      <Text layoutX="196.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+      <Text layoutX="256.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+      <Text layoutX="316.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
+      <Text layoutX="376.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="6" />
+      <Text layoutX="436.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="7" />
+      <Text layoutX="496.0" layoutY="292.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="8" />
+   </children>
+</AnchorPane>
