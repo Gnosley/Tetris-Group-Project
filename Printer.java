@@ -15,6 +15,9 @@ public class Printer {
 
     // Block Character
     private final String BLOCKCHAR = "\u2588";
+    // Ghost Block Character
+    private final String GBLKCHAR = "\u2591";
+
 
     // Spacing between Blocks: "" is no spacing
     private final String BLOCKSPC = ""; // \u200A works well in emacs
@@ -130,12 +133,12 @@ public class Printer {
         Block[] cTetrominoArray = currentTetromino.getBlockArray();
         Block[] gTetrominoArray = ghostTetromino.getBlockArray();
 
-        for(Block block:cTetrominoArray) {
+        for(Block block:gTetrominoArray) {
             int x = block.getXPosition();
             int y = block.getYPosition();
             boardArray[y][x] = block;
         }
-        for(Block block:gTetrominoArray) {
+        for(Block block:cTetrominoArray) {
             int x = block.getXPosition();
             int y = block.getYPosition();
             boardArray[y][x] = block;
@@ -216,13 +219,17 @@ public class Printer {
     }
 
     private String getBlockString(Block block) {
+        String Blockchar = BLOCKCHAR;
         String blockStr = BLOCKSPC;
         if (block != null) {
             blockStr += ANSI.color(block.getColor());
+            if (block.getIsGhost()) {
+                Blockchar = GBLKCHAR;
+            }
         }
         else blockStr += ANSI.BLACK;
         for (int i =0; i<BLOCKWIDTH; i++) {
-            blockStr += BLOCKCHAR;
+            blockStr += Blockchar;
         }
         blockStr += ANSI.RESET;
         return blockStr;

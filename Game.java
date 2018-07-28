@@ -30,7 +30,7 @@ public class Game {
     public Game() {
         // generate three new tetrominos at the start of the game
         currentTetromino = new Tetromino(startingX, startingY);
-        ghostTetromino = new Tetromino(currentTetromino);   //creates ghost
+        ghostTetromino = new Tetromino(currentTetromino, true);   //creates ghost
         nextTetromino = new Tetromino(startingX, startingY);
 
 
@@ -142,7 +142,7 @@ public class Game {
 		
 		
         if(moveType == 'f'){
-            currentTetromino = ghostTetromino;
+            currentTetromino = new Tetromino(ghostTetromino, false);
             board.updateBoard(currentTetromino);
             commitTetrominoSequence(board);
         }
@@ -207,7 +207,7 @@ public class Game {
      */
     private Tetromino positionGhost(Tetromino currentTetromino, Board board) {
         boolean canMove = true;
-        Tetromino ghostTetromino = new Tetromino(currentTetromino);
+        Tetromino ghostTetromino = new Tetromino(currentTetromino, true);
         while (canMove) {
             Tetromino movedGhost = ghostTetromino.doMove('s');
             canMove = board.checkMove(movedGhost);

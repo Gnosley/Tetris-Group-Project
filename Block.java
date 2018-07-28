@@ -4,13 +4,15 @@ public class Block{
     private int color = 0;
     private int xPosition;
     private int yPosition;
+    private boolean isGhost;
 
 /** Three parameter constructor for color, xPosition and yPosition.
 	@param color, @param xPosition, @param yPosition	*/
-    public Block(int color, int x, int y) {
+    public Block(int color, int x, int y, boolean isGhost) {
         xPosition = x;
         yPosition = y;
         this.color = color;
+        this.isGhost = isGhost;
     }
 
 /** Block copy constructor
@@ -19,17 +21,24 @@ public class Block{
         this.color = block.getColor();
         this.xPosition = block.getXPosition();
         this.yPosition = block.getYPosition();
+        this.isGhost = block.getIsGhost();
     }
 /** Set method for color
 	@param color	*/
     public void setColor(int color) {
         this.color = color;
     }
+    /** Get method for color
+        @return boolean representing if it is a ghost block or not*/
+    public boolean getIsGhost() {
+        return this.isGhost;
+    }
 /** Get method for color
 	@return color*/
     public int getColor() {
         return this.color;
     }
+
 /** Set method for xPosition
 	@param x New xPosition	*/
     public void setXPosition(int x) {

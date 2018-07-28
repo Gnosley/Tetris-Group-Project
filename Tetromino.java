@@ -89,13 +89,24 @@ public class Tetromino {
      *            old Tetromino that needs to be copied
      */
     public Tetromino(Tetromino tetromino) {
-		this.type = tetromino.getType();
+        this.type = tetromino.getType();
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
     }
-	
+
+    public Tetromino(Tetromino tetromino, boolean isGhost) {
+        this.type = tetromino.getType();
+        this.xReferencePosition = tetromino.getXReference();
+        this.yReferencePosition = tetromino.getYReference();
+        this.tetrominoArray = generateTetrominoArray(type, isGhost);
+        this.size = tetromino.getSize();
+    }
+
+    private Block[] generateTetrominoArray(int type) {
+        return generateTetrominoArray(type, false);
+    }
 
     /**
      * Generate the new tetromino thorough data from the tetrominoData array
@@ -103,7 +114,7 @@ public class Tetromino {
      * @param type:
      *            int of what type the tetromino is (i,o,t,s,z,j,l)
      */
-    private Block[] generateTetrominoArray(int type) {
+    private Block[] generateTetrominoArray(int type, boolean isGhost) {
         if (type < 0 || type > 6) type = 0; // only 7 tetromino types
 
         int color = tetrominoData[type][0][0];
@@ -116,7 +127,8 @@ public class Tetromino {
 
             Block block = new Block(color,
                                     xReferencePosition + x,
-                                    yReferencePosition + y);
+                                    yReferencePosition + y,
+                                    isGhost);
             tetrominoArray[i-1] = block;
         }
         return tetrominoArray;
