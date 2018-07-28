@@ -45,6 +45,7 @@ public class Tetromino {
     private int xReferencePosition; // x coordinate in relation to the board
     private int yReferencePosition; // y coordinate in relation to the board
     private int size; // size of grid needed to hold tetromino
+	private int type; //the type of tetromino
 
     /**
      * Constructor for a new Tetromino when one is place. A randomized type of
@@ -57,12 +58,29 @@ public class Tetromino {
      */
 
     public Tetromino(int xRef, int yRef) {
-        int type = rand.nextInt(7);
+        type = rand.nextInt(7);
         size = tetrominoData[type][0][1];
         xReferencePosition = xRef;
         yReferencePosition = yRef;
         tetrominoArray = generateTetrominoArray(type);
     }
+	
+    /**
+     * Constructor for setting an old tetromino back at the start after storing
+     * @param xRef:
+     * 			x-coordinate of reference position
+     * @param yRef:
+     * 			y-coordinate of reference position
+     * @param tetType
+     * 			type of tetromino that was stored
+     */
+	public Tetromino (int xRef, int yRef, int tetType) {
+		type = tetType;
+		size = tetrominoData[tetType][0][1];
+        xReferencePosition = xRef;
+        yReferencePosition = yRef;
+        tetrominoArray = generateTetrominoArray(tetType);
+	}
 
     /**
      * Copy constructor after each movement or movement check
@@ -71,11 +89,13 @@ public class Tetromino {
      *            old Tetromino that needs to be copied
      */
     public Tetromino(Tetromino tetromino) {
+		this.type = tetromino.getType();
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
     }
+	
 
     /**
      * Generate the new tetromino thorough data from the tetrominoData array
@@ -215,10 +235,18 @@ public class Tetromino {
     /**
     *Accesses the private variable "size"
     *
-    *@return size: int of bloack array size
+    *@return size: int of block array size
     */
     public int getSize() {
         return size;
     }
+
+    /**
+     * Accesses the private variable "type"
+     * @return type: int of tetromino type
+     */
+	public int getType() {
+		return type;
+	}
 
 }

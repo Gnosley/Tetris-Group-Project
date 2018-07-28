@@ -8,6 +8,8 @@ import java.io.IOException;
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
+	private Tetromino storedTetromino; // the held tetromino
+	private Tetromino proxyTetromino; // proxy space for switching tetrominos
 
     private static final int startingX = 3; // where a tetromino should start on
     private static final int startingY = 0; // the board
@@ -16,6 +18,8 @@ public class Game {
 
     private Terminal terminal;        // the terminal and
     private NonBlockingReader reader; // reader for instant input
+	
+	private boolean heldYet = false;  // if there is already a held piece
 
 
     /**
@@ -111,19 +115,37 @@ public class Game {
         // a moves the block left.
         // s moves the block down.
         // d moves the block right.
+		// h holds the current block.
         switch(moveType) {
-        case 'q': case 'e': case 'a': case 's': case 'd': break;
+        case 'q': case 'e': case 'a': case 's': case 'd': case 'h': break;
         default: return;
         }
-
+		
+        //if the hold character is pressed, it will switch out the current tetromino for the held one
+		if(moveType == 'h') {
+			if (heldYet == false) {		// no tetromino is held yet, so it grabs a new one
+				storedTetromino = new Tetromino (currentTetromino);
+				currentTetromino = new Tetromino (nextTetromino);
+				nextTetromino = new Tetromino (startingX, startingY);
+				heldYet = true;
+			}
+			else {						// a tetromino is already held, so it replaces current with that one
+				proxyTetromino = new Tetromino (currentTetromino);
+				currentTetromino = new Tetromino (startingX, startingY, storedTetromino.getType());
+				storedTetromino = new Tetromino (proxyTetromino);
+			}
+		}
+		
+		
         // Tetromino.doMove() should return a NEW tetromino with the move applied
         Tetromino movedTetromino = currentTetromino.doMove(moveType);
 
         // board.checkBoard() returns true if no blocks are currently in the way and
         // no blocks in the given tetromino are out of board bounds.
         boolean canMove = board.checkMove(movedTetromino);
+
         if (canMove) {
-            currentTetromino = movedTetromino;
+            currentTetromino = new Tetromino (movedTetromino);
         }
         else if (moveType == 's' && !canMove) {
             board.updateBoard(currentTetromino); // if moving down causes it to hit a
@@ -134,7 +156,7 @@ public class Game {
             this.updateGameScore(gameStatistics[0]);
             this.updateLinesCleared(gameStatistics[1]);
             board.resetGameStatistics();
-            currentTetromino = nextTetromino;
+            currentTetromino = new Tetromino (nextTetromino);
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         }
     }
