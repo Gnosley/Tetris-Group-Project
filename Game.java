@@ -94,6 +94,8 @@ public class Game {
 
             game.tryMove((char)gameMove, board);
 
+            game.ghostTetromino = game.returnGhost(game.currentTetromino, board);
+
             // board needs to check if there are any blocks in the board with a
             // y coordinate <= (board.height - 20). Returns true if there is.
             gameDone = board.isGameDone();
@@ -160,15 +162,25 @@ public class Game {
     }
 
     private void positionGhostTetromino(Tetromino ghostTetromino, Board board){
-        Tetromino movedGhostTetromino = this.doMove('d');
+        Tetromino movedGhostTetromino = ghostTetromino.doMove('s');
         boolean canGMove = board.checkMove(movedGhostTetromino);
-        do{
-            ghostTetromino = movedGhostTetromino;
-            movedGhostTetromino = ghostTetromino.doMove('d');
+        while(canGMove) {
+            movedGhostTetromino = movedGhostTetromino.doMove('s');
             canGMove = board.checkMove(movedGhostTetromino);
-            System.out.println(canGMove);
+        }
+        ghostTetromino = movedGhostTetromino;
+    }
 
-        }while (canGMove);
-
+    private Tetromino returnGhost(Tetromino currentTetromino, Board board) {
+        boolean canMove = true;
+        Tetromino ghostTetromino = new Tetromino(currentTetromino);
+        while (canMove) {
+            Tetromino movedGhost = ghostTetromino.doMove('s');
+            canMove = board.checkMove(movedGhost);
+            if (canMove) {
+                ghostTetromino = movedGhost;
+            }
+        }
+        return ghostTetromino;
     }
 }
