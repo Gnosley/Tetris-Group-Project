@@ -8,6 +8,7 @@ import java.io.IOException;
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
+    private Tetromino ghostTetromino; //  the ghost of the current tetromino
 
     private static final int startingX = 3; // where a tetromino should start on
     private static final int startingY = 0; // the board
@@ -22,11 +23,17 @@ public class Game {
      * This constructor initializes the terminal input/output to work correctly
      * and generates two new Tetrominos.
      */
-    public Game() {
-
-        // generate two new tetrominos at the start of the game
+    public Game(Board board) {
+        System.out.println("4");
+        // generate three new tetrominos at the start of the game
         currentTetromino = new Tetromino(startingX, startingY);
+        ghostTetromino = new Tetromino(currentTetromino);   //creates ghost
+        System.out.println("PRE POSITION");
+        positionGhostTetromino(ghostTetromino, board);
+        System.out.println("Post POSITION");
         nextTetromino = new Tetromino(startingX, startingY);
+        System.out.println("3");
+
 
         try{
             terminal = TerminalBuilder.builder()
@@ -49,16 +56,14 @@ public class Game {
      */
     public static void main(String[] args) {
         Board board = new Board();
-
         // The printer object, which is what will
         // produce graphics for text based game
         Printer printer = new Printer();
-
-        Game game = new Game();
-
+        Game game = new Game(board);
         // Print initial board.
         printer.print(game.currentTetromino,
                       game.nextTetromino,
+                      game.ghostTetromino,
                       board,
                       game.terminal,
                       game.gameScore,
@@ -86,6 +91,7 @@ public class Game {
             catch(IOException e){
                 System.out.println("Couldn't read character for move.");
             }
+
             game.tryMove((char)gameMove, board);
 
             // board needs to check if there are any blocks in the board with a
@@ -95,6 +101,7 @@ public class Game {
             // Prints the board at the end of every turn.
             printer.print(game.currentTetromino,
                           game.nextTetromino,
+                          game.ghostTetromino,
                           board,
                           game.terminal,
                           game.gameScore,
@@ -150,5 +157,18 @@ public class Game {
     }
     public void updateLinesCleared(long linesCleared){
         this.linesCleared += linesCleared;
+    }
+
+    private void positionGhostTetromino(Tetromino ghostTetromino, Board board){
+        Tetromino movedGhostTetromino = this.doMove('d');
+        boolean canGMove = board.checkMove(movedGhostTetromino);
+        do{
+            ghostTetromino = movedGhostTetromino;
+            movedGhostTetromino = ghostTetromino.doMove('d');
+            canGMove = board.checkMove(movedGhostTetromino);
+            System.out.println(canGMove);
+
+        }while (canGMove);
+
     }
 }
