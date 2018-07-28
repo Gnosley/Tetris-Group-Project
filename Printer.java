@@ -58,12 +58,13 @@ public class Printer {
         String[] outString = new String[22];
         outString[0] = getBoardTop();
 
-        String[] controlStrings = new String[5];
+        String[] controlStrings = new String[6];
         controlStrings[0] = "Controls:\t'a' - move left";
         controlStrings[1] = "\t\t's' - move down";
         controlStrings[2] = "\t\t'd' - move right";
         controlStrings[3] = "\t\t'e' - rotate clockwise";
         controlStrings[4] = "\t\t'q' - rotate counter-clockwise";
+        controlStrings[5] = "\t\t'r' - drop";
 
         for (int i = 4; i < BOARDHEIGHT; i++) {
             String rowString = "";
