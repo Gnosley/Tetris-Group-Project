@@ -72,7 +72,6 @@ public class Game {
 
         // While loop runs each turn
         while(!gameDone) {
-            // char gameMove = input.next().charAt(0);
             int gameMove = 0;
             try{
                 gameMove = game.reader.read();
