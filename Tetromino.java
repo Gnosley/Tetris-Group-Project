@@ -221,5 +221,4 @@ public class Tetromino {
     public int getSize() {
         return size;
     }
-
 }
