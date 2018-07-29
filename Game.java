@@ -140,7 +140,7 @@ public class Game {
      * @param moveType: char, letter input of I/O
      * @param board: Board, the playing surface
      */
-    private void tryMove(char moveType, Board board) {
+    private void tryMove(int moveType, Board board) {
         // Possible chars are q, e, a, s, d.
         // q rotates counter-clockwise.
         // e rotates clockwise.
