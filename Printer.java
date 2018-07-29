@@ -5,8 +5,8 @@ public class Printer {
     private final int BOARDHEIGHT = 24;
 
 
-    private final int PREVIEWTOP = 6; // where the preview window starts (which row)
-    private final int PREVIEWBOT = 13;// where the preview window ends (which row)
+    private final int PREVIEWTOP = 8; // where the preview window starts (which row)
+    private final int PREVIEWBOT = 15;// where the preview window ends (which row)
 
     private final int BLOCKWIDTH = 2; // How many characters wide each block should be
 
@@ -61,13 +61,15 @@ public class Printer {
         String[] outString = new String[22];
         outString[0] = getBoardTop();
 
-        String[] controlStrings = new String[6];
+        String[] controlStrings = new String[7];
         controlStrings[0] = "Controls:\t'a' - move left";
         controlStrings[1] = "\t\t's' - move down";
         controlStrings[2] = "\t\t'd' - move right";
         controlStrings[3] = "\t\t'e' - rotate clockwise";
         controlStrings[4] = "\t\t'q' - rotate counter-clockwise";
         controlStrings[5] = "\t\t'f' - drop";
+		controlStrings[6] = "\t\t'h' - hold";
+
 
         for (int i = 4; i < BOARDHEIGHT; i++) {
             String rowString = "";
@@ -95,9 +97,9 @@ public class Printer {
                 rowString += getPreviewTopBot(BRCHAR);
             }
 
-            if (curRow > PREVIEWBOT && curRow < 14 + getTetrisWord().length) {
+            if (curRow > PREVIEWBOT && curRow < 15 + getTetrisWord().length) {
 
-                rowString += "   " + (getTetrisWord()[curRow - 14]);
+                rowString += "   " + (getTetrisWord()[curRow - 15]);
             }
 
             if (curRow == 19) {
