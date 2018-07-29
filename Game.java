@@ -112,6 +112,11 @@ public class Game {
 
     }
 
+    /**
+     * Attempt to make a move, must be checked for possibility within limits of game
+     * @param moveType: char, letter input of I/O
+     * @param board: Board, the playing surface
+     */
     private void tryMove(char moveType, Board board) {
         // Possible chars are q, e, a, s, d.
         // q rotates counter-clockwise.
@@ -143,8 +148,8 @@ public class Game {
 				heldTurn = true;			// a tetromino has already been held for this drop
 			}
 		}
-
-
+		
+		
         if(moveType == 'f'){
             currentTetromino = new Tetromino(ghostTetromino, false);
             board.updateBoard(currentTetromino);
@@ -175,6 +180,7 @@ public class Game {
 
         }
     }
+    
     /**
      * Sequence of events which occur after a piece 'played' (locked into the
      * board).
@@ -187,18 +193,37 @@ public class Game {
         board.resetGameStatistics();
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
-        heldTurn = false;				// can hold the tetromino again
+        heldTurn = true;
     }
 
+    /**
+     * Getter method of the score achieved through clearing rows
+     * @return gameScore: long, the score achieved
+     */
     public long getGameScore(){
         return this.gameScore;
     }
+    
+    /**
+     * Setter of the score achieved through clearing rows
+     * @param gameScore: long, the score achieved
+     */
     public void updateGameScore(long gameScore){
         this.gameScore += gameScore;
     }
+    
+    /**
+     * Getter of how many lines were cleared
+     * @return linesCleared: long, keeps track of number of lines cleared
+     */
     public long getLinesCleared(){
         return this.linesCleared;
     }
+    
+    /**
+     * Keeping track of score through addition of lines cleared as lines clear
+     * @param linesCleared: long, keeps track of number of lines cleared
+     */
     public void updateLinesCleared(long linesCleared){
         this.linesCleared += linesCleared;
     }
