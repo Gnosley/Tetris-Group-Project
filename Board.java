@@ -3,7 +3,6 @@ import java.util.Arrays;
 /**
  * Board class for Tetris implimentation.
  *
- * Natalie Dean (CPSC 233, SUM18, T02 Team 6)
  */
 public class Board{
     private Block[][] gameBoard = new Block[24][10];
@@ -99,7 +98,7 @@ public class Board{
     public boolean isGameDone(){
         boolean gameOver = false;
         for(int col = 0; col < this.gameBoard[0].length; col++){
-            if(this.gameBoard[4][col] != null){   //ignores top 4 rows (outside of playable area)
+            if(this.gameBoard[3][col] != null){   //ignores top 4 rows (outside of playable area)
                 return true;
             }
         }
