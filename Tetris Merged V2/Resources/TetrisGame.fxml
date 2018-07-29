@@ -10,11 +10,16 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
+<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="600.0" style="-fx-background-color: #1b1424;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
    <children>
-      <ImageView fx:id="image" fitHeight="540.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="image" fitHeight="430.0" fitWidth="220.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="80.0">
          <image>
-            <Image url="@tetris-ui-v1.png" />
+            <Image url="@Grid.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="400.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Next.png" />
          </image>
       </ImageView>
       <GridPane layoutX="100.0" layoutY="66.0" prefHeight="292.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0">

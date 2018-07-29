@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Resources/TetrisMenu.fxml"));
-            Scene scene = new Scene(root, 600, 540);
+            Scene scene = new Scene(root, 580, 400);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

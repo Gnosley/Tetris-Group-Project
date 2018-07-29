@@ -4,40 +4,40 @@ import java.util.Arrays;
 public class Tetromino {
     // {color, size} {block1} {block 2} {block 3} {block 4}
     private final int[][][] tetrominoData = {
-        // I-Tetromino
-        {
-            {0, 4}, {1, 0}, {1, 1}, {1, 2}, {1, 3}
-        },
+            // I-Tetromino
+            {
+                    {0, 4}, {1, 0}, {1, 1}, {1, 2}, {1, 3}
+            },
 
-        // O-Tetromino
-        {
-            {1, 2}, {0, 0}, {0, 1}, {1, 0}, {1, 1}
-        },
+            // O-Tetromino
+            {
+                    {1, 2}, {0, 0}, {0, 1}, {1, 0}, {1, 1}
+            },
 
-        // T-Tetromino
-        {
-            {2, 3}, {1, 0}, {1, 1}, {0, 1}, {2, 1}
-        },
+            // T-Tetromino
+            {
+                    {2, 3}, {1, 0}, {1, 1}, {0, 1}, {2, 1}
+            },
 
-        // S-Tetromino
-        {
-            {3, 3}, {1, 0}, {1, 1}, {2, 1}, {2, 2}
-        },
+            // S-Tetromino
+            {
+                    {3, 3}, {1, 0}, {1, 1}, {2, 1}, {2, 2}
+            },
 
-        // Z-Tetromino
-        {
-            {4, 3}, {0, 0}, {1, 0}, {1, 1}, {2, 1}
-        },
+            // Z-Tetromino
+            {
+                    {4, 3}, {0, 0}, {1, 0}, {1, 1}, {2, 1}
+            },
 
-        // J-Tetromino
-        {
-            {5, 3}, {2, 0}, {1, 0}, {1, 1}, {1, 2}
-        },
+            // J-Tetromino
+            {
+                    {5, 3}, {2, 0}, {1, 0}, {1, 1}, {1, 2}
+            },
 
-        // L-Tetromino
-        {
-            {6, 3}, {2, 2}, {1, 0}, {1, 1}, {1, 2}
-        }
+            // L-Tetromino
+            {
+                    {6, 3}, {2, 2}, {1, 0}, {1, 1}, {1, 2}
+            }
     };
 
     private static Random rand = new Random();
@@ -45,8 +45,8 @@ public class Tetromino {
     private int xReferencePosition; // x coordinate in relation to the board
     private int yReferencePosition; // y coordinate in relation to the board
     private int size; // size of grid needed to hold tetromino
-    private int type;
-    private int rotation = 0;
+    private int type; //the type of tetromino
+    private int rotation;
 
     /**
      * Constructor for a new Tetromino when one is place. A randomized type of
@@ -59,25 +59,65 @@ public class Tetromino {
      */
 
     public Tetromino(int xRef, int yRef) {
-        this.type = rand.nextInt(7);
+        type = rand.nextInt(7);
         size = tetrominoData[type][0][1];
         xReferencePosition = xRef;
         yReferencePosition = yRef;
-        tetrominoArray = generateTetrominoArray(this.type);
+        tetrominoArray = generateTetrominoArray(type);
+    }
+
+    /**
+     * Constructor for setting an old tetromino back at the start after storing
+     * @param xRef:
+     * 			x-coordinate of reference position
+     * @param yRef:
+     * 			y-coordinate of reference position
+     * @param tetType
+     * 			type of tetromino that was stored
+     */
+    public Tetromino (int xRef, int yRef, int tetType) {
+        type = tetType;
+        size = tetrominoData[tetType][0][1];
+        xReferencePosition = xRef;
+        yReferencePosition = yRef;
+        tetrominoArray = generateTetrominoArray(tetType);
     }
 
     /**
      * Copy constructor after each movement or movement check
-     * 
+     *
      * @param tetromino:
      *            old Tetromino that needs to be copied
      */
     public Tetromino(Tetromino tetromino) {
+        this.type = tetromino.getType();
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
         this.rotation = tetromino.rotation;
+    }
+
+    public Tetromino(Tetromino tetromino, boolean isGhost) {
+        this.type = tetromino.getType();
+        this.xReferencePosition = tetromino.getXReference();
+        this.yReferencePosition = tetromino.getYReference();
+        this.tetrominoArray = tetromino.getBlockArray();
+        this.size = tetromino.getSize();
+        this.convertGhostType(isGhost);
+        this.rotation = tetromino.rotation;
+    }
+
+    private void convertGhostType(boolean toGhost) {
+        for(Block block:this.tetrominoArray) {
+            if(block != null){
+                block.setIsGhost(toGhost);
+            }
+        }
+    }
+
+    private Block[] generateTetrominoArray(int type) {
+        return generateTetrominoArray(type, false);
     }
 
     /**
@@ -86,7 +126,7 @@ public class Tetromino {
      * @param type:
      *            int of what type the tetromino is (i,o,t,s,z,j,l)
      */
-    private Block[] generateTetrominoArray(int type) {
+    private Block[] generateTetrominoArray(int type, boolean isGhost) {
         if (type < 0 || type > 6) type = 0; // only 7 tetromino types
 
         int color = tetrominoData[type][0][0];
@@ -98,19 +138,21 @@ public class Tetromino {
             int y = tetrominoData[type][i][1];
 
             Block block = new Block(color,
-                                    xReferencePosition + x,
-                                    yReferencePosition + y);
+                    xReferencePosition + x,
+
+                    yReferencePosition + y,
+                    isGhost);
             tetrominoArray[i-1] = block;
         }
         return tetrominoArray;
     }
 
     /**
-	 * Changes the rotation of the block
-	 * 
-	 * @param direction:
-	 *            char, either 'q' or 'e' to be CCW or CW rotation
-	 */
+     * Changes the rotation of the block
+     *
+     * @param direction:
+     *            char, either 'q' or 'e' to be CCW or CW rotation
+     */
     private void rotate(char direction) {
         // We can rotate counter clockwise by {x, y} -> {y, size - 1 - x}
         // We can rotate clockwise by {x, y} -> {size - 1 - y, x}
@@ -142,12 +184,12 @@ public class Tetromino {
     }
 
     /**
-	 * Decides what translation is being asked to do via a character switch.
-	 * Performs the method via setting the block position to the old position + the movement
-	 * 
-	 * @param direction:
-	 *            char that indicates the direction of translation
-	 */
+     * Decides what translation is being asked to do via a character switch.
+     * Performs the method via setting the block position to the old position + the movement
+     *
+     * @param direction:
+     *            char that indicates the direction of translation
+     */
     private void move(char direction) {
         int xMovement = 0;
         int yMovement = 0;
@@ -168,11 +210,11 @@ public class Tetromino {
     }
 
     /**
-	 * Decides what move is being asked to do via a character switch. Performs the
-	 * method.
-	 * 
-	 * @param moveType:
-	 *            char that indicates the action asked
+     * Decides what move is being asked to do via a character switch. Performs the
+     * method.
+     *
+     * @param moveType:
+     *            char that indicates the action asked
      */
     public Tetromino doMove(char moveType) {
         Tetromino movedTetromino = new Tetromino(this);
@@ -180,19 +222,19 @@ public class Tetromino {
             case 'a':   //left indication
             case 's':   //down indication
             case 'd':   //right indication
-                        movedTetromino.move(moveType); break;
+                movedTetromino.move(moveType); break;
             case 'q':   //CCW rotation indication
             case 'e':   //CW rotation indiciation
-                        movedTetromino.rotate(moveType); break;
+                movedTetromino.rotate(moveType); break;
         }
         return movedTetromino;
     }
 
     /**
-	 * Method to copy information of the private tetrominoArray
-	 * 
-	 * @return copy: Block[] copy constructor to extract information without a privacy leak
-	 */
+     * Method to copy information of the private tetrominoArray
+     *
+     * @return copy: Block[] copy constructor to extract information without a privacy leak
+     */
     public Block[] getBlockArray() {
         Block[] copy = new Block[tetrominoArray.length];
         for(int i=0; i < tetrominoArray.length; i++) {
@@ -202,38 +244,47 @@ public class Tetromino {
     }
 
     /**
-	 * Accesses the private variable "xReferencePosition"
-	 * 
-	 * @return xReferencePosition: int of x index position on board
-	 */
+     * Accesses the private variable "xReferencePosition"
+     *
+     * @return xReferencePosition: int of x index position on board
+     */
     public int getXReference() {
         return xReferencePosition;
     }
 
     /**
-	 * Accesses the private variable "yReferencePosition"
-	 * 
-	 * @return yReferencePosition: int of y index position on board
-	 */
+     * Accesses the private variable "yReferencePosition"
+     *
+     * @return yReferencePosition: int of y index position on board
+     */
     public int getYReference() {
         return yReferencePosition;
     }
-    
+
     /**
-    *Accesses the private variable "size"
-    *
-    *@return size: int of bloack array size
-    */
+     *Accesses the private variable "size"
+     *
+     *@return size: int of block array size
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Accesses the private variable "type"
+     * @return type: int of tetromino type
+     */
     public int getType() {
-        return this.type;
+        return type;
     }
 
     public int getRotation() {
         return this.rotation;
     }
+
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
 
 }

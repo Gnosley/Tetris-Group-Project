@@ -90,7 +90,7 @@ public class Board{
             }
         }
         return canMove = true; //otherwise, return move is valid
-	}
+    }
 
     /**
      * Checks if game is over (top row of playable board does not contain any null objects)
