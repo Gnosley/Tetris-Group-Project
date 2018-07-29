@@ -9,7 +9,7 @@ public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
-    private Tetromino storedTetromino; // the held tetromino
+    private Tetromino storedTetromino = null; // the held tetromino
     private Tetromino proxyTetromino; // proxy space for switching tetrominos
 
     private static final int startingX = 3; // where a tetromino should start on
@@ -66,10 +66,12 @@ public class Game {
         printer.print(game.currentTetromino,
                       game.nextTetromino,
                       game.ghostTetromino,
+                      game.storedTetromino,
                       board,
                       game.terminal,
                       game.gameScore,
-                      game.linesCleared);
+                      game.linesCleared,
+                      game.heldTurn);
 
         boolean gameDone = false;
 
@@ -87,32 +89,53 @@ public class Game {
                     if (nextInput == 27) {
                         break; // end game if escape is pressed twice.
                     }
+                    else if (nextInput == 91) {
+                        nextInput = game.reader.read();
+                        switch(nextInput) {
+                            case 65: gameMove = 101; break; // up arrow
+                            case 66: gameMove = 115; break; // down arrow
+                            case 67: gameMove = 100; break;// right arrow 
+                            case 68: gameMove = 97; break; //left arrow
+                        }
+                    }
+
+                    // try {
+                    //     Thread.sleep(1000);
+                    // }
+                    // catch(Exception e) {}
                 }
             }
             catch(IOException e){
                 System.out.println("Couldn't read character for move.");
             }
 
-            game.tryMove((char)gameMove, board);
+            game.tryMove(gameMove, board);
             game.ghostTetromino = game.positionGhost(game.currentTetromino, board);
             // board needs to check if there are any blocks in the board with a
             // y coordinate <= (board.height - 20). Returns true if there is.
             gameDone = board.isGameDone();
 
-            // Prints the board at the end of every turn.
-            printer.print(game.currentTetromino,
-                          game.nextTetromino,
-                          game.ghostTetromino,
-                          board,
-                          game.terminal,
-                          game.gameScore,
-                          game.linesCleared);
+            if (gameMove == 'h') {
+                printer.printHelp(game.terminal);
+            }
+            else {
+                // Prints the board at the end of every turn.
+                printer.print(game.currentTetromino,
+                              game.nextTetromino,
+                              game.ghostTetromino,
+                              game.storedTetromino,
+                              board,
+                              game.terminal,
+                              game.gameScore,
+                              game.linesCleared,
+                              game.heldTurn);
+            }
         }
         System.out.println("Game Over!");
 
     }
 
-    private void tryMove(char moveType, Board board) {
+    private void tryMove(int moveType, Board board) {
         // Possible chars are q, e, a, s, d.
         // q rotates counter-clockwise.
         // e rotates clockwise.
@@ -122,12 +145,13 @@ public class Game {
 		// h holds the current block.
         // x drops the current block.
         switch(moveType) {
-        case 'q': case 'e': case 'a': case 's': case 'd': case 'f' : case 'h': break;
+        case 'q': case 'e': case 'a': case 's': case 'd': case 'f' : case 'h':
+        case 'w': case 9: case 32: break;
         default: return;
         }
 		
         //if the hold character is pressed, it will switch out the current tetromino for the held one
-		if(moveType == 'h') {
+        if(moveType == 'w' || moveType == 9) { // hold on 'w' or tab
 			if (heldTurn == false) {
 				if (heldYet == false) {		// no tetromino is held yet, so it grabs a new one
 					storedTetromino = new Tetromino (currentTetromino);
@@ -145,13 +169,13 @@ public class Game {
 		}
 
 
-        if(moveType == 'f'){
+        if(moveType == 'f' || moveType == 32){ // drop on 'f' or space
             currentTetromino = new Tetromino(ghostTetromino, false);
             board.updateBoard(currentTetromino);
             commitTetrominoSequence(board);
         }
         // Tetromino.doMove() should return a NEW tetromino with the move applied
-        Tetromino movedTetromino = currentTetromino.doMove(moveType);
+        Tetromino movedTetromino = currentTetromino.doMove((char)moveType);
 
         // board.checkBoard() returns true if no blocks are currently in the way and
         // no blocks in the given tetromino are out of board bounds.
