@@ -149,6 +149,7 @@ public class Game {
             currentTetromino = new Tetromino(ghostTetromino, false);
             board.updateBoard(currentTetromino);
             commitTetrominoSequence(board);
+			heldTurn = false;
         }
         // Tetromino.doMove() should return a NEW tetromino with the move applied
         Tetromino movedTetromino = currentTetromino.doMove(moveType);
