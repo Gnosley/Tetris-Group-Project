@@ -112,5 +112,10 @@
             <Font size="64.0" />
          </font>
       </Text>
+      <Text fx:id="startGameText" fill="WHITE" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-view-order: -3.0;" text="Press ENTER to start game">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -16,11 +16,6 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-//TODO
-//Need to create a rectangle array that stores [Rectangle, row] when the blocks are placed.
-//Need to create a ScreenCoordinate method
-//Clear blocks method
-
 public class TetrisController {
     @FXML
     //private Rectangle newGame;
@@ -41,17 +36,15 @@ public class TetrisController {
     @FXML
     private Text gameOverText;
 
+    @FXML
+    private Text startGameText;
+
     private StackPane currentTetrominoGraphic;
     private StackPane nextTetrominoGraphic;
     private StackPane ghostTetrominoGraphic;
 
-    private double currentRotate;
-
-    //public TetrisController controlTest;
-
     private long startTime = 0;
 
-    private boolean pieceFalling = true;
     private Board board;
     private Game game;
 
@@ -60,9 +53,9 @@ public class TetrisController {
     private Tetromino ghostTetromino; // the ghost tetromino to drop
     private static final int startingX = 3;
     private static final int startingY = 0;
-    private int gameScore = 0;
-    private int linesCleared = 0;
+
     private boolean gameDone = false;
+    private boolean newGame;
     private int currentDifficulty;
     private int dropSpeed;
     private Rectangle[][] blockFXArray;
@@ -71,6 +64,7 @@ public class TetrisController {
         this.blockFXArray = new Rectangle[24][10];
         Game game = new Game();
         this.game = game;
+        newGame = true;
     }
 
     /**
@@ -127,7 +121,8 @@ public class TetrisController {
                 }
                 break;
             case ENTER:
-                if(!gameDone) {
+                if(newGame) {
+                    startGameText.setText(" ");
                     startTime = System.currentTimeMillis();
                     this.board = game.getBoard();
                     currentTetromino = game.getCurrentTetromino();
@@ -135,9 +130,11 @@ public class TetrisController {
                     ghostTetromino = game.getGhostTetromino();
                     generateTetromino();
                     dropPieces();
+                    newGame = false;
                 }
 
                 if(gameDone) {
+                    startGameText.setText(" ");
                     Game game = new Game();
                     this.game = game;
 
@@ -157,6 +154,9 @@ public class TetrisController {
                     dropPieces();
                     gameDone = false;
                 }
+                break;
+            case ESCAPE:
+                System.exit(0);
                 break;
         }
     }
@@ -372,6 +372,7 @@ public class TetrisController {
 
         if(gameDone) {
             gameOverText.setText("Game Over");
+            startGameText.setText("Press ENTER to start new game");
         }
 
     }
