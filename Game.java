@@ -9,8 +9,8 @@ public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
-	private Tetromino storedTetromino; // the held tetromino
-	private Tetromino proxyTetromino; // proxy space for switching tetrominos
+    private Tetromino storedTetromino; // the held tetromino
+    private Tetromino proxyTetromino; // proxy space for switching tetrominos
 
     private static final int startingX = 3; // where a tetromino should start on
     private static final int startingY = 0; // the board
