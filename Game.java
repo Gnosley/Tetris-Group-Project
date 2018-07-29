@@ -154,7 +154,6 @@ public class Game {
             currentTetromino = new Tetromino(ghostTetromino, false);
             board.updateBoard(currentTetromino);
             commitTetrominoSequence(board);
-			heldTurn = false;
         }
         // Tetromino.doMove() should return a NEW tetromino with the move applied
         Tetromino movedTetromino = currentTetromino.doMove(moveType);
@@ -178,7 +177,6 @@ public class Game {
             board.resetGameStatistics();
             currentTetromino = new Tetromino (nextTetromino);
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
-			heldTurn = false;				// can hold the tetromino again
 
         }
     }
@@ -195,6 +193,7 @@ public class Game {
         board.resetGameStatistics();
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
+        heldTurn = true;
     }
 
     /**
