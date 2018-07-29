@@ -19,9 +19,9 @@ public class Game {
 
     private Terminal terminal;        // the terminal and
     private NonBlockingReader reader; // reader for instant input
-	
-	private boolean heldYet = false;  // if there is already a held piece
-	private boolean heldTurn = false; // if the piece this turn was already held
+
+    private boolean heldYet = false;  // if there is already a held piece
+    private boolean heldTurn = false; // if the piece this turn was already held
 
 
     /**
@@ -147,15 +147,16 @@ public class Game {
         // a moves the block left.
         // s moves the block down.
         // d moves the block right.
-		// h holds the current block.
+        // h holds the current block.
         // x drops the current block.
         switch(moveType) {
         case 'q': case 'e': case 'a': case 's': case 'd': case 'f' : case 'h':
         case 'w': case 9: case 32: break;
         default: return;
         }
-		
-        //if the hold character is pressed, it will switch out the current tetromino for the held one
+
+        //if the hold character is pressed, it will switch out the current
+        //tetromino for the held one
         if(moveType == 'w' || moveType == 9) { // hold on 'w' or tab
 			if (heldTurn == false) {
 				if (heldYet == false) {		// no tetromino is held yet, so it grabs a new one
