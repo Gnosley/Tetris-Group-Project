@@ -143,8 +143,8 @@ public class Game {
 				heldTurn = true;			// a tetromino has already been held for this drop
 			}
 		}
-		
-		
+
+
         if(moveType == 'f'){
             currentTetromino = new Tetromino(ghostTetromino, false);
             board.updateBoard(currentTetromino);
@@ -172,7 +172,6 @@ public class Game {
             board.resetGameStatistics();
             currentTetromino = new Tetromino (nextTetromino);
             nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
-			heldTurn = false;				// can hold the tetromino again
 
         }
     }
@@ -188,6 +187,7 @@ public class Game {
         board.resetGameStatistics();
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
+        heldTurn = false;				// can hold the tetromino again
     }
 
     public long getGameScore(){
