@@ -79,9 +79,8 @@ public class MenuController {
 //        Stage stage = (Stage) newGame.getScene().getWindow();
         Parent root2 = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root2, 600 ,540));
+        stage.setScene(new Scene(root2, 640 ,540));
         stage.show();
-        System.out.println("ok");
         ((Node)(event.getSource())).getScene().getWindow().hide();
 
     }

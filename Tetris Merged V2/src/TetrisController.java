@@ -3,21 +3,16 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,6 +31,15 @@ public class TetrisController {
 
     @FXML
     private ImageView image;
+
+    @FXML
+    private Text scoreText;
+
+    @FXML
+    private Text linesClearedText;
+
+    @FXML
+    private Text gameOverText;
 
     private StackPane currentTetrominoGraphic;
     private StackPane nextTetrominoGraphic;
@@ -62,11 +66,9 @@ public class TetrisController {
     private int currentDifficulty;
     private int dropSpeed;
     private Rectangle[][] blockFXArray;
-    private boolean dontUpdate;
 
     public void initialize() {
         this.blockFXArray = new Rectangle[24][10];
-        dontUpdate = false;
         Game game = new Game();
         this.game = game;
     }
@@ -83,55 +85,79 @@ public class TetrisController {
      */
     @FXML
     protected void handleKeyboardAction(KeyEvent event) throws IOException {
-        if(!gameDone) {
-            switch (event.getCode()) {
-                case LEFT:
+
+        switch (event.getCode()) {
+            case LEFT:
+                if(!gameDone) {
                     tryMove('a', board);
                     currentTetrominoGraphic.setLayoutX(currentTetromino.getXReference() * 20 + 160);
                     ghostTetrominoGraphic.setLayoutX(ghostTetromino.getXReference() * 20 + 160);
                     ghostTetrominoGraphic.setLayoutY(ghostTetromino.getYReference() * 20 + 20);
+                }
                     break;
-                case RIGHT:
+            case RIGHT:
+                if(!gameDone) {
                     tryMove('d', board);
                     currentTetrominoGraphic.setLayoutX(currentTetromino.getXReference() * 20 + 160);
                     ghostTetrominoGraphic.setLayoutX(ghostTetromino.getXReference() * 20 + 160);
                     ghostTetrominoGraphic.setLayoutY(ghostTetromino.getYReference() * 20 + 20);
+                }
                     break;
-                case DOWN:
+            case DOWN:
+                if(!gameDone) {
                     tryMove('s', board);
                     currentTetrominoGraphic.setLayoutY(currentTetromino.getYReference() * 20 + 20);
                     gameDone = board.isGameDone();
-                    break;
-                case SPACE:
+                }
+                break;
+            case SPACE:
+                if(!gameDone) {
                     currentTetrominoGraphic.setLayoutY(game.getGhostTetromino().getYReference() * 20 + 20);
                     tryMove('f', board);
                     gameDone = board.isGameDone();
+                }
                     break;
-                case UP:
+            case UP:
+                if(!gameDone) {
                     tryMove('e', board);
                     currentTetrominoGraphic.setRotate(currentTetromino.getRotation());
                     ghostTetrominoGraphic.setRotate(currentTetromino.getRotation());
                     ghostTetrominoGraphic.setLayoutX(ghostTetromino.getXReference() * 20 + 160);
                     ghostTetrominoGraphic.setLayoutY(ghostTetromino.getYReference() * 20 + 20);
-                    break;
-                case ENTER:
+                }
+                break;
+            case ENTER:
+                if(!gameDone) {
                     startTime = System.currentTimeMillis();
-
                     this.board = game.getBoard();
                     currentTetromino = game.getCurrentTetromino();
                     nextTetromino = game.getNextTetromino();
                     ghostTetromino = game.getGhostTetromino();
                     generateTetromino();
                     dropPieces();
-                    break;
-    //            case R:replaceI();
-    //                break;
-    //            case Q:
-    //                Image img = new Image("Resources/onepunch.jpg");
-    //                ImagePattern imgP = new ImagePattern(img);
-    //                image.setImage(img);
-    //                break;
-            }
+                }
+
+                if(gameDone) {
+                    Game game = new Game();
+                    this.game = game;
+
+
+                    startTime = System.currentTimeMillis();
+                    this.board = game.getBoard();
+                    gameOverText.setText(" ");
+
+                    clearRows();
+                    playArea.getChildren().remove(nextTetrominoGraphic);
+                    this.blockFXArray = new Rectangle[24][10];
+
+                    currentTetromino = game.getCurrentTetromino();
+                    nextTetromino = game.getNextTetromino();
+                    ghostTetromino = game.getGhostTetromino();
+                    generateTetromino();
+                    dropPieces();
+                    gameDone = false;
+                }
+                break;
         }
     }
 
@@ -151,7 +177,7 @@ public class TetrisController {
                                         currentTetrominoGraphic.setLayoutY(currentTetromino.getYReference() * 20 + 20);
                                         gameDone = board.isGameDone();
                                     } else {
-
+                                        cancel();
                                     }
                                 }
                             });
@@ -172,6 +198,7 @@ public class TetrisController {
         //Get the type of the new and next Tetrominos
         int newTetNum = currentTetromino.getType();
         int nextTetNum = nextTetromino.getType();
+
 
         //Load the FXML file for the new Tetromino
         try {
@@ -230,7 +257,6 @@ public class TetrisController {
             e.printStackTrace();
         }
 
-
         int[] gridCoords = getGridCoordinates(layoutY, layoutX);
 
 
@@ -239,12 +265,9 @@ public class TetrisController {
             blockFXArray[gridCoords[1]][gridCoords[0]] = block;
         }
 
-
         block.setLayoutX(layoutX);
         block.setLayoutY(layoutY);
         block.setFill(Color.web(tetrominoColor[blockColor]));
-
-
     }
 
 
@@ -314,96 +337,43 @@ public class TetrisController {
 
         //}
 
-        //for
+        //Update score and lines cleared text
+        scoreText.setText(Long.toString(game.getGameScore()));
+        linesClearedText.setText(Long.toString(game.getLinesCleared()));
+
+        //Update the block graphics on the board
         updateBoardFX();
         board.resetRowsToClear();
     }
 
-//    public void tryMove(char moveType, Board board) {
-//        // Possible chars are q, e, a, s, d.
-//        // q rotates counter-clockwise.
-//        // e rotates clockwise.
-//        // a moves the block left.
-//        // s moves the block down.
-//        // d moves the block right.
-//        // h holds the current block.
-//        // x drops the current block.
-//        switch(moveType) {
-//            case 'q': case 'e': case 'a': case 's': case 'd': case 'f' : case 'h': break;
-//            default: return;
-//        }
-//
-////        //if the hold character is pressed, it will switch out the current tetromino for the held one
-////        if(moveType == 'h') {
-////            if (heldTurn == false) {
-////                if (heldYet == false) {		// no tetromino is held yet, so it grabs a new one
-////                    storedTetromino = new Tetromino (currentTetromino);
-////                    currentTetromino = new Tetromino (nextTetromino);
-////                    nextTetromino = new Tetromino (startingX, startingY);
-////                    heldYet = true;
-////                }
-////                else {						// a tetromino is already held, so it replaces current with that one
-////                    proxyTetromino = new Tetromino (currentTetromino);
-////                    currentTetromino = new Tetromino (startingX, startingY, storedTetromino.getType());
-////                    storedTetromino = new Tetromino (proxyTetromino);
-////                }
-////                heldTurn = true;			// a tetromino has already been held for this drop
-////            }
-////        }
-//
-//        // Tetromino.doMove() should return a NEW tetromino with the move applied
-//        Tetromino movedTetromino = currentTetromino.doMove(moveType);
-//
-//        // board.checkBoard() returns true if no blocks are currently in the way and
-//        // no blocks in the given tetromino are out of board bounds.
-//        boolean canMove = board.checkMove(movedTetromino);
-//        if (canMove) {
-//            currentTetromino = movedTetromino;
-//        }
-//        else if (moveType == 's' && !canMove) {
-//            board.updateBoard(currentTetromino); // if moving down causes it to hit a
-//            // block or go out of bounds, add
-//            // the current blocks in the
-//            // tetromino to the board.
-//
-//            removePlacedTetromino();
-//
-//            ArrayList<Integer> test = board.getRowsToClear();
-//
-//            currentTetromino = nextTetromino;
-//            nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
-//            generateTetromino();
-//            updateBoardFX();
-//            if(board.getRowsToClear().size() > 0) {
-//                clearRows();
-//            }
-//
-//        }
-//    }
-
     public void tryMove(char moveType, Board board) {
         boolean tetrominoPlaced = game.tryMove(moveType,board);
-
-        System.out.println(tetrominoPlaced);
-
-        if(tetrominoPlaced) {
-            removePlacedTetromino();
-        }
-
-//            ArrayList<Integer> test = board.getRowsToClear();
 
         this.currentTetromino = game.getCurrentTetromino();
         this.nextTetromino = game.getNextTetromino();
         this.ghostTetromino = game.getGhostTetromino();
         this.board = game.getBoard();
 
-        if(tetrominoPlaced) {
-            generateTetromino();
+        gameDone = board.isGameDone();
+
+        if (tetrominoPlaced) {
+            removePlacedTetromino();
+        }
+
+        if (tetrominoPlaced) {
+            if(!gameDone) {
+                generateTetromino();
+            }
             updateBoardFX();
             if (board.getRowsToClear().size() > 0) {
                 clearRows();
             }
         }
+
+        if(gameDone) {
+            gameOverText.setText("Game Over");
+        }
+
     }
 
     public void removePlacedTetromino() {
@@ -411,43 +381,45 @@ public class TetrisController {
         playArea.getChildren().remove(currentTetrominoGraphic);
 
         //Remove the old Tetromino from the next Tetromino display box
-        playArea.getChildren().remove(nextTetrominoGraphic);
+        if(!gameDone) {
+            playArea.getChildren().remove(nextTetrominoGraphic);
+        }
 
         //Remove the old ghost Tetromino
         playArea.getChildren().remove(ghostTetrominoGraphic);
     }
 
-    public void dropTetromino() {
-
-    }
-
-    public long getGameScore(){
-        return this.gameScore;
-    }
-    public void updateGameScore(){
-        this.linesCleared += 100;
-    }
-    public int getLinesCleared(){
-        return this.gameScore;
-    }
-    public void updateLinesCleared(){
-        this.linesCleared += 1;
-    }
-
-    public Tetromino getCurrentTetromino() {
-        return this.currentTetromino;
-    }
-
-    public Tetromino getNextTetromino() {
-        return this.nextTetromino;
-    }
-
-    public void setCurrentTetromino(Tetromino currentTetromino) {
-        this.currentTetromino = currentTetromino;
-    }
-
-    public void setNextTetromino(Tetromino nextTetromino) {
-        this.currentTetromino = currentTetromino;
-    }
+//    public void dropTetromino() {
+//
+//    }
+//
+//    public long getGameScore(){
+//        return this.gameScore;
+//    }
+//    public void updateGameScore(){
+//        this.linesCleared += 100;
+//    }
+//    public int getLinesCleared(){
+//        return this.gameScore;
+//    }
+//    public void updateLinesCleared(){
+//        this.linesCleared += 1;
+//    }
+//
+//    public Tetromino getCurrentTetromino() {
+//        return this.currentTetromino;
+//    }
+//
+//    public Tetromino getNextTetromino() {
+//        return this.nextTetromino;
+//    }
+//
+//    public void setCurrentTetromino(Tetromino currentTetromino) {
+//        this.currentTetromino = currentTetromino;
+//    }
+//
+//    public void setNextTetromino(Tetromino nextTetromino) {
+//        this.currentTetromino = currentTetromino;
+//    }
 
 }

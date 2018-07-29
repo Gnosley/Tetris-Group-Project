@@ -99,7 +99,7 @@ public class Board{
     public boolean isGameDone(){
         boolean gameOver = false;
         for(int col = 0; col < this.gameBoard[0].length; col++){
-            if(this.gameBoard[4][col] != null){   //ignores top 4 rows (outside of playable area)
+            if(this.gameBoard[3][col] != null){   //ignores top 4 rows (outside of playable area)
                 return true;
             }
         }
@@ -162,7 +162,7 @@ public class Board{
 
     /**
      * Drops indicated row after clearing
-     * @param rowClear specified row to drop into (recently cleared)
+     * @param rowCleared specified row to drop into (recently cleared)
      */
     private void dropRow(int rowCleared){
         for(int row = rowCleared; row > 0; row--){
