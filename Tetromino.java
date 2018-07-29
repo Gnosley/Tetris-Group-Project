@@ -45,7 +45,8 @@ public class Tetromino {
     private int xReferencePosition; // x coordinate in relation to the board
     private int yReferencePosition; // y coordinate in relation to the board
     private int size; // size of grid needed to hold tetromino
-	private int type; //the type of tetromino
+    private int type; //the type of tetromino
+    private int rotation;
 
     /**
      * Constructor for a new Tetromino when one is place. A randomized type of
@@ -94,6 +95,7 @@ public class Tetromino {
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
+        this.rotation = tetromino.rotation;
     }
 
     public Tetromino(Tetromino tetromino, boolean isGhost) {
@@ -103,6 +105,7 @@ public class Tetromino {
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
         this.convertGhostType(isGhost);
+        this.rotation = tetromino.rotation;
     }
 
     private void convertGhostType(boolean toGhost) {
@@ -269,5 +272,14 @@ public class Tetromino {
 	public int getType() {
 		return type;
 	}
+
+    public int getRotation() {
+        return this.rotation;
+    }
+
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
 
 }
