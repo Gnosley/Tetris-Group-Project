@@ -104,8 +104,8 @@ public class Tetromino {
 			if ( drop <= dropInterval[0] ) {
 				type = 0;
 			}
-			if ( drop > dropInterval[dropInterval.length -1] ){
-				type = dropInterval.length;
+			if ( drop > dropInterval[dropInterval.length - 2] ){
+				type = dropInterval.length - 1;
 			}
 			for (int i = 0; i < (dropInterval.length - 2); i++){
 				if ( drop > dropInterval[i] && drop <= dropInterval[i+1]){
