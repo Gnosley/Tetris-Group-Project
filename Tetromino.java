@@ -1,5 +1,7 @@
 import java.util.Random;
 import java.util.Arrays;
+import java.lang.Math;
+import java.util.stream.*;
 
 public class Tetromino {
     // {color, size} {block1} {block 2} {block 3} {block 4}
@@ -39,7 +41,7 @@ public class Tetromino {
             {6, 3}, {2, 2}, {1, 0}, {1, 1}, {1, 2}
         }
     };
-
+	private final int numPieces = 7;
     private static Random rand = new Random();
     private Block[] tetrominoArray = new Block[4];
     private int xReferencePosition; // x coordinate in relation to the board
@@ -47,10 +49,12 @@ public class Tetromino {
     private int size; // size of grid needed to hold tetromino
     private int type; //the type of tetromino
     private int rotation;
+	private int[] pieceStats = new int[numPieces];
 
     /**
-     * Constructor for a new Tetromino when one is place. A randomized type of
-     * Tetromino is formed
+     * Constructor for a new Tetromino when one is called for. A randomized type of
+     * Tetromino is formed for the first 15 game pieces, after that the distribution
+	 * is altered to increase drop chances of the least frequently seen (so far) pieces.
      *
      * @param xRef:
      *            x-coordinate of reference position
@@ -59,11 +63,60 @@ public class Tetromino {
      */
 
     public Tetromino(int xRef, int yRef) {
-        type = rand.nextInt(7);
-        size = tetrominoData[type][0][1];
-        xReferencePosition = xRef;
-        yReferencePosition = yRef;
-        tetrominoArray = generateTetrominoArray(type);
+		int total = IntStream.of(pieceStats).sum();
+		xReferencePosition = xRef;
+		yReferencePosition = yRef;
+		if ( total < 15 ){ // Generate from even distribution when less than 15 pieces played.
+			type = rand.nextInt(numPieces);
+			size = tetrominoData[type][0][1];						
+			tetrominoArray = generateTetrominoArray(type);
+			pieceStats[type] += 1;
+		}
+		
+		if ( total >= 15) { // Generate from skewed distribution when more than 15 pieces played.
+			double[] dropRates = new double[numPieces];
+			double[] dropInterval = new double[numPieces];
+			int lowest = pieceStats[0];
+			int lowestIndex = 0;
+			for (int i = 0; i < pieceStats.length; i++){
+				if ( pieceStats[i] < lowest ){ // determine the least frequently seen piece
+					lowest = pieceStats[i];
+					lowestIndex = i;
+				}
+			}
+			dropRates[lowestIndex] = 0.35; // Give the least seen piece a 35% drop rate
+			for (int i = 0; i < dropRates.length; i++){
+				if ( i != lowestIndex ) {
+					dropRates[i] = 0.65/6.0; // Give the other pieces a 65/6 % drop rate
+				}
+			}
+			
+			double drop = Math.random(); // Generate a random number on (0,1)
+			// Set the dropInterval list with the skewed distribution
+			for ( int i = 0; i < dropRates.length; i++){
+				double sum = 0;
+				for ( int j = 0; j <= i; j++){
+					sum += dropRates[j] ;
+				}
+				dropInterval[i] = sum;
+			}
+			// Depending on the value of the random number drop, select the proper piece type
+			if ( drop <= dropInterval[0] ) {
+				type = 0;
+			}
+			if ( drop > dropInterval[dropInterval.length -1] ){
+				type = dropInterval.length;
+			}
+			for (int i = 0; i < (dropInterval.length - 2); i++){
+				if ( drop > dropInterval[i] && drop <= dropInterval[i+1]){
+					type = i + 1;
+				}
+			}
+			size = tetrominoData[type][0][1];						
+			tetrominoArray = generateTetrominoArray(type);
+			pieceStats[type] += 1;
+		}
+		
     }
 	
     /**
