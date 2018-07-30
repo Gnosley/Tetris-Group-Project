@@ -63,7 +63,7 @@ public class Printer {
                       Terminal terminal,
                       long gameScore,
                       long linesCleared,
-                      boolean haveHeld) {
+                      boolean holdAvailable) {
         Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, board);
         Block[][] previewArray = createPreviewArray(nextTetromino);
         Block[][] holdArray = createPreviewArray(holdTetromino);
@@ -146,7 +146,7 @@ public class Printer {
 
             if (curRow == 3 + getTetrisWord().length) {
                 rowString += "  Hold Available:  ";
-                if (!haveHeld) {
+                if (holdAvailable) {
                     rowString += ANSI.GREEN + "Yes";
                 }
                 else rowString += ANSI.RED + " No";
