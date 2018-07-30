@@ -278,10 +278,18 @@ public class Tetromino {
         return type;
     }
 
+    /**
+     * Accesses the private variable "rotation"
+     * @return type: int of rotation value
+     */
     public int getRotation() {
         return this.rotation;
     }
 
+    /**
+     * Sets the Tetromino rotation value
+     * @param rotation
+     */
     public void setRotation(int rotation) {
         this.rotation = rotation;
     }

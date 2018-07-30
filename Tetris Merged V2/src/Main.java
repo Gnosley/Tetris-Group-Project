@@ -6,7 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+/**
+ * Loads initial settings to start the Tetris application
+ */
 public class Main extends Application {
 
     @Override

@@ -32,6 +32,11 @@ public class Game {
         boolean gameDone = false;
     }
 
+    /**
+     * Attempt to make a move, must be checked for possibility within limits of game
+     * @param moveType: char, letter input of I/O
+     * @param board: Board, the playing surface
+     */
     public boolean tryMove(char moveType, Board board) {
         boolean tetrominoPlaced = false;
         // Possible chars are q, e, a, s, d.
@@ -168,15 +173,35 @@ public class Game {
 
 
     //TODO protect these from privacy leaks
+
+    /**
+     * Returns current board object
+     * @return Board
+     */
     public Board getBoard() {
         return this.board;
     }
+
+    /**
+     * Returns current Tetromino object
+     * @return Tetromino
+     */
     public Tetromino getCurrentTetromino() {
         return this.currentTetromino;
     }
+
+    /**
+     * Returns next Tetromino object
+     * @return Tetromino
+     */
     public Tetromino getNextTetromino() {
         return this.nextTetromino;
     }
+
+    /**
+     * Returns ghost Tetromino object
+     * @return Tetromino
+     */
     public Tetromino getGhostTetromino() {
         return this.ghostTetromino;
     }

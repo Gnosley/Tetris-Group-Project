@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="640.0" style="-fx-background-color: #1b1424;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
+<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="640.0" style="-fx-background-color: #1b1424;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="TetrisController">
    <children>
       <ImageView fx:id="image" fitHeight="430.0" fitWidth="220.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="80.0">
          <image>
@@ -61,7 +61,7 @@
             <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <StackPane fx:id="iPiece" focusTraversable="true" layoutX="660.0" layoutY="20.0" prefHeight="80.0" prefWidth="20.0">
+      <StackPane fx:id="iPiece" focusTraversable="true" layoutX="660.0" layoutY="20.0" opacity="0.0" prefHeight="80.0" prefWidth="20.0">
          <children>
             <Rectangle fx:id="tetrisBlock" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" focusTraversable="true" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
