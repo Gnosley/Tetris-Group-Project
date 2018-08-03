@@ -3,7 +3,6 @@ import java.util.Arrays;
 /**
  * Board class for Tetris implimentation.
  *
- * Natalie Dean (CPSC 233, SUM18, T02 Team 6)
  */
 public class Board{
     private Block[][] gameBoard = new Block[24][10];
@@ -162,7 +161,7 @@ public class Board{
 
     /**
      * Drops indicated row after clearing
-     * @param rowCleared specified row to drop into (recently cleared)
+     * @param rowClear specified row to drop into (recently cleared)
      */
     private void dropRow(int rowCleared){
         for(int row = rowCleared; row > 0; row--){

@@ -21,7 +21,6 @@ public class MenuController {
     private Rectangle newGame;
 
     private Rectangle currentDifficultyButton = difficultyButton1;
-    private int currentDifficultyInt;
     private int currentDifficulty;
     private int dropSpeed;
 

@@ -3,7 +3,7 @@ public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
-    private Tetromino storedTetromino; // the held tetromino
+    private Tetromino storedTetromino = null; // the held tetromino
     private Tetromino proxyTetromino; // proxy space for switching tetrominos
 
     private static final int startingX = 3; // where a tetromino should start on
@@ -12,8 +12,8 @@ public class Game {
     private long linesCleared = 0;
     private Board board;
 
-    private boolean heldYet = false;  // if there is already a held piece
-    private boolean heldTurn = false; // if the piece this turn was already held
+    private boolean isHoldOccupied = false;  // if a piece is already being held
+    private boolean isHoldMoveAvailable = true; // indicates if hold functionality is available (can only put a piece into the hold once per turn)
 
 
     /**
@@ -38,7 +38,6 @@ public class Game {
      * @param board: Board, the playing surface
      */
     public boolean tryMove(char moveType, Board board) {
-        boolean tetrominoPlaced = false;
         // Possible chars are q, e, a, s, d.
         // q rotates counter-clockwise.
         // e rotates clockwise.
@@ -75,8 +74,6 @@ public class Game {
             board.updateBoard(currentTetromino);
             commitTetrominoSequence(board);
             ghostTetromino = positionGhost(currentTetromino, board);
-            tetrominoPlaced = true;
-            return tetrominoPlaced;
         }
 
         // Tetromino.doMove() should return a NEW tetromino with the move applied
@@ -96,10 +93,9 @@ public class Game {
                                             // tetromino to the board.
 
             commitTetrominoSequence(board);
-            tetrominoPlaced = true;
         }
         ghostTetromino = positionGhost(currentTetromino, board);
-        return tetrominoPlaced;
+        return canMove;
     }
 
     /**
@@ -114,7 +110,7 @@ public class Game {
         board.resetGameStatistics();
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
-        heldTurn = false;
+        isHoldMoveAvailable = true; //resets ability to hold piece
     }
 
     /**

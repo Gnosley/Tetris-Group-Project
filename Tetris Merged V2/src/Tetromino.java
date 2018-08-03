@@ -57,7 +57,6 @@ public class Tetromino {
      * @param yRef:
      *            y-coordinate of reference position
      */
-
     public Tetromino(int xRef, int yRef) {
         type = rand.nextInt(7);
         size = tetrominoData[type][0][1];

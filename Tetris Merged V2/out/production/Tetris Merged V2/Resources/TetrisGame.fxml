@@ -4,16 +4,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="640.0" style="-fx-background-color: #1b1424;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="TetrisController">
+<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="640.0" style="-fx-background-color: #1b1424; -fx-view-order: -1.0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
    <children>
       <ImageView fx:id="image" fitHeight="430.0" fitWidth="220.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="80.0">
          <image>
@@ -25,42 +22,6 @@
             <Image url="@Next.png" />
          </image>
       </ImageView>
-      <GridPane layoutX="100.0" layoutY="66.0" prefHeight="292.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
       <StackPane fx:id="iPiece" focusTraversable="true" layoutX="660.0" layoutY="20.0" opacity="0.0" prefHeight="80.0" prefWidth="20.0">
          <children>
             <Rectangle fx:id="tetrisBlock" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" focusTraversable="true" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_CENTER">
@@ -101,13 +62,12 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Pane layoutX="151.0" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1.0;" />
       <ImageView fitHeight="10.0" fitWidth="220.0" layoutX="150.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-view-order: -1.0;">
          <image>
             <Image url="@Border-top.png" />
          </image>
       </ImageView>
-      <Text fx:id="gameOverText" fill="RED" layoutX="121.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: impact; -fx-view-order: -1.0;" text=" ">
+      <Text fx:id="gameOverText" fill="RED" layoutX="121.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: impact; -fx-view-order: 1.0;" text=" ">
          <font>
             <Font size="64.0" />
          </font>
@@ -117,5 +77,11 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="20.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Hold.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="151.0" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1;" />
    </children>
 </AnchorPane>
