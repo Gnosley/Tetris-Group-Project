@@ -151,8 +151,7 @@ public class Board{
         }
         tempBoard.dropRow(rowClear);
         this.gameBoard = tempBoard.gameBoard;
-        this.gameStatistics[0] += 100; //100pts for line cleared
-        this.gameStatistics[1] += 1;
+        this.rowsToClear += 1;
         rowsToClear.add(rowClear);
     }
 
