@@ -212,12 +212,7 @@ public class Game {
     private void commitTetrominoSequence(Board board){
         long numLinesCleared = board.getNumLinesCleared();
         this.updateLinesCleared(numLinesCleared);
-        if((numLinesCleared == 4){
-          this.updateGameScore(numLinesCleared * 200);
-        }
-        else{
-          this.updateGameScore(numLinesCleared * 100);
-        }
+        this.updateGameScore(numLinesCleared);
         board.resetNumLinesCleared();
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
@@ -236,8 +231,13 @@ public class Game {
      * Setter of the score achieved through clearing rows
      * @param gameScore: long, the score achieved
      */
-    public void updateGameScore(long gameScore){
-        this.gameScore += gameScore;
+    public void updateGameScore(long numLinesCleared){
+      if((numLinesCleared == 4){
+        this.gameScore += (numLinesCleared * 200);
+      }
+      else{
+        this.gameScore += (numLinesCleared * 100);
+      }
     }
 
     /**
