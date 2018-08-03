@@ -210,10 +210,15 @@ public class Game {
      * @param board         current game board
      */
     private void commitTetrominoSequence(Board board){
-        long[] gameStatistics = board.getGameStatistics();
-        this.updateGameScore(gameStatistics[0]);
-        this.updateLinesCleared(gameStatistics[1]);
-        board.resetGameStatistics();
+        long numLinesCleared = board.getNumLinesCleared();
+        this.updateLinesCleared(numLinesCleared);
+        if((numLinesCleared == 4){
+          this.updateGameScore(numLinesCleared * 200);
+        }
+        else{
+          this.updateGameScore(numLinesCleared * 100);
+        }
+        board.resetNumLinesCleared();
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
         isHoldMoveAvailable = true; //resets ability to hold piece
