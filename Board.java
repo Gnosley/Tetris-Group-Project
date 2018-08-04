@@ -151,7 +151,7 @@ public class Board{
         }
         tempBoard.dropRow(rowClear);
         this.gameBoard = tempBoard.gameBoard;
-        this.rowsToClear += 1;
+        this.numLinesCleared += 1;
         rowsToClear.add(rowClear);
     }
 
