@@ -11,6 +11,8 @@ public class Game {
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
     private Tetromino storedTetromino = null; // the held tetromino
     private Tetromino proxyTetromino; // proxy space for switching tetrominos
+    
+    private GenerateTetromino create = new GenerateTetromino();
 
     private static final int startingX = 3; // where a tetromino should start on
     private static final int startingY = 0; // the board
@@ -29,9 +31,9 @@ public class Game {
      */
     public Game() {
         // generate three new tetrominos at the start of the game
-        currentTetromino = new Tetromino(startingX, startingY);
+        currentTetromino = new Tetromino(create.newTetromino(startingX, startingY));
         ghostTetromino = new Tetromino(currentTetromino, true);
-        nextTetromino = new Tetromino(startingX, startingY);
+        nextTetromino = new Tetromino(create.newTetromino(startingX, startingY));
 
         try{
             terminal = TerminalBuilder.builder()
@@ -179,13 +181,13 @@ public class Game {
                 // no tetromino is held yet, so it grabs a new one
                 storedTetromino = new Tetromino (currentTetromino);
                 currentTetromino = new Tetromino (nextTetromino);
-                nextTetromino = new Tetromino (startingX, startingY);
+                nextTetromino = new Tetromino (create.newTetromino(startingX, startingY));
                 isHoldOccupied = true;
             }
             else {
                 // a tetromino is already held, so it replaces current with that one
                 proxyTetromino = new Tetromino (currentTetromino);
-                currentTetromino = new Tetromino (startingX, startingY, storedTetromino.getType());
+                currentTetromino = new Tetromino (create.oldTetromino(startingX, startingY, storedTetromino.getType()));
                 storedTetromino = new Tetromino (proxyTetromino);
             }
             isHoldMoveAvailable = false;			// a tetromino has already been held for this drop
@@ -215,7 +217,7 @@ public class Game {
         this.updateGameScore(numLinesCleared);
         board.resetNumLinesCleared();
         this.currentTetromino = this.nextTetromino;
-        this.nextTetromino = new Tetromino(startingX, startingY); // initialize a new random Tetromino
+        this.nextTetromino = new Tetromino(create.newTetromino(startingX, startingY)); // initialize a new random Tetromino
         isHoldMoveAvailable = true; //resets ability to hold piece
     }
 
@@ -232,7 +234,7 @@ public class Game {
      * @param gameScore: long, the score achieved
      */
     public void updateGameScore(long numLinesCleared){
-      if((numLinesCleared == 4){
+      if(numLinesCleared == 4){
         this.gameScore += (numLinesCleared * 200);
       }
       else{
