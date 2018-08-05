@@ -41,7 +41,7 @@ public class Console{
                 int keyInASCII = console.reader.read();
                 if (keyInASCII == 'h') {
                     //pressing 'h' during game opens help/controls menu
-                    printer.printHelp(terminal);
+                    printer.printHelp(console.terminal);
                 }
                 // check if user wants to quit
                 else if (keyInASCII == 27) {
