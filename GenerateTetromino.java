@@ -3,6 +3,10 @@ import java.util.Arrays;
 import java.lang.Math;
 import java.util.stream.*;
 
+/** 
+ *  Used to randomly generate new tetrominos from the piece subclasses to be placed on the board
+ */
+
 public class GenerateTetromino {
     private static Random rand = new Random();
     private Tetromino tetromino;
@@ -16,6 +20,13 @@ public class GenerateTetromino {
     
     public GenerateTetromino () {}
     
+/**
+ *	Constructor which randomly determines type based on difficulty, then calls the 
+ *  generate method to generate the piece
+ *  @param xRef: int, x reference position of the piece on the board
+ *  @param yRef: int, y reference position of the piece on the board
+ */
+	
     public Tetromino newTetromino (int xRef, int yRef) {
        int total = IntStream.of(pieceStats).sum();
 		int type = 0;
@@ -106,12 +117,25 @@ public class GenerateTetromino {
         
 
     }
-    
+
+/**
+ *  Copy constructor, generate a tetromino of a particular type at an (x,y) location
+ * @param xRef: int, x reference position of the piece on the board
+ * @param yRef: int, y reference position of the piece on the board
+ * @param type: int, from 0-6
+ */ 
     public Tetromino oldTetromino (int xRef, int yRef, int type) {
         generate(xRef, yRef, type);
         return tetromino;
     }
     
+/**
+ * Generates a tetromino piece by instantiating the subclass of the given type
+ * @param xRef: int, x reference position of the piece on the board
+ * @param yRef: int, y reference position of the piece on the board
+ * @param type: int, from 0-6
+ */    	
+	
     public Tetromino generate (int xReference, int yReference, int type) {
         switch(type) {
             case 0: tetromino = new ITetromino(xReference, yReference);
