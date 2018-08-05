@@ -1,3 +1,5 @@
+package org.teamsix;
+
 // imports for reading characters from the command line and enabling colors on
 // Windows 10.
 import org.jline.terminal.Terminal;
@@ -232,7 +234,7 @@ public class Game {
      * @param gameScore: long, the score achieved
      */
     public void updateGameScore(long numLinesCleared){
-      if((numLinesCleared == 4){
+      if(numLinesCleared == 4){
         this.gameScore += (numLinesCleared * 200);
       }
       else{

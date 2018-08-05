@@ -1,3 +1,5 @@
+package org.teamsix;
+
 public class ANSI {
     public static final String CLEARSCREEN = "\u001B[1J";
     public static final String RESET = "\u001B[0m";

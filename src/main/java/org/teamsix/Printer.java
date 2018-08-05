@@ -1,3 +1,5 @@
+package org.teamsix;
+
 import org.jline.terminal.Terminal;
 public class Printer {
 
