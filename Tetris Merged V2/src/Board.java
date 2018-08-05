@@ -6,12 +6,9 @@ import java.util.Arrays;
  */
 public class Board{
     private Block[][] gameBoard = new Block[24][10];
-    private long[] gameStatistics = new long[2];
+    private long numLinesCleared;
     private ArrayList<Integer> rowsToClear = new ArrayList<>();
 
-    public long[] getGameStatistics(){
-        return this.gameStatistics;
-    }
 
     /**
      * Update method for Board. Takes in a tetromino object and adds it to the
@@ -154,14 +151,13 @@ public class Board{
         }
         tempBoard.dropRow(rowClear);
         this.gameBoard = tempBoard.gameBoard;
-        this.gameStatistics[0] += 100; //100pts for line cleared
-        this.gameStatistics[1] += 1;
+        this.numLinesCleared += 1;
         rowsToClear.add(rowClear);
     }
 
     /**
      * Drops indicated row after clearing
-     * @param rowClear specified row to drop into (recently cleared)
+     * @param rowCleared specified row to drop into (recently cleared)
      */
     private void dropRow(int rowCleared){
         for(int row = rowCleared; row > 0; row--){
@@ -171,11 +167,14 @@ public class Board{
         }
     }
     /**
-     * Resets game gameStatistics variable
+     * Resets variable for number of lines cleared
      */
-    public void resetGameStatistics(){
-        this.gameStatistics[0] = 0;
-        this.gameStatistics[1] = 0;
+    public void resetNumLinesCleared(){
+        numLinesCleared = 0;
+    }
+
+    public long getNumLinesCleared(){
+        return this.numLinesCleared;
     }
 
     public ArrayList<Integer> getRowsToClear() {
@@ -185,4 +184,5 @@ public class Board{
     public void resetRowsToClear() {
         rowsToClear.clear();
     }
+
 }

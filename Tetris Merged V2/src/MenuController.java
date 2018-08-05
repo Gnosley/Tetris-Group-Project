@@ -18,19 +18,40 @@ public class MenuController {
     private Rectangle difficultyButton1;
 
     @FXML
+    private Rectangle levelButton1;
+
+    @FXML
+    private Rectangle controlsButtonStandard;
+
+    @FXML
+    private Rectangle screenButtonSmall;
+
+    @FXML
     private Rectangle newGame;
 
     private Rectangle currentDifficultyButton = difficultyButton1;
-    private int currentDifficulty;
+    private Rectangle currentLevelButton = levelButton1;
+    private Rectangle currentControlsButton = controlsButtonStandard;
+    private Rectangle currentScreenButton = screenButtonSmall;
+    //private int currentDifficulty;
+    private GameSettings gameSettings;
     private int dropSpeed;
 
     /**
      * Initializes values when Menu window opens
      */
     public void initialize() {
+//        this.difficultyButton1.setFill(Color.web("ff481e"));
         currentDifficultyButton = difficultyButton1;
-        currentDifficulty = 1;
+        currentLevelButton = levelButton1;
+        currentControlsButton = controlsButtonStandard;
+        currentScreenButton = screenButtonSmall;
+        //currentDifficulty = 1;
         currentDifficultyButton.setFill(Color.web("ff481e"));
+        currentLevelButton.setFill(Color.web("ff481e"));
+        currentControlsButton.setFill(Color.web("ff481e"));
+        currentScreenButton.setFill(Color.web("ff481e"));
+        gameSettings = new GameSettings();
     }
 
     /**
@@ -74,7 +95,7 @@ public class MenuController {
      * @param event
      */
     @FXML
-    protected void mouseClickButton(MouseEvent event) {
+    protected void mouseClickDifficulty(MouseEvent event) {
         currentDifficultyButton.setFill(Color.web("1e90ff"));
         ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
         currentDifficultyButton = (Rectangle)event.getTarget();
@@ -87,17 +108,66 @@ public class MenuController {
      */
     private void setDifficulty(String difficulty) {
         switch (difficulty) {
-            case "difficultyButton1": currentDifficulty = 1; break;
-            case "difficultyButton2": currentDifficulty = 2; break;
-            case "difficultyButton3": currentDifficulty = 3; break;
-            case "difficultyButton4": currentDifficulty = 4; break;
-            case "difficultyButton5": currentDifficulty = 5; break;
-            case "difficultyButton6": currentDifficulty = 6; break;
-            case "difficultyButton7": currentDifficulty = 7; break;
-            case "difficultyButton8": currentDifficulty = 8; break;
+            case "difficultyButton1": gameSettings.setDifficulty(1); break;
+            case "difficultyButton2": gameSettings.setDifficulty(2); break;
+            case "difficultyButton3": gameSettings.setDifficulty(3); break;
+            case "difficultyButton4": gameSettings.setDifficulty(4); break;
+            case "difficultyButton5": gameSettings.setDifficulty(5); break;
+            case "difficultyButton6": gameSettings.setDifficulty(6); break;
+            case "difficultyButton7": gameSettings.setDifficulty(7); break;
+            case "difficultyButton8": gameSettings.setDifficulty(8); break;
+            case "difficultyButton9": gameSettings.setDifficulty(9); break;
+            case "difficultyButton10": gameSettings.setDifficulty(10); break;
 
         }
-        dropSpeed = (10-currentDifficulty)*100;
+    }
+
+    /**
+     * Changes color of level button to red and calls setLevel function
+     * @param event
+     */
+    @FXML
+    protected void mouseClickLevel(MouseEvent event) {
+        currentLevelButton.setFill(Color.web("1e90ff"));
+        ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
+        currentLevelButton = (Rectangle)event.getTarget();
+        setLevel(((Rectangle) event.getTarget()).getId());
+    }
+
+    /**
+     * Sets level based on button selected
+     * @param level
+     */
+    private void setLevel(String level) {
+        switch (level) {
+            case "levelButton1": gameSettings.setLevel(1); break;
+            case "levelButton2": gameSettings.setLevel(2); break;
+            case "levelButton3": gameSettings.setLevel(3); break;
+        }
+    }
+
+    /**
+     * Changes color of level button to red and calls setLevel function
+     * @param event
+     */
+    @FXML
+    protected void mouseClickControls(MouseEvent event) {
+        currentControlsButton.setFill(Color.web("1e90ff"));
+        ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
+        currentControlsButton = (Rectangle)event.getTarget();
+        //setLevel(((Rectangle) event.getTarget()).getId());
+    }
+
+    /**
+     * Changes color of level button to red and calls setLevel function
+     * @param event
+     */
+    @FXML
+    protected void mouseClickScreenSize(MouseEvent event) {
+        currentScreenButton.setFill(Color.web("1e90ff"));
+        ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
+        currentScreenButton = (Rectangle)event.getTarget();
+        //setLevel(((Rectangle) event.getTarget()).getId());
     }
 
     /**
@@ -107,11 +177,22 @@ public class MenuController {
      */
     private void loadGame(MouseEvent event) throws IOException {
 //        Stage stage = (Stage) newGame.getScene().getWindow();
-        Parent root2 = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
+        System.out.println(gameSettings.getDifficulty());
+        System.out.println(gameSettings);
+
+
+
+        Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(root2, 640 ,540));
+        stage.setScene(new Scene(tetrisRoot, 640 ,540));
+        stage.setTitle("TETRIS");
+        stage.setResizable(false);
         stage.show();
         ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        TetrisController tetrisController = new TetrisController(); // This did the "trick"
+        tetrisController.setGameSettings(gameSettings); // Passing the GameSettings-object to the TetrisController
+
 
     }
 }

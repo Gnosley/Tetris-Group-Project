@@ -1,0 +1,34 @@
+.main {
+    -fx-background-color: #4b1df1;
+}
+
+.btn-primary {
+    -fx-font-family: Impact;
+    -fx-text-fill: #ff0000;
+}
+
+.btn-primary Rectangle {
+    -fx-fill: #1f93ff;
+}
+
+.btn-primary Text {
+    -fx-fill: #000000;
+}
+
+.btn-lg {
+    -fx-font-size: 18px;
+}
+
+.btn-md {
+    -fx-font-size: 13px;
+}
+
+.btn-sm {
+    -fx-font-size: 13px;
+}
+
+.heading-settings {
+    -fx-font-family: Impact;
+    -fx-fill: #bc422a;
+    -fx-font-size: 18px;
+}
