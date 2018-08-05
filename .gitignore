@@ -13,7 +13,7 @@ hs_err_pid*
 
 # Emacs
 .meghanada/
-.meghanadaFormatter.xml
+meghanadaFormatter\.xml
 
 # Maven
 log/
@@ -33,4 +33,3 @@ target/
 .DS_Store
 
 .metadata
-meghanadaFormatter\.xml
