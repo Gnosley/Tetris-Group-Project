@@ -3,7 +3,6 @@ public class Game {
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
     private Tetromino storedTetromino = null; // the held tetromino
-    private Tetromino proxyTetromino; // proxy space for switching tetrominos
     private GenerateTetromino generateTetromino; //
 
     private static final int startingX = 3; // where a tetromino should start on
@@ -180,6 +179,7 @@ public class Game {
             }
             else {
                 // a tetromino is already held, so it replaces current with that one
+                Tetromino proxyTetromino; // proxy space for switching tetrominos
                 proxyTetromino = new Tetromino(currentTetromino);
                 currentTetromino = new Tetromino(startingX, startingY, storedTetromino.getType());
                 storedTetromino = new Tetromino(proxyTetromino);
