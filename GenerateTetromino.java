@@ -1,16 +1,110 @@
 import java.util.Random;
+import java.util.Arrays;
+import java.lang.Math;
+import java.util.stream.*;
 
 public class GenerateTetromino {
     private static Random rand = new Random();
     private Tetromino tetromino;
+	private final int numPieces = 7;
+	private final double[] hardDistribution = { (2.5/28.0), (5.0/28.0), (8.0/28.0), 
+							(13.0/28.0), (18.0/28.0), (23.0/28.0), (28.0/28.0)};
+	
+	private int[] pieceStats = new int[numPieces];
+	String difficulty = "HARD";
     
     
     public GenerateTetromino () {}
     
     public Tetromino newTetromino (int xRef, int yRef) {
-        int type = rand.nextInt(7);
-        generate(xRef, yRef, type);
-        return tetromino;
+       int total = IntStream.of(pieceStats).sum();
+		int type = 0;
+		if( difficulty.equals("EASY") ){
+		
+		if ( total < 10 ){ // Generate from even distribution when less than 15 pieces played.
+			type = rand.nextInt(numPieces);
+		
+			generate(xRef, yRef, type);
+			pieceStats[type] += 1;
+			return tetromino;
+		}
+		
+		if ( total >= 10) { // Generate from skewed distribution when more than 15 pieces played.
+		
+			double[] dropRates = new double[numPieces];
+			double[] dropInterval = new double[numPieces];
+			int lowest = pieceStats[0];
+			int lowestIndex = 0;
+			for (int i = 0; i < pieceStats.length; i++){
+				if ( pieceStats[i] < lowest ){ // determine the least frequently seen piece
+					lowest = pieceStats[i];
+					lowestIndex = i;
+				}
+			}
+			dropRates[lowestIndex] = 0.35; // Give the least seen piece a 35% drop rate
+			for (int i = 0; i < dropRates.length; i++){
+				if ( i != lowestIndex ) {
+					dropRates[i] = 0.65/6.0; // Give the other pieces a 65/6 % drop rate
+				}
+			}
+			
+			double drop = Math.random(); // Generate a random number on (0,1)
+			// Set the dropInterval list with the skewed distribution
+			for ( int i = 0; i < dropRates.length; i++){
+				double sum = 0;
+				for ( int j = 0; j <= i; j++){
+					sum += dropRates[j] ;
+				}
+				dropInterval[i] = sum;
+			}
+			// Depending on the value of the random number drop, select the proper piece type
+			if ( drop <= dropInterval[0] ) {
+				type = 0;
+			}
+			if ( drop > dropInterval[dropInterval.length - 2] ){
+				type = dropInterval.length - 1;
+			}
+			for (int i = 0; i < (dropInterval.length - 2); i++){
+				if ( drop > dropInterval[i] && drop <= dropInterval[i+1]){
+					type = i + 1;
+				}
+			}
+						
+			generate(xRef, yRef, type);
+			pieceStats[type] += 1;
+			return tetromino;
+		}
+		}
+		if ( difficulty.equals("MEDIUM") ){ // Standard random generation
+			type = rand.nextInt(numPieces);
+		
+			generate(xRef, yRef, type);
+			pieceStats[type] += 1;
+			return tetromino;
+		}
+		if ( difficulty.equals("HARD") ){ // Reduced drop rates for I,O,T, increased for S,Z,J,L
+			double drop = Math.random(); // Generate a random number on (0,1)
+		
+			// Depending on the value of the random number drop, select the proper piece type
+			if ( drop <= hardDistribution[0] ) {
+				type = 0;
+			}
+			if ( drop > hardDistribution[hardDistribution.length - 2] ){
+				type = hardDistribution.length - 1;
+			}
+			for (int i = 0; i < (hardDistribution.length - 2); i++){
+				if ( drop > hardDistribution[i] && drop <= hardDistribution[i+1]){
+					type = i + 1;
+				}
+			}
+					
+			generate(xRef, yRef, type);
+			pieceStats[type] += 1;
+			return tetromino;
+		}
+		return null;
+        
+
     }
     
     public Tetromino oldTetromino (int xRef, int yRef, int type) {
