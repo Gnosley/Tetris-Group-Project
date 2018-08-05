@@ -13,6 +13,7 @@ hs_err_pid*
 
 # Emacs
 .meghanada/
+.meghanadaFormatter.xml
 
 # Maven
 log/
