@@ -140,17 +140,24 @@ public class Printer {
         String[] helpStrings = {
             "Welcome to Tetris",
             "",
-            "Here are a few controls:\t\t",
-            "Rotate:",
-            "\tCounter Clockwise:  'q'",
-            "\t        Clockwise:  'e'",
-            "Translate:   ",
-            "\t  Left: 'a'",
-            "\t  Down: 's'",
-            "\t Right: 'd'",
-            "Drop: SPACE  ",
-            "Hold: TAB    ",
-            "Quit: ESC ESC"
+            "",
+            " Implemented By:",
+            "Natalie, Jesse",
+            "Dustin, Murray",
+            "Stephen",
+            "",
+            " Controls:",
+            "     Rotate:                              ",
+            "            Counter Clockwise:  'q'       ",
+            "            Clockwise:          'e'       ",
+            "     Translate:                           ",
+            "            Left:               'a'       ",
+            "            Down:               's'       ",
+            "           Right:               'd'       ",
+            "     Drop:             SPACE or 'f'       ",
+            "     Hold:             TAB   or 'w'       ",
+            "     Quit:             ESC ESC            ",
+
         };
         for (String line : helpStrings) {
             terminal.writer().println(centerString(line, 80));
