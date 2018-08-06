@@ -14,6 +14,7 @@ public class Tetromino {
     protected int size; // size of grid needed to hold tetromino
     protected int type; //the type of tetromino
     protected int rotation;
+    protected boolean isGhost = false;
 
     /**
      * Constructor for a new Tetromino when one is called for.
@@ -58,12 +59,16 @@ public class Tetromino {
      *            old Tetromino that needs to be copied
      */
     public Tetromino(Tetromino tetromino) {
-        this.type = tetromino.getType();
-        this.xReferencePosition = tetromino.getXReference();
-        this.yReferencePosition = tetromino.getYReference();
-        this.tetrominoArray = tetromino.getBlockArray();
-        this.size = tetromino.getSize();
-        this.rotation = tetromino.rotation;
+        if (tetromino.getIsGhost()) {
+            this(tetromino, true);
+        }
+        else this(tetromino, true);
+        // this.type = tetromino.getType();
+        // this.xReferencePosition = tetromino.getXReference();
+        // this.yReferencePosition = tetromino.getYReference();
+        // this.tetrominoArray = tetromino.getBlockArray();
+        // this.size = tetromino.getSize();
+        // this.rotation = tetromino.rotation;
     }
 
     /**
@@ -77,7 +82,11 @@ public class Tetromino {
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
-        this.convertGhostType(convertToGhost);
+        // Don't convert if it already is ghost.
+        if (tetromino.getIsGhost() != convertToGhost) {
+            this.convertGhostType(convertToGhost);
+            this.isGhost = convertToGhost;
+        }
         this.rotation = tetromino.rotation;
     }
 
@@ -258,6 +267,10 @@ public class Tetromino {
      */
     public void setRotation(int rotation) {
         this.rotation = rotation;
+    }
+
+    public boolean getIsGhost() {
+        return this.isGhost;
     }
 
 
