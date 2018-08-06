@@ -68,6 +68,23 @@ public class Tetromino {
     }
 
     /**
+     * Copy constructor after each movement or movement check
+     *
+     * @param xRef  The new xReference position for the Tetromino
+     * @param yRef  The new yReference position for the Tetromino
+     * @param tetromino
+     *            old Tetromino that needs to be copied
+     */
+    public Tetromino(int xRef, int yRef, Tetromino tetromino) {
+        this.type = tetromino.getType();
+        this.xReferencePosition = xRef;
+        this.yReferencePosition = yRef;
+        this.tetrominoArray = tetromino.getBlockArray();
+        this.size = tetromino.getSize();
+        this.rotation = tetromino.getRotation();
+    }
+
+    /**
      * Copy constructor for the tetromino after each ghosting
      * @param tetromino: Tetromino 
      * @param isGhost: boolean, either is or isn't a ghost block
