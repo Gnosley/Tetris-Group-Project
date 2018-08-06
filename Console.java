@@ -84,6 +84,7 @@ public class Console{
                       terminal,
                       game.getGameScore(),
                       game.getLinesCleared(),
-                      game.getIsHoldMoveAvailable());
+                      game.getIsHoldMoveAvailable(),
+                      game.getPieceStats());
     }
 }

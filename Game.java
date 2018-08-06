@@ -92,6 +92,11 @@ public class Game {
         return this.linesCleared;
     }
 
+    public int[] getPieceStats() {
+        return generateTetromino.getPieceStats();
+    }
+
+
     /**
      * Getter method for whether hold move is available
      * @return isHoldMoveAvailable: boolean, inidcates if hold move is available

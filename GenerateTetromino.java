@@ -185,4 +185,8 @@ public class GenerateTetromino {
         return tetromino;
     }
 
+    public int[] getPieceStats() {
+        return pieceStats.clone();
+    }
+
 }
