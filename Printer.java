@@ -18,7 +18,7 @@ public class Printer {
     // rows that preview window begins and ends on
     private final int PREVIEWTOP = 9;
 
-    private final int PREVIEWBOT = 16;
+    private final int PREVIEWBOT = 14;
 
     // Preview window width
     private final int PREVIEWWIDTH = 5 * BLOCKWIDTH;
@@ -101,6 +101,11 @@ public class Printer {
                       boolean holdAvailable,
                       int[] tetrominoStats)
     {
+        // int termHeight = terminal.getHeight();
+        //     for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
+        //         terminal.writer().println();
+        //     }
+        terminal.writer().println(ANSI.CLEARSCREEN);
 
         // combine the board and the tetrominos played on it
         Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, board);
@@ -664,7 +669,7 @@ public class Printer {
         for(Block block:boardRow) {
             rowString += getBlockString(block);
         }
-        if (rowNum == PREVIEWBOT || rowNum == PREVIEWTOP) {
+        if (rowNum == PREVIEWBOT + 3|| rowNum == PREVIEWTOP + 3) {
             rowString += VHRSPLIT;
         }
         else rowString += VCHAR;
