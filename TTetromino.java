@@ -10,7 +10,7 @@ public class TTetromino extends Tetromino {
      *            y-coordinate of reference position
      */
     public TTetromino (int xRef, int yRef, boolean isGhost) {
-        super(xRef, yRef);
+        super(xRef, yRef, isGhost);
         tetrominoData = new int[][] {{1, 0}, {1, 1}, {0, 1}, {2, 1}};
         size = 3;
         type = 2;

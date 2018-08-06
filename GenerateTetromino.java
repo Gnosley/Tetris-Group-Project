@@ -161,25 +161,25 @@ public class GenerateTetromino {
     public Tetromino generate(int xReference, int yReference, int type) {
         switch(type) {
             case 0:
-                tetromino = new ITetromino(xReference, yReference);
+                tetromino = new ITetromino(xReference, yReference, false);
                 break;
             case 1:
-                tetromino = new OTetromino(xReference, yReference);
+                tetromino = new OTetromino(xReference, yReference, false);
                 break;
             case 2:
-                tetromino = new TTetromino(xReference, yReference);
+                tetromino = new TTetromino(xReference, yReference, false);
                 break;
             case 3:
-                tetromino = new STetromino(xReference, yReference);
+                tetromino = new STetromino(xReference, yReference, false);
                 break;
             case 4:
-                tetromino = new ZTetromino(xReference, yReference);
+                tetromino = new ZTetromino(xReference, yReference, false);
                 break;
             case 5:
-                tetromino = new JTetromino(xReference, yReference);
+                tetromino = new JTetromino(xReference, yReference, false);
                 break;
             case 6:
-                tetromino = new LTetromino(xReference, yReference);
+                tetromino = new LTetromino(xReference, yReference, false);
                 break;
         }
         return tetromino;

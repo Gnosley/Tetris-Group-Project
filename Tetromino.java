@@ -23,9 +23,11 @@ public class Tetromino {
      * @param yRef:
      *            y-coordinate of reference position
      */
-    public Tetromino(int xRef, int yRef) {
+    public Tetromino(int xRef, int yRef, boolean isGhost) {
         xReferencePosition = xRef;
         yReferencePosition = yRef;
+        this.isGhost = isGhost;
+
     }
 
      /**
@@ -59,10 +61,7 @@ public class Tetromino {
      *            old Tetromino that needs to be copied
      */
     public Tetromino(Tetromino tetromino) {
-        if (tetromino.getIsGhost()) {
-            this(tetromino, true);
-        }
-        else this(tetromino, true);
+        this(tetromino, tetromino.getIsGhost());
         // this.type = tetromino.getType();
         // this.xReferencePosition = tetromino.getXReference();
         // this.yReferencePosition = tetromino.getYReference();
@@ -82,10 +81,10 @@ public class Tetromino {
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
-        // Don't convert if it already is ghost.
+        this.isGhost = convertToGhost;
+        // Don't need to convert if it already is already wanted type.
         if (tetromino.getIsGhost() != convertToGhost) {
-            this.convertGhostType(convertToGhost);
-            this.isGhost = convertToGhost;
+            this.convertGhostType(this.isGhost);
         }
         this.rotation = tetromino.rotation;
     }
