@@ -5,9 +5,9 @@ import java.util.stream.*;
 
 public class Tetromino {
 	private final int numPieces = 7;
-    
+
     protected int[][] tetrominoData;
-    
+
     protected Block[] tetrominoArray = new Block[4];
     protected int xReferencePosition; // x coordinate in relation to the board
     protected int yReferencePosition; // y coordinate in relation to the board
@@ -22,10 +22,9 @@ public class Tetromino {
      * @param yRef:
      *            y-coordinate of reference position
      */
-
     public Tetromino(int xRef, int yRef) {
-		xReferencePosition = xRef;
-		yReferencePosition = yRef;
+        xReferencePosition = xRef;
+        yReferencePosition = yRef;
     }
 
      /**
@@ -72,13 +71,13 @@ public class Tetromino {
      * @param tetromino: Tetromino 
      * @param isGhost: boolean, either is or isn't a ghost block
      */
-    public Tetromino(Tetromino tetromino, boolean isGhost) {
+    public Tetromino(Tetromino tetromino, boolean convertToGhost) {
         this.type = tetromino.getType();
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
         this.tetrominoArray = tetromino.getBlockArray();
         this.size = tetromino.getSize();
-        this.convertGhostType(isGhost);
+        this.convertGhostType(convertToGhost);
         this.rotation = tetromino.rotation;
     }
 

@@ -1,7 +1,5 @@
-
-    
 public class ZTetromino extends Tetromino {
-    
+
     private Block[] tetrominoArray = new Block[4];
 
     /**
@@ -11,12 +9,15 @@ public class ZTetromino extends Tetromino {
      * @param yRef:
      *            y-coordinate of reference position
      */
-    public ZTetromino (int xRef, int yRef) {
+    public ZTetromino (int xRef, int yRef, boolean isGhost) {
         super(xRef, yRef);
         tetrominoData = new int[][] {{0, 0}, {1, 0}, {1, 1}, {2, 1}};
         size = 3;
         type = 4;
-        setBlockArray(generateTetrominoArray(false));
+        setBlockArray(generateTetrominoArray(isGhost));
     }
-    
+
+    public ZTetromino(Tetromino tetrominoToCopy, boolean convertToGhost) {
+        super(tetrominoToCopy, convertToGhost);
+    }
 }
