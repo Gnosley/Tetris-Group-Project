@@ -1,9 +1,8 @@
-
 import java.util.Arrays;
 import java.lang.Math;
 import java.util.stream.*;
 
-public class Tetromino {
+public abstract class Tetromino {
 	private final int numPieces = 7;
 
     protected int[][] tetrominoData;
@@ -15,6 +14,14 @@ public class Tetromino {
     protected int type; //the type of tetromino
     protected int rotation;
     protected boolean isGhost = false;
+
+    // http://tetris.wikia.com/wiki/SRS#Wall_Kicks
+    protected int[][][] wallKickData = {
+        { {0, 0}, {-1, 0}, {-1, 1}, {0, -2}, {-1, -2} },
+        { {0, 0}, {1, 0}, {1, -1}, {0, 2}, {1, 2} },
+        { {0, 0}, {1, 0}, {1, 1}, {0, -2}, {1, -2} },
+        { {0, 0}, {-1, 0}, {-1, -1}, {0, 2}, {-1, 2} }
+    };
 
     /**
      * Constructor for a new Tetromino when one is called for.
@@ -141,6 +148,10 @@ public class Tetromino {
         }
     }
 
+    protected void move(char direction) {
+        move(direction, 1);
+    }
+
     /**
 	 * Decides what translation is being asked to do via a character switch.
 	 * Performs the method via setting the block position to the old position + the movement
@@ -148,14 +159,14 @@ public class Tetromino {
 	 * @param moveType:
 	 *            char that indicates the direction of translation
 	 */
-    protected void move(char direction) {
+    protected void move(char direction, int distance) {
         int xMovement = 0;
         int yMovement = 0;
 
         switch(direction) {
-            case 'a': xMovement = -1; break;    //change is moving the x coordinate 1 left
-            case 's': yMovement = 1; break;     //change is moving the x coordinate 1 right
-            case 'd': xMovement = 1; break;     //change is moving the y coordinate 1 down
+            case 'a': xMovement = -distance; break;    //change is moving the x coordinate 1 left
+            case 's': yMovement = distance; break;     //change is moving the x coordinate 1 right
+            case 'd': xMovement = distance; break;     //change is moving the y coordinate 1 down
         }
 
         xReferencePosition += xMovement;        //apply changes to the reference
@@ -167,6 +178,10 @@ public class Tetromino {
         }
     }
 
+    public void doMove(char moveType) {
+        doMove(moveType, 0); // do default move.
+    }
+
     /**
 	 * Decides what move is being asked to do via a character switch. Performs the
 	 * method.
@@ -174,16 +189,74 @@ public class Tetromino {
 	 * @param moveType:
 	 *            char that indicates the action asked
      */
-    public void doMove(char moveType) {
+    public void doMove(char moveType, int testNum) {
         switch(moveType) {
             case 'a':   //left indication
             case 's':   //down indication
             case 'd':   //right indication
-                        this.move(moveType); break;
+                        this.move(moveType); return;
             case 'q':   //CCW rotation indication
             case 'e':   //CW rotation indiciation
-                        this.rotate(moveType); break;
+                        this.rotate(moveType, testNum); break;
         }
+    }
+
+    // http://tetris.wikia.com/wiki/SRS#Wall_Kicks
+    protected void rotate(char moveType, int testNum) {
+        int preR = rotationToState(rotation);
+        rotate(moveType);
+        int postR = rotationToState(rotation);
+
+        int xMovement;
+        int yMovement;
+
+        switch(testNum) {
+        default: return;
+        case 1:
+        case 2:
+        case 3:
+        case 4: break;
+        }
+
+
+        int rowNum = 0;
+        if ((preR == 1 && postR == 0) || (preR == 0 && postR == 1)) {
+            rowNum = 0;
+        }
+        else if ((preR == 1 && postR == 2) || (preR == 2 && postR == 1)) {
+            rowNum = 1;
+        }
+        else if ((preR == 2 && postR == 3) || (preR == 3 && postR == 2)) {
+            rowNum = 2;
+        }
+        else if ((preR == 3 && postR == 0) || (preR == 0 && postR == 3)) {
+            rowNum = 3;
+        }
+
+        xMovement = this.wallKickData[rowNum][testNum][0];
+        yMovement = this.wallKickData[rowNum][testNum][1];
+
+        if (moveType == 'q') {
+            xMovement *= -1;
+            yMovement *= -1;
+        }
+
+        move('d', xMovement);
+        move('s', -yMovement);
+
+    }
+
+    private int rotationToState(int rotation) {
+        switch(rotation) {
+        case 0: return 0;
+        case 90: return 1;
+        case 180: return 2;
+        case 270: return 3;
+        case -270: return 1;
+        case -180: return 2;
+        case -90: return 3;
+        }
+        return -1;
     }
 
     /**

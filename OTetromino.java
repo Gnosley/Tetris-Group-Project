@@ -20,4 +20,9 @@ public class OTetromino extends Tetromino {
     public OTetromino(Tetromino tetrominoToCopy, boolean convertToGhost) {
         super(tetrominoToCopy, convertToGhost);
     }
+
+    @Override
+    protected void rotate(char moveType, int testNum) {
+        if (testNum == 0) rotate(moveType);
+    }
 }

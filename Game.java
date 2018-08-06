@@ -148,10 +148,24 @@ public class Game {
         // w or TAB holds the current block.
         // f or SPACE drops the current block.
         boolean  canMove = false;
+        Tetromino  movedTetromino = null;
         switch(moveType) {
-            case 'q': case 'e': case 'a': case 's': case 'd':
+            case 'q': case 'e': 
+                int testNum = 0;
+                while(!canMove && testNum < 5) {
+                    movedTetromino =
+                        tetrominoFactory.getTetrominoCopy(currentTetromino);
+                    movedTetromino.doMove((char)moveType, testNum);
+                    canMove = board.checkMove(movedTetromino);
+                    testNum++;
+                }
+                if (canMove) {
+                    currentTetromino = tetrominoFactory.getTetrominoCopy(movedTetromino);
+                }
+                break;
+            case 'a': case 's': case 'd':
             // Tetromino.doMove() should return a NEW tetromino with the move applied
-                Tetromino movedTetromino = tetrominoFactory.getTetrominoCopy(currentTetromino);
+                movedTetromino = tetrominoFactory.getTetrominoCopy(currentTetromino);
                     movedTetromino.doMove((char)moveType);
 
             // board.checkBoard() returns true if no blocks are currently in the way and

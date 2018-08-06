@@ -106,6 +106,7 @@ public class Printer {
             for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
                 terminal.writer().println();
             }
+            terminal.writer().flush();
 
         // terminal.writer().println(ANSI.CLEARSCREEN);
 
