@@ -128,7 +128,7 @@ public class Game {
      * game
      * @param moveType: char, letter input of I/O
      */
-    public void tryMove(int moveType){
+    public boolean tryMove(int moveType){
         // Possible chars are q, e, a, s, d, w or TAB, f or SPACE.
         // q rotates counter-clockwise.
         // e rotates clockwise.
@@ -137,6 +137,7 @@ public class Game {
         // d moves the block right.
         // w or TAB holds the current block.
         // f or SPACE drops the current block.
+        boolean  canMove = false
         switch(moveType) {
             case 'q': case 'e': case 'a': case 's': case 'd':
             // Tetromino.doMove() should return a NEW tetromino with the move applied
@@ -144,7 +145,7 @@ public class Game {
 
             // board.checkBoard() returns true if no blocks are currently in the way and
             // no blocks in the given tetromino are out of board bounds.
-            boolean canMove = board.checkMove(movedTetromino);
+            canMove = board.checkMove(movedTetromino);
 
             if (canMove) {
                 currentTetromino = new Tetromino (movedTetromino);
@@ -163,9 +164,10 @@ public class Game {
                 this.holdMove();
                 break;
 
-            default: return;
+            default: return false;
             }
         this.ghostTetromino = positionGhost(board);
+        return canMove;
     }
 
     /**
