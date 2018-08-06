@@ -41,9 +41,12 @@
 
 .heading-settings {
     -fx-font-family: Impact;
-    -fx-fill: #bc422a;
+    -fx-fill: #c4f0f5;
     -fx-font-size: 18px;
 }
 
 .txt-controls {
+    -fx-line-spacing: 3;
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 13px;
 }

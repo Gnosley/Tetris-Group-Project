@@ -87,7 +87,7 @@
       </StackPane>
       <StackPane layoutX="220.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="difficultyButton5" arcHeight="5.0" arcWidth="5.0" fill="#124c51" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -272,5 +272,7 @@
             <String fx:value="btn-md" />
          </styleClass>
       </StackPane>
+      <Text fx:id="controlsText1" fill="WHITE" layoutX="320.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="LEFT: Left RIGHT: Right UP: Rotate CW X: Rotate CCW" wrappingWidth="100.0" />
+      <Text fx:id="controlsText2" fill="WHITE" layoutX="440.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="DOWN: Soft Drop SPACE: Hard Drop C: Hold" wrappingWidth="117.0" />
    </children>
 </AnchorPane>

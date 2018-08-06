@@ -1,10 +1,8 @@
-
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
     private Tetromino storedTetromino = null; // the held tetromino
-    private Tetromino proxyTetromino; // proxy space for switching tetrominos
     private GenerateTetromino generateTetromino; //
 
     private static final int startingX = 3; // where a tetromino should start on
@@ -15,24 +13,9 @@ public class Game {
 
     private boolean isHoldOccupied = false;  // if a piece is already being held
     private boolean isHoldMoveAvailable = true; // indicates if hold functionality is available (can only put a piece into the hold once per turn)
-    private Board board;
+    private Board board = new Board();
 
-
-    /**
-     * This constructor initializes the terminal input/output to work correctly
-     * and generates two new Tetrominos.
-     */
     public Game() {
-//        // generate three new tetrominos at the start of the game
-//        currentTetromino = new Tetromino(startingX, startingY);
-//        nextTetromino = new Tetromino(startingX, startingY);
-//        ghostTetromino = new Tetromino(currentTetromino, true);   //creates ghost
-//
-//        Board board = new Board();
-//        this.board = board;
-//        ghostTetromino = positionGhost(currentTetromino, board);
-//        boolean gameDone = false;
-
         generateTetromino = new GenerateTetromino();
         // generate three new tetrominos at the start of the game
         currentTetromino =
@@ -40,54 +23,12 @@ public class Game {
         nextTetromino = generateTetromino.newTetromino(startingX, startingY);
         ghostTetromino = new Tetromino(currentTetromino, true);
 
-        Board board = new Board();
-        this.board = board;
-
         // Initial positioning ghost version of current tetromino
         ghostTetromino = positionGhost(board);
+
     }
 
-//    /**
-//     * Attempt to make a move, must be checked for possibility within limits of game
-//     * @param moveType: char, letter input of I/O
-//     * @param board: Board, the playing surface
-//     */
-//    public boolean tryMove(int moveType, Board board) {
-//        // Possible chars are q, e, a, s, d.
-//        // q rotates counter-clockwise.
-//        // e rotates clockwise.
-//        // a moves the block left.
-//        // s moves the block down.
-//        // d moves the block right.
-//        // w or TAB holds the current block.
-//        // f or SPACE drops the current block.
-//        switch(moveType) {
-//            case 'q': case 'e': case 'a': case 's': case 'd': case 'h': break;
-//            case 'f': case 32:
-//                dropMove(board);
-//                break;
-//            case 'w': case 9:
-//                holdMove();
-//                break;
-//            default: return false;
-//        }
-//        // Tetromino.doMove() should return a NEW tetromino with the move applied
-//        Tetromino movedTetromino = currentTetromino.doMove((char)moveType);
-//
-//        // board.checkBoard() returns true if no blocks are currently in the way and
-//        // no blocks in the given tetromino are out of board bounds.
-//        boolean canMove = board.checkMove(movedTetromino);
-//
-//        if (canMove) {
-//            currentTetromino = new Tetromino (movedTetromino);
-//        }
-//        else if (moveType == 's' && !canMove) {
-//            board.updateBoard(currentTetromino); // if moving down causes it to hit a block or go out of bounds, add the current blocks in the tetromino to the board.
-//            commitTetrominoSequence(board);
-//        }
-//        ghostTetromino = positionGhost(currentTetromino, board);
-//        return canMove;
-//    }
+
 
     /**
      * Getter for the current tetromino instance variable
@@ -121,6 +62,9 @@ public class Game {
      * @return tetromino: Tetromino, copy of the storedTetromino
      */
     public Tetromino getStoredTetromino(){
+        if (this.storedTetromino == null) {
+            return null;
+        }
         Tetromino tetromino = new Tetromino(this.storedTetromino);
         return (tetromino);
     }
@@ -161,6 +105,7 @@ public class Game {
     /**
      * Positioning method for the ghost tetromino. Takes position of current
      * tetromino and sets the ghost position to the "floored" version if it
+     * @param  currentTetromino current tetromino in play
      * @param  board            current board
      * @return                  ghost tetromino (re-positioned)
      */
@@ -184,7 +129,6 @@ public class Game {
      * @param moveType: char, letter input of I/O
      */
     public boolean tryMove(int moveType){
-        boolean canMove = false;
         // Possible chars are q, e, a, s, d, w or TAB, f or SPACE.
         // q rotates counter-clockwise.
         // e rotates clockwise.
@@ -193,6 +137,7 @@ public class Game {
         // d moves the block right.
         // w or TAB holds the current block.
         // f or SPACE drops the current block.
+        boolean  canMove = false;
         switch(moveType) {
             case 'q': case 'e': case 'a': case 's': case 'd':
                 // Tetromino.doMove() should return a NEW tetromino with the move applied
@@ -217,13 +162,16 @@ public class Game {
 
             case 'w': case 9:
                 this.holdMove();
+                canMove = true;
                 break;
 
             default: return false;
         }
+
+
+
         this.ghostTetromino = positionGhost(board);
         return canMove;
-
     }
 
     /**
@@ -241,8 +189,9 @@ public class Game {
             }
             else {
                 // a tetromino is already held, so it replaces current with that one
+                Tetromino proxyTetromino; // proxy space for switching tetrominos
                 proxyTetromino = new Tetromino(currentTetromino);
-                currentTetromino = generateTetromino.newTetromino(startingX, startingY);
+                currentTetromino = new Tetromino(startingX, startingY, storedTetromino);
                 storedTetromino = new Tetromino(proxyTetromino);
             }
             isHoldMoveAvailable = false;			// a tetromino has already been held for this drop
@@ -288,7 +237,7 @@ public class Game {
 
     /**
      * Setter of the score achieved through clearing rows
-     * @param numLinesCleared: long, the score achieved
+     * @param gameScore: long, the score achieved
      */
     public void updateGameScore(long numLinesCleared){
         if(numLinesCleared == 4){
@@ -298,6 +247,4 @@ public class Game {
             this.gameScore += (numLinesCleared * 100);
         }
     }
-
-
 }

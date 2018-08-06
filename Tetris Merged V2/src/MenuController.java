@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +29,12 @@ public class MenuController {
 
     @FXML
     private Rectangle newGame;
+
+    @FXML
+    private Text controlsText1;
+
+    @FXML
+    private Text controlsText2;
 
     private Rectangle currentDifficultyButton = difficultyButton1;
     private Rectangle currentLevelButton = levelButton1;
@@ -75,7 +82,7 @@ public class MenuController {
     @FXML
     protected void mouseOverButton(MouseEvent event) {
         if(!((Rectangle)event.getTarget()).getFill().equals(Color.web("ff481e"))) {
-            ((Rectangle) event.getTarget()).setFill(Color.web("72ff1e"));
+            ((Rectangle) event.getTarget()).setFill(Color.web("155982"));
         }
     }
 
@@ -156,6 +163,18 @@ public class MenuController {
         ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
         currentControlsButton = (Rectangle)event.getTarget();
         gameSettings.setCurrentControls(((Rectangle) event.getTarget()).getId());
+        if(((Rectangle) event.getTarget()).getId().equals("controlsButtonStandard")) {
+            controlsText1.setText("LEFT: Left RIGHT: Right UP: Rotate CW X: Rotate CCW");
+            controlsText2.setText("DOWN: Soft Drop SPACE: Hard Drop C: Hold");
+            controlsText1.setWrappingWidth(100);
+            controlsText2.setWrappingWidth(117);
+        }
+        if(((Rectangle) event.getTarget()).getId().equals("controlsButtonWASD")) {
+            controlsText1.setText("A: Left\nD: Right\nE: Rotate CW\nQ: Rotate CCW");
+            controlsText2.setText("S: Soft Drop\nF: Hard Drop\nW: Hold");
+            controlsText1.setWrappingWidth(95);
+            controlsText2.setWrappingWidth(85);
+        }
     }
 
     /**

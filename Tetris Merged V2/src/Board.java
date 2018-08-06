@@ -8,6 +8,7 @@ public class Board{
     private Block[][] gameBoard = new Block[24][10];
     private long numLinesCleared;
     private ArrayList<Integer> rowsToClear = new ArrayList<>();
+    private Block[][] preClearedBoard = new Block[24][10];
 
 
     /**
@@ -20,8 +21,12 @@ public class Board{
         for(int b = 0; b < tetrominoBlockArray.length; b++){
             this.gameBoard[tetrominoBlockArray[b].getYPosition()][tetrominoBlockArray[b].getXPosition()] = tetrominoBlockArray[b];
         }
+
+
+
         //after new piece played, loop checking board for any rows to clear until done
         boolean doneBoardCheck = false;
+        this.preClearedBoard = copyBoard(gameBoard);
         do{
             doneBoardCheck = this.checkBoard();
         }
@@ -36,6 +41,21 @@ public class Board{
         Board copyBoard = new Board();
         copyBoard.gameBoard = copyBoard(this.gameBoard);
         return copyBoard.gameBoard;
+    }
+
+    /**
+     * Getter method for the current gameBoard. Returns copy to avoid privacy leak
+     * @return copy of the current Board
+     */
+//    public Block[][] getPreClearedBoard(){
+//        Board copyBoard = new Board();
+//        copyBoard.preClearedBoard = copyBoard(this.preClearedBoard);
+//        return copyBoard.preClearedBoard;
+//    }
+    public Block[][] getPreClearedBoard(){
+        Board copyBoard = new Board();
+        copyBoard.preClearedBoard = copyBoard(this.preClearedBoard);
+        return copyBoard.preClearedBoard;
     }
 
     /**
@@ -145,6 +165,7 @@ public class Board{
      */
     private void clearRow(int rowClear){
         Board tempBoard = new Board();
+//        this.preClearedBoard = tempBoard.getCurrentBoard();
         tempBoard.gameBoard = copyBoard(this.gameBoard);
         for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
             tempBoard.gameBoard[rowClear][col] = null;
@@ -184,5 +205,9 @@ public class Board{
     public void resetRowsToClear() {
         rowsToClear.clear();
     }
+
+//    public Block[][] getPreClearedBoard() {
+//        return preClearedBoard;
+//    }
 
 }
