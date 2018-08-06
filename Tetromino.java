@@ -53,7 +53,7 @@ public class Tetromino {
         }
         return tetrominoArray;
     }
-    
+
     /**
      * Copy constructor after each movement or movement check
      *
@@ -62,17 +62,11 @@ public class Tetromino {
      */
     public Tetromino(Tetromino tetromino) {
         this(tetromino, tetromino.getIsGhost());
-        // this.type = tetromino.getType();
-        // this.xReferencePosition = tetromino.getXReference();
-        // this.yReferencePosition = tetromino.getYReference();
-        // this.tetrominoArray = tetromino.getBlockArray();
-        // this.size = tetromino.getSize();
-        // this.rotation = tetromino.rotation;
     }
 
     /**
      * Copy constructor for the tetromino after each ghosting
-     * @param tetromino: Tetromino 
+     * @param tetromino: Tetromino
      * @param isGhost: boolean, either is or isn't a ghost block
      */
     public Tetromino(Tetromino tetromino, boolean convertToGhost) {
@@ -90,7 +84,7 @@ public class Tetromino {
     }
 
     /**
-     * Changes a tetrominoArray completely into ghost blocks or out of 
+     * Changes a tetrominoArray completely into ghost blocks or out of
      * ghost blocks
      * @param toGhost: boolean, either is or is not a ghost block
      */
@@ -101,7 +95,7 @@ public class Tetromino {
             }
         }
     }
-    
+
     /**
 	 * Changes the rotation of the block
 	 *
@@ -206,7 +200,7 @@ public class Tetromino {
         }
         return copy;
     }
-    
+
     /**
      * Sets the tetrominoArray from the subclasses
      * @param transferArray: Block []
@@ -243,7 +237,7 @@ public class Tetromino {
     public int getSize() {
         return size;
     }
-     
+
     /**
      * Accesses the protected variable "type"
      * @return type: int of tetromino type
@@ -251,7 +245,7 @@ public class Tetromino {
 	public int getType() {
 		return type;
 	}
- 
+
 	/**
 	 * Accesses the protected variable "rotation"
 	 * @return rotation: int of rotation state
@@ -274,5 +268,3 @@ public class Tetromino {
 
 
 }
-
-		
