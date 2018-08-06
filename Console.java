@@ -27,7 +27,7 @@ public class Console{
 
     public static void main(String[] args){
         Console console = new Console();
-        Board board = new Board();
+        // Board board = new Board();
         // The printer object, which is what will produce graphics for text
         // based game
         Printer printer = new Printer();
@@ -40,11 +40,16 @@ public class Console{
             try{
                 int keyInASCII = console.reader.read();
                 if (keyInASCII == 'h') {
+                    keyInASCII = -1;
                     //pressing 'h' during game opens help/controls menu
                     printer.printHelp(console.terminal);
+                    while(keyInASCII == -1) {
+                        keyInASCII = console.reader.read();
+                    }
+                    console.printGame(printer, game);
                 }
                 // check if user wants to quit
-                else if (keyInASCII == 27) {
+                if (keyInASCII == 27) {
                     // game.reader.read() returns many keys other than Escape as
                     // 27. So check if the user presses escape twice.
                     int nextInput = console.reader.read();
@@ -61,7 +66,7 @@ public class Console{
                 System.out.println("Couldn't read character for move.");
             }
             console.printGame(printer, game);
-            isGameDone = board.isGameDone();
+            isGameDone = game.getBoard().isGameDone();
         }
         System.out.println("Game Over!");
     }

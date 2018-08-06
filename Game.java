@@ -13,7 +13,7 @@ public class Game {
 
     private boolean isHoldOccupied = false;  // if a piece is already being held
     private boolean isHoldMoveAvailable = true; // indicates if hold functionality is available (can only put a piece into the hold once per turn)
-    private Board board;
+    private Board board = new Board();
 
     public Game() {
         generateTetromino = new GenerateTetromino();
@@ -62,6 +62,9 @@ public class Game {
      * @return tetromino: Tetromino, copy of the storedTetromino
      */
     public Tetromino getStoredTetromino(){
+        if (this.storedTetromino == null) {
+            return null;
+        }
         Tetromino tetromino = new Tetromino(this.storedTetromino);
         return (tetromino);
     }
@@ -108,6 +111,7 @@ public class Game {
      */
     private Tetromino positionGhost(Board board) {
         boolean canMove = true;
+        Tetromino ghostTetromino = new Tetromino(currentTetromino, true);
         while (canMove) {
             Tetromino movedGhost = ghostTetromino.doMove('s');
             canMove = board.checkMove(movedGhost);
@@ -161,7 +165,7 @@ public class Game {
 
             default: return;
             }
-
+        this.ghostTetromino = positionGhost(board);
     }
 
     /**
@@ -181,7 +185,7 @@ public class Game {
                 // a tetromino is already held, so it replaces current with that one
                 Tetromino proxyTetromino; // proxy space for switching tetrominos
                 proxyTetromino = new Tetromino(currentTetromino);
-                currentTetromino = new Tetromino(startingX, startingY, storedTetromino.getType());
+                currentTetromino = new Tetromino(startingX, startingY, storedTetromino);
                 storedTetromino = new Tetromino(proxyTetromino);
             }
             isHoldMoveAvailable = false;			// a tetromino has already been held for this drop
