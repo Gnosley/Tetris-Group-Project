@@ -11,7 +11,7 @@ public class STetromino extends Tetromino {
      */
     public STetromino (int xRef, int yRef, boolean isGhost) {
         super(xRef, yRef, isGhost);
-        tetrominoData = new int[][] {{1, 0}, {1, 1}, {2, 1}, {2, 2}};
+        tetrominoData = new int[][] {{0, 1}, {1, 1}, {1, 0}, {2, 0}};
         size = 3;
         type = 3;
         setBlockArray(generateTetrominoArray(isGhost));
