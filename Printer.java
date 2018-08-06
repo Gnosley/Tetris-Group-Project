@@ -1,5 +1,5 @@
 // package org.teamsix;
-
+import org.jline.utils.InfoCmp.Capability;
 import org.jline.terminal.Terminal;
 import java.lang.String;
 
@@ -101,11 +101,13 @@ public class Printer {
                       boolean holdAvailable,
                       int[] tetrominoStats)
     {
-        // int termHeight = terminal.getHeight();
-        //     for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
-        //         terminal.writer().println();
-        //     }
-        terminal.writer().println(ANSI.CLEARSCREEN);
+
+        int termHeight = terminal.getHeight();
+            for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
+                terminal.writer().println();
+            }
+
+        // terminal.writer().println(ANSI.CLEARSCREEN);
 
         // combine the board and the tetrominos played on it
         Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, board);
