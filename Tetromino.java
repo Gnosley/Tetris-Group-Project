@@ -174,18 +174,16 @@ public class Tetromino {
 	 * @param moveType:
 	 *            char that indicates the action asked
      */
-    public Tetromino doMove(char moveType) {
-        Tetromino movedTetromino = new Tetromino(this);
+    public void doMove(char moveType) {
         switch(moveType) {
             case 'a':   //left indication
             case 's':   //down indication
             case 'd':   //right indication
-                        movedTetromino.move(moveType); break;
+                        this.move(moveType); break;
             case 'q':   //CCW rotation indication
             case 'e':   //CW rotation indiciation
-                        movedTetromino.rotate(moveType); break;
+                        this.rotate(moveType); break;
         }
-        return movedTetromino;
     }
 
     /**

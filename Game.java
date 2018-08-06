@@ -122,7 +122,8 @@ public class Game {
         boolean canMove = true;
         Tetromino ghostTetromino = tetrominoFactory.getTetrominoCopy(currentTetromino, true);
         while (canMove) {
-            Tetromino movedGhost = ghostTetromino.doMove('s');
+            Tetromino movedGhost = tetrominoFactory.getTetrominoCopy(ghostTetromino);
+               movedGhost.doMove('s');
             canMove = board.checkMove(movedGhost);
             if (canMove) {
                 ghostTetromino = movedGhost;
@@ -150,7 +151,8 @@ public class Game {
         switch(moveType) {
             case 'q': case 'e': case 'a': case 's': case 'd':
             // Tetromino.doMove() should return a NEW tetromino with the move applied
-            Tetromino movedTetromino = currentTetromino.doMove((char)moveType);
+                Tetromino movedTetromino = tetrominoFactory.getTetrominoCopy(currentTetromino);
+                    movedTetromino.doMove((char)moveType);
 
             // board.checkBoard() returns true if no blocks are currently in the way and
             // no blocks in the given tetromino are out of board bounds.
