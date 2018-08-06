@@ -192,7 +192,9 @@ public class Game {
                 // a tetromino is already held, so it replaces current with that one
                 Tetromino proxyTetromino; // proxy space for switching tetrominos
                 proxyTetromino = new Tetromino(currentTetromino);
-                currentTetromino = new Tetromino(startingX, startingY, storedTetromino);
+                currentTetromino = generateTetromino.oldTetromino(startingX,
+                                                                  startingY,
+                                                                  storedTetromino.getType());
                 storedTetromino = new Tetromino(proxyTetromino);
             }
             isHoldMoveAvailable = false;			// a tetromino has already been held for this drop
