@@ -157,7 +157,7 @@ public class Board{
 
     /**
      * Drops indicated row after clearing
-     * @param rowCleared specified row to drop into (recently cleared)
+     * @param rowClear specified row to drop into (recently cleared)
      */
     private void dropRow(int rowCleared){
         for(int row = rowCleared; row > 0; row--){

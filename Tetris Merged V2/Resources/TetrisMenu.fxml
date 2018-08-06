@@ -39,7 +39,7 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
          </children>
          <styleClass>
-            <String fx:value="btn-primary" />
+            <String fx:value="btn-secondary" />
             <String fx:value="btn-sm" />
          </styleClass>
       </StackPane>
@@ -182,7 +182,7 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy" />
          </children>
          <styleClass>
-            <String fx:value="btn-primary" />
+            <String fx:value="btn-secondary" />
             <String fx:value="btn-sm" />
          </styleClass>
       </StackPane>
@@ -224,7 +224,7 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Standard" />
          </children>
          <styleClass>
-            <String fx:value="btn-primary" />
+            <String fx:value="btn-secondary" />
             <String fx:value="btn-md" />
          </styleClass>
       </StackPane>
@@ -254,7 +254,7 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Small" />
          </children>
          <styleClass>
-            <String fx:value="btn-primary" />
+            <String fx:value="btn-secondary" />
             <String fx:value="btn-md" />
          </styleClass>
       </StackPane>

@@ -155,7 +155,7 @@ public class MenuController {
         currentControlsButton.setFill(Color.web("1e90ff"));
         ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
         currentControlsButton = (Rectangle)event.getTarget();
-        //setLevel(((Rectangle) event.getTarget()).getId());
+        gameSettings.setCurrentControls(((Rectangle) event.getTarget()).getId());
     }
 
     /**
@@ -190,7 +190,7 @@ public class MenuController {
         stage.show();
         ((Node)(event.getSource())).getScene().getWindow().hide();
 
-        TetrisController tetrisController = new TetrisController(); // This did the "trick"
+        TetrisController tetrisController = new TetrisController();
         tetrisController.setGameSettings(gameSettings); // Passing the GameSettings-object to the TetrisController
 
 

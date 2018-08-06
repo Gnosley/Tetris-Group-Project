@@ -1,85 +1,54 @@
-import java.util.Random;
 import java.util.Arrays;
+import java.lang.Math;
+import java.util.stream.*;
 
 public class Tetromino {
-    // {color, size} {block1} {block 2} {block 3} {block 4}
-    private final int[][][] tetrominoData = {
-            // I-Tetromino
-            {
-                    {0, 4}, {1, 0}, {1, 1}, {1, 2}, {1, 3}
-            },
+    private final int numPieces = 7;
 
-            // O-Tetromino
-            {
-                    {1, 2}, {0, 0}, {0, 1}, {1, 0}, {1, 1}
-            },
+    protected int[][] tetrominoData;
 
-            // T-Tetromino
-            {
-                    {2, 3}, {1, 0}, {1, 1}, {0, 1}, {2, 1}
-            },
-
-            // S-Tetromino
-            {
-                    {3, 3}, {1, 0}, {1, 1}, {2, 1}, {2, 2}
-            },
-
-            // Z-Tetromino
-            {
-                    {4, 3}, {0, 0}, {1, 0}, {1, 1}, {2, 1}
-            },
-
-            // J-Tetromino
-            {
-                    {5, 3}, {2, 0}, {1, 0}, {1, 1}, {1, 2}
-            },
-
-            // L-Tetromino
-            {
-                    {6, 3}, {2, 2}, {1, 0}, {1, 1}, {1, 2}
-            }
-    };
-
-    private static Random rand = new Random();
-    private Block[] tetrominoArray = new Block[4];
-    private int xReferencePosition; // x coordinate in relation to the board
-    private int yReferencePosition; // y coordinate in relation to the board
-    private int size; // size of grid needed to hold tetromino
-    private int type; //the type of tetromino
-    private int rotation;
+    protected Block[] tetrominoArray = new Block[4];
+    protected int xReferencePosition; // x coordinate in relation to the board
+    protected int yReferencePosition; // y coordinate in relation to the board
+    protected int size; // size of grid needed to hold tetromino
+    protected int type; //the type of tetromino
+    protected int rotation;
 
     /**
-     * Constructor for a new Tetromino when one is place. A randomized type of
-     * Tetromino is formed
-     *
+     * Constructor for a new Tetromino when one is called for.
      * @param xRef:
      *            x-coordinate of reference position
      * @param yRef:
      *            y-coordinate of reference position
      */
+
     public Tetromino(int xRef, int yRef) {
-        type = rand.nextInt(7);
-        size = tetrominoData[type][0][1];
         xReferencePosition = xRef;
         yReferencePosition = yRef;
-        tetrominoArray = generateTetrominoArray(type);
     }
 
     /**
-     * Constructor for setting an old tetromino back at the start after storing
-     * @param xRef:
-     * 			x-coordinate of reference position
-     * @param yRef:
-     * 			y-coordinate of reference position
-     * @param tetType
-     * 			type of tetromino that was stored
+     * Generate the new tetromino thorough individulized Tetromino data
+     *
+     * @param isGhost:
+     *            boolean of if the tetromino is a ghost type or not
      */
-    public Tetromino (int xRef, int yRef, int tetType) {
-        type = tetType;
-        size = tetrominoData[tetType][0][1];
-        xReferencePosition = xRef;
-        yReferencePosition = yRef;
-        tetrominoArray = generateTetrominoArray(tetType);
+    public Block[] generateTetrominoArray(boolean isGhost) {
+        int color = getType();
+        Block[] tetrominoArray = new Block[4];
+
+        // start iteration at 0
+        for (int i=0; i< tetrominoData.length; i++) {
+            int x = tetrominoData[i][0];
+            int y = tetrominoData[i][1];
+
+            Block block = new Block(color,
+                    xReferencePosition + x,
+                    yReferencePosition + y,
+                    isGhost);
+            tetrominoArray[i] = block;
+        }
+        return tetrominoArray;
     }
 
     /**
@@ -97,6 +66,11 @@ public class Tetromino {
         this.rotation = tetromino.rotation;
     }
 
+    /**
+     * Copy constructor for the tetromino after each ghosting
+     * @param tetromino: Tetromino
+     * @param isGhost: boolean, either is or isn't a ghost block
+     */
     public Tetromino(Tetromino tetromino, boolean isGhost) {
         this.type = tetromino.getType();
         this.xReferencePosition = tetromino.getXReference();
@@ -107,43 +81,17 @@ public class Tetromino {
         this.rotation = tetromino.rotation;
     }
 
-    private void convertGhostType(boolean toGhost) {
+    /**
+     * Changes a tetrominoArray completely into ghost blocks or out of
+     * ghost blocks
+     * @param toGhost: boolean, either is or is not a ghost block
+     */
+    protected void convertGhostType(boolean toGhost) {
         for(Block block:this.tetrominoArray) {
             if(block != null){
                 block.setIsGhost(toGhost);
             }
         }
-    }
-
-    private Block[] generateTetrominoArray(int type) {
-        return generateTetrominoArray(type, false);
-    }
-
-    /**
-     * Generate the new tetromino thorough data from the tetrominoData array
-     *
-     * @param type:
-     *            int of what type the tetromino is (i,o,t,s,z,j,l)
-     */
-    private Block[] generateTetrominoArray(int type, boolean isGhost) {
-        if (type < 0 || type > 6) type = 0; // only 7 tetromino types
-
-        int color = tetrominoData[type][0][0];
-        Block[] tetrominoArray = new Block[4];
-
-        // start iteration at 1 so that we skip color/size info
-        for (int i=1; i< tetrominoData[type].length; i++) {
-            int x = tetrominoData[type][i][0];
-            int y = tetrominoData[type][i][1];
-
-            Block block = new Block(color,
-                    xReferencePosition + x,
-
-                    yReferencePosition + y,
-                    isGhost);
-            tetrominoArray[i-1] = block;
-        }
-        return tetrominoArray;
     }
 
     /**
@@ -152,7 +100,7 @@ public class Tetromino {
      * @param direction:
      *            char, either 'q' or 'e' to be CCW or CW rotation
      */
-    private void rotate(char direction) {
+    protected void rotate(char direction) {
         // We can rotate counter clockwise by {x, y} -> {y, size - 1 - x}
         // We can rotate clockwise by {x, y} -> {size - 1 - y, x}
         int rotSize = size - 1; // for the function to rotate we need size - 1
@@ -191,10 +139,10 @@ public class Tetromino {
      * Decides what translation is being asked to do via a character switch.
      * Performs the method via setting the block position to the old position + the movement
      *
-     * @param direction:
+     * @param moveType:
      *            char that indicates the direction of translation
      */
-    private void move(char direction) {
+    protected void move(char direction) {
         int xMovement = 0;
         int yMovement = 0;
 
@@ -235,7 +183,7 @@ public class Tetromino {
     }
 
     /**
-     * Method to copy information of the private tetrominoArray
+     * Method to copy information of the protected tetrominoArray
      *
      * @return copy: Block[] copy constructor to extract information without a privacy leak
      */
@@ -248,7 +196,17 @@ public class Tetromino {
     }
 
     /**
-     * Accesses the private variable "xReferencePosition"
+     * Sets the tetrominoArray from the subclasses
+     * @param transferArray: Block []
+     */
+    public void setBlockArray(Block[] transferArray) {
+        for (int i =0; i<transferArray.length; i++) {
+            tetrominoArray[i] = new Block(transferArray[i]);
+        }
+    }
+
+    /**
+     * Accesses the protected variable "xReferencePosition"
      *
      * @return xReferencePosition: int of x index position on board
      */
@@ -257,7 +215,7 @@ public class Tetromino {
     }
 
     /**
-     * Accesses the private variable "yReferencePosition"
+     * Accesses the protected variable "yReferencePosition"
      *
      * @return yReferencePosition: int of y index position on board
      */
@@ -266,7 +224,7 @@ public class Tetromino {
     }
 
     /**
-     *Accesses the private variable "size"
+     *Accesses the protected variable "size"
      *
      *@return size: int of block array size
      */
@@ -275,7 +233,7 @@ public class Tetromino {
     }
 
     /**
-     * Accesses the private variable "type"
+     * Accesses the protected variable "type"
      * @return type: int of tetromino type
      */
     public int getType() {
@@ -283,16 +241,16 @@ public class Tetromino {
     }
 
     /**
-     * Accesses the private variable "rotation"
-     * @return type: int of rotation value
+     * Accesses the protected variable "rotation"
+     * @return rotation: int of rotation state
      */
     public int getRotation() {
         return this.rotation;
     }
 
     /**
-     * Sets the Tetromino rotation value
-     * @param rotation
+     * Sets the rotation state of the tetromino
+     * @param rotation: int of wanted rotation state
      */
     public void setRotation(int rotation) {
         this.rotation = rotation;
