@@ -142,6 +142,19 @@ public class Tetromino {
             block.setXPosition(newX);
             block.setYPosition(newY);
         }
+        // update tetromino rotatation
+        if(direction == 'e') {
+            rotation += 90;
+        }
+        else if(direction == 'q') {
+            rotation -= 90;
+        }
+
+        // limit rotation
+        if(rotation == 360 || rotation == -360) {
+
+            rotation = 0;
+        }
     }
 
     /**

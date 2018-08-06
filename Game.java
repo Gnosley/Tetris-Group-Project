@@ -137,7 +137,7 @@ public class Game {
         // d moves the block right.
         // w or TAB holds the current block.
         // f or SPACE drops the current block.
-        boolean  canMove = false
+        boolean  canMove = false;
         switch(moveType) {
             case 'q': case 'e': case 'a': case 's': case 'd':
             // Tetromino.doMove() should return a NEW tetromino with the move applied
