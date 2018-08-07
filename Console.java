@@ -51,7 +51,7 @@ public class Console{
         }
     }
 
-    public static void main(String[] args){
+    public static String[] getOptions() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your username (5 Chars MAX):\t");
         String username = scanner.next();
@@ -62,17 +62,24 @@ public class Console{
         if (username.equals("")) {
             username = "USER";
         }
-        else if (username.length() > 5) {
-            username = username.substring(0, 5);
+        while(username.length() < 7) {
+            username += " ";
+        }
+        if (username.length() > 7) {
+            username = username.substring(0, 7);
         }
         if(difficulty.equals("")) {
             difficulty = "MEDIUM";
         }
+        return new String[] {username, difficulty};
+    }
+    public static void main(String[] args){
+
+        String[] options = Console.getOptions();
+        String username= options[0], difficulty=options[1];
 
         Console console = new Console(username, difficulty);
-        // Board board = new Board();
-        // The printer object, which is what will produce graphics for text
-        // based game
+
 
         // Print initial board.
         console.printGame();
@@ -98,6 +105,7 @@ public class Console{
                     // 27. So check if the user presses escape twice.
                     int nextInput = console.reader.read();
                     if (nextInput == 27) {
+                        console.pauseDropping();
                         break; // end game if escape is pressed twice.
                     }
                 }
@@ -145,8 +153,7 @@ public class Console{
      */
     public void dropPieces() {
         this.dropTimer = new DropTimer();
-        new Timer().schedule(dropTimer
-                             , 0, 300);
+        new Timer().schedule(dropTimer, 0, 300);
     }
 
     public void pauseDropping() {

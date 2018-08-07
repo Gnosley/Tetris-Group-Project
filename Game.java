@@ -1,3 +1,14 @@
+// imports for high score handling
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import java.util.List;
+import java.io.FileNotFoundException;
+
+
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
@@ -14,10 +25,10 @@ public class Game {
     private boolean isHoldOccupied = false;  // if a piece is already being held
     private boolean isHoldMoveAvailable = true; // indicates if hold functionality is available (can only put a piece into the hold once per turn)
     private Board board = new Board();
-    private String username = "USER";
+    private String username = "USER   ";
 
     public Game() {
-        this("USER", "MEDIUM");
+        this("USER    ", "MEDIUM");
     }
 
     public Game(String username, String difficulty) {
@@ -279,16 +290,133 @@ public class Game {
         return this.username;
     }
 
-    // TODO
-    public long getHighScore() {
-        return 12181;
-    }
-    // TODO
-    public String getHighScoreName() {
-        return "BestP";
-    }
-    // TODO
-    public void writeScoreToFile() {
+    // // TODO
+    // public long getHighScore() {
+    //     return 12181;
+    // }
+    // // TODO
+    // public String getHighScoreName() {
+    //     return "BestP";
+    // }
+    // // TODO
+    // public void writeScoreToFile() {
 
+    // }
+
+
+    /*
+     * HIGH SCORE FILE METHODS
+     */
+
+/**
+	 * Sets the highscore by reading and writing from a text file
+	 */
+    public void writeScoreToFile () {
+
+        try{
+        Scanner input = new Scanner (new File("HighScore.txt"));
+        List<String> userAndScore = new ArrayList<String>();
+
+        String usernameToWrite = username;
+        while(usernameToWrite.length() < 7) {
+            usernameToWrite += " ";
+        }
+        if (usernameToWrite.length() > 7) {
+            usernameToWrite.substring(0, 7);
+        }
+        //this is the string that needs to be written to the text file
+        String newUserScore = username + Long.toString(gameScore);
+
+
+        while (input.hasNextLine()) {
+        	//run through text file and transfer to a String ArrayList
+            userAndScore.add(input.nextLine());
+        }
+        
+        input.close();
+
+        //String ArrayList for username storage, long ArrayList for score storage
+        List<String> user = new ArrayList<String>();
+        List<Long> scores = new ArrayList<Long>();
+
+        for (int i=0; i<userAndScore.size(); i++) {
+            long  newLongScore;
+        	//newScore is just the score
+            if (userAndScore.get(i).length() > 7) {
+                String newScore = userAndScore.get(i).substring(7);
+                newLongScore = Long.parseLong(newScore);
+            }
+            else newLongScore = 0;
+
+            scores.add(newLongScore);
+        }
+
+        int placement = 0;
+        //find what the placement of the new score is compared to the rest
+        for (int a=0; a<scores.size(); a++) {
+            if (scores.get(a)>gameScore) {
+                placement = a+1;
+            } 
+        }
+
+        PrintWriter output = new PrintWriter("HighScore.txt");
+        
+        userAndScore.add(null);
+
+        //place the old data back onto the ArrayList in the new order
+        if (placement != userAndScore.size()-1) {	
+            for (int b = userAndScore.size()-1; b>placement; b--) {
+                userAndScore.set(b, userAndScore.get(b-1));
+            }    
+        }
+        userAndScore.set(placement, newUserScore);
+        
+        //print out onto the document
+        for (int c=0; c<userAndScore.size(); c++) {
+            output.println(userAndScore.get(c));
+            }
+            
+        output.close();
+        }
+        
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    
+    /**
+	 * Gets the highscore by reading from a text file
+     * @return highscore, long
+	 */
+    public long getHighScore() {
+        long highscore = 0;
+        try{
+            Scanner input = new Scanner (new File("HighScore.txt"));
+            highscore = Long.parseLong(input.nextLine().substring(7));
+            
+        }
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return highscore;
+
+    }
+   
+    /**
+	 * Gets the username by reading from a text file
+     * @return highscoreName, String
+	 */
+    public String getHighScoreName() {
+        String highscoreName = "NoFILE";
+        try{
+            Scanner input = new Scanner (new File("HighScore.txt"));
+            highscoreName = input.nextLine().substring(0,7);
+            
+        }
+        catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return highscoreName;
     }
 }
