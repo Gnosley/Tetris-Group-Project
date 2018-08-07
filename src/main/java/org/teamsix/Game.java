@@ -1,3 +1,5 @@
+package org.teamsix;
+
 // imports for high score handling
 import java.io.PrintWriter;
 import java.io.FileOutputStream;

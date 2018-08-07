@@ -1,3 +1,5 @@
+package org.teamsix;
+
 /** Block class is the blocks that make up the game pieces. Blocks store their color,
 	xPosition and yPosition all as integers. Get/set methods for all 3 instance variables	*/
 public class Block{

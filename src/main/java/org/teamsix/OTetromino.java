@@ -1,3 +1,6 @@
+package org.teamsix;
+
+
 public class OTetromino extends Tetromino {
 
     private Block[] tetrominoArray = new Block[4];

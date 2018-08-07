@@ -1,4 +1,4 @@
-// package org.teamsix;
+package org.teamsix;
 
 public class ANSI {
     public static final String CLEARSCREEN = "\u001B[1J";
