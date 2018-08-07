@@ -46,11 +46,11 @@ public class BlockTest {
         Assert.assertEquals("isGhost is not properly set in constructor.",b1.getIsGhost(), false);
 
 
-        Block b2 = new Block(7, 7, 7, true);
-        Assert.assertEquals("Color is not properly set in constructor.",b2.getColor(), 7);
-        Assert.assertEquals("xPosition is not properly set in constructor.",b2.getXPosition(), 7);
-        Assert.assertEquals("yPosition is not properly set in constructor.",b2.getYPosition(), 7);
-        Assert.assertEquals("isGhost is not properly set in constructor.",b2.getIsGhost(), true);
+        Block b2 = new Block(6, 6, 6, true);
+        Assert.assertEquals("Color is not properly set in constructor.",6, b2.getColor());
+        Assert.assertEquals("xPosition is not properly set in constructor.", 6, b2.getXPosition());
+        Assert.assertEquals("yPosition is not properly set in constructor.", 6, b2.getYPosition());
+        Assert.assertEquals("isGhost is not properly set in constructor.", true, b2.getIsGhost());
 
     }
 
@@ -61,10 +61,17 @@ public class BlockTest {
         b1.setColor(4);
         b2.setColor(0);
 
-        Assert.assertEquals("Block color is not set properly.", b1.getColor(), 4);
-        Assert.assertEquals("Block color is not set properly.", b2.getColor(), 0);
-        b2.setColor(6);
-        Assert.assertEquals("Block color is not set properly.", b2.getColor(), 6);
+        Assert.assertEquals("Block color is not set properly.", 4, b1.getColor());
+        Assert.assertEquals("Block color is not set properly.", 0, b2.getColor());
+
+        b2 = new Block(3, 7, 2, false);
+        b2.setColor(7);
+        Assert.assertEquals("Block initialized with color 3, setColor() accepts color > 6", 3, b2.getColor());
+
+        b2 = new Block(-1, 7, 2, false);
+        Assert.assertEquals("Block initialized with negative color. Color should not be negative.", 0, b2.getColor());
+        b2.setColor(-5);
+        Assert.assertEquals("Block initialized with color 3, setColor() accepts color < 0", 0, b2.getColor());
     }
 
     @Test
@@ -89,8 +96,8 @@ public class BlockTest {
 
         Assert.assertEquals("Block xPosition is not set properly.", b1.getXPosition(), 10);
         Assert.assertEquals("Block xPosition is not set properly.", b2.getXPosition(), 0);
-        b2.setXPosition(5);
-        Assert.assertEquals("Block xPosition is not set properly.", b2.getXPosition(), 5);
+        b2.setXPosition(-5);
+        Assert.assertEquals("Block xPosition is not set properly.", b2.getXPosition(), 0);
     }
 
     @Test
