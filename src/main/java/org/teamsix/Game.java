@@ -115,6 +115,7 @@ public class Game {
     public int[] getPieceStats() {
         return tetrominoFactory.getPieceStats();
     }
+
     /**
      * Retrives isGameDone boolean from board.
      * @return isGameDone: boolean, indicates if game is done.
@@ -124,13 +125,37 @@ public class Game {
     }
 
     /**
+     * Retrives preClearedBoard board from board.
+     * @return preClearedBoard: block[][].
+     */
+    public Block[][] getPreClearedBoard(){
+        return(board.getPreClearedBoard());
+    }
+
+    /**
+     * Retrives getRowsToClear from board.
+     * @return getRowsToClear: ArrayList<Integer>.
+     */
+    public ArrayList<Integer> getRowsToClear(){
+        return(board.getRowsToClear());
+    }
+
+    /**
+     * Resets getRowsToClear from board.
+     *
+     */
+    public void resetRowsToClear() {
+        board.resetRowsToClear();
+    }
+
+
+    /**
      * Getter method for whether hold move is available
      * @return isHoldMoveAvailable: boolean, inidcates if hold move is available
      */
     public boolean getIsHoldMoveAvailable(){
         return this.isHoldMoveAvailable;
     }
-
 
 
     /**
