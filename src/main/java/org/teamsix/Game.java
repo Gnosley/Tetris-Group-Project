@@ -47,7 +47,6 @@ public class Game {
     }
 
 
-
     /**
      * Getter for the current tetromino instance variable
      * @return tetromino: Tetromino, copy of the currentTetromino
@@ -86,14 +85,16 @@ public class Game {
         Tetromino tetromino = tetrominoFactory.getTetrominoCopy(this.storedTetromino);
         return (tetromino);
     }
+
     /**
-     * TODO HUGE PRIVACY LEAK?
      * Getter method for the board instance variable
-     * @return board: Board, the current board
+     * @return block[][]: gameBoard instance variable of block object,
+     *  the current board
      */
-    public Board getBoard(){
-        return board;
+    public Block[][] getBoard(){
+        return (board.getCurrentBoard());
     }
+
 
     /**
      * Getter method of the score achieved through clearing rows
@@ -114,7 +115,13 @@ public class Game {
     public int[] getPieceStats() {
         return tetrominoFactory.getPieceStats();
     }
-
+    /**
+     * Retrives isGameDone boolean from board.
+     * @return isGameDone: boolean, indicates if game is done.
+     */
+    public boolean isGameDone(){
+        return(board.isGameDone());
+    }
 
     /**
      * Getter method for whether hold move is available
@@ -165,7 +172,7 @@ public class Game {
         boolean  canMove = false;
         Tetromino  movedTetromino = null;
         switch(moveType) {
-            case 'q': case 'e': 
+            case 'q': case 'e':
                 int testNum = 0;
                 while(!canMove && testNum < 5) {
                     movedTetromino =
@@ -334,7 +341,7 @@ public class Game {
         	//run through text file and transfer to a String ArrayList
             userAndScore.add(input.nextLine());
         }
-        
+
         input.close();
 
         //String ArrayList for username storage, long ArrayList for score storage
@@ -358,35 +365,35 @@ public class Game {
         for (int a=0; a<scores.size(); a++) {
             if (scores.get(a)>gameScore) {
                 placement = a+1;
-            } 
+            }
         }
 
         PrintWriter output = new PrintWriter("HighScore.txt");
-        
+
         userAndScore.add(null);
 
         //place the old data back onto the ArrayList in the new order
-        if (placement != userAndScore.size()-1) {	
+        if (placement != userAndScore.size()-1) {
             for (int b = userAndScore.size()-1; b>placement; b--) {
                 userAndScore.set(b, userAndScore.get(b-1));
-            }    
+            }
         }
         userAndScore.set(placement, newUserScore);
-        
+
         //print out onto the document
         for (int c=0; c<userAndScore.size(); c++) {
             output.println(userAndScore.get(c));
             }
-            
+
         output.close();
         }
-        
+
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
     }
-    
+
     /**
 	 * Gets the highscore by reading from a text file
      * @return highscore, long
@@ -396,7 +403,7 @@ public class Game {
         try{
             Scanner input = new Scanner (new File("HighScore.txt"));
             highscore = Long.parseLong(input.nextLine().substring(7));
-            
+
         }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -404,7 +411,7 @@ public class Game {
         return highscore;
 
     }
-   
+
     /**
 	 * Gets the username by reading from a text file
      * @return highscoreName, String
@@ -414,7 +421,7 @@ public class Game {
         try{
             Scanner input = new Scanner (new File("HighScore.txt"));
             highscoreName = input.nextLine().substring(0,7);
-            
+
         }
         catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
