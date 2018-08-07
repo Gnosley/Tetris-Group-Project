@@ -181,9 +181,11 @@ public class MenuController {
      */
     private void loadGame(MouseEvent event) throws IOException {
 
+
+
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(tetrisRoot, 620 ,540));
+        stage.setScene(new Scene(tetrisRoot, 700 ,540));
         stage.setTitle("TETRIS");
         stage.setResizable(false);
         stage.show();
@@ -203,5 +205,7 @@ public class MenuController {
 
         TetrisController tetrisController = new TetrisController();
         tetrisController.setGameSettings(gameSettings); // Passing the GameSettings-object to the TetrisController
+
+
     }
 }

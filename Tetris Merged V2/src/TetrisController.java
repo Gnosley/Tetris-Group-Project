@@ -44,6 +44,12 @@ public class TetrisController {
     private Text linesClearedText;
 
     @FXML
+    private Text gameStats;
+
+    @FXML
+    private Text currentDifficultyText;
+
+    @FXML
     private Text gameOverText;
 
     @FXML
@@ -147,9 +153,12 @@ public class TetrisController {
 
             //New Game
             if (event.getCode().equals(gameSettings.getControls()[7])) {
-
                 if (newGame) {
-                    System.out.println(gameSettings.getLevel());
+
+                    gameStats.setText(0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0);
+                    gameStats.setWrappingWidth(100);
+                    currentDifficultyText.setText(gameSettings.getLevel());
+
 
                     Game game = new Game(gameSettings.getLevel());
                     this.game = game;
@@ -269,6 +278,9 @@ public class TetrisController {
 
         //generate new Tetromino graphics and update the board if the move was a drop, a hold, or if canMove is false
         if (moveType == 'f' || moveType == 'w' || !canMove) {
+            gameStats.setText(game.getPieceStats()[0] + "\n" + game.getPieceStats()[1] + "\n"
+                    + game.getPieceStats()[2] + "\n" + game.getPieceStats()[3] + "\n" + game.getPieceStats()[4]
+                    + "\n" + game.getPieceStats()[5] + "\n" + game.getPieceStats()[6]);
 
             //Clears block graphics from a row
             if (game.getBoard().getRowsToClear().size() > 0) {
@@ -289,6 +301,9 @@ public class TetrisController {
         if(gameDone) {
             gameOverText.setText("Game Over");
             gameOverText.toFront();
+            startGameText.setLayoutX(43);
+            startGameText.setLayoutY(35);
+            startGameText.setWrappingWidth(300);
             startGameText.setText("Press ENTER to start new game");
             startGameText.toFront();
         }

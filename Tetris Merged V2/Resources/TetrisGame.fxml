@@ -73,7 +73,7 @@
             <Font size="64.0" />
          </font>
       </Text>
-      <Text fx:id="startGameText" fill="WHITE" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-view-order: -2.0; -fx-font-family: Century Gothic;" text="Press ENTER to start game">
+      <Text fx:id="startGameText" fill="RED" layoutX="233.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-view-order: -2.0; -fx-font-family: Century Gothic;" text="Press ENTER to start game" wrappingWidth="125.00000298023224">
          <font>
             <Font size="18.0" />
          </font>
@@ -83,12 +83,12 @@
             <Image url="@Box@2x.png" />
          </image>
       </ImageView>
-      <Pane layoutX="180.0" opacity="0.09" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1.0;" />
+      <Pane layoutX="180.0" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1.0;" />
       <Text layoutX="55.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="HOLD" />
       <Text layoutX="435.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="NEXT" />
       <StackPane layoutX="450.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" styleClass="btn-tetris">
          <children>
-            <Rectangle fx:id="screenButtonLarge" arcHeight="5.0" arcWidth="5.0" height="40.0" onMouseClicked="#loadMainMenu" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="CENTER">
+            <Rectangle fx:id="mainMenuButton" arcHeight="5.0" arcWidth="5.0" height="40.0" onMouseClicked="#loadMainMenu" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="CENTER">
                <effect>
                   <Bloom />
                </effect>
@@ -96,5 +96,30 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" />
          </children>
       </StackPane>
+      <Text fx:id="gameStatsLabels" fill="WHITE" layoutX="40.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I:O:T:S:Z:J:L:" textAlignment="RIGHT" wrappingWidth="20.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="gameStats" fill="WHITE" layoutX="80.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000000" wrappingWidth="10.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="25.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Piece Stats:" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="418.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Difficulty:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text id="scoreText" fx:id="currentDifficultyText" fill="WHITE" layoutX="580.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
