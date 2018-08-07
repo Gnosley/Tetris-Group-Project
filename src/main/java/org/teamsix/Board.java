@@ -193,7 +193,8 @@ public class Board{
     }
 
     public ArrayList<Integer> getRowsToClear() {
-        return this.rowsToClear;
+        ArrayList<Integer> rowsToClear = new ArrayList<>(this.rowsToClear);
+        return rowsToClear;
     }
 
     public void resetRowsToClear() {
