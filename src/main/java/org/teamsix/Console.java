@@ -87,7 +87,6 @@ public class Console{
         // Print initial board.
         console.printGame();
         console.dropPieces();
-       // jgame.dropPieces();
         while(!console.getIsGameDone()) {
             try{
                 int keyInASCII = console.reader.read();
