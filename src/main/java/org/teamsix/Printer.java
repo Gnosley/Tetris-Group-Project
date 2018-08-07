@@ -109,13 +109,17 @@ public class Printer {
                       String highscoreName)
     {
 
-        int termHeight = terminal.getHeight();
-            for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
-                terminal.writer().println();
-            }
-            terminal.writer().flush();
+        // IF LINUX:
 
-        // terminal.writer().println(ANSI.CLEARSCREEN);
+        // int termHeight = terminal.getHeight();
+        // for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
+        //     terminal.writer().println();
+        // }
+        // terminal.writer().flush();
+
+        // IF WINDOWS
+
+        terminal.puts(Capability.clear_screen);
 
         // combine the board and the tetrominos played on it
         Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, board);
