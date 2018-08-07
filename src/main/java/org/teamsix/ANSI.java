@@ -1,3 +1,5 @@
+package org.teamsix;
+
 public class ANSI {
     public static final String CLEARSCREEN = "\u001B[1J";
     public static final String RESET = "\u001B[0m";
@@ -10,6 +12,7 @@ public class ANSI {
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
     public static final String BRIGHT_YELLOW = "\u001B[93m"; // Yellow
+    public static final String BLINK = "\u001B[5m";
 
     /**
      * Takes an int and returns a String for an ANSI escape sequence. Maps as follows:

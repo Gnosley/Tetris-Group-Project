@@ -1,0 +1,13 @@
+Jack   4500
+J      1300
+j      600
+JesseF 300
+Jesse  200
+J      200
+j      0
+eahus  0
+Jesse  0
+Jesse  0
+JESSEF 0
+Jesse  0
+

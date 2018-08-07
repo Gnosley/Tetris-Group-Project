@@ -1,3 +1,6 @@
+package org.teamsix;
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 /**
@@ -8,6 +11,7 @@ public class Board{
     private Block[][] gameBoard = new Block[24][10];
     private long numLinesCleared;
     private ArrayList<Integer> rowsToClear = new ArrayList<>();
+    private Block[][] preClearedBoard = new Block[24][10];
 
 
     /**
@@ -22,6 +26,7 @@ public class Board{
         }
         //after new piece played, loop checking board for any rows to clear until done
         boolean doneBoardCheck = false;
+        this.preClearedBoard = copyBoard(gameBoard);
         do{
             doneBoardCheck = this.checkBoard();
         }
@@ -36,6 +41,16 @@ public class Board{
         Board copyBoard = new Board();
         copyBoard.gameBoard = copyBoard(this.gameBoard);
         return copyBoard.gameBoard;
+    }
+
+    /**
+     * Getter method for the precleared gameBoard. Returns copy to avoid privacy leak
+     * @return copy of the precleared Board
+     */
+    public Block[][] getPreClearedBoard(){
+        Board copyBoard = new Board();
+        copyBoard.preClearedBoard = copyBoard(this.preClearedBoard);
+        return copyBoard.preClearedBoard;
     }
 
     /**
