@@ -120,8 +120,8 @@ public class Printer {
         Block[][] holdArray = createBlockArray(holdTetromino);
         Block[][] nextArray = createBlockArray(nextTetromino);
 
+        terminal.writer().println(centerString("Press Escape Twice to exit. Press 'h' for help.", 80));
 
-        terminal.writer().println();
         String[] rowStrings = new String[CONSOLEHEIGHT];
         // get the strings left of the main play space
         String[] leftStrings = getLeftSide(holdArray, holdAvailable, tetrominoStats);
@@ -238,14 +238,14 @@ public class Printer {
     }
 
     /**
-     * Formats a number to be have given number of digits with 0 as placeholder.
+     * Formats a number to be have given number of digits with " " as placeholder.
      *
      * @param number The number to be formatted.
      * @param digits The number of digits to format to.
      * @return String with the given number of digits.
      */
     private String formatNumber(long number, int digits) {
-        return String.format("%0" + digits + "d", number);
+        return String.format("% " + digits + "d", number);
     }
 
     /**
@@ -483,7 +483,7 @@ public class Printer {
 
         switch(row) {
         default: return generatePadding(LEFTWIDTH);
-        case 0: return centerString("--S T A T S--", LEFTWIDTH);
+        case 0: return centerString("- - S T A T S - -", LEFTWIDTH);
         case 2: tetrominoType = "I"; break;
         case 3: tetrominoType = "O"; break;
         case 4: tetrominoType = "T"; break;
@@ -496,7 +496,7 @@ public class Printer {
             return centerString(
                                 formatNumber(
                                              getTetrominoData(7, tetrominoStats),
-                                             6
+                                             8
                                              ),
                                 LEFTWIDTH
                                 );
