@@ -56,7 +56,7 @@ public class Console{
 
     public static String[] getOptions() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter your username (5 Chars MAX):\t");
+        System.out.println("Please enter your username (7 Chars MAX):\t");
         String username = scanner.next();
         System.out.println("Please Choose Difficulty (EASY, MEDIUM, HARD): ");
         String difficulty = scanner.next();
@@ -79,7 +79,7 @@ public class Console{
     public static void main(String[] args){
 
         String[] options = Console.getOptions();
-        String username= options[0], difficulty=options[1];
+        String username=options[0], difficulty=options[1];
 
         Console console = new Console(username, difficulty);
 
