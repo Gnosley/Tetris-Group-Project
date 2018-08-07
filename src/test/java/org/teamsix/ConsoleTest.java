@@ -36,16 +36,22 @@ public class ConsoleTest {
         optionsArray = Console.getOptions();
         Assert.assertEquals("Username with more than 7 characters does not get trimmed when entered.",optionsArray[0], "Tetromi");
         Assert.assertEquals("When 'easy' is entered, 'easy' is not returned.",optionsArray[1], "easy");
+
         // test for difficulty input
         input = "Natalie\nmedium";
         in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         optionsArray = Console.getOptions();
-        Assert.assertEquals("Username with 1 character does not get returned when entered.",optionsArray[0], "Natalie");
+        Assert.assertEquals("Username with 7 characters does not get returned when entered.",optionsArray[0], "Natalie");
         Assert.assertEquals("When 'medium' is entered, 'medium' is not returned.",optionsArray[1], "medium");
 
-
-
+        // test for difficulty input
+        input = "DustinD\nHARD";
+        in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        optionsArray = Console.getOptions();
+        Assert.assertEquals("Username with 7 characters does not get returned when entered.",optionsArray[0], "DustinD");
+        Assert.assertEquals("When 'HARD' is entered, 'HARD' is not returned.",optionsArray[1], "HARD");
 
 
     }
