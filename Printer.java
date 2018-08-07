@@ -99,7 +99,9 @@ public class Printer {
                       long gameScore,
                       long linesCleared,
                       boolean holdAvailable,
-                      int[] tetrominoStats)
+                      int[] tetrominoStats,
+                      String username,
+                      String difficulty)
     {
 
         int termHeight = terminal.getHeight();
@@ -116,7 +118,6 @@ public class Printer {
         Block[][] holdArray = createBlockArray(holdTetromino);
         Block[][] nextArray = createBlockArray(nextTetromino);
 
-        String username = "USERNAME";
         long highscore = 100;
         String highscoreName = "P2";
 
@@ -129,7 +130,7 @@ public class Printer {
         // get the strings right of the main play space
         String[] rightStrings = getRightSide(username, gameScore,
                                              linesCleared, highscore,
-                                             highscoreName, nextArray, 3);
+                                             highscoreName, nextArray, difficulty);
         // for each row, add left + main + right then print
         for (int i = 0; i < CONSOLEHEIGHT; i++) {
             rowStrings[i] = leftStrings[i] + boardStrings[i] + rightStrings[i];
@@ -342,7 +343,7 @@ public class Printer {
     private String[] getRightSide(String username, long gameScore,
                                   long linesCleared, long highscore,
                                   String scoreName, Block[][] nextArray,
-                                  int currentDifficulty) {
+                                  String currentDifficulty) {
 
         String[] arrayOfRows = new String[CONSOLEHEIGHT];
         for (int r=0; r < arrayOfRows.length; r++) {
@@ -734,9 +735,9 @@ public class Printer {
      * @param currentDifficulty The current difficulty.
      * @return Nicely formatted string representing the current difficulty.
      */
-    private String getDifficultyString(int currentDifficulty) {
+    private String getDifficultyString(String currentDifficulty) {
         return centerString("Current Difficulty: "
-                            + formatNumber(currentDifficulty, 1), RIGHTWIDTH);
+                            + currentDifficulty, RIGHTWIDTH);
     }
 
     /**

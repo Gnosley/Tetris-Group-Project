@@ -4,6 +4,7 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Console{
 
@@ -32,6 +33,11 @@ public class Console{
      * Console constructor
      */
     public Console(){
+        this("USER", "MEDIUM");
+    }
+
+    public Console(String username, String difficulty){
+        game = new Game(username, difficulty);
         try{
             terminal = TerminalBuilder.builder()
                 .jansi(true)
@@ -45,9 +51,25 @@ public class Console{
         }
     }
 
-
     public static void main(String[] args){
-        Console console = new Console();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter your username (5 Chars MAX):\t");
+        String username = scanner.next();
+        System.out.println("Please Choose Difficulty (EASY, MEDIUM, HARD): ");
+        String difficulty = scanner.next();
+        username = username.trim();
+        difficulty = difficulty.trim();
+        if (username.equals("")) {
+            username = "USER";
+        }
+        else if (username.length() > 5) {
+            username = username.substring(0, 5);
+        }
+        if(difficulty.equals("")) {
+            difficulty = "MEDIUM";
+        }
+
+        Console console = new Console(username, difficulty);
         // Board board = new Board();
         // The printer object, which is what will produce graphics for text
         // based game
@@ -108,7 +130,9 @@ public class Console{
                       game.getGameScore(),
                       game.getLinesCleared(),
                       game.getIsHoldMoveAvailable(),
-                      game.getPieceStats());
+                      game.getPieceStats(),
+                      game.getUsername(),
+                      game.getDifficulty());
     }
 
     /**

@@ -14,12 +14,13 @@ public class Game {
     private boolean isHoldOccupied = false;  // if a piece is already being held
     private boolean isHoldMoveAvailable = true; // indicates if hold functionality is available (can only put a piece into the hold once per turn)
     private Board board = new Board();
+    private String username = "USER";
 
     public Game() {
-        this("MEDIUM");
+        this("USER", "MEDIUM");
     }
 
-    public Game(String difficulty) {
+    public Game(String username, String difficulty) {
         tetrominoFactory = new TetrominoFactory(difficulty, startingX, startingY);
         // generate three new tetrominos at the start of the game
         currentTetromino = tetrominoFactory.getTetromino();
@@ -28,6 +29,7 @@ public class Game {
 
         // Initial positioning ghost version of current tetromino
         ghostTetromino = positionGhost(board);
+        this.username = username;
 
     }
 
@@ -267,5 +269,13 @@ public class Game {
       else{
         this.gameScore += (numLinesCleared * 100);
       }
+    }
+
+    public String getDifficulty() {
+        return this.tetrominoFactory.getDifficulty();
+    }
+
+    public String getUsername() {
+        return this.username;
     }
 }
