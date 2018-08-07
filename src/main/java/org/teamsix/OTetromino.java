@@ -20,10 +20,23 @@ public class OTetromino extends Tetromino {
         setBlockArray(generateTetrominoArray(isGhost));
     }
 
+    /**
+     * Copy constructor for a Tetromino
+     *
+     * @param tetrominoToCopy The Tetromino to change
+     * @param convertToGhost Whether the copy should be a ghost tetromino
+     */
     public OTetromino(Tetromino tetrominoToCopy, boolean convertToGhost) {
         super(tetrominoToCopy, convertToGhost);
     }
 
+    /**
+     * Don't do anything if not the first rotation test. OTetromino can not wallkick.
+     *
+     * @param moveType The direction of rotation to do. 'q' for counter
+     * clockwise. 'e' for clockwise.
+     * @param testNum The rotation test number.
+     */
     @Override
     protected void rotate(char moveType, int testNum) {
         if (testNum == 0) rotate(moveType);
