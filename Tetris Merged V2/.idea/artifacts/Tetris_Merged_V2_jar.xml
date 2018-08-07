@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tetris Merged V2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tetris_Merged_V2_jar</output-path>
+    <root id="archive" name="Tetris Merged V2.jar">
+      <element id="module-output" name="Tetris Merged V2" />
+    </root>
+  </artifact>
+</component>

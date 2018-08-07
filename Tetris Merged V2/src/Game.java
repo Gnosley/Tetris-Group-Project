@@ -1,3 +1,4 @@
+
 // imports for high score handling
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
@@ -45,7 +46,6 @@ public class Game {
     }
 
 
-
     /**
      * Getter for the current tetromino instance variable
      * @return tetromino: Tetromino, copy of the currentTetromino
@@ -84,14 +84,16 @@ public class Game {
         Tetromino tetromino = tetrominoFactory.getTetrominoCopy(this.storedTetromino);
         return (tetromino);
     }
+
     /**
-     * TODO HUGE PRIVACY LEAK?
      * Getter method for the board instance variable
-     * @return board: Board, the current board
+     * @return block[][]: gameBoard instance variable of block object,
+     *  the current board
      */
-    public Board getBoard(){
-        return board;
+    public Block[][] getBoard(){
+        return (board.getCurrentBoard());
     }
+
 
     /**
      * Getter method of the score achieved through clearing rows
@@ -113,6 +115,38 @@ public class Game {
         return tetrominoFactory.getPieceStats();
     }
 
+    /**
+     * Retrives isGameDone boolean from board.
+     * @return isGameDone: boolean, indicates if game is done.
+     */
+    public boolean isGameDone(){
+        return(board.isGameDone());
+    }
+
+    /**
+     * Retrives preClearedBoard board from board.
+     * @return preClearedBoard: block[][].
+     */
+    public Block[][] getPreClearedBoard(){
+        return(board.getPreClearedBoard());
+    }
+
+    /**
+     * Retrives getRowsToClear from board.
+     * @return getRowsToClear: ArrayList<Integer>.
+     */
+    public ArrayList<Integer> getRowsToClear(){
+        return(board.getRowsToClear());
+    }
+
+    /**
+     * Resets getRowsToClear from board.
+     *
+     */
+    public void resetRowsToClear() {
+        board.resetRowsToClear();
+    }
+
 
     /**
      * Getter method for whether hold move is available
@@ -121,7 +155,6 @@ public class Game {
     public boolean getIsHoldMoveAvailable(){
         return this.isHoldMoveAvailable;
     }
-
 
 
     /**

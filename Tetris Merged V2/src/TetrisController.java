@@ -123,44 +123,44 @@ public class TetrisController {
 
             //Left: Move Tetromino left
             if (event.getCode().equals(gameSettings.getControls()[0])) {
-                tryMove('a', game.getBoard());
+                tryMove('a');
             }
 
             //Right: Move Tetromino right
             if (event.getCode().equals(gameSettings.getControls()[1])) {
-                tryMove('d', game.getBoard());
+                tryMove('d');
             }
 
             //Rotate CW: Rotate Tetromino clockwise
             if (event.getCode().equals(gameSettings.getControls()[2])) {
-                tryMove('e', game.getBoard());
+                tryMove('e');
             }
 
             //Rotate CCW: Rotate Tetromino counter clockwise
             if (event.getCode().equals(gameSettings.getControls()[3])) {
-                tryMove('q', game.getBoard());
+                tryMove('q');
             }
 
             //Down: Move Tetromino down once (Soft Drop)
             if (event.getCode().equals(gameSettings.getControls()[4])) {
                 if (!gameDone && !newGame) {
-                    tryMove('s', game.getBoard());
-                    gameDone = game.getBoard().isGameDone();
+                    tryMove('s');
+                    gameDone = game.isGameDone();
                 }
             }
 
             //Drop: Drops Tetromino to the bottom (Hard Drop)
             if (event.getCode().equals(gameSettings.getControls()[5])) {
                 if (!gameDone && !newGame) {
-                    tryMove('f', game.getBoard());
-                    gameDone = game.getBoard().isGameDone();
+                    tryMove('f');
+                    gameDone = game.isGameDone();
                 }
             }
 
             //Hold: Holds the current Tetromino
             if (event.getCode().equals(gameSettings.getControls()[6])) {
                 if (!gameDone && !newGame) {
-                    tryMove('w', game.getBoard());
+                    tryMove('w');
                 }
             }
 
@@ -173,11 +173,14 @@ public class TetrisController {
                     gameStats.setWrappingWidth(100);
                     currentDifficultyText.setText(gameSettings.getLevel());
                     currentUser.setText(gameSettings.getUser());
-                    highScoreUser.setText("Dustin   ");
-                    highScore.setText(": " + 1000);
 
-                    Game game = new Game(gameSettings.getLevel(),"Dustin");
+
+                    Game game = new Game("Dustin", gameSettings.getLevel());
                     this.game = game;
+
+                    highScoreUser.setText(game.getHighScoreName());
+                    highScore.setText(": " + game.getHighScore());
+
                     this.clearingRowsObs = new SimpleBooleanProperty();
 
                     clearingRowsObs.setValue(false);
@@ -204,7 +207,7 @@ public class TetrisController {
                     System.out.println(gameSettings.getLevel());
                     startGameText.setText(" ");
                     startTime = System.currentTimeMillis();
-                    Game game = new Game(gameSettings.getLevel(), "Dustin");
+                    Game game = new Game("Dustin", gameSettings.getLevel());
                     this.game = game;
                     gameOverText.setText(" ");
 
@@ -241,9 +244,9 @@ public class TetrisController {
                     public void run() {
                         //Continuously performs soft drop until the game ends
                         if(!gameDone) {
-                            tryMove('s', game.getBoard());
+                            tryMove('s');
                             moveTetromino();
-                            gameDone = game.getBoard().isGameDone();
+                            gameDone = game.isGameDone();
                         } else {
                             cancel();
                         }
@@ -260,21 +263,20 @@ public class TetrisController {
      * Calls a sequence of functions to update the board
      * Checks if the game is over to display "GAME OVER" text
      * @param moveType
-     * @param board
      */
-    public void tryMove(char moveType, Board board) {
+    public void tryMove(char moveType) {
         boolean canMove = game.tryMove(moveType);
         boolean removeStored = false;
 
-        Block[][] oldBoard = game.getBoard().getPreClearedBoard();
+        Block[][] oldBoard = game.getPreClearedBoard();
 
         //Checks if a row needs to be cleared. Sets boolean value and cancels the current timer
-        if(game.getBoard().getRowsToClear().size() > 0) {
+        if(game.getRowsToClear().size() > 0) {
             clearingRows = true;
             timer.cancel();
         }
 
-        gameDone = board.isGameDone();
+        gameDone = game.isGameDone();
 
         //Move the Tetromino if canMove is true
         if (canMove) {
@@ -302,7 +304,7 @@ public class TetrisController {
                     + "\n" + game.getPieceStats()[5] + "\n" + game.getPieceStats()[6]);
 
             //Clears block graphics from a row
-            if (game.getBoard().getRowsToClear().size() > 0) {
+            if (game.getRowsToClear().size() > 0) {
                 updateBoardFX(oldBoard);
                 clearRows(oldBoard);
             } else {
@@ -469,7 +471,7 @@ public class TetrisController {
      * Updates all blocks on the grid. Matches blocks with the current board object
      */
     public void updateBoardFX() {
-        Block[][] currentBoard = game.getBoard().getCurrentBoard();
+        Block[][] currentBoard = game.getBoard();
         for(int row = 0; row < currentBoard.length; row++){
             for(int col = 0; col < currentBoard[0].length; col++){
                 if (currentBoard[row][col] != null) {
@@ -519,7 +521,7 @@ public class TetrisController {
      * Updates score
      */
     public void clearRows() {
-        game.getBoard().getRowsToClear();
+        game.getRowsToClear();
 
         //Removes all blocks from the grid
         for (int row = 0; row < 24; row++) {
@@ -536,7 +538,7 @@ public class TetrisController {
         //Update the block graphics on the board
         updateBoardFX();
         //Resets the array of rows to clear
-        game.getBoard().resetRowsToClear();
+        game.resetRowsToClear();
     }
 
     /**
@@ -544,10 +546,10 @@ public class TetrisController {
      * Updates score
      */
     public void clearRows(Block[][] oldBoard) {
-        game.getBoard().getRowsToClear();
+        game.getRowsToClear();
 
         //Creates new thread to perform the ClearLines Class animation
-        ClearLines C1 = new ClearLines(game.getBoard().getCurrentBoard(), oldBoard, game.getBoard().getRowsToClear(), blockFXArray, playArea);
+        ClearLines C1 = new ClearLines(game.getBoard(), oldBoard, game.getRowsToClear(), blockFXArray, playArea);
         C1.start();
 
         //Update score and lines cleared text
@@ -555,7 +557,7 @@ public class TetrisController {
         linesClearedText.setText(Long.toString(game.getLinesCleared()));
 
         //Resets the array of rows to clear
-        game.getBoard().resetRowsToClear();
+        game.resetRowsToClear();
     }
 
     /**

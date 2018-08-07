@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Arrays;
 /**
@@ -21,9 +22,6 @@ public class Board{
         for(int b = 0; b < tetrominoBlockArray.length; b++){
             this.gameBoard[tetrominoBlockArray[b].getYPosition()][tetrominoBlockArray[b].getXPosition()] = tetrominoBlockArray[b];
         }
-
-
-
         //after new piece played, loop checking board for any rows to clear until done
         boolean doneBoardCheck = false;
         this.preClearedBoard = copyBoard(gameBoard);
@@ -160,7 +158,6 @@ public class Board{
      */
     private void clearRow(int rowClear){
         Board tempBoard = new Board();
-//        this.preClearedBoard = tempBoard.getCurrentBoard();
         tempBoard.gameBoard = copyBoard(this.gameBoard);
         for(int col = 0; col < tempBoard.gameBoard[0].length; col++){
             tempBoard.gameBoard[rowClear][col] = null;
@@ -173,7 +170,7 @@ public class Board{
 
     /**
      * Drops indicated row after clearing
-     * @param rowCleared specified row to drop into (recently cleared)
+     * @param rowClear specified row to drop into (recently cleared)
      */
     private void dropRow(int rowCleared){
         for(int row = rowCleared; row > 0; row--){
@@ -201,4 +198,5 @@ public class Board{
     public void resetRowsToClear() {
         rowsToClear.clear();
     }
+
 }

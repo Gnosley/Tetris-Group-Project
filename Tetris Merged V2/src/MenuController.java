@@ -52,6 +52,10 @@ public class MenuController {
      */
     public void initialize() {
         gameSettings = new GameSettings();
+        currentDropSpeedButton = dropSpeedButton1;
+        currentLevelButton = EASY;
+        currentControlsButton = controlsButtonStandard;
+
     }
 
     /**
