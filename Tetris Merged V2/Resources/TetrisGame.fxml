@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="620.0" style="-fx-background-color: #1b1424; -fx-view-order: -1.0;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
+<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="700.0" style="-fx-background-color: #1b1424; -fx-view-order: -1.0;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
    <children>
-      <ImageView fx:id="image" fitHeight="430.0" fitWidth="220.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="80.0">
+      <ImageView fx:id="image" fitHeight="430.0" fitWidth="220.0" layoutX="180.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="80.0">
          <image>
             <Image url="@Grid@2x.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="400.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="430.0" layoutY="87.5" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@Box@2x.png" />
          </image>
@@ -43,32 +43,32 @@
             </Rectangle>
          </children>
       </StackPane>
-      <Text fill="WHITE" layoutX="411.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Score:">
+      <Text fill="WHITE" layoutX="441.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Score:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="scoreText" fx:id="scoreText" fill="WHITE" layoutX="535.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text id="scoreText" fx:id="scoreText" fill="WHITE" layoutX="565.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="400.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lines Cleared:">
+      <Text fill="WHITE" layoutX="430.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lines Cleared:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="scoreText" fx:id="linesClearedText" fill="WHITE" layoutX="535.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text id="scoreText" fx:id="linesClearedText" fill="WHITE" layoutX="565.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="10.0" fitWidth="220.0" layoutX="150.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-view-order: -1.0;">
+      <ImageView fitHeight="10.0" fitWidth="220.0" layoutX="180.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-view-order: -1.0;">
          <image>
             <Image url="@Border-top.png" />
          </image>
       </ImageView>
-      <Text fx:id="gameOverText" fill="RED" layoutX="90.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-gameover" text=" ">
+      <Text fx:id="gameOverText" fill="RED" layoutX="120.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-gameover" text=" ">
          <font>
             <Font size="64.0" />
          </font>
@@ -78,15 +78,15 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="20.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="50.0" layoutY="87.5" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@Box@2x.png" />
          </image>
       </ImageView>
-      <Pane layoutX="151.0" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1.0;" />
-      <Text layoutX="25.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="HOLD" />
-      <Text layoutX="405.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="NEXT" />
-      <StackPane layoutX="420.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" styleClass="btn-tetris">
+      <Pane layoutX="180.0" opacity="0.09" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1.0;" />
+      <Text layoutX="55.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="HOLD" />
+      <Text layoutX="435.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="NEXT" />
+      <StackPane layoutX="450.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" styleClass="btn-tetris">
          <children>
             <Rectangle fx:id="screenButtonLarge" arcHeight="5.0" arcWidth="5.0" height="40.0" onMouseClicked="#loadMainMenu" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="CENTER">
                <effect>

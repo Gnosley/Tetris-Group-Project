@@ -31,7 +31,7 @@
       </StackPane>
       <StackPane layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="250.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="250.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -45,7 +45,7 @@
       </StackPane>
       <StackPane layoutX="100.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -59,7 +59,7 @@
       </StackPane>
       <StackPane layoutX="140.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -73,7 +73,7 @@
       </StackPane>
       <StackPane layoutX="180.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -87,7 +87,7 @@
       </StackPane>
       <StackPane layoutX="220.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton5" arcHeight="5.0" arcWidth="5.0" fill="#124c51" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton5" arcHeight="5.0" arcWidth="5.0" fill="#124c51" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -101,7 +101,7 @@
       </StackPane>
       <StackPane layoutX="60.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -115,7 +115,7 @@
       </StackPane>
       <StackPane layoutX="100.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -129,7 +129,7 @@
       </StackPane>
       <StackPane layoutX="140.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -143,7 +143,7 @@
       </StackPane>
       <StackPane layoutX="180.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -157,7 +157,7 @@
       </StackPane>
       <StackPane layoutX="220.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
          <children>
-            <Rectangle fx:id="difficultyButton10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDifficulty" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+            <Rectangle fx:id="dropSpeedButton10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
                <effect>
                   <Bloom />
                </effect>
@@ -174,7 +174,7 @@
       <Text layoutX="60.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Controls:" />
       <StackPane layoutX="320.0" layoutY="300.0" prefHeight="40.0" prefWidth="60.0">
          <children>
-            <Rectangle fx:id="levelButton1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="250.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
+            <Rectangle fx:id="EASY" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="250.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
                <effect>
                   <Bloom />
                </effect>
@@ -188,7 +188,7 @@
       </StackPane>
       <StackPane layoutX="380.0" layoutY="300.0" prefHeight="40.0" prefWidth="60.0">
          <children>
-            <Rectangle fx:id="levelButton2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
+            <Rectangle fx:id="MEDIUM" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
                <effect>
                   <Bloom />
                </effect>
@@ -202,7 +202,7 @@
       </StackPane>
       <StackPane layoutX="440.0" layoutY="300.0" prefHeight="40.0" prefWidth="60.0">
          <children>
-            <Rectangle fx:id="levelButton3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
+            <Rectangle fx:id="HARD" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
                <effect>
                   <Bloom />
                </effect>

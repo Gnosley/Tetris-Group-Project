@@ -1,18 +1,12 @@
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +14,6 @@ public class ClearLines implements Runnable {
 
     private AnchorPane playArea;
 
-    private int name;
     private Thread t;
     private ArrayList<Integer> rowsToClear = new ArrayList<>();
     private Rectangle[][] blockFXArray;
@@ -32,29 +25,13 @@ public class ClearLines implements Runnable {
         this.blockFXArray = blockFXArray;
         this.playArea = playArea;
         this.currentBoard = currentBoard;
-
-        System.out.println(rowsToClear);
-
     }
 
     public void run() {
         Platform.runLater(new Runnable() {
             public void run() {
-        //        System.out.println("Running " +  threadName );
-        //        try {
-        //            for(int i = 4; i > 0; i--) {
-        //                System.out.println("Thread: " + threadName + ", " + i);
-        //                // Let the thread sleep for a while.
-        //                Thread.sleep(2000);
-        //            }
-        //        } catch (InterruptedException e) {
-        //            System.out.println("Thread " +  threadName + " interrupted.");
-        //        }
-        //        System.out.println("Thread " +  threadName + " exiting.");
 
                 TetrisController tetController = new TetrisController();
-                Boolean graphicsDone = false;
-                int counter;
 
                 for (int row : rowsToClear) {
                     for (int col = 0; col < 10; col++) {

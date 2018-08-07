@@ -4,25 +4,25 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<StackPane fx:id="iPiece2" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="TetrisController">
+<StackPane fx:id="ITetromino" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
    <children>
       <Rectangle fx:id="tetrisBlock" arcHeight="5.0" arcWidth="5.0" fill="#1eeaff" focusTraversable="true" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_LEFT">
          <StackPane.margin>
             <Insets left="20.0" top="20.0" />
          </StackPane.margin>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1eeaff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="BOTTOM_LEFT">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1eeaff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_RIGHT">
          <StackPane.margin>
-            <Insets left="20.0" />
+            <Insets top="20.0" />
          </StackPane.margin>
       </Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1eeaff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_LEFT">
          <StackPane.margin>
-            <Insets left="20.0" />
+            <Insets top="20.0" />
          </StackPane.margin></Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1eeaff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="BOTTOM_LEFT">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1eeaff" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_RIGHT">
          <StackPane.margin>
-            <Insets bottom="20.0" left="20.0" />
+            <Insets right="20.0" top="20.0" />
          </StackPane.margin>
       </Rectangle>
    </children>

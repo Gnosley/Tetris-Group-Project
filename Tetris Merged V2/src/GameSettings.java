@@ -4,8 +4,8 @@ import javafx.scene.input.KeyCode;
 import static javafx.scene.input.KeyCode.*;
 
 public class GameSettings {
-    private int difficulty = 1;
-    private int level = 1;
+    private int dropSpeed = 1;
+    private String level = "EASY";
     private KeyCode[] currentControls;
     private final KeyCode[] standardControls = new KeyCode[]{LEFT,RIGHT,UP,X,DOWN,SPACE,C,ENTER,ESCAPE};
     private final KeyCode[] wasdControls = new KeyCode[]{A,D,E,Q,S,F,W,ENTER,ESCAPE};
@@ -14,24 +14,24 @@ public class GameSettings {
         this.currentControls = standardControls;
     }
 
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    public int getDropSpeedLevel() {
+        return dropSpeed;
     }
 
     public int getDropSpeed() {
-        return 2000/difficulty;
+        return 2000/dropSpeed;
+    }
+
+    public void setDropSpeed(int dropSpeed) {
+        this.dropSpeed = dropSpeed;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public KeyCode[] getControls() {

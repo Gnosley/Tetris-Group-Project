@@ -44,14 +44,9 @@ public class Board{
     }
 
     /**
-     * Getter method for the current gameBoard. Returns copy to avoid privacy leak
-     * @return copy of the current Board
+     * Getter method for the precleared gameBoard. Returns copy to avoid privacy leak
+     * @return copy of the precleared Board
      */
-//    public Block[][] getPreClearedBoard(){
-//        Board copyBoard = new Board();
-//        copyBoard.preClearedBoard = copyBoard(this.preClearedBoard);
-//        return copyBoard.preClearedBoard;
-//    }
     public Block[][] getPreClearedBoard(){
         Board copyBoard = new Board();
         copyBoard.preClearedBoard = copyBoard(this.preClearedBoard);
@@ -206,9 +201,4 @@ public class Board{
     public void resetRowsToClear() {
         rowsToClear.clear();
     }
-
-//    public Block[][] getPreClearedBoard() {
-//        return preClearedBoard;
-//    }
-
 }

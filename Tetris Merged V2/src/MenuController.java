@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -16,10 +19,10 @@ import java.io.IOException;
  */
 public class MenuController {
     @FXML
-    private Rectangle difficultyButton1;
+    private Rectangle dropSpeedButton1;
 
     @FXML
-    private Rectangle levelButton1;
+    private Rectangle EASY;
 
     @FXML
     private Rectangle controlsButtonStandard;
@@ -33,8 +36,8 @@ public class MenuController {
     @FXML
     private Text controlsText2;
 
-    private Rectangle currentDifficultyButton = difficultyButton1;
-    private Rectangle currentLevelButton = levelButton1;
+    private Rectangle currentDropSpeedButton = dropSpeedButton1;
+    private Rectangle currentLevelButton = EASY;
     private Rectangle currentControlsButton = controlsButtonStandard;
     //private int currentDifficulty;
     private GameSettings gameSettings;
@@ -45,11 +48,11 @@ public class MenuController {
      */
     public void initialize() {
 //        this.difficultyButton1.setFill(Color.web("ff481e"));
-        currentDifficultyButton = difficultyButton1;
-        currentLevelButton = levelButton1;
+        currentDropSpeedButton = dropSpeedButton1;
+        currentLevelButton = EASY;
         currentControlsButton = controlsButtonStandard;
         //currentDifficulty = 1;
-        currentDifficultyButton.setFill(Color.web("ff481e"));
+        currentDropSpeedButton.setFill(Color.web("ff481e"));
         currentLevelButton.setFill(Color.web("ff481e"));
         currentControlsButton.setFill(Color.web("ff481e"));
         gameSettings = new GameSettings();
@@ -96,29 +99,29 @@ public class MenuController {
      * @param event
      */
     @FXML
-    protected void mouseClickDifficulty(MouseEvent event) {
-        currentDifficultyButton.setFill(Color.web("1e90ff"));
+    protected void mouseClickDropSpeed(MouseEvent event) {
+        currentDropSpeedButton.setFill(Color.web("1e90ff"));
         ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
-        currentDifficultyButton = (Rectangle)event.getTarget();
-        setDifficulty(((Rectangle) event.getTarget()).getId());
+        currentDropSpeedButton = (Rectangle)event.getTarget();
+        setDropSpeed(((Rectangle) event.getTarget()).getId());
     }
 
     /**
      * Sets difficulty based on button selected
      * @param difficulty
      */
-    private void setDifficulty(String difficulty) {
+    private void setDropSpeed(String difficulty) {
         switch (difficulty) {
-            case "difficultyButton1": gameSettings.setDifficulty(1); break;
-            case "difficultyButton2": gameSettings.setDifficulty(2); break;
-            case "difficultyButton3": gameSettings.setDifficulty(3); break;
-            case "difficultyButton4": gameSettings.setDifficulty(4); break;
-            case "difficultyButton5": gameSettings.setDifficulty(5); break;
-            case "difficultyButton6": gameSettings.setDifficulty(6); break;
-            case "difficultyButton7": gameSettings.setDifficulty(7); break;
-            case "difficultyButton8": gameSettings.setDifficulty(8); break;
-            case "difficultyButton9": gameSettings.setDifficulty(9); break;
-            case "difficultyButton10": gameSettings.setDifficulty(10); break;
+            case "dropSpeedButton1": gameSettings.setDropSpeed(1); break;
+            case "dropSpeedButton2": gameSettings.setDropSpeed(2); break;
+            case "dropSpeedButton3": gameSettings.setDropSpeed(3); break;
+            case "dropSpeedButton4": gameSettings.setDropSpeed(4); break;
+            case "dropSpeedButton5": gameSettings.setDropSpeed(5); break;
+            case "dropSpeedButton6": gameSettings.setDropSpeed(6); break;
+            case "dropSpeedButton7": gameSettings.setDropSpeed(7); break;
+            case "dropSpeedButton8": gameSettings.setDropSpeed(8); break;
+            case "dropSpeedButton9": gameSettings.setDropSpeed(9); break;
+            case "dropSpeedButton10": gameSettings.setDropSpeed(10); break;
 
         }
     }
@@ -141,9 +144,9 @@ public class MenuController {
      */
     private void setLevel(String level) {
         switch (level) {
-            case "levelButton1": gameSettings.setLevel(1); break;
-            case "levelButton2": gameSettings.setLevel(2); break;
-            case "levelButton3": gameSettings.setLevel(3); break;
+            case "EASY": gameSettings.setLevel("EASY"); break;
+            case "MEDIUM": gameSettings.setLevel("MEDIUM"); break;
+            case "HARD": gameSettings.setLevel("HARD"); break;
         }
     }
 
@@ -177,10 +180,6 @@ public class MenuController {
      * @throws IOException
      */
     private void loadGame(MouseEvent event) throws IOException {
-        System.out.println(gameSettings.getDifficulty());
-        System.out.println(gameSettings);
-
-
 
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
         Stage stage = new Stage();
@@ -188,7 +187,19 @@ public class MenuController {
         stage.setTitle("TETRIS");
         stage.setResizable(false);
         stage.show();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        //Close application gracefully when user presses the close button on the window
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+
+        final Node source = (Node) event.getSource();
+        final Stage previousStage = (Stage) source.getScene().getWindow();
+        previousStage.close();
 
         TetrisController tetrisController = new TetrisController();
         tetrisController.setGameSettings(gameSettings); // Passing the GameSettings-object to the TetrisController
