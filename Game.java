@@ -278,4 +278,17 @@ public class Game {
     public String getUsername() {
         return this.username;
     }
+
+    // TODO
+    public long getHighScore() {
+        return 12181;
+    }
+    // TODO
+    public String getHighScoreName() {
+        return "BestP";
+    }
+    // TODO
+    public void writeScoreToFile() {
+
+    }
 }

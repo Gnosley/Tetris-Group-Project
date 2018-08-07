@@ -101,7 +101,9 @@ public class Printer {
                       boolean holdAvailable,
                       int[] tetrominoStats,
                       String username,
-                      String difficulty)
+                      String difficulty,
+                      long highscore,
+                      String highscoreName)
     {
 
         int termHeight = terminal.getHeight();
@@ -118,8 +120,6 @@ public class Printer {
         Block[][] holdArray = createBlockArray(holdTetromino);
         Block[][] nextArray = createBlockArray(nextTetromino);
 
-        long highscore = 100;
-        String highscoreName = "P2";
 
         terminal.writer().println();
         String[] rowStrings = new String[CONSOLEHEIGHT];
@@ -387,7 +387,7 @@ public class Printer {
      * @return A pretty string representing the current time.
      */
     private String getTimerString() {
-        return "00:00";
+        return " ";
     }
 
     /**

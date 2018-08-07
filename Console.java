@@ -112,6 +112,8 @@ public class Console{
             console.printGame();
             console.setIsGameDone(console.game.getBoard().isGameDone());
         }
+        // Save Score and username on game done.
+        console.game.writeScoreToFile();
         System.out.println("Game Over!");
         System.exit(0);
     }
@@ -132,7 +134,9 @@ public class Console{
                       game.getIsHoldMoveAvailable(),
                       game.getPieceStats(),
                       game.getUsername(),
-                      game.getDifficulty());
+                      game.getDifficulty(),
+                      game.getHighScore(),
+                      game.getHighScoreName());
     }
 
     /**
