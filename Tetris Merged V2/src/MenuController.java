@@ -25,9 +25,6 @@ public class MenuController {
     private Rectangle controlsButtonStandard;
 
     @FXML
-    private Rectangle screenButtonSmall;
-
-    @FXML
     private Rectangle newGame;
 
     @FXML
@@ -39,7 +36,6 @@ public class MenuController {
     private Rectangle currentDifficultyButton = difficultyButton1;
     private Rectangle currentLevelButton = levelButton1;
     private Rectangle currentControlsButton = controlsButtonStandard;
-    private Rectangle currentScreenButton = screenButtonSmall;
     //private int currentDifficulty;
     private GameSettings gameSettings;
     private int dropSpeed;
@@ -52,12 +48,10 @@ public class MenuController {
         currentDifficultyButton = difficultyButton1;
         currentLevelButton = levelButton1;
         currentControlsButton = controlsButtonStandard;
-        currentScreenButton = screenButtonSmall;
         //currentDifficulty = 1;
         currentDifficultyButton.setFill(Color.web("ff481e"));
         currentLevelButton.setFill(Color.web("ff481e"));
         currentControlsButton.setFill(Color.web("ff481e"));
-        currentScreenButton.setFill(Color.web("ff481e"));
         gameSettings = new GameSettings();
     }
 
@@ -178,24 +172,11 @@ public class MenuController {
     }
 
     /**
-     * Changes color of level button to red and calls setLevel function
-     * @param event
-     */
-    @FXML
-    protected void mouseClickScreenSize(MouseEvent event) {
-        currentScreenButton.setFill(Color.web("1e90ff"));
-        ((Rectangle)event.getTarget()).setFill(Color.web("ff481e"));
-        currentScreenButton = (Rectangle)event.getTarget();
-        //setLevel(((Rectangle) event.getTarget()).getId());
-    }
-
-    /**
      * Loads the Tetris window when "New Game" is clicked
      * @param event
      * @throws IOException
      */
     private void loadGame(MouseEvent event) throws IOException {
-//        Stage stage = (Stage) newGame.getScene().getWindow();
         System.out.println(gameSettings.getDifficulty());
         System.out.println(gameSettings);
 
@@ -203,7 +184,7 @@ public class MenuController {
 
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(tetrisRoot, 640 ,540));
+        stage.setScene(new Scene(tetrisRoot, 620 ,540));
         stage.setTitle("TETRIS");
         stage.setResizable(false);
         stage.show();
@@ -211,7 +192,5 @@ public class MenuController {
 
         TetrisController tetrisController = new TetrisController();
         tetrisController.setGameSettings(gameSettings); // Passing the GameSettings-object to the TetrisController
-
-
     }
 }

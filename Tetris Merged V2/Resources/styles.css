@@ -50,3 +50,35 @@
     -fx-fill: #FFFFFF;
     -fx-font-size: 13px;
 }
+
+.heading-tetris {
+    -fx-font-family: Century Gothic;
+    -fx-fill: #ffffff;
+    -fx-font-size: 18px;
+}
+
+.txt-gameover {
+    -fx-font-family: Century Gothic;
+    -fx-fill: #ffffff;
+    -fx-font-size: 64px;
+    -fx-view-order: 1.0;
+}
+
+.btn-tetris {
+    -fx-font-size: 13px;
+    -fx-font-family: Impact;
+
+}
+
+.btn-tetris Text {
+    -fx-fill: #000000;
+}
+
+.btn-tetris Rectangle {
+    -fx-fill: #1f93ff;
+}
+
+.btn-tetris Rectangle: hover {
+    -fx-fill: #155982;
+
+}

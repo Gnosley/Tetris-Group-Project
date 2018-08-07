@@ -6,13 +6,18 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -91,6 +96,7 @@ public class TetrisController {
         newGame = true;
         Timer timer = new Timer();
         this.timer = timer;
+
 //        GameSettings gameSettings = new GameSettings();
 //        this.gameSettings = gameSettings;
 //        clearingRowsObs.bind(clearingRows);
@@ -398,7 +404,9 @@ public class TetrisController {
         //Displays Game Over text if the game has ended
         if(gameDone) {
             gameOverText.setText("Game Over");
+            gameOverText.toFront();
             startGameText.setText("Press ENTER to start new game");
+            startGameText.toFront();
         }
     }
 
@@ -775,5 +783,21 @@ public class TetrisController {
     public static void setClearingRowsTrue() {
         System.out.println("Set to true");
         clearingRowsObs.setValue(true);
+    }
+
+
+    /**
+     * Returns to main menu when the "Main Menu" button is clicked
+     * @param event
+     */
+    @FXML
+    private void loadMainMenu(MouseEvent event) throws IOException {
+        Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisMenu.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(tetrisRoot, 580 ,510));
+        stage.setTitle("Tetris Main Menu");
+        stage.setResizable(false);
+        stage.show();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

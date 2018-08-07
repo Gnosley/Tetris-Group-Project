@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,16 +11,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="640.0" style="-fx-background-color: #1b1424; -fx-view-order: -1.0;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="TetrisController">
+<AnchorPane fx:id="playArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyboardAction" prefHeight="540.0" prefWidth="620.0" style="-fx-background-color: #1b1424; -fx-view-order: -1.0;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TetrisController">
    <children>
       <ImageView fx:id="image" fitHeight="430.0" fitWidth="220.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="80.0">
          <image>
-            <Image url="@Grid.png" />
+            <Image url="@Grid@2x.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="400.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="400.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Next.png" />
+            <Image url="@Box@2x.png" />
          </image>
       </ImageView>
       <StackPane fx:id="iPiece" focusTraversable="true" layoutX="660.0" layoutY="20.0" opacity="0.0" prefHeight="80.0" prefWidth="20.0">
@@ -67,21 +68,33 @@
             <Image url="@Border-top.png" />
          </image>
       </ImageView>
-      <Text fx:id="gameOverText" fill="RED" layoutX="121.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: impact; -fx-view-order: 1.0;" text=" ">
+      <Text fx:id="gameOverText" fill="RED" layoutX="90.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-gameover" text=" ">
          <font>
             <Font size="64.0" />
          </font>
       </Text>
-      <Text fx:id="startGameText" fill="WHITE" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-view-order: -3.0; -fx-font-family: Century Gothic;" text="Press ENTER to start game">
+      <Text fx:id="startGameText" fill="WHITE" layoutX="37.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-view-order: -2.0; -fx-font-family: Century Gothic;" text="Press ENTER to start game">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="20.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="180.0" fitWidth="100.0" layoutX="20.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Hold.png" />
+            <Image url="@Box@2x.png" />
          </image>
       </ImageView>
-      <Pane layoutX="151.0" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1;" />
+      <Pane layoutX="151.0" prefHeight="80.0" prefWidth="220.0" style="-fx-background-color: #1b1424 #1b1424; -fx-view-order: -1.0;" />
+      <Text layoutX="25.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="HOLD" />
+      <Text layoutX="405.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-tetris" text="NEXT" />
+      <StackPane layoutX="420.0" layoutY="460.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" styleClass="btn-tetris">
+         <children>
+            <Rectangle fx:id="screenButtonLarge" arcHeight="5.0" arcWidth="5.0" height="40.0" onMouseClicked="#loadMainMenu" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="CENTER">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
