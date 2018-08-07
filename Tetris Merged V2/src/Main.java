@@ -16,6 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //Load the menu from FXML
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Resources/TetrisMenu.fxml"));
             Scene scene = new Scene(root, 580, 510);

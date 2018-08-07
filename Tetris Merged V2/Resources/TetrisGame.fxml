@@ -43,22 +43,22 @@
             </Rectangle>
          </children>
       </StackPane>
-      <Text fill="WHITE" layoutX="441.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Score:">
+      <Text fill="WHITE" layoutX="441.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Score:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="scoreText" fx:id="scoreText" fill="WHITE" layoutX="565.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text id="scoreText" fx:id="scoreText" fill="WHITE" layoutX="565.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="430.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lines Cleared:">
+      <Text fill="WHITE" layoutX="430.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lines Cleared:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="scoreText" fx:id="linesClearedText" fill="WHITE" layoutX="565.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text id="scoreText" fx:id="linesClearedText" fill="WHITE" layoutX="565.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font size="18.0" />
          </font>
@@ -117,6 +117,31 @@
          </font>
       </Text>
       <Text id="scoreText" fx:id="currentDifficultyText" fill="WHITE" layoutX="580.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="436.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current User:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text id="scoreText" fx:id="currentUser" fill="WHITE" layoutX="565.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="450.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="High Score" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="highScoreUser" fill="WHITE" layoutX="430.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USER    ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="highScore" fill="WHITE" layoutX="531.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text=": 1000    ">
          <font>
             <Font size="18.0" />
          </font>

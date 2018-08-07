@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -36,6 +37,9 @@ public class MenuController {
     @FXML
     private Text controlsText2;
 
+    @FXML
+    private TextField userTextField;
+
     private Rectangle currentDropSpeedButton = dropSpeedButton1;
     private Rectangle currentLevelButton = EASY;
     private Rectangle currentControlsButton = controlsButtonStandard;
@@ -47,14 +51,6 @@ public class MenuController {
      * Initializes values when Menu window opens
      */
     public void initialize() {
-//        this.difficultyButton1.setFill(Color.web("ff481e"));
-        currentDropSpeedButton = dropSpeedButton1;
-        currentLevelButton = EASY;
-        currentControlsButton = controlsButtonStandard;
-        //currentDifficulty = 1;
-        currentDropSpeedButton.setFill(Color.web("ff481e"));
-        currentLevelButton.setFill(Color.web("ff481e"));
-        currentControlsButton.setFill(Color.web("ff481e"));
         gameSettings = new GameSettings();
     }
 
@@ -64,7 +60,7 @@ public class MenuController {
      */
     @FXML
     protected void handleNewGameButtonAction(MouseEvent event) {
-        newGame.setFill(Color.web("ff481e"));
+//        newGame.setFill(Color.web("ff481e"));
         try {
             loadGame(event);
         } catch (IOException e) {
@@ -73,7 +69,7 @@ public class MenuController {
     }
 
     /**
-     * Changes difficulty button color when mouse enters
+     * Changes button color when mouse enters
      * @param event
      */
     @FXML
@@ -84,7 +80,7 @@ public class MenuController {
     }
 
     /**
-     * Resets difficulty button color when mouse exits
+     * Resets button color when mouse exits
      * @param event
      */
     @FXML
@@ -95,7 +91,7 @@ public class MenuController {
     }
 
     /**
-     * Changes color of difficulty button to red and calls setDifficulty function
+     * Changes color of drop speed button to red and calls setDropSpeed function to set the drop speed value
      * @param event
      */
     @FXML
@@ -107,7 +103,7 @@ public class MenuController {
     }
 
     /**
-     * Sets difficulty based on button selected
+     * Sets drop speed based on button selected
      * @param difficulty
      */
     private void setDropSpeed(String difficulty) {
@@ -151,7 +147,8 @@ public class MenuController {
     }
 
     /**
-     * Changes color of level button to red and calls setLevel function
+     * Changes color of level button to red and calls setCurrentControls function
+     * Displays text showing the current controls
      * @param event
      */
     @FXML
@@ -180,9 +177,10 @@ public class MenuController {
      * @throws IOException
      */
     private void loadGame(MouseEvent event) throws IOException {
+        //Sets the user name to the entered text
+        gameSettings.setUser(userTextField.getText());
 
-
-
+        //Load the Tetris window from FXML
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(tetrisRoot, 700 ,540));
@@ -199,12 +197,14 @@ public class MenuController {
             }
         });
 
+        //Closes previous window
         final Node source = (Node) event.getSource();
         final Stage previousStage = (Stage) source.getScene().getWindow();
         previousStage.close();
 
+        //Passes GameSettings to the TetrisController
         TetrisController tetrisController = new TetrisController();
-        tetrisController.setGameSettings(gameSettings); // Passing the GameSettings-object to the TetrisController
+        tetrisController.setGameSettings(gameSettings);
 
 
     }

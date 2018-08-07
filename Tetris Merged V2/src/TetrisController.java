@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -50,6 +49,15 @@ public class TetrisController {
     private Text currentDifficultyText;
 
     @FXML
+    private Text currentUser;
+
+    @FXML
+    private Text highScoreUser;
+
+    @FXML
+    private Text highScore;
+
+    @FXML
     private Text gameOverText;
 
     @FXML
@@ -73,6 +81,7 @@ public class TetrisController {
 
     private Rectangle[][] blockFXArray;
 
+    //Layout values
     private int boardCellWidth = 20;
     private int boardLayoutX = 190;
     private int boardLayoutY = 20;
@@ -93,13 +102,17 @@ public class TetrisController {
 
     /**
      * Handles the keyboard controls of the game
+     * --STANDARD CONTROLS--
      * ENTER: Start Game
      * LEFT: Move Tetromino left
      * RIGHT: Move Tetromino right
-     * DOWN: Move Tetromino down
      * UP: Rotates the Tetromino clockwise
-     * SPACE: Drop Tetromino
-     * ESC: Exit Game
+     * X: Rotates the Tetromino counter clockwise
+     * DOWN: Move Tetromino down (soft drop)
+     * SPACE: Drop Tetromino (hard drop)
+     * C: Holds the current Tetromino
+     * ENTER: Starts new game when available
+     * ESC: Exit Application
      * @param event
      * @throws IOException
      */
@@ -108,27 +121,27 @@ public class TetrisController {
 
         if(!clearingRows) {
 
-            //Move Tetromino left
+            //Left: Move Tetromino left
             if (event.getCode().equals(gameSettings.getControls()[0])) {
                 tryMove('a', game.getBoard());
             }
 
-            //Move Tetromino right
+            //Right: Move Tetromino right
             if (event.getCode().equals(gameSettings.getControls()[1])) {
                 tryMove('d', game.getBoard());
             }
 
-            //Rotate Tetromino clockwise
+            //Rotate CW: Rotate Tetromino clockwise
             if (event.getCode().equals(gameSettings.getControls()[2])) {
                 tryMove('e', game.getBoard());
             }
 
-            //Rotate Tetromino counter clockwise
+            //Rotate CCW: Rotate Tetromino counter clockwise
             if (event.getCode().equals(gameSettings.getControls()[3])) {
                 tryMove('q', game.getBoard());
             }
 
-            //Move Tetromino down once (Soft Drop)
+            //Down: Move Tetromino down once (Soft Drop)
             if (event.getCode().equals(gameSettings.getControls()[4])) {
                 if (!gameDone && !newGame) {
                     tryMove('s', game.getBoard());
@@ -136,7 +149,7 @@ public class TetrisController {
                 }
             }
 
-            //Drop Tetromino to the bottom (Hard Drop)
+            //Drop: Drops Tetromino to the bottom (Hard Drop)
             if (event.getCode().equals(gameSettings.getControls()[5])) {
                 if (!gameDone && !newGame) {
                     tryMove('f', game.getBoard());
@@ -144,23 +157,26 @@ public class TetrisController {
                 }
             }
 
-            //Hold Tetromino
+            //Hold: Holds the current Tetromino
             if (event.getCode().equals(gameSettings.getControls()[6])) {
                 if (!gameDone && !newGame) {
                     tryMove('w', game.getBoard());
                 }
             }
 
-            //New Game
+            //Enter: New Game
             if (event.getCode().equals(gameSettings.getControls()[7])) {
+                //TODO: Combine these with if/or
                 if (newGame) {
 
                     gameStats.setText(0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0);
                     gameStats.setWrappingWidth(100);
                     currentDifficultyText.setText(gameSettings.getLevel());
+                    currentUser.setText(gameSettings.getUser());
+                    highScoreUser.setText("Dustin   ");
+                    highScore.setText(": " + 1000);
 
-
-                    Game game = new Game(gameSettings.getLevel());
+                    Game game = new Game(gameSettings.getLevel(),"Dustin");
                     this.game = game;
                     this.clearingRowsObs = new SimpleBooleanProperty();
 
@@ -188,7 +204,7 @@ public class TetrisController {
                     System.out.println(gameSettings.getLevel());
                     startGameText.setText(" ");
                     startTime = System.currentTimeMillis();
-                    Game game = new Game(gameSettings.getLevel());
+                    Game game = new Game(gameSettings.getLevel(), "Dustin");
                     this.game = game;
                     gameOverText.setText(" ");
 
@@ -203,7 +219,7 @@ public class TetrisController {
             }
         }
 
-        //Escape application
+        //ESC: Escape application
         if(event.getCode().equals(gameSettings.getControls()[8])) {
             System.exit(0);
         }
@@ -217,11 +233,13 @@ public class TetrisController {
 
         timer = new Timer();
 
+        //TimerTask to set the soft drop
         TimerTask task = new TimerTask() {
             @Override
             public void run () {
                 Platform.runLater(new Runnable() {
                     public void run() {
+                        //Continuously performs soft drop until the game ends
                         if(!gameDone) {
                             tryMove('s', game.getBoard());
                             moveTetromino();
@@ -250,6 +268,7 @@ public class TetrisController {
 
         Block[][] oldBoard = game.getBoard().getPreClearedBoard();
 
+        //Checks if a row needs to be cleared. Sets boolean value and cancels the current timer
         if(game.getBoard().getRowsToClear().size() > 0) {
             clearingRows = true;
             timer.cancel();
@@ -299,6 +318,7 @@ public class TetrisController {
 
         //Displays Game Over text if the game has ended
         if(gameDone) {
+            game.writeScoreToFile();
             gameOverText.setText("Game Over");
             gameOverText.toFront();
             startGameText.setLayoutX(43);
@@ -343,6 +363,9 @@ public class TetrisController {
         playArea.getChildren().remove(ghostTetrominoGraphic);
     }
 
+    /**
+     * Method to load the stored Tetromino FXML and place it in the window
+     */
     public void storeTetromino() {
         int storedTetNum = game.getStoredTetromino().getType();
 
@@ -359,6 +382,7 @@ public class TetrisController {
             e.printStackTrace();
         }
 
+        //Calls method to place the stored Tetromino graphic in the window
         placeStoredTetrominoGraphic(storedTetNum);
 
     }
@@ -414,12 +438,13 @@ public class TetrisController {
         currentTetrominoGraphic.toBack();
         ghostTetrominoGraphic.toBack();
 
+        //Calls method to place the next Tetromino graphic in the window
         placeNextTetrominoGraphic(nextTetNum);
     }
 
 
     /**
-     * Sets the next Tetromino to the display box location
+     * Sets the next Tetromino to the display box location. Uses offset values to align properly.
      * @param nextTetNum
      */
     public void placeNextTetrominoGraphic(int nextTetNum) {
@@ -430,7 +455,7 @@ public class TetrisController {
     }
 
     /**
-     * Sets the stored Tetromino to the display box location
+     * Sets the stored Tetromino to the display box location. Uses offset values to align properly.
      * @param storedTetNum
      */
     public void placeStoredTetrominoGraphic(int storedTetNum) {
@@ -474,9 +499,9 @@ public class TetrisController {
 
     /**
      * Updates all blocks on the grid. Matches blocks with the current board object
+     * This overloaded method can be called from the ClearLines thread
      */
     public void updateBoardFX(Block[][] currentBoard, Rectangle[][] blockFXArray, AnchorPane playArea) {
-//        Block[][] currentBoard = game.getBoard().getCurrentBoard();
         for(int row = 0; row < currentBoard.length; row++){
             for(int col = 0; col < currentBoard[0].length; col++){
                 if (currentBoard[row][col] != null) {
@@ -496,6 +521,7 @@ public class TetrisController {
     public void clearRows() {
         game.getBoard().getRowsToClear();
 
+        //Removes all blocks from the grid
         for (int row = 0; row < 24; row++) {
             for (int col = 0; col < 10; col++) {
                 playArea.getChildren().remove(blockFXArray[row][col]);
@@ -509,6 +535,7 @@ public class TetrisController {
 
         //Update the block graphics on the board
         updateBoardFX();
+        //Resets the array of rows to clear
         game.getBoard().resetRowsToClear();
     }
 
@@ -518,25 +545,16 @@ public class TetrisController {
      */
     public void clearRows(Block[][] oldBoard) {
         game.getBoard().getRowsToClear();
-        Boolean graphicsDone = false;
-        int counter;
 
+        //Creates new thread to perform the ClearLines Class animation
         ClearLines C1 = new ClearLines(game.getBoard().getCurrentBoard(), oldBoard, game.getBoard().getRowsToClear(), blockFXArray, playArea);
         C1.start();
-
-//        for (int row = 0; row < 24; row++) {
-//            for (int col = 0; col < 10; col++) {
-//                playArea.getChildren().remove(blockFXArray[row][col]);
-//                blockFXArray[row][col] = null;
-//            }
-//        }
 
         //Update score and lines cleared text
         scoreText.setText(Long.toString(game.getGameScore()));
         linesClearedText.setText(Long.toString(game.getLinesCleared()));
 
-        //Update the block graphics on the board
-        //updateBoardFX();
+        //Resets the array of rows to clear
         game.getBoard().resetRowsToClear();
     }
 
@@ -572,6 +590,7 @@ public class TetrisController {
 
     /**
      * Adds blocks to the grid when a Tetromino is placed
+     * This overloaded method can be called from the ClearLines thread
      * @param layoutX
      * @param layoutY
      * @param blockColor
@@ -602,7 +621,7 @@ public class TetrisController {
 
 
     /**
-     * Converts from grid coordinates to screen coordinates
+     * Converts from grid coordinates to screen coordinates (pixels)
      * @param row
      * @param col
      * @return screenCoords int array
@@ -617,10 +636,10 @@ public class TetrisController {
     }
 
     /**
-     * Converts from screen coordinates to grid coordinates
+     * Converts from screen coordinates (pixels) to grid coordinates
      * @param row
      * @param col
-     * @return
+     * @return gridCoords int array
      */
     public int[] getGridCoordinates(int row, int col) {
         int xCoord = (col - boardLayoutX)/boardCellWidth;
@@ -631,56 +650,20 @@ public class TetrisController {
         return gridCoords;
     }
 
-//    /**
-//     * Calls the tryMove function in the Game class. Updates all Tetrominos and board object
-//     * Calls a sequence of functions to update the board
-//     * Checks if the game is over to display "GAME OVER" text
-//     * @param moveType
-//     * @param board
-//     */
-//    public void tryMove(char moveType, Board board) {
-//        boolean tetrominoPlaced = game.tryMove(moveType,board);
-//
-////        this.currentTetromino = game.getCurrentTetromino();
-////        this.nextTetromino = game.getNextTetromino();
-////        this.ghostTetromino = game.getGhostTetromino();
-//        //this.board = game.getBoard();
-//
-//        gameDone = board.isGameDone();
-//
-//        if (tetrominoPlaced) {
-//            removePlacedTetromino();
-//        }
-//
-//        if (tetrominoPlaced) {
-//            if(!gameDone) {
-//                generateTetromino();
-//            }
-//            updateBoardFX();
-//            if (game.getBoard().getRowsToClear().size() > 0) {
-//                clearRows();
-//            }
-//        }
-//
-//        if(gameDone) {
-//            gameOverText.setText("Game Over");
-//            startGameText.setText("Press ENTER to start new game");
-//        }
-//
-//    }
-
-    public void setGameSettings(GameSettings gameSettings) { // Setting the client-object in ClientViewController
+    /**
+     * Setter method for the game settings
+     * @param gameSettings
+     */
+    public void setGameSettings(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
     }
 
-    public Game getGame() {
-        return this.game;
-    }
-
+    /**
+     * Used to set Observable value to true after line clear animation
+     */
     public static void setClearingRowsTrue() {
         clearingRowsObs.setValue(true);
     }
-
 
     /**
      * Returns to main menu when the "Main Menu" button is clicked
@@ -689,8 +672,9 @@ public class TetrisController {
     @FXML
     private void loadMainMenu(MouseEvent event) throws IOException {
 
-
         timer.cancel();
+
+        //Load the menu from FXML
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisMenu.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(tetrisRoot, 580 ,510));
@@ -707,7 +691,7 @@ public class TetrisController {
             }
         });
 
-
+        //Closes previous window
         final Node source = (Node) event.getSource();
         final Stage previousStage = (Stage) source.getScene().getWindow();
         previousStage.close();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +17,7 @@
             <Image url="@Tetris.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="190.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="200.0">
+      <StackPane layoutX="190.0" layoutY="185.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="200.0">
          <children>
             <Rectangle fx:id="newGame" arcHeight="5.0" arcWidth="5.0" height="50.0" onMouseClicked="#handleNewGameButtonAction" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" styleClass="btn-primary, btn-lg" width="200.0" StackPane.alignment="CENTER">
                <effect>
@@ -242,8 +243,10 @@
             <String fx:value="btn-md" />
          </styleClass>
       </StackPane>
-      <Text layoutX="320.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Level:" />
+      <Text layoutX="320.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Difficulty:" />
       <Text fx:id="controlsText1" fill="WHITE" layoutX="320.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="LEFT: Left RIGHT: Right UP: Rotate CW X: Rotate CCW" wrappingWidth="100.0" />
       <Text fx:id="controlsText2" fill="WHITE" layoutX="440.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="DOWN: Soft Drop SPACE: Hard Drop C: Hold" wrappingWidth="117.0" />
+      <TextField fx:id="userTextField" layoutX="205.0" layoutY="136.0" />
+      <Text layoutX="110.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="User Name:" />
    </children>
 </AnchorPane>
