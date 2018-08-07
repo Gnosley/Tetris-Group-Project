@@ -97,7 +97,7 @@ public class Printer {
                       Tetromino nextTetromino,
                       Tetromino ghostTetromino,
                       Tetromino holdTetromino,
-                      Board board,
+                      Block[][] boardArray,
                       Terminal terminal,
                       long gameScore,
                       long linesCleared,
@@ -122,7 +122,7 @@ public class Printer {
         terminal.puts(Capability.clear_screen);
 
         // combine the board and the tetrominos played on it
-        Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, board);
+        Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, boardArray);
         // create arrays for easy printing
         Block[][] holdArray = createBlockArray(holdTetromino);
         Block[][] nextArray = createBlockArray(nextTetromino);
@@ -433,8 +433,8 @@ public class Printer {
      */
     private Block[][] combine(Tetromino currentTetromino,
                                 Tetromino ghostTetromino,
-                                Board board) {
-        Block[][] boardArray = board.getCurrentBoard();
+                                Block[][] boardArray) {
+        // Block[][] boardArray = board.getCurrentBoard();
         Block[] cTetrominoArray = currentTetromino.getBlockArray();
         Block[] gTetrominoArray = ghostTetromino.getBlockArray();
 

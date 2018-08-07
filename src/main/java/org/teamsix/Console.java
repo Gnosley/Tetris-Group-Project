@@ -17,7 +17,7 @@ public class Console{
             // boolean gameDone = game.getBoard().isGameDone();
             if(!isGameDone) {
                 game.tryMove('s');
-                isGameDone = game.getBoard().isGameDone();
+                isGameDone = game.isGameDone();
                 printGame();
             } else {
                 printGame();
@@ -121,7 +121,7 @@ public class Console{
                 System.out.println("Couldn't read character for move.");
             }
             console.printGame();
-            console.setIsGameDone(console.game.getBoard().isGameDone());
+            console.setIsGameDone(console.game.isGameDone());
         }
         // Save Score and username on game done.
         console.game.writeScoreToFile();
