@@ -307,7 +307,7 @@ public class Game {
      * Setter of the score achieved through clearing rows
      * @param gameScore: long, the score achieved
      */
-    public void updateGameScore(long numLinesCleared){
+    private void updateGameScore(long numLinesCleared){
       if(numLinesCleared == 4){
         this.gameScore += (numLinesCleared * 200);
       }
@@ -324,27 +324,13 @@ public class Game {
         return this.username;
     }
 
-    // // TODO
-    // public long getHighScore() {
-    //     return 12181;
-    // }
-    // // TODO
-    // public String getHighScoreName() {
-    //     return "BestP";
-    // }
-    // // TODO
-    // public void writeScoreToFile() {
-
-    // }
-
-
     /*
      * HIGH SCORE FILE METHODS
      */
 
-/**
-	 * Sets the highscore by reading and writing from a text file
-	 */
+    /**
+    * Sets the highscore by reading and writing from a text file
+    */
     public void writeScoreToFile () {
 
         try{

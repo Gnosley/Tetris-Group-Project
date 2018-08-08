@@ -27,10 +27,10 @@ public class Console{
     }
     private Terminal terminal;        // the terminal and
     private NonBlockingReader reader; // reader for instant input
-    Printer printer = new Printer();
-    Game game = new Game();
-    boolean isGameDone = false;
-    TimerTask dropTimer = new DropTimer();
+    private Printer printer = new Printer();
+    private Game game = new Game();
+    private boolean isGameDone = false;
+    private TimerTask dropTimer = new DropTimer();
 
     /**
      * Console constructor
@@ -153,12 +153,12 @@ public class Console{
      * Creates a new timer thread.
      * Tetrominos will drop at a rate determined by the timer
      */
-    public void dropPieces() {
+    private void dropPieces() {
         this.dropTimer = new DropTimer();
         new Timer().schedule(dropTimer, 0, 300);
     }
 
-    public void pauseDropping() {
+    private void pauseDropping() {
         this.dropTimer.cancel();
     }
 
@@ -166,7 +166,7 @@ public class Console{
         return this.isGameDone;
     }
 
-    public void setIsGameDone(boolean gameDone) {
+    private void setIsGameDone(boolean gameDone) {
         this.isGameDone = gameDone;
     }
 
