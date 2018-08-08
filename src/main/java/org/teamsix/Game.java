@@ -307,7 +307,7 @@ public class Game {
      * Setter of the score achieved through clearing rows
      * @param gameScore: long, the score achieved
      */
-    private void updateGameScore(long numLinesCleared){
+    public void updateGameScore(long numLinesCleared){
       if(numLinesCleared == 4){
         this.gameScore += (numLinesCleared * 200);
       }
