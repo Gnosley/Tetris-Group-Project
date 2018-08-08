@@ -33,7 +33,7 @@ public abstract class Tetromino {
      * @param yRef:
      *            y-coordinate of reference position
      */
-    public Tetromino(int xRef, int yRef, boolean isGhost) {
+    protected Tetromino(int xRef, int yRef, boolean isGhost) {
         xReferencePosition = xRef;
         yReferencePosition = yRef;
         this.isGhost = isGhost;
@@ -46,7 +46,7 @@ public abstract class Tetromino {
      * @param isGhost:
      *            boolean of if the tetromino is a ghost type or not
      */
-    public Block[] generateTetrominoArray(boolean isGhost) {
+    protected Block[] generateTetrominoArray(boolean isGhost) {
         int color = getType();
         Block[] tetrominoArray = new Block[4];
 
@@ -70,7 +70,7 @@ public abstract class Tetromino {
      * @param tetromino:
      *            old Tetromino that needs to be copied
      */
-    public Tetromino(Tetromino tetromino) {
+    protected Tetromino(Tetromino tetromino) {
         this(tetromino, tetromino.getIsGhost());
     }
 
@@ -79,7 +79,7 @@ public abstract class Tetromino {
      * @param tetromino: Tetromino
      * @param isGhost: boolean, either is or isn't a ghost block
      */
-    public Tetromino(Tetromino tetromino, boolean convertToGhost) {
+    protected Tetromino(Tetromino tetromino, boolean convertToGhost) {
         this.type = tetromino.getType();
         this.xReferencePosition = tetromino.getXReference();
         this.yReferencePosition = tetromino.getYReference();
@@ -279,7 +279,7 @@ public abstract class Tetromino {
      * Sets the tetrominoArray from the subclasses
      * @param transferArray: Block []
      */
-    public void setBlockArray(Block[] transferArray) {
+    protected void setBlockArray(Block[] transferArray) {
         for (int i =0; i<transferArray.length; i++) {
             tetrominoArray[i] = new Block(transferArray[i]);
         }
@@ -332,7 +332,7 @@ public abstract class Tetromino {
      * Sets the rotation state of the tetromino
      * @param rotation: int of wanted rotation state
      */
-    public void setRotation(int rotation) {
+    protected void setRotation(int rotation) {
         this.rotation = rotation;
     }
 

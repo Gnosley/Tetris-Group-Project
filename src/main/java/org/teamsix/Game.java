@@ -299,7 +299,7 @@ public class Game {
      * Keeping track of score through addition of lines cleared as lines clear
      * @param linesCleared: long, keeps track of number of lines cleared
      */
-    public void updateLinesCleared(long linesCleared){
+    private void updateLinesCleared(long linesCleared){
         this.linesCleared += linesCleared;
     }
 
