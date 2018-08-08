@@ -1,6 +1,6 @@
 Jack   4500
 J      1300
-Dustin600
 Jesse  200
 J      200
+DDD    100
 Jesse  0

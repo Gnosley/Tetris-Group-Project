@@ -1,6 +1,8 @@
 
 import javafx.scene.input.KeyCode;
 
+import java.util.Arrays;
+
 import static javafx.scene.input.KeyCode.*;
 
 public class GameSettings {
@@ -83,7 +85,8 @@ public class GameSettings {
      * @return User name
      */
     public KeyCode[] getControls() {
-        return currentControls;
+        KeyCode[] copyControls = Arrays.copyOf (currentControls, currentControls.length);
+        return copyControls;
     }
 
     /**

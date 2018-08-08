@@ -166,7 +166,6 @@ public class TetrisController {
 
             //Enter: New Game
             if (event.getCode().equals(gameSettings.getControls()[7])) {
-                //TODO: Combine these with if/or
                 if (newGame) {
 
                     gameStats.setText(0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0);
@@ -175,7 +174,7 @@ public class TetrisController {
                     currentUser.setText(gameSettings.getUser());
 
 
-                    Game game = new Game("Dustin", gameSettings.getLevel());
+                    Game game = new Game(gameSettings.getUser(), gameSettings.getLevel());
                     this.game = game;
 
                     highScoreUser.setText(game.getHighScoreName());
@@ -207,7 +206,7 @@ public class TetrisController {
                     System.out.println(gameSettings.getLevel());
                     startGameText.setText(" ");
                     startTime = System.currentTimeMillis();
-                    Game game = new Game("Dustin", gameSettings.getLevel());
+                    Game game = new Game(gameSettings.getUser(), gameSettings.getLevel());
                     this.game = game;
                     gameOverText.setText(" ");
 

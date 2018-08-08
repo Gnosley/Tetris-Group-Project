@@ -27,12 +27,16 @@ public class ClearLines implements Runnable {
         this.currentBoard = currentBoard;
     }
 
+    /**
+     * Executes the clear lines animation
+     */
     public void run() {
         Platform.runLater(new Runnable() {
             public void run() {
 
                 TetrisController tetController = new TetrisController();
 
+                //Removes all blocks in the rows to be cleared
                 for (int row : rowsToClear) {
                     for (int col = 0; col < 10; col++) {
                         if (blockFXArray[row][col] != null) {
@@ -42,6 +46,7 @@ public class ClearLines implements Runnable {
                     }
                 }
 
+                //Fills each of the entire rows to be cleared with the proper blocks
                 for (int row : rowsToClear) {
                     for (int col = 0; col < 10; col++) {
                         int[] screenCoords = tetController.getScreenCoordinates(row,col);
@@ -53,8 +58,6 @@ public class ClearLines implements Runnable {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-
 
                         if (blockFXArray[row][col] == null){
                             playArea.getChildren().add(block);
@@ -68,6 +71,7 @@ public class ClearLines implements Runnable {
                     }
                 }
 
+                //Sets the clear color and glow of the blocks in the rows to be cleared
                 Glow glow = new Glow();
                 glow.setLevel(1.0);
                 for (int row : rowsToClear) {
@@ -81,12 +85,14 @@ public class ClearLines implements Runnable {
             }
         });
 
+        //Briefly pauses the animation with the clear color and glow
         try {
             TimeUnit.MILLISECONDS.sleep(300);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        //Clears all the blocks and re-updates the grid with the proper blocks. This update will have the rows dropped
         Platform.runLater(new Runnable() {
             public void run() {
 
@@ -102,6 +108,7 @@ public class ClearLines implements Runnable {
 
                 //Update the block graphics on the board
                 tetController.updateBoardFX(currentBoard, blockFXArray, playArea);
+                //Changes observable boolean value to resume the game after the clear
                 TetrisController.setClearingRowsTrue();
             }
         });

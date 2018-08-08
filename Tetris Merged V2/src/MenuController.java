@@ -1,4 +1,6 @@
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +58,14 @@ public class MenuController {
         currentLevelButton = EASY;
         currentControlsButton = controlsButtonStandard;
 
+        //Limits text in username TextField to 7 characters
+        userTextField.textProperty().addListener(new ChangeListener<String>() {
+            public void changed(ObservableValue ov, String old_val, String new_val) {
+                if (new_val.length() > 7) {
+                    userTextField.setText(old_val);
+                }
+            }
+        });
     }
 
     /**
@@ -181,8 +191,19 @@ public class MenuController {
      * @throws IOException
      */
     private void loadGame(MouseEvent event) throws IOException {
+
         //Sets the user name to the entered text
-        gameSettings.setUser(userTextField.getText());
+        String enteredUserName = userTextField.getText();
+        String userName;
+        if (enteredUserName.length() < 7) {
+            userName = enteredUserName;
+            for (int letters = enteredUserName.length(); letters < 7; letters++) {
+                userName += " ";
+            }
+        } else {
+            userName = enteredUserName;
+        }
+        gameSettings.setUser(userName);
 
         //Load the Tetris window from FXML
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
