@@ -298,7 +298,7 @@ public class Game {
      * Keeping track of score through addition of lines cleared as lines clear
      * @param linesCleared: long, keeps track of number of lines cleared
      */
-    public void updateLinesCleared(long linesCleared){
+    private void updateLinesCleared(long linesCleared){
         this.linesCleared += linesCleared;
     }
 
@@ -322,20 +322,6 @@ public class Game {
     public String getUsername() {
         return this.username;
     }
-
-    // // TODO
-    // public long getHighScore() {
-    //     return 12181;
-    // }
-    // // TODO
-    // public String getHighScoreName() {
-    //     return "BestP";
-    // }
-    // // TODO
-    // public void writeScoreToFile() {
-
-    // }
-
 
     /*
      * HIGH SCORE FILE METHODS

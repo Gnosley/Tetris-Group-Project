@@ -1,3 +1,4 @@
+
 /** Block class is the blocks that make up the game pieces. Blocks store their color,
  xPosition and yPosition all as integers. Get/set methods for all 3 instance variables	*/
 public class Block{
@@ -9,10 +10,10 @@ public class Block{
     /** Three parameter constructor for color, xPosition and yPosition.
      @param color, @param xPosition, @param yPosition	*/
     public Block(int color, int x, int y, boolean isGhost) {
-        xPosition = x;
-        yPosition = y;
-        this.color = color;
-        this.isGhost = isGhost;
+        this.setXPosition(x);
+        this.setYPosition(y);
+        this.setColor(color);
+        this.setIsGhost(isGhost);
     }
 
     /** Block copy constructor
@@ -26,7 +27,9 @@ public class Block{
     /** Set method for color
      @param color	*/
     public void setColor(int color) {
-        this.color = color;
+        if (color >= 0 && color < 7) {
+            this.color = color;
+        }
     }
     /** Get method for color
      @return boolean representing if it is a ghost block or not*/
