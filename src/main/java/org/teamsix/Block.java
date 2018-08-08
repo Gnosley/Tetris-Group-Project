@@ -50,16 +50,12 @@ public class Block{
 /** Set method for xPosition
 	@param x New xPosition	*/
     public void setXPosition(int x) {
-        if (x >= 0)  {
-            xPosition = x;
-        }
+        xPosition = x;
     }
 /** Set method for yPosition
 	@param y New yPosition	*/
     public void setYPosition(int y) {
-        if (y >= 0)  {
-            yPosition = y;
-        }
+        yPosition = y;
     }
 /** Get method for xPosition
 	@return xPosition	*/
