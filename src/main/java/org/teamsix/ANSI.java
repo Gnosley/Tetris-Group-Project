@@ -13,7 +13,7 @@ public class ANSI {
     public static final String GREEN = "\u001B[38;5;40m";
     public static final String ORANGE = "\u001B[38;5;214m";
     public static final String BLUE = "\u001B[38;5;21m";
-    public static final String PURPLE = "\u001B[38;5;53m";
+    public static final String PURPLE = "\u001B[38;5;90m";
     public static final String CYAN = "\u001B[38;5;51m";
     public static final String WHITE = "\u001B[37m";
     public static final String YELLOW = "\u001B[38;5;226m";

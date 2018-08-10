@@ -32,16 +32,19 @@ public class Console{
     private Game game = new Game();
     private boolean isGameDone = false;
     private TimerTask dropTimer = new DropTimer();
+    private int dropSpeed = 1;
 
     /**
      * Console constructor
      */
     public Console(){
-        this("USER", "MEDIUM");
+        this("USER", "MEDIUM", 1);
     }
 
-    public Console(String username, String difficulty){
+
+    public Console(String username, String difficulty, int speed){
         game = new Game(username, difficulty);
+        this.dropSpeed = speed;
         try{
             terminal = TerminalBuilder.builder()
                 .jansi(true)
@@ -56,11 +59,19 @@ public class Console{
     }
 
     public static String[] getOptions() {
+        System.out.println(ANSI.RESET_CURSOR + ANSI.CLEARSCREEN);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter your username (7 Chars MAX):\t");
         String username = scanner.next();
-        System.out.println("Please Choose Difficulty (EASY, MEDIUM, HARD): ");
+        System.out.println("Please choose difficulty (EASY, MEDIUM, HARD): ");
         String difficulty = scanner.next();
+        System.out.println("Please choose drop speed (integer in [0 - 10]): ");
+        int dropSpeed = 1;
+        try {
+            dropSpeed = scanner.nextInt();
+        }
+        catch (Exception e){
+        }
         username = username.trim();
         difficulty = difficulty.trim();
         if (username.equals("")) {
@@ -75,14 +86,22 @@ public class Console{
         if(difficulty.equals("")) {
             difficulty = "MEDIUM";
         }
-        return new String[] {username, difficulty};
+        if (dropSpeed < 0) {
+            dropSpeed = 0;
+        }
+        else if (dropSpeed > 10) {
+            dropSpeed = 10;
+        }
+        return new String[] {username, difficulty, "" + dropSpeed};
     }
+
     public static void main(String[] args){
 
         String[] options = Console.getOptions();
         String username=options[0], difficulty=options[1];
+        int speed = Integer.parseInt(options[2]);
 
-        Console console = new Console(username, difficulty);
+        Console console = new Console(username, difficulty, speed);
 
 
         // Print initial board.
@@ -156,8 +175,10 @@ public class Console{
      * Tetrominos will drop at a rate determined by the timer
      */
     private void dropPieces() {
-        this.dropTimer = new DropTimer();
-        new Timer().schedule(dropTimer, 0, 300);
+        if (dropSpeed > 0) {
+            this.dropTimer = new DropTimer();
+            new Timer().schedule(dropTimer, 0, 2000/dropSpeed);
+        }
     }
 
     private void pauseDropping() {
