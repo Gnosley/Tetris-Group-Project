@@ -232,8 +232,8 @@ public class Printer {
                              ANSI.PURPLE,
                              ANSI.WHITE,
                              ANSI.BLACK,
-                             ANSI.BRIGHT_YELLOW,
-                             ANSI.YELLOW};
+                             ANSI.YELLOW,
+                             ANSI.ORANGE};
         for (String stringToRemove : ansiList) {
             cleanStr = cleanStr.replace(stringToRemove, "");
         }
@@ -724,7 +724,7 @@ public class Printer {
         scoreStr = centerString(scoreStr, RIGHTWIDTH);
 
         if (gameScore >= highscore) {
-            return ANSI.BRIGHT_YELLOW + scoreStr + ANSI.RESET;
+            return ANSI.YELLOW + scoreStr + ANSI.RESET;
         }
         else return scoreStr;
     }

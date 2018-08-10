@@ -11,12 +11,12 @@ public class ANSI {
     public static final String BLACK = "\u001B[38;5;16m";
     public static final String RED = "\u001B[38;5;196m";
     public static final String GREEN = "\u001B[38;5;40m";
-    public static final String YELLOW = "\u001B[38;5;214m"; // Really Orange
+    public static final String ORANGE = "\u001B[38;5;214m";
     public static final String BLUE = "\u001B[38;5;21m";
     public static final String PURPLE = "\u001B[38;5;53m";
     public static final String CYAN = "\u001B[38;5;51m";
     public static final String WHITE = "\u001B[37m";
-    public static final String BRIGHT_YELLOW = "\u001B[38;5;226m"; // Yellow
+    public static final String YELLOW = "\u001B[38;5;226m";
     // move cursor to top left of terminal
     public static final String RESET_CURSOR = "\u001B[1;1H";
     // move cursor down 80 lines
@@ -25,12 +25,12 @@ public class ANSI {
     /**
      * Takes an int and returns a String for an ANSI escape sequence. Maps as follows:
      * <ul> <li> 0 => cyan </li>
-     *      <li> 1 => bright yellow </li>
+     *      <li> 1 => yellow </li>
      *      <li> 2 => purple </li>
      *      <li> 3 => green </li>
      *      <li> 4 => red </li>
      *      <li> 5 => blue </li>
-     *      <li> 6 => yellow </li>
+     *      <li> 6 => orange </li>
      *      <li> n>6 => "" </li>
      * </ul>
      *
@@ -40,12 +40,12 @@ public class ANSI {
     public static String color(int colorNum){
         String[] colorCodes = {
             CYAN,
-            BRIGHT_YELLOW,
+            YELLOW,
             PURPLE,
             GREEN,
             RED,
             BLUE,
-            YELLOW
+            ORANGE
         };
 
         if (0 <= colorNum && colorNum < colorCodes.length) {
