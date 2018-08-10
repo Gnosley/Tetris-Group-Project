@@ -9,8 +9,14 @@ import org.jline.utils.NonBlockingReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Runs a game of Tetris on the console.
+ */
 public class Console{
 
+    /**
+     * Runs the auto drop asynchronously
+     */
     public class DropTimer extends TimerTask {
         @Override
         public void run () {
@@ -35,13 +41,20 @@ public class Console{
     private int dropSpeed = 1;
 
     /**
-     * Console constructor
+     * Default constructor for Console, sets to default.
      */
     public Console(){
-        this("USER", "MEDIUM", 1);
+        this("USER", "MEDIUM", 3);
     }
 
-
+    /**
+     * Creates a Console that can play the game.
+     *
+     * @param username The name of the player that will play the game.
+     * @param difficulty A string with the difficulty for the game.
+     * @param speed The drop rate with which blocks will automatically move down
+     * the screen.
+     */
     public Console(String username, String difficulty, int speed){
         game = new Game(username, difficulty);
         this.dropSpeed = speed;
@@ -58,6 +71,12 @@ public class Console{
         }
     }
 
+    /** TODO Clean UP!
+     * Get user input for username, difficulty, and drop speed through the
+     * terminal.
+     * 
+     * @return An array with the options provided by the user as strings.
+     */
     public static String[] getOptions() {
         System.out.println(ANSI.RESET_CURSOR + ANSI.CLEARSCREEN);
         Scanner scanner = new Scanner(System.in);
@@ -95,6 +114,9 @@ public class Console{
         return new String[] {username, difficulty, "" + dropSpeed};
     }
 
+    /**
+     * Runs the tetris game.
+     */
     public static void main(String[] args){
 
         String[] options = Console.getOptions();
@@ -150,8 +172,7 @@ public class Console{
     }
 
     /**
-     * [printGame description]
-     * @param printer [description]
+     * Prints the current game.
      */
     private void printGame(){
         printer.print(game.getCurrentTetromino(),
@@ -181,14 +202,27 @@ public class Console{
         }
     }
 
+    /**
+     * Stop the pieces from dropping
+     */
     private void pauseDropping() {
         this.dropTimer.cancel();
     }
 
+    /**
+     * Getter method for if game is done.
+     *
+     * @return Boolean representing whether game is done or not.
+     */
     public boolean getIsGameDone() {
         return this.isGameDone;
     }
 
+    /**
+     * Set the Console game to be done.
+     *
+     * @param gameDone The state of the game to set.
+     */
     private void setIsGameDone(boolean gameDone) {
         this.isGameDone = gameDone;
     }
