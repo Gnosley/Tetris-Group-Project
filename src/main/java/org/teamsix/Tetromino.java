@@ -37,7 +37,6 @@ public abstract class Tetromino {
         xReferencePosition = xRef;
         yReferencePosition = yRef;
         this.isGhost = isGhost;
-
     }
 
      /**
@@ -91,6 +90,7 @@ public abstract class Tetromino {
             this.convertGhostType(this.isGhost);
         }
         this.rotation = tetromino.rotation;
+        this.wallKickData = tetromino.getWallKickData();
     }
 
     /**
@@ -334,6 +334,10 @@ public abstract class Tetromino {
      */
     protected void setRotation(int rotation) {
         this.rotation = rotation;
+    }
+
+    private int[][][] getWallKickData() {
+        return this.wallKickData;
     }
 
     public boolean getIsGhost() {
