@@ -1,5 +1,8 @@
 package org.teamsix;
 
+/**
+ * Provides ANSI Escape Sequences for printing colors, moving the cursor, and screen clearing.
+ */
 public class ANSI {
     // clear from cursor to end of screen
     public static final String CLEARSCREEN = "\u001B[0J";
@@ -35,7 +38,8 @@ public class ANSI {
      * </ul>
      *
      * @param colorNum The int of the color wanted.
-     * @return String with an ANSI escape sequence for a color.
+     * @return String with an ANSI escape sequence for a color. Nothing if
+     * number < 0 or number > 6.
      */
     public static String color(int colorNum){
         String[] colorCodes = {
