@@ -6,6 +6,9 @@ import org.jline.utils.InfoCmp.Capability;
 import org.jline.terminal.Terminal;
 import java.lang.String;
 
+/**
+ * This class provides a text based printer for the Tetris game.
+ */
 public class Printer {
 
     // how many characters wide should each block be
@@ -13,69 +16,54 @@ public class Printer {
 
     // info about the board
     private final int BOARDWIDTH = 10;
-
     private final int BOARDHEIGHT = 24;
-
     private final int BOARDCHARWIDTH = BOARDWIDTH * BLOCKWIDTH + 2;
 
     // rows that preview window begins and ends on
     private final int PREVIEWTOP = 9;
-
     private final int PREVIEWBOT = 14;
 
     // Preview window width
     private final int PREVIEWWIDTH = 5 * BLOCKWIDTH;
 
-    // rows that preview window begins and ends on
+    // rows that hold window begins and ends on
     private final int HOLDTOP = 2;
-
     private final int HOLDBOT = 7;
 
+    // Rows that the stats start and end on
     private final int STATSTOP = 9;
-
     private final int STATSBOT = 20;
 
     // how many characters wide is the space beside the main part of the board
     private final int LEFTWIDTH = 20;
-
     private final int RIGHTWIDTH = 38;
 
     // Standard console width
     private final int CONSOLEWIDTH = 80;
-
     private final int CONSOLEHEIGHT = 22;
 
     // Unicode Characters
+
     // Block Character
     private final String BLOCKCHAR = "\u2588";
-
     // Ghost Block Character
     private final String GBLKCHAR = "\u2591";
-
     // Vertical Character
     private final String VCHAR = "\u2551";
-
     // Horizontal Character
     private final String HCHAR = "\u2550";
-
     // Top Right Character
     private final String TRCHAR = "\u2557";
-
     // Top Left Character
     private final String TLCHAR = "\u2554";
-
     // Bottom Right Character
     private final String BRCHAR = "\u255D";
-
     // Bottom Left Character
     private final String BLCHAR = "\u255A";
-
     // Horizontal to Vertical Upper Split
     private final String HVUSPLIT = "\u2569";
-
     // Vertical to Horizontal Right Split
     private final String VHRSPLIT = "\u2560";
-
     // Vertical to Horizontal Left Split
     private final String VHLSPLIT = "\u2563";
 
@@ -89,6 +77,23 @@ public class Printer {
 
     /**
      * Prints the current game state from the given objects.
+     *
+     * @param currentTetromino The tetromino currently being played.
+     * @param nextTetromino The tetromino to be played next.
+     * @param ghostTetromino The current Tetromino's ghost.
+     * @param holdTetromino The tetromino currently being held.
+     * @param boardArray  The current board represented as a Block matrix.
+     * @param terminal   The Terminal object used for printing.
+     * @param gameScore  The current game score.
+     * @param linesCleared The amount of lines that have been cleared.
+     * @param holdAvailable A boolean representing if hold is currently
+     * available.
+     * @param tetrominoStats  An array of integers with each tetromino's count.
+     * @param username   A string with the current players name.
+     * @param difficulty A string representing the current distribution
+     * droprate.
+     * @param highscore  The highscore to beat.
+     * @param highscoreName  The name of the player who got the highscore.
      */
     public void print(Tetromino currentTetromino,
                       Tetromino nextTetromino,
@@ -106,25 +111,36 @@ public class Printer {
                       String highscoreName)
     {
 
+        // move the cursor to the top of the screen to overwrite.
         terminal.writer().print(ANSI.RESET_CURSOR);
 
         // combine the board and the tetrominos played on it
-        Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, boardArray);
+        Block[][] combinedBoard = combine(currentTetromino,
+                                          ghostTetromino,
+                                          boardArray);
+
         // create arrays for easy printing
         Block[][] holdArray = createBlockArray(holdTetromino);
         Block[][] nextArray = createBlockArray(nextTetromino);
 
-        terminal.writer().println(centerString("Press Escape Twice to exit. Press 'h' for help.", 80));
+        terminal.writer()
+            .println(
+                     centerString("Press Escape Twice to exit." 
+                                    + " Press 'h' for help.",
+                                  CONSOLEWIDTH)
+                     );
 
         String[] rowStrings = new String[CONSOLEHEIGHT];
         // get the strings left of the main play space
-        String[] leftStrings = getLeftSide(holdArray, holdAvailable, tetrominoStats);
+        String[] leftStrings = getLeftSide(holdArray, holdAvailable,
+                                           tetrominoStats);
         // get the strings representing the main play space
         String[] boardStrings = getBoardStrings(combinedBoard);
         // get the strings right of the main play space
         String[] rightStrings = getRightSide(username, gameScore,
                                              linesCleared, highscore,
-                                             highscoreName, nextArray, difficulty);
+                                             highscoreName, nextArray,
+                                             difficulty);
         // for each row, add left + main + right then print
         for (int i = 0; i < CONSOLEHEIGHT; i++) {
             rowStrings[i] = leftStrings[i] + boardStrings[i] + rightStrings[i];
@@ -171,6 +187,12 @@ public class Printer {
         terminal.writer().flush();
     }
 
+    /**
+     * Prints that the game is over. Leaves everything but first line in
+     * terminal untouched.
+     *
+     * @param terminal The Terminal to use for printing to.
+     */
     public void printGameOver(Terminal terminal) {
         terminal.writer().print(ANSI.RESET_CURSOR);
         terminal.writer().print(ANSI.CLEAR_LINE);
@@ -241,7 +263,8 @@ public class Printer {
     }
 
     /**
-     * Formats a number to be have given number of digits with " " as placeholder.
+     * Formats a number to be have given number of digits with " " as
+     * placeholder.
      *
      * @param number The number to be formatted.
      * @param digits The number of digits to format to.
@@ -356,7 +379,8 @@ public class Printer {
             switch (r) {
                 // Add welcome
             case 0:
-                arrayOfRows[r] = centerString("Welcome to Tetris, " + username, RIGHTWIDTH);
+                arrayOfRows[r] = centerString("Welcome to Tetris, "
+                                              + username, RIGHTWIDTH);
                 break;
             case 1: case 2: case 3: case 4: 
                 arrayOfRows[r] = getTetrisString(r - 1);
@@ -518,7 +542,8 @@ public class Printer {
      * Returns the string representing the given row of the hold box.
      *
      * @param row The row to be returned
-     * @param holdArray  The array of arrays representing the currently held tetromino.
+     * @param holdArray The array of arrays representing the currently held
+     * tetromino.
      * @param isHoldMoveAvailable A boolean indicating if the player can use the
      * hold move function.
      * @return String representing row of the hold box. Empty string if outside
@@ -558,8 +583,8 @@ public class Printer {
      * @param nextArray The array of arrays representing the currently held
      * tetromino.
      * @param row  The row to generate a string for.
-     * @return String representing row of the next tetromino box. Empty string if outside
-     * box rows.
+     * @return String representing row of the next tetromino box. Empty string
+     * if outside box rows.
      */
     private String getNextBoxString(Block[][] nextArray, int row) {
         String nextString = "NEXT";
