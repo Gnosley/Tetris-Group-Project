@@ -83,9 +83,6 @@ public class Printer {
 
 
 
-
-
-
     /*
      * PUBLIC FUNCTIONS
      */
@@ -109,17 +106,7 @@ public class Printer {
                       String highscoreName)
     {
 
-        // IF LINUX:
-
-        // int termHeight = terminal.getHeight();
-        // for(int i=0; i < termHeight - CONSOLEHEIGHT; i++) {
-        //     terminal.writer().println();
-        // }
-        // terminal.writer().flush();
-
-        // IF WINDOWS
-
-        terminal.puts(Capability.clear_screen);
+        terminal.writer().print(ANSI.RESET_CURSOR);
 
         // combine the board and the tetrominos played on it
         Block[][] combinedBoard = combine(currentTetromino, ghostTetromino, boardArray);
@@ -144,6 +131,7 @@ public class Printer {
             terminal.writer().println(rowStrings[i]);
         }
         // Print everything out
+        terminal.writer().print(ANSI.CLEARSCREEN);
         terminal.writer().flush();
     }
 
@@ -153,6 +141,7 @@ public class Printer {
      * @param terminal The Terminal object to print to
      */
     public void printHelp(Terminal terminal) {
+        terminal.writer().print(ANSI.RESET_CURSOR);
         terminal.writer().println(ANSI.CLEARSCREEN);
         String[] helpStrings = {
             "Welcome to Tetris",
@@ -179,6 +168,14 @@ public class Printer {
         for (String line : helpStrings) {
             terminal.writer().println(centerString(line, 80));
         }
+        terminal.writer().flush();
+    }
+
+    public void printGameOver(Terminal terminal) {
+        terminal.writer().print(ANSI.RESET_CURSOR);
+        terminal.writer().print(ANSI.CLEAR_LINE);
+        terminal.writer().println(centerString("Game Over", 80));
+        terminal.writer().print(ANSI.SET_CURSOR_BOT);
         terminal.writer().flush();
     }
 
@@ -228,7 +225,6 @@ public class Printer {
         String cleanStr = inputStr;
         String[] ansiList = {ANSI.RED,
                              ANSI.BLUE,
-                             ANSI.BLINK,
                              ANSI.CYAN,
                              ANSI.GREEN,
                              ANSI.RESET,
@@ -531,12 +527,15 @@ public class Printer {
     private String getHoldBoxString(int row, Block[][] holdArray,
                                     boolean isHoldMoveAvailable) {
         String holdString = "HOLD";
-        // make text in border blink green if can hold.
+        String colorString = "";
+        // make text in border green if can hold.
         if (isHoldMoveAvailable) {
-            holdString = ANSI.BLINK + ANSI.GREEN + holdString + ANSI.RESET;
+            colorString = ANSI.GREEN;
         }
-        // make text in border solid red if can't hold.
-        else holdString = ANSI.RED + holdString + ANSI.RESET;
+        // make text in border red if can't hold.
+        else colorString = ANSI.RED;
+
+        holdString = colorString + holdString + ANSI.RESET;
 
 
         // Generate strings
@@ -637,11 +636,16 @@ public class Printer {
                 Blockchar = GBLKCHAR;
             }
         }
-        else blockStr += ANSI.BLACK;
+        else {
+            blockStr += "";
+            Blockchar= " ";
+        }
         for (int i =0; i<BLOCKWIDTH; i++) {
             blockStr += Blockchar;
         }
-        blockStr += ANSI.RESET;
+        if (block != null) {
+            blockStr += ANSI.RESET;
+        }
         return blockStr;
     }
 
@@ -720,7 +724,7 @@ public class Printer {
         scoreStr = centerString(scoreStr, RIGHTWIDTH);
 
         if (gameScore >= highscore) {
-            return ANSI.BRIGHT_YELLOW + ANSI.BLINK + scoreStr + ANSI.RESET;
+            return ANSI.BRIGHT_YELLOW + scoreStr + ANSI.RESET;
         }
         else return scoreStr;
     }

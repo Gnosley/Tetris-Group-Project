@@ -1,4 +1,9 @@
+Jack   10900
+e      6400
+Jesse  6100
 Jack   4500
+a      4200
+Jesse  3300
 J      1300
 j      600
 JesseF 300

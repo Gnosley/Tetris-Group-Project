@@ -21,6 +21,7 @@ public class Console{
                 printGame();
             } else {
                 printGame();
+                printer.printGameOver(terminal);
                 this.cancel();
             }
         }
@@ -124,7 +125,8 @@ public class Console{
         }
         // Save Score and username on game done.
         console.game.writeScoreToFile();
-        System.out.println("Game Over!");
+        console.printGame();
+        console.printer.printGameOver(console.terminal);
         System.exit(0);
     }
 
