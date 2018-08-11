@@ -391,7 +391,7 @@ public abstract class Tetromino {
         int[][][] wallKickDataCopy =
                 new int[wallKickData.length][wallKickData[0].length][wallKickData[0][0].length];
         for (int i = 0; i < wallKickData.length; i++)
-            for (int j = 0; i < wallKickData[i].length; i++)
+            for (int j = 0; j < wallKickData[i].length; j++)
                 wallKickDataCopy[i][j] = Arrays.copyOf(wallKickData[i][j],
                         wallKickData[i][j].length);
 
