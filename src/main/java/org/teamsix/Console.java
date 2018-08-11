@@ -22,7 +22,7 @@ public class Console{
         public void run () {
             // boolean gameDone = game.getBoard().isGameDone();
             if(!isGameDone) {
-                game.tryMove('s');
+                game.tryMove('s'); // move down
                 isGameDone = game.isGameDone();
                 printGame();
             } else {
@@ -155,7 +155,9 @@ public class Console{
                 }
                 else {
                     //if user enters valid keyboard command, game begins sequence for cheking the move
-                    console.game.tryMove(keyInASCII);
+                    if (!console.getIsGameDone()) {
+                        console.game.tryMove(keyInASCII);
+                    }
                 }
             }
             catch(IOException e){

@@ -13,12 +13,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
+/**
+ * This class provides the game object. Holds the current state of the game. Can
+ * use its public methods to play a game of Tetris.
+ */
 public class Game {
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
     private Tetromino storedTetromino = null; // the held tetromino
-    private TetrominoFactory tetrominoFactory; //
+    private TetrominoFactory tetrominoFactory;
 
     private static final int startingX = 3; // where a tetromino should start on
     private static final int startingY = 0; // the board
@@ -26,17 +30,34 @@ public class Game {
     private long gameScore = 0;
     private long linesCleared = 0;
 
-    private boolean isHoldOccupied = false;  // if a piece is already being held
-    private boolean isHoldMoveAvailable = true; // indicates if hold functionality is available (can only put a piece into the hold once per turn)
+    // boolean to indicate if a piece is already being held
+    private boolean isHoldOccupied = false;  
+
+    // boolean to indicate if hold functionality is available
+    private boolean isHoldMoveAvailable = true; 
+
     private Board board = new Board();
     private String username = "USER   ";
 
+    /**
+     * Default constructor. Initializes a game of Tetris with a username of USER
+     * and medium difficulty.
+     */
     public Game() {
         this("USER    ", "MEDIUM");
     }
 
+    /**
+     * Constructor which initializes a game with a given username and
+     * difficulty.
+     *
+     * @param username   The current player's username
+     * @param difficulty The difficulty of the game. One of "easy", "medium", or
+     * "hard".
+     */
     public Game(String username, String difficulty) {
-        tetrominoFactory = new TetrominoFactory(difficulty, startingX, startingY);
+        tetrominoFactory = new TetrominoFactory(difficulty,
+                                                startingX, startingY);
         // generate three new tetrominos at the start of the game
         currentTetromino = tetrominoFactory.getTetromino();
         nextTetromino = tetrominoFactory.getTetromino();
@@ -225,7 +246,10 @@ public class Game {
                 currentTetromino = tetrominoFactory.getTetrominoCopy(movedTetromino);
             }
             else if (moveType == 's' && !canMove) {
-                board.updateBoard(currentTetromino); // if moving down causes it to hit a block or go out of bounds, add the current blocks in the tetromino to the board.
+                // if moving down causes it to hit a block or go out of bounds
+                // (aka hit the bottom of the board), add the current blocks in
+                // the tetromino to the board.
+                board.updateBoard(currentTetromino); 
                 commitTetrominoSequence(board);
             }
             break;
@@ -264,7 +288,7 @@ public class Game {
                 currentTetromino = tetrominoFactory.getTetromino(storedTetromino.getType());
                 storedTetromino = tetrominoFactory.getTetrominoCopy(proxyTetromino);
             }
-            isHoldMoveAvailable = false;			// a tetromino has already been held for this drop
+            isHoldMoveAvailable = false; // a tetromino has already been held for this drop
         }
     }
 
@@ -351,7 +375,7 @@ public class Game {
 
 
         while (input.hasNextLine()) {
-        	//run through text file and transfer to a String ArrayList
+        //run through text file and transfer to a String ArrayList
             userAndScore.add(input.nextLine());
         }
 
@@ -363,7 +387,7 @@ public class Game {
 
         for (int i=0; i<userAndScore.size(); i++) {
             long  newLongScore;
-        	//newScore is just the score
+            //newScore is just the score
             if (userAndScore.get(i).length() > 7) {
                 String newScore = userAndScore.get(i).substring(7);
                 newLongScore = Long.parseLong(newScore);
@@ -409,9 +433,9 @@ public class Game {
     }
 
     /**
-	 * Gets the highscore by reading from a text file
+     * Gets the highscore by reading from a text file
      * @return highscore, long
-	 */
+     */
     public long getHighScore() {
         long highscore = 0;
         try{
@@ -427,9 +451,9 @@ public class Game {
     }
 
     /**
-	 * Gets the username by reading from a text file
+     * Gets the username by reading from a text file
      * @return highscoreName, String
-	 */
+     */
     public String getHighScoreName() {
         String highscoreName = "NoFILE";
         try{
@@ -442,7 +466,7 @@ public class Game {
         }
         return highscoreName;
     }
-    
+
     /**
      * If no Highscore.txt exists, or if a deletion of the current highscore file is 
      * requested, a new base file is written.
@@ -450,7 +474,7 @@ public class Game {
     public void generateNewHighScore() {
         String insert = "USERNAM000";
         byte[] insertBytes = insert.getBytes();
-        
+
         try {
             OutputStream output = new FileOutputStream("HighScore.txt");
             output.write(insertBytes);
