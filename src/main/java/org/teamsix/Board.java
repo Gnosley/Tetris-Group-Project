@@ -48,10 +48,10 @@ public class Board {
     }
 
     /**
-     * Getter method for the precleared gameBoard. Returns copy to avoid privacy
+     * Getter method for the pre-cleared gameBoard. Returns copy to avoid privacy
      * leak
      *
-     * @return copy of the precleared Board
+     * @return copy of the pre-cleared Board
      */
     public Block[][] getPreClearedBoard() {
         Board copyBoard = new Board();
@@ -115,7 +115,7 @@ public class Board {
      * Checks if game is over (top row of playable board does not contain any
      * null objects)
      * 
-     * @return gameover boolean
+     * @return game over boolean
      */
     public boolean isGameDone() {
         for (int col = 0; col < this.gameBoard[0].length; col++) {
@@ -132,7 +132,7 @@ public class Board {
      * checkRowFull method to determined if there are any full rows and calling
      * clearRow method when appropriate.
      * 
-     * @return boolean indicating it is fisnished checking and clearing current
+     * @return boolean indicating it is finished checking and clearing current
      *         board state
      */
     private boolean checkBoard() {

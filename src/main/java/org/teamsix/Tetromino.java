@@ -40,7 +40,7 @@ public abstract class Tetromino {
     }
 
      /**
-     * Generate the new tetromino thorough individulized Tetromino data
+     * Generate the new tetromino thorough individualized Tetromino data
      *
      * @param isGhost:
      *            boolean of if the tetromino is a ghost type or not

@@ -154,7 +154,7 @@ public class Console{
                     }
                 }
                 else {
-                    //if user enters valid keyboard command, game begins sequence for cheking the move
+                    //if user enters valid keyboard command, game begins sequence for checking the move
                     if (!console.getIsGameDone()) {
                         console.game.tryMove(keyInASCII);
                     }
