@@ -219,8 +219,7 @@ public class Board {
      * @return an array list containing the index of rows cleared.
      */
     public ArrayList<Integer> getRowsToClear() {
-        ArrayList<Integer> rowsToClear = new ArrayList<>(this.rowsToClear);
-        return rowsToClear;
+        return new ArrayList<>(this.rowsToClear);
     }
 
     /**
