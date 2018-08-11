@@ -191,12 +191,16 @@ public class TetrominoFactory {
      */
     private int generateType() {
         int type = 0;
-        if (this.difficulty.equals("EASY")) {
-            type = genEasyType();
-        } else if (this.difficulty.equals("MEDIUM")) {
-            type = genMediumType();
-        } else if (this.difficulty.equals("HARD")) {
-            type = genHardType();
+        switch (this.difficulty) {
+            case "EASY":
+                type = genEasyType();
+                break;
+            case "MEDIUM":
+                type = genMediumType();
+                break;
+            case "HARD":
+                type = genHardType();
+                break;
         }
         return type;
     }
