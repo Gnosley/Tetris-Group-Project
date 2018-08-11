@@ -3,12 +3,14 @@ package org.teamsix;
 // imports for high score handling
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.FileInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.List;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Game {
@@ -400,7 +402,8 @@ public class Game {
         }
 
         catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            generateNewHighScore();
+            writeScoreToFile();
         }
 
     }
@@ -438,5 +441,22 @@ public class Game {
             System.out.println(e.getMessage());
         }
         return highscoreName;
+    }
+    
+    /**
+     * If no Highscore.txt exists, or if a deletion of the current highscore file is 
+     * requested, a new base file is written.
+     */
+    public void generateNewHighScore() {
+        String insert = "USERNAM000";
+        byte[] insertBytes = insert.getBytes();
+        
+        try {
+            OutputStream output = new FileOutputStream("HighScore.txt");
+            output.write(insertBytes);
+        }
+        catch (IOException error) {
+            error.printStackTrace();
+        }
     }
 }

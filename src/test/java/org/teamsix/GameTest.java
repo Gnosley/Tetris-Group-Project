@@ -3,14 +3,16 @@ package org.teamsix;
 import junit.framework.Assert;
 import org.junit.Test;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class GameTest {
         
         //test for when holding is available
         @Test 
-        public void TestHoldingPieceAfterCommit () {
+        public void testHoldingPieceAfterCommit () {
             Game g = new Game ("usernam", "easy");
             Assert.assertEquals("Initial state has the hold as unavailable",g.getIsHoldMoveAvailable(), true);
             g.tryMove('w');
@@ -23,7 +25,7 @@ public class GameTest {
         
         //tests for gameScore updating and file I/O of score
         @Test
-        public void TestScoringAndFilingMechansim () {
+        public void testScoringAndFilingMechansim () {
             Game g = new Game ("HIGHSCR", "easy");
             Assert.assertEquals("Score doesn't start at 0",g.getGameScore(),0);
             g.updateGameScore(1);
@@ -45,7 +47,7 @@ public class GameTest {
         
         //tests for rotating pieces
         @Test
-        public void TestRotation () {
+        public void testRotation () {
             Game g = new Game ("usernam", "easy");
             Assert.assertEquals("Rotation state doesn't start at 0",g.getCurrentTetromino().getRotation(),0);
             g.tryMove('q');
@@ -57,4 +59,25 @@ public class GameTest {
             }
             Assert.assertEquals("Rotation state doesn't accurately track the rotation after multiple full rotations",g.getCurrentTetromino().getRotation(),180);
         }
+        
+        //tests for making sure the highscore file
+        @Test 
+        public void testHighscoreFile () {
+          
+            boolean fileExists = true;
+            try {
+                Scanner input1 = new Scanner (new File ("Highscore.txt"));
+            }
+            catch (FileNotFoundException e) {
+                try {
+                    Scanner input2 = new Scanner (new File ("Highscore.txt"));
+                }
+                catch (FileNotFoundException ex) {
+                    fileExists = false;
+                }
+            }
+            finally {
+                Assert.assertEquals("The file does not exists and is not created.", fileExists, true);
+            }
+        }        
 }
