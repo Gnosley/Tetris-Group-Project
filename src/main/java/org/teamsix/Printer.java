@@ -447,7 +447,7 @@ public class Printer {
      *
      * @param currentTetromino The current tetromino to be played.
      * @param ghostTetromino The ghost of the current tetromino.
-     * @param board The current game board.
+     * @param boardArray The current game board.
      * @return An array of arrays of blocks representing the current game board
      * with the tetromino being played.
      */
@@ -474,10 +474,10 @@ public class Printer {
 
 
     /**
-     * TODO returns the amount of times a tetromino has been created.
+     * Returns the amount of times a tetromino has been created.
      *
-     * @param tetrominoType  The type of tetromino to query.
-     * @param TetrominoFactory  TODO the tetromino generator.
+     * @param type  The type of tetromino to query.
+     * @param tetrominoStats  An ordered int array holding the tetromino stats
      */
     private int getTetrominoData(int type, int[] tetrominoStats) {
         switch (type) {

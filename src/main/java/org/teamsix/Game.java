@@ -180,7 +180,6 @@ public class Game {
     /**
      * Positioning method for the ghost tetromino. Takes position of current
      * tetromino and sets the ghost position to the "floored" version if it
-     * @param  currentTetromino current tetromino in play
      * @param  board            current board
      * @return                  ghost tetromino (re-positioned)
      */
@@ -327,7 +326,7 @@ public class Game {
 
     /**
      * Setter of the score achieved through clearing rows
-     * @param gameScore: long, the score achieved
+     * @param numLinesCleared: long, the number of lines cleared in a turn.
      */
     public void updateGameScore(long numLinesCleared){
       if(numLinesCleared == 4){

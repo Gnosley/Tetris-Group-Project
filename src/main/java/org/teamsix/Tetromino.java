@@ -159,8 +159,10 @@ public abstract class Tetromino {
 	 * Decides what translation is being asked to do via a character switch.
 	 * Performs the method via setting the block position to the old position + the movement
 	 *
-	 * @param moveType:
+	 * @param direction:
 	 *            char that indicates the direction of translation
+     * @param distance:
+     *                integer indicating how far to move.
 	 */
     protected void move(char direction, int distance) {
         int xMovement = 0;
