@@ -75,8 +75,7 @@ public class Game {
      * @return tetromino: Tetromino, copy of the currentTetromino
      */
     public Tetromino getCurrentTetromino(){
-        Tetromino tetromino = tetrominoFactory.getTetrominoCopy(this.currentTetromino);
-        return (tetromino);
+        return (tetrominoFactory.getTetrominoCopy(this.currentTetromino));
     }
 
     /**
@@ -84,8 +83,7 @@ public class Game {
      * @return tetromino: Tetromino, copy of the nextTetromino
      */
     public Tetromino getNextTetromino(){
-        Tetromino tetromino = tetrominoFactory.getTetrominoCopy(this.nextTetromino);
-        return (tetromino);
+        return (tetrominoFactory.getTetrominoCopy(this.nextTetromino));
     }
 
     /**
@@ -93,8 +91,7 @@ public class Game {
      * @return tetromino: Tetromino, copy of the ghostTetromino
      */
     public Tetromino getGhostTetromino(){
-        Tetromino tetromino = tetrominoFactory.getTetrominoCopy(this.ghostTetromino);
-        return (tetromino);
+        return (tetrominoFactory.getTetrominoCopy(this.ghostTetromino));
     }
 
     /**
@@ -105,8 +102,7 @@ public class Game {
         if (this.storedTetromino == null) {
             return null;
         }
-        Tetromino tetromino = tetrominoFactory.getTetrominoCopy(this.storedTetromino);
-        return (tetromino);
+        return (tetrominoFactory.getTetrominoCopy(this.storedTetromino));
     }
 
     /**
