@@ -4,10 +4,17 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
+import java.io.File;
+import java.nio.file.Paths;
 
 /**
  * Loads initial settings to start the Tetris application
@@ -16,6 +23,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         //Load the menu from FXML
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Resources/TetrisMenu.fxml"));

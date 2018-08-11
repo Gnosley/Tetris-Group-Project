@@ -4,17 +4,22 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -172,16 +177,16 @@ public class MenuController {
         currentControlsButton = (Rectangle)event.getTarget();
         gameSettings.setCurrentControls(((Rectangle) event.getTarget()).getId());
         if(((Rectangle) event.getTarget()).getId().equals("controlsButtonStandard")) {
-            controlsText1.setText("LEFT: Left RIGHT: Right UP: Rotate CW X: Rotate CCW");
-            controlsText2.setText("DOWN: Soft Drop SPACE: Hard Drop C: Hold");
-            controlsText1.setWrappingWidth(100);
-            controlsText2.setWrappingWidth(117);
+            controlsText1.setText("LEFT: Left\nRIGHT: Right\nUP: Rotate CW\nX: Rotate CCW");
+            controlsText2.setText("DOWN: Soft Drop\nSPACE: Hard Drop\nC: Hold");
+//            controlsText1.setWrappingWidth(100);
+//            controlsText2.setWrappingWidth(117);
         }
         if(((Rectangle) event.getTarget()).getId().equals("controlsButtonWASD")) {
             controlsText1.setText("A: Left\nD: Right\nE: Rotate CW\nQ: Rotate CCW");
             controlsText2.setText("S: Soft Drop\nF: Hard Drop\nW: Hold");
-            controlsText1.setWrappingWidth(95);
-            controlsText2.setWrappingWidth(85);
+//            controlsText1.setWrappingWidth(95);
+//            controlsText2.setWrappingWidth(85);
         }
     }
 
@@ -197,6 +202,7 @@ public class MenuController {
         String userName;
         if (enteredUserName.length() < 7) {
             userName = enteredUserName;
+            //Adds spaces to end of username if it is less than 7 characters
             for (int letters = enteredUserName.length(); letters < 7; letters++) {
                 userName += " ";
             }
@@ -204,6 +210,10 @@ public class MenuController {
             userName = enteredUserName;
         }
         gameSettings.setUser(userName);
+
+        //Passes GameSettings to the TetrisController
+        TetrisController tetrisController = new TetrisController();
+        tetrisController.setGameSettings(gameSettings);
 
         //Load the Tetris window from FXML
         Parent tetrisRoot = FXMLLoader.load(getClass().getResource("Resources/TetrisGame.fxml"));
@@ -227,9 +237,7 @@ public class MenuController {
         final Stage previousStage = (Stage) source.getScene().getWindow();
         previousStage.close();
 
-        //Passes GameSettings to the TetrisController
-        TetrisController tetrisController = new TetrisController();
-        tetrisController.setGameSettings(gameSettings);
+
 
 
     }

@@ -49,8 +49,8 @@ public class ClearLines implements Runnable {
                 //Fills each of the entire rows to be cleared with the proper blocks
                 for (int row : rowsToClear) {
                     for (int col = 0; col < 10; col++) {
-                        int[] screenCoords = tetController.getScreenCoordinates(row,col);
-                        String[] tetrominoColor = new String[]{"1eeaff","fffe21","ff1ee6","1eff5e" ,"ff1e1e","231eff","ff8c1e"};
+                        int[] screenCoords = tetController.getScreenCoordinates(row, col);
+                        String[] tetrominoColor = new String[]{"1eeaff", "fffe21", "ff1ee6", "1eff5e", "ff1e1e", "231eff", "ff8c1e"};
 
                         Rectangle block = null;
                         try {
@@ -59,7 +59,7 @@ public class ClearLines implements Runnable {
                             e.printStackTrace();
                         }
 
-                        if (blockFXArray[row][col] == null){
+                        if (blockFXArray[row][col] == null) {
                             playArea.getChildren().add(block);
                             blockFXArray[row][col] = block;
                         }
@@ -87,9 +87,35 @@ public class ClearLines implements Runnable {
 
         //Briefly pauses the animation with the clear color and glow
         try {
-            TimeUnit.MILLISECONDS.sleep(300);
+            TimeUnit.MILLISECONDS.sleep(150);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        //Creates the block shrinking animation
+        for (int count = 0; count < 8; count++) {
+            for(int row : rowsToClear) {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        for (int col = 0; col < 10; col++) {
+                            //Make block size slightly smaller and adjust position each loop
+                            blockFXArray[row][col].setWidth(blockFXArray[row][col].getWidth() - 2);
+                            blockFXArray[row][col].setHeight(blockFXArray[row][col].getHeight() - 2);
+                            blockFXArray[row][col].setLayoutX(blockFXArray[row][col].getLayoutX() + 1);
+                            blockFXArray[row][col].setLayoutY(blockFXArray[row][col].getLayoutY() + 1);
+                        }
+
+                    }
+                });
+
+
+            }
+            //Briefly pauses the shrinking animation each loop
+            try {
+                TimeUnit.MILLISECONDS.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         //Clears all the blocks and re-updates the grid with the proper blocks. This update will have the rows dropped

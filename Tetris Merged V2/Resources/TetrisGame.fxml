@@ -65,7 +65,7 @@
       </Text>
       <ImageView fitHeight="10.0" fitWidth="220.0" layoutX="180.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-view-order: -1.0;">
          <image>
-            <Image url="@Border-top.png" />
+            <Image url="@Border-top@2x.png" />
          </image>
       </ImageView>
       <Text fx:id="gameOverText" fill="RED" layoutX="120.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-gameover" text=" ">
@@ -96,12 +96,12 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" />
          </children>
       </StackPane>
-      <Text fx:id="gameStatsLabels" fill="WHITE" layoutX="40.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I:O:T:S:Z:J:L:" textAlignment="RIGHT" wrappingWidth="20.0">
+      <Text fx:id="gameStatsLabels" fill="WHITE" layoutX="40.0" layoutY="300.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I:&#10;O:&#10;T:&#10;S:&#10;Z:&#10;J:&#10;L:" textAlignment="RIGHT" wrappingWidth="20.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="gameStats" fill="WHITE" layoutX="80.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000000" wrappingWidth="10.0">
+      <Text fx:id="gameStats" fill="WHITE" layoutX="80.0" layoutY="300.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0&#10;0&#10;0&#10;0&#10;0&#10;0&#10;0" wrappingWidth="95.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -141,7 +141,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="highScore" fill="WHITE" layoutX="531.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text=": 1000    ">
+      <Text fx:id="highScore" fill="WHITE" layoutX="531.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text=": 0000    ">
          <font>
             <Font size="18.0" />
          </font>

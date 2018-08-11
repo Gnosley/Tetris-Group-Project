@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,12 +16,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,6 +78,7 @@ public class TetrisController {
     private Game game;
     private Timer timer;
     private static GameSettings gameSettings;
+    private MediaPlayer themePlayer;
 
     private boolean gameDone = false;
     private boolean newGame;
@@ -168,14 +174,20 @@ public class TetrisController {
             if (event.getCode().equals(gameSettings.getControls()[7])) {
                 if (newGame) {
 
-                    gameStats.setText(0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0 + "\n" + 0);
-                    gameStats.setWrappingWidth(100);
                     currentDifficultyText.setText(gameSettings.getLevel());
                     currentUser.setText(gameSettings.getUser());
 
 
                     Game game = new Game(gameSettings.getUser(), gameSettings.getLevel());
                     this.game = game;
+
+                    String musicFile = "src/TetrisTheme.wav";
+                    Media tetrisTheme = new Media(new File(musicFile).toURI().toString());
+                    this.themePlayer = new MediaPlayer(tetrisTheme);
+                    // Play the media once the stage is shown
+                    themePlayer.setRate(0.97+(gameSettings.getDropSpeedLevel()/10.0)*0.3);
+                    themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    themePlayer.play();
 
                     highScoreUser.setText(game.getHighScoreName());
                     highScore.setText(": " + game.getHighScore());
@@ -691,6 +703,8 @@ public class TetrisController {
                 System.exit(0);
             }
         });
+
+        themePlayer.stop();
 
         //Closes previous window
         final Node source = (Node) event.getSource();

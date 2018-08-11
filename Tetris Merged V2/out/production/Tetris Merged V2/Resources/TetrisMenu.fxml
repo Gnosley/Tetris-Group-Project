@@ -244,8 +244,8 @@
          </styleClass>
       </StackPane>
       <Text layoutX="320.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Difficulty:" />
-      <Text fx:id="controlsText1" fill="WHITE" layoutX="320.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="LEFT: Left RIGHT: Right UP: Rotate CW X: Rotate CCW" wrappingWidth="100.0" />
-      <Text fx:id="controlsText2" fill="WHITE" layoutX="440.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="DOWN: Soft Drop SPACE: Hard Drop C: Hold" wrappingWidth="117.0" />
+      <Text fx:id="controlsText1" fill="WHITE" layoutX="320.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="LEFT: Left&#10;RIGHT: Right&#10;UP: Rotate CW&#10;X: Rotate CCW" wrappingWidth="100.0" />
+      <Text fx:id="controlsText2" fill="WHITE" layoutX="440.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="DOWN: Soft Drop&#10;SPACE: Hard Drop&#10;C: Hold" wrappingWidth="117.0" />
       <TextField fx:id="userTextField" layoutX="240.0" layoutY="136.0" prefWidth="100.0" />
       <Text layoutX="130.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="User Name:" />
    </children>
