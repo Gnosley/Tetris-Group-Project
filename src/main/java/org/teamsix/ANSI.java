@@ -1,7 +1,8 @@
 package org.teamsix;
 
 /**
- * Provides ANSI Escape Sequences for printing colors, moving the cursor, and screen clearing.
+ * Provides ANSI Escape Sequences for printing colors, moving the cursor, and
+ * screen clearing.
  */
 public class ANSI {
     // clear from cursor to end of screen
@@ -26,7 +27,8 @@ public class ANSI {
     public static final String SET_CURSOR_BOT = "\u001B[80B";
 
     /**
-     * Takes an int and returns a String for an ANSI escape sequence. Maps as follows:
+     * Takes an int and returns a String for an ANSI escape sequence. Maps as
+     * follows:
      * <ul> <li> 0 => cyan </li>
      *      <li> 1 => yellow </li>
      *      <li> 2 => purple </li>
@@ -41,15 +43,15 @@ public class ANSI {
      * @return String with an ANSI escape sequence for a color. Nothing if
      * number < 0 or number > 6.
      */
-    public static String color(int colorNum){
+    public static String color(int colorNum) {
         String[] colorCodes = {
-            CYAN,
-            YELLOW,
-            PURPLE,
-            GREEN,
-            RED,
-            BLUE,
-            ORANGE
+                CYAN,
+                YELLOW,
+                PURPLE,
+                GREEN,
+                RED,
+                BLUE,
+                ORANGE
         };
 
         if (0 <= colorNum && colorNum < colorCodes.length) {

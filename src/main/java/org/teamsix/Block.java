@@ -37,17 +37,6 @@ public class Block {
     }
 
     /**
-     * Set method for color
-     *
-     * @param color The color to set the block to. Should be in 0 to 6 inclusive
-     */
-    public void setColor(int color) {
-        if (color >= 0 && color < 7) {
-            this.color = color;
-        }
-    }
-
-    /**
      * Get method for color
      *
      * @return boolean representing if it is a ghost block or not
@@ -75,21 +64,15 @@ public class Block {
     }
 
     /**
-     * Set method for xPosition
+     * Set method for color
      *
-     * @param x New xPosition
+     * @param color The color to set the block to. Should be in 0 to 6
+     *              inclusive
      */
-    public void setXPosition(int x) {
-        xPosition = x;
-    }
-
-    /**
-     * Set method for yPosition
-     *
-     * @param y New yPosition
-     */
-    public void setYPosition(int y) {
-        yPosition = y;
+    public void setColor(int color) {
+        if (color >= 0 && color < 7) {
+            this.color = color;
+        }
     }
 
     /**
@@ -102,11 +85,29 @@ public class Block {
     }
 
     /**
+     * Set method for xPosition
+     *
+     * @param x New xPosition
+     */
+    public void setXPosition(int x) {
+        xPosition = x;
+    }
+
+    /**
      * Get method for yPosition
      *
      * @return yPosition
      */
     public int getYPosition() {
         return yPosition;
+    }
+
+    /**
+     * Set method for yPosition
+     *
+     * @param y New yPosition
+     */
+    public void setYPosition(int y) {
+        yPosition = y;
     }
 }
