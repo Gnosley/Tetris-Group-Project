@@ -89,7 +89,7 @@ public class Console{
         try {
             dropSpeed = scanner.nextInt();
         }
-        catch (Exception e){
+        catch (Exception ignored){
         }
         username = username.trim();
         difficulty = difficulty.trim();

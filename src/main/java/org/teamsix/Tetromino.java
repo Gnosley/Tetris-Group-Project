@@ -76,7 +76,7 @@ public abstract class Tetromino {
     /**
      * Copy constructor for the tetromino after each ghosting
      * @param tetromino: Tetromino
-     * @param isGhost: boolean, either is or isn't a ghost block
+     * @param convertToGhost: boolean, whether or not the copy should be a ghost
      */
     protected Tetromino(Tetromino tetromino, boolean convertToGhost) {
         this.type = tetromino.getType();
