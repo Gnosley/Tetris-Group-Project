@@ -161,11 +161,8 @@ public class Board {
                 counter++;
             }
         }
-        if (counter == 10) { // if all 10 blocks are full
-            return true;
-        } else {
-            return false;
-        }
+        // if all 10 blocks are full, return true
+        return (counter == 10);
     }
 
     /**
