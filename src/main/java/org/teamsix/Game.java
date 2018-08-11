@@ -18,15 +18,13 @@ import java.io.IOException;
  * use its public methods to play a game of Tetris.
  */
 public class Game {
+    private static final int startingX = 3; // where a tetromino should start on
+    private static final int startingY = 0; // the board
     private Tetromino currentTetromino; // the tetromino currently in play
     private Tetromino nextTetromino; // the tetromino to be played next
     private Tetromino ghostTetromino; //  the ghost of the current tetromino
     private Tetromino storedTetromino = null; // the held tetromino
     private TetrominoFactory tetrominoFactory;
-
-    private static final int startingX = 3; // where a tetromino should start on
-    private static final int startingY = 0; // the board
-
     private long gameScore = 0;
     private long linesCleared = 0;
 
@@ -361,10 +359,20 @@ public class Game {
         }
     }
 
+    /**
+     * Getter method for difficulty.
+     *
+     * @return The current tetromino generation difficulty setting.
+     */
     public String getDifficulty() {
         return this.tetrominoFactory.getDifficulty();
     }
 
+    /**
+     * Getter method for username attached to current game.
+     *
+     * @return String with the user's name.
+     */
     public String getUsername() {
         return this.username;
     }
