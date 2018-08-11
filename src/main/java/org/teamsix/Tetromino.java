@@ -382,8 +382,21 @@ public abstract class Tetromino {
         this.rotation = rotation;
     }
 
+    /**
+     * Returns the Tetromino's wallKickData.
+     *
+     * @return A copy of the Tetromino's wallKickData
+     */
     private int[][][] getWallKickData() {
-        return this.wallKickData;
+        int[][][] wallKickDataCopy =
+                new int[wallKickData.length][wallKickData[0].length][wallKickData[0][0].length];
+        for (int i = 0; i < wallKickData.length; i++)
+            for (int j = 0; i < wallKickData[i].length; i++)
+                wallKickDataCopy[i][j] = Arrays.copyOf(wallKickData[i][j],
+                        wallKickData[i][j].length);
+
+
+        return wallKickDataCopy;
     }
 
     /**
