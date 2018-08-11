@@ -273,8 +273,8 @@ public class Game {
      * switch out the current tetromino for the held one
      */
     private void holdMove(){
-        if (isHoldMoveAvailable == true) {
-            if (isHoldOccupied == false) {
+        if (isHoldMoveAvailable) {
+            if (!isHoldOccupied) {
                 // no tetromino is held yet, so it grabs a new one
                 storedTetromino = tetrominoFactory.getTetrominoCopy(currentTetromino);
                 currentTetromino = tetrominoFactory.getTetrominoCopy(nextTetromino);
