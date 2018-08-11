@@ -677,8 +677,8 @@ public class Printer {
     /**
      * Generates a string for the top or bottom border of the board.
      *
-     * @leftChar The String to be printed on the left end of the border.
-     * @leftChar The String to be printed on the right end of the border.
+     * @param leftChar The String to be printed on the left end of the border.
+     * @param rightChar The String to be printed on the right end of the border.
      */
     private String getBoardTopBot(String leftChar, String rightChar) {
         String row = "";
