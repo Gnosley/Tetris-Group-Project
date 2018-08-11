@@ -118,14 +118,13 @@ public class Board {
      * @return gameover boolean
      */
     public boolean isGameDone() {
-        boolean gameOver = false;
         for (int col = 0; col < this.gameBoard[0].length; col++) {
             if (this.gameBoard[3][col] != null) { // ignores top 4 rows (outside
                                                   // of playable area)
                 return true;
             }
         }
-        return gameOver;
+        return false;
     }
 
     /**
