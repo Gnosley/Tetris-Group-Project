@@ -27,7 +27,7 @@ public class Block {
     /**
      * Block copy constructor
      *
-     * @param block
+     * @param block The block to be copied.
      */
     public Block(Block block) {
         this.color = block.getColor();
@@ -39,7 +39,7 @@ public class Block {
     /**
      * Set method for color
      *
-     * @param color
+     * @param color The color to set the block to. Should be in 0 to 6 inclusive
      */
     public void setColor(int color) {
         if (color >= 0 && color < 7) {
