@@ -1,9 +1,9 @@
 package org.teamsix;
 
 
-
 import org.jline.utils.InfoCmp.Capability;
 import org.jline.terminal.Terminal;
+
 import java.lang.String;
 
 /**
@@ -79,21 +79,22 @@ public class Printer {
      * Prints the current game state from the given objects.
      *
      * @param currentTetromino The tetromino currently being played.
-     * @param nextTetromino The tetromino to be played next.
-     * @param ghostTetromino The current Tetromino's ghost.
-     * @param holdTetromino The tetromino currently being held.
-     * @param boardArray  The current board represented as a Block matrix.
-     * @param terminal   The Terminal object used for printing.
-     * @param gameScore  The current game score.
-     * @param linesCleared The amount of lines that have been cleared.
-     * @param holdAvailable A boolean representing if hold is currently
-     * available.
-     * @param tetrominoStats  An array of integers with each tetromino's count.
-     * @param username   A string with the current players name.
-     * @param difficulty A string representing the current distribution
-     * droprate.
-     * @param highscore  The highscore to beat.
-     * @param highscoreName  The name of the player who got the highscore.
+     * @param nextTetromino    The tetromino to be played next.
+     * @param ghostTetromino   The current Tetromino's ghost.
+     * @param holdTetromino    The tetromino currently being held.
+     * @param boardArray       The current board represented as a Block matrix.
+     * @param terminal         The Terminal object used for printing.
+     * @param gameScore        The current game score.
+     * @param linesCleared     The amount of lines that have been cleared.
+     * @param holdAvailable    A boolean representing if hold is currently
+     *                         available.
+     * @param tetrominoStats   An array of integers with each tetromino's
+     *                         count.
+     * @param username         A string with the current players name.
+     * @param difficulty       A string representing the current distribution
+     *                         droprate.
+     * @param highscore        The highscore to beat.
+     * @param highscoreName    The name of the player who got the highscore.
      */
     public void print(Tetromino currentTetromino,
                       Tetromino nextTetromino,
@@ -108,39 +109,38 @@ public class Printer {
                       String username,
                       String difficulty,
                       long highscore,
-                      String highscoreName)
-    {
+                      String highscoreName) {
 
         // move the cursor to the top of the screen to overwrite.
         terminal.writer().print(ANSI.RESET_CURSOR);
 
         // combine the board and the tetrominos played on it
         Block[][] combinedBoard = combine(currentTetromino,
-                                          ghostTetromino,
-                                          boardArray);
+                ghostTetromino,
+                boardArray);
 
         // create arrays for easy printing
         Block[][] holdArray = createBlockArray(holdTetromino);
         Block[][] nextArray = createBlockArray(nextTetromino);
 
         terminal.writer()
-            .println(
-                     centerString("Press Escape Twice to exit." 
-                                    + " Press 'h' for help.",
-                                  CONSOLEWIDTH)
-                     );
+                .println(
+                        centerString("Press Escape Twice to exit."
+                                        + " Press 'h' for help.",
+                                CONSOLEWIDTH)
+                );
 
         String[] rowStrings = new String[CONSOLEHEIGHT];
         // get the strings left of the main play space
         String[] leftStrings = getLeftSide(holdArray, holdAvailable,
-                                           tetrominoStats);
+                tetrominoStats);
         // get the strings representing the main play space
         String[] boardStrings = getBoardStrings(combinedBoard);
         // get the strings right of the main play space
         String[] rightStrings = getRightSide(username, gameScore,
-                                             linesCleared, highscore,
-                                             highscoreName, nextArray,
-                                             difficulty);
+                linesCleared, highscore,
+                highscoreName, nextArray,
+                difficulty);
         // for each row, add left + main + right then print
         for (int i = 0; i < CONSOLEHEIGHT; i++) {
             rowStrings[i] = leftStrings[i] + boardStrings[i] + rightStrings[i];
@@ -160,25 +160,25 @@ public class Printer {
         terminal.writer().print(ANSI.RESET_CURSOR);
         terminal.writer().println(ANSI.CLEARSCREEN);
         String[] helpStrings = {
-            "Welcome to Tetris",
-            "",
-            "",
-            " Implemented By:",
-            "Natalie, Jesse",
-            "Dustin, Murray",
-            "Stephen",
-            "",
-            " Controls:",
-            "     Rotate:                              ",
-            "            Counter Clockwise:  'q'       ",
-            "            Clockwise:          'e'       ",
-            "     Translate:                           ",
-            "            Left:               'a'       ",
-            "            Down:               's'       ",
-            "           Right:               'd'       ",
-            "     Drop:             SPACE or 'f'       ",
-            "     Hold:             TAB   or 'w'       ",
-            "     Quit:             ESC ESC            ",
+                "Welcome to Tetris",
+                "",
+                "",
+                " Implemented By:",
+                "Natalie, Jesse",
+                "Dustin, Murray",
+                "Stephen",
+                "",
+                " Controls:",
+                "     Rotate:                              ",
+                "            Counter Clockwise:  'q'       ",
+                "            Clockwise:          'e'       ",
+                "     Translate:                           ",
+                "            Left:               'a'       ",
+                "            Down:               's'       ",
+                "           Right:               'd'       ",
+                "     Drop:             SPACE or 'f'       ",
+                "     Hold:             TAB   or 'w'       ",
+                "     Quit:             ESC ESC            ",
 
         };
         for (String line : helpStrings) {
@@ -209,8 +209,8 @@ public class Printer {
     /**
      * Centers a string within the given width.
      *
-     * @param inputStr  The String to be centered.
-     * @param width  The width for the string to be centered within.
+     * @param inputStr The String to be centered.
+     * @param width    The width for the string to be centered within.
      * @return A String that is centered, or if the string was longer than the
      * given width, the string that was given.
      */
@@ -233,14 +233,13 @@ public class Printer {
         // can't be evenly centered
         if (leftPadding == rightPadding) {
             return padString + inputStr + padString;
-        }
-        else return padString + inputStr + padString + " ";
+        } else return padString + inputStr + padString + " ";
     }
 
     /**
      * Removes all ANSI codes from string.
      *
-     * @param  inputStr   The String to be stripped.
+     * @param inputStr The String to be stripped.
      * @return A string stripped of ANSI.
      */
     private String stripANSI(String inputStr) {
@@ -282,7 +281,7 @@ public class Printer {
      */
     private String generatePadding(int length) {
         String padString = "";
-        for (int i =0; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             padString += " ";
         }
         return padString;
@@ -292,9 +291,10 @@ public class Printer {
      * Returns an array of strings representing the rows of the left side of the
      * screen to be printed.
      *
-     * @param holdArray The array of arrays with correctly positioned blocks.
+     * @param holdArray           The array of arrays with correctly positioned
+     *                            blocks.
      * @param isHoldMoveAvailable A boolean, true if the player can use hold
-     * move.
+     *                            move.
      * @return Array containing the rows of the left side as string
      * representations. Every String in the array should be Printer.LEFTWIDTH
      * long.
@@ -304,7 +304,7 @@ public class Printer {
                                  int[] tetrominoStats) {
 
         String[] arrayOfRows = new String[CONSOLEHEIGHT];
-        for(int i = 0; i < arrayOfRows.length; i++) {
+        for (int i = 0; i < arrayOfRows.length; i++) {
             arrayOfRows[i] = "";
 
             // Add the timer at the top row
@@ -313,7 +313,7 @@ public class Printer {
             }
 
             // add the holding box
-            else if (i>= HOLDTOP && i <= HOLDBOT) {
+            else if (i >= HOLDTOP && i <= HOLDBOT) {
                 String holdString = getHoldBoxString(i - HOLDTOP, holdArray,
                                                      isHoldMoveAvailable);
                 // calculate the spacing needed before the hold box
@@ -323,7 +323,7 @@ public class Printer {
             }
 
             // The stats
-            else if (i>=STATSTOP && i <= STATSBOT) {
+            else if (i >= STATSTOP && i <= STATSBOT) {
                 arrayOfRows[i] += getStatsString(i - STATSTOP, tetrominoStats);
             }
             // Put blank (filled with spaces) lines in the other rows
@@ -341,11 +341,17 @@ public class Printer {
      */
     private String[] getBoardStrings(Block[][] board) {
         String[] boardStrings = new String[board.length];
-        for(int r = 0; r < board.length - 2; r++) {
-            switch(r) {
-            case 0: boardStrings[r] = getBoardTopBot(TLCHAR, TRCHAR); break;
-            case 21: boardStrings[r] = getBoardTopBot(BLCHAR, BRCHAR); break;
-            default: boardStrings[r] = getBoardRow(board[r + 3], r + 3); break;
+        for (int r = 0; r < board.length - 2; r++) {
+            switch (r) {
+                case 0:
+                    boardStrings[r] = getBoardTopBot(TLCHAR, TRCHAR);
+                    break;
+                case 21:
+                    boardStrings[r] = getBoardTopBot(BLCHAR, BRCHAR);
+                    break;
+                default:
+                    boardStrings[r] = getBoardRow(board[r + 3], r + 3);
+                    break;
             }
         }
         return boardStrings;
@@ -355,14 +361,15 @@ public class Printer {
     /**
      * Returns string representations of rows from the right of the board.
      *
-     * @param username The current player's name.
-     * @param gameScore The current player's score.
-     * @param linesCleared The amount of lines the current player has cleared.
-     * @param highscore The highest score on file.
-     * @param scoreName The name of the person with the highest score on file.
-     * @param nextArray The array representing the next Tetromino.
+     * @param username          The current player's name.
+     * @param gameScore         The current player's score.
+     * @param linesCleared      The amount of lines the current player has
+     *                          cleared.
+     * @param highscore         The highest score on file.
+     * @param scoreName         The name of the person with the highest score on
+     *                          file.
+     * @param nextArray         The array representing the next Tetromino.
      * @param currentDifficulty An integer representing the current difficulty.
-     *
      * @return An array of strings where each string is a row of the right side
      * of the board.
      */
@@ -372,36 +379,45 @@ public class Printer {
                                   String currentDifficulty) {
 
         String[] arrayOfRows = new String[CONSOLEHEIGHT];
-        for (int r=0; r < arrayOfRows.length; r++) {
+        for (int r = 0; r < arrayOfRows.length; r++) {
 
 
             // go through each row and add relevant strings
             switch (r) {
                 // Add welcome
-            case 0:
-                arrayOfRows[r] = centerString("Welcome to Tetris, "
-                                              + username, RIGHTWIDTH);
-                break;
-            case 1: case 2: case 3: case 4: 
-                arrayOfRows[r] = getTetrisString(r - 1);
-                break;
-            case 5:
-                arrayOfRows[r] = getHighScore(highscore,scoreName);
-                break;
-            case 7:
-                arrayOfRows[r] = getCurrentScore(gameScore, highscore);
-                break;
-            case 8:
-                arrayOfRows[r] = getLinesCleared(linesCleared);
-                break;
+                case 0:
+                    arrayOfRows[r] = centerString("Welcome to Tetris, "
+                            + username, RIGHTWIDTH);
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    arrayOfRows[r] = getTetrisString(r - 1);
+                    break;
+                case 5:
+                    arrayOfRows[r] = getHighScore(highscore, scoreName);
+                    break;
+                case 7:
+                    arrayOfRows[r] = getCurrentScore(gameScore, highscore);
+                    break;
+                case 8:
+                    arrayOfRows[r] = getLinesCleared(linesCleared);
+                    break;
 
-            case 9: case 10: case 11: case 12: case 13: case 14:
-                arrayOfRows[r] = getNextBoxString(nextArray, r-9);
-                break;
-            case 19:
-                arrayOfRows[r] = getDifficultyString(currentDifficulty);
-                break;
-            default: arrayOfRows[r] = generatePadding(RIGHTWIDTH);
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                    arrayOfRows[r] = getNextBoxString(nextArray, r - 9);
+                    break;
+                case 19:
+                    arrayOfRows[r] = getDifficultyString(currentDifficulty);
+                    break;
+                default:
+                    arrayOfRows[r] = generatePadding(RIGHTWIDTH);
             }
 
 
@@ -411,6 +427,7 @@ public class Printer {
 
     /**
      * Returns the current time TODO
+     *
      * @return A pretty string representing the current time.
      */
     private String getTimerString() {
@@ -426,13 +443,13 @@ public class Printer {
     private Block[][] createBlockArray(Tetromino tetromino) {
         int xRef = 0, yRef = 0;
         Block[] tetrominoData = new Block[4];
-        if (tetromino != null)  {
+        if (tetromino != null) {
             xRef = tetromino.getXReference();
             yRef = tetromino.getYReference();
             tetrominoData = tetromino.getBlockArray();
         }
         Block[][] tetrominoArray = new Block[4][4];
-        for(Block block:tetrominoData) {
+        for (Block block : tetrominoData) {
             if (block != null) {
                 int x = block.getXPosition();
                 int y = block.getYPosition();
@@ -446,24 +463,24 @@ public class Printer {
      * Combines the board with the current tetromino and its ghost.
      *
      * @param currentTetromino The current tetromino to be played.
-     * @param ghostTetromino The ghost of the current tetromino.
-     * @param boardArray The current game board.
+     * @param ghostTetromino   The ghost of the current tetromino.
+     * @param boardArray       The current game board.
      * @return An array of arrays of blocks representing the current game board
      * with the tetromino being played.
      */
     private Block[][] combine(Tetromino currentTetromino,
-                                Tetromino ghostTetromino,
-                                Block[][] boardArray) {
+                              Tetromino ghostTetromino,
+                              Block[][] boardArray) {
         // Block[][] boardArray = board.getCurrentBoard();
         Block[] cTetrominoArray = currentTetromino.getBlockArray();
         Block[] gTetrominoArray = ghostTetromino.getBlockArray();
 
-        for(Block block:gTetrominoArray) {
+        for (Block block : gTetrominoArray) {
             int x = block.getXPosition();
             int y = block.getYPosition();
             boardArray[y][x] = block;
         }
-        for(Block block:cTetrominoArray) {
+        for (Block block : cTetrominoArray) {
             int x = block.getXPosition();
             int y = block.getYPosition();
             boardArray[y][x] = block;
@@ -476,21 +493,28 @@ public class Printer {
     /**
      * Returns the amount of times a tetromino has been created.
      *
-     * @param type  The type of tetromino to query.
-     * @param tetrominoStats  An ordered int array holding the tetromino stats
+     * @param type           The type of tetromino to query.
+     * @param tetrominoStats An ordered int array holding the tetromino stats
      */
     private int getTetrominoData(int type, int[] tetrominoStats) {
         switch (type) {
-        case 0: case 1: case 2: case 3: case 4: case 5: case 6:
-            return tetrominoStats[type];
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                return tetrominoStats[type];
             // return total if type == 7
-        case 7:
-            int sum = 0;
-            for (int i=0; i < type; i++) {
-                sum += tetrominoStats[i];
-            }
-            return sum;
-        default: return -1;
+            case 7:
+                int sum = 0;
+                for (int i = 0; i < type; i++) {
+                    sum += tetrominoStats[i];
+                }
+                return sum;
+            default:
+                return -1;
         }
     }
 
@@ -498,39 +522,57 @@ public class Printer {
     /**
      * Returns the strings needed to display stats. 0 is the row "S T A T S".
      * The last available row is 11.
+     *
      * @param row Which row to return a string representation of.
      */
     private String getStatsString(int row, int[] tetrominoStats) {
         String tetrominoType = "";
-        String tetrominoColor ="";
+        String tetrominoColor = "";
         int tetrominoStat;
         if (row >= 2 && row <= 8) {
             tetrominoColor = ANSI.color(row - 2);
         }
 
-        switch(row) {
-        default: return generatePadding(LEFTWIDTH);
-        case 0: return centerString("- - S T A T S - -", LEFTWIDTH);
-        case 2: tetrominoType = "I"; break;
-        case 3: tetrominoType = "O"; break;
-        case 4: tetrominoType = "T"; break;
-        case 5: tetrominoType = "S"; break;
-        case 6: tetrominoType = "Z"; break;
-        case 7: tetrominoType = "J"; break;
-        case 8: tetrominoType = "L"; break;
-        case 10: return centerString("Total Tetrominos:", LEFTWIDTH);
-        case 11:
-            return centerString(
-                                formatNumber(
-                                             getTetrominoData(7, tetrominoStats),
-                                             8
-                                             ),
-                                LEFTWIDTH
-                                );
+        switch (row) {
+            default:
+                return generatePadding(LEFTWIDTH);
+            case 0:
+                return centerString("- - S T A T S - -", LEFTWIDTH);
+            case 2:
+                tetrominoType = "I";
+                break;
+            case 3:
+                tetrominoType = "O";
+                break;
+            case 4:
+                tetrominoType = "T";
+                break;
+            case 5:
+                tetrominoType = "S";
+                break;
+            case 6:
+                tetrominoType = "Z";
+                break;
+            case 7:
+                tetrominoType = "J";
+                break;
+            case 8:
+                tetrominoType = "L";
+                break;
+            case 10:
+                return centerString("Total Tetrominos:", LEFTWIDTH);
+            case 11:
+                return centerString(
+                        formatNumber(
+                                getTetrominoData(7, tetrominoStats),
+                                8
+                        ),
+                        LEFTWIDTH
+                );
         }
         String rowStr = tetrominoType
-            + ": "
-            + formatNumber(getTetrominoData(row - 2, tetrominoStats), 6);
+                + ": "
+                + formatNumber(getTetrominoData(row - 2, tetrominoStats), 6);
 
         rowStr = centerString(rowStr, LEFTWIDTH);
         rowStr = tetrominoColor + rowStr + ANSI.RESET;
@@ -541,11 +583,11 @@ public class Printer {
     /**
      * Returns the string representing the given row of the hold box.
      *
-     * @param row The row to be returned
-     * @param holdArray The array of arrays representing the currently held
-     * tetromino.
+     * @param row                 The row to be returned
+     * @param holdArray           The array of arrays representing the currently
+     *                            held tetromino.
      * @param isHoldMoveAvailable A boolean indicating if the player can use the
-     * hold move function.
+     *                            hold move function.
      * @return String representing row of the hold box. Empty string if outside
      * box rows.
      */
@@ -566,12 +608,10 @@ public class Printer {
         // Generate strings
         if (row == 0) {
             return getBoxTopBot(TLCHAR, "", holdString);
-        }
-        else if (row >= 1 && row < 5) {
+        } else if (row >= 1 && row < 5) {
             return generatePadding(1 + BLOCKWIDTH * 4)
-                + getBoxRowString(holdArray[row - 1], true);
-        }
-        else if (row == 5) {
+                    + getBoxRowString(holdArray[row - 1], true);
+        } else if (row == 5) {
             return getBoxTopBot(BLCHAR, "", holdString);
         }
         return "";
@@ -581,20 +621,18 @@ public class Printer {
      * Returns the string representing the given row of the hold box.
      *
      * @param nextArray The array of arrays representing the currently held
-     * tetromino.
-     * @param row  The row to generate a string for.
+     *                  tetromino.
+     * @param row       The row to generate a string for.
      * @return String representing row of the next tetromino box. Empty string
      * if outside box rows.
      */
     private String getNextBoxString(Block[][] nextArray, int row) {
         String nextString = "NEXT";
-        if (row == 0)  {
+        if (row == 0) {
             return getBoxTopBot("", TRCHAR, nextString);
-        }
-        else if (row >= 1 && row < 5) {
+        } else if (row >= 1 && row < 5) {
             return getBoxRowString(nextArray[row - 1], false);
-        }
-        else if (row == 5)  {
+        } else if (row == 5) {
             return getBoxTopBot("", BRCHAR, nextString);
         }
         return "";
@@ -604,43 +642,41 @@ public class Printer {
      * Returns the top and bottom rows of a tetromino box.
      *
      * @param startPiece The string that should start the row.
-     * @param endPiece The string that should end the row.
-     * @param word The string that should be embedded in the border.
+     * @param endPiece   The string that should end the row.
+     * @param word       The string that should be embedded in the border.
      * @return The top or bottom row of a tetromino box.
      */
     private String getBoxTopBot(String startPiece, String endPiece, String word) {
-        String top =  startPiece;
-        for(int i = 0; i < PREVIEWWIDTH; i++) {
+        String top = startPiece;
+        for (int i = 0; i < PREVIEWWIDTH; i++) {
             if (i == 3) {
                 top += word;
-            }
-            else if (i > 3 && i < 3 + 4) {
+            } else if (i > 3 && i < 3 + 4) {
                 // top += word.charAt(i - 3);
-                top+="";
-            }
-            else top += HCHAR;
+                top += "";
+            } else top += HCHAR;
         }
         top += endPiece;
         return top;
     }
 
     /**
-     *  Generates the string representation of a row for the middle of a
-     *  tetromino box.
+     * Generates the string representation of a row for the middle of a
+     * tetromino box.
      *
      * @param boxRow The blocks representing the current row of the box.
-     * @param isLeft boolean, true if generating a box to the left of the board.
+     * @param isLeft boolean, true if generating a box to the left of the
+     *               board.
      * @return String representation of given box row.
      */
     private String getBoxRowString(Block[] boxRow, boolean isLeft) {
         String boxRowString = "";
-        for(Block block:boxRow) {
+        for (Block block : boxRow) {
             boxRowString += getBlockString(block);
         }
         if (isLeft) {
             boxRowString = VCHAR + getBlockString(null) + boxRowString;
-        }
-        else {
+        } else {
             boxRowString = getBlockString(null) + boxRowString + VCHAR;
         }
         return boxRowString;
@@ -660,12 +696,11 @@ public class Printer {
             if (block.getIsGhost()) {
                 Blockchar = GBLKCHAR;
             }
-        }
-        else {
+        } else {
             blockStr += "";
-            Blockchar= " ";
+            Blockchar = " ";
         }
-        for (int i =0; i<BLOCKWIDTH; i++) {
+        for (int i = 0; i < BLOCKWIDTH; i++) {
             blockStr += Blockchar;
         }
         if (block != null) {
@@ -677,16 +712,23 @@ public class Printer {
     /**
      * Generates a string for the top or bottom border of the board.
      *
-     * @param leftChar The String to be printed on the left end of the border.
-     * @param rightChar The String to be printed on the right end of the border.
+     * @param leftChar  The String to be printed on the left end of the border.
+     * @param rightChar The String to be printed on the right end of the
+     *                  border.
      */
     private String getBoardTopBot(String leftChar, String rightChar) {
         String row = "";
-        for(int i= 0; i < BOARDCHARWIDTH; i++) {
-            switch(i) {
-            case 0: row += leftChar; break;
-            case BOARDCHARWIDTH - 1: row += rightChar; break;
-            default: row += HCHAR; break;
+        for (int i = 0; i < BOARDCHARWIDTH; i++) {
+            switch (i) {
+                case 0:
+                    row += leftChar;
+                    break;
+                case BOARDCHARWIDTH - 1:
+                    row += rightChar;
+                    break;
+                default:
+                    row += HCHAR;
+                    break;
             }
         }
         return row;
@@ -695,24 +737,22 @@ public class Printer {
     /**
      * Generates a string representing a row for the board.
      *
-     * @param boardRow   The block array of the row to be processed.
+     * @param boardRow The block array of the row to be processed.
      * @param rowNum   The row number of the board being processed.
      * @return A string representing the given board row.
      */
     private String getBoardRow(Block[] boardRow, int rowNum) {
         String rowString = "";
         // add 3 because top 4 rows are removed
-        if (rowNum == HOLDBOT + 3|| rowNum == HOLDTOP + 3) {
+        if (rowNum == HOLDBOT + 3 || rowNum == HOLDTOP + 3) {
             rowString += VHLSPLIT;
-        }
-        else rowString += VCHAR;
-        for(Block block:boardRow) {
+        } else rowString += VCHAR;
+        for (Block block : boardRow) {
             rowString += getBlockString(block);
         }
-        if (rowNum == PREVIEWBOT + 3|| rowNum == PREVIEWTOP + 3) {
+        if (rowNum == PREVIEWBOT + 3 || rowNum == PREVIEWTOP + 3) {
             rowString += VHRSPLIT;
-        }
-        else rowString += VCHAR;
+        } else rowString += VCHAR;
         return rowString;
     }
 
@@ -720,8 +760,8 @@ public class Printer {
     /**
      * Generates a string for the previous highscore.
      *
-     * @param highscore  The previous highscore.
-     * @param scoreName  The player that achieved the previous highscore.
+     * @param highscore The previous highscore.
+     * @param scoreName The player that achieved the previous highscore.
      */
     private String getHighScore(long highscore, String scoreName) {
         String highscoreStr = "Score to Beat: " + formatNumber(highscore, 9);
@@ -732,15 +772,15 @@ public class Printer {
         }
 
         return ANSI.RED + highscoreStr + ANSI.RESET
-            + ANSI.GREEN + scoreName + ANSI.RESET;
+                + ANSI.GREEN + scoreName + ANSI.RESET;
     }
 
 
     /**
      * Generates a string for the current game score.
      *
-     * @param gameScore  The current score.
-     * @param highscore  The previous highscore.
+     * @param gameScore The current score.
+     * @param highscore The previous highscore.
      * @return A pretty string of the current score.
      */
     private String getCurrentScore(long gameScore, long highscore) {
@@ -750,19 +790,18 @@ public class Printer {
 
         if (gameScore >= highscore) {
             return ANSI.YELLOW + scoreStr + ANSI.RESET;
-        }
-        else return scoreStr;
+        } else return scoreStr;
     }
 
     /**
      * Produces a string representation for lines cleared.
      *
-     * @param linesCleared  The amount of lines that have been cleared.
+     * @param linesCleared The amount of lines that have been cleared.
      * @return Nicely formatted string for the current lines cleared.
      */
     private String getLinesCleared(long linesCleared) {
         return centerString("Lines Cleared: "
-                            + formatNumber(linesCleared, 9), RIGHTWIDTH);
+                + formatNumber(linesCleared, 9), RIGHTWIDTH);
     }
 
     /**
@@ -773,12 +812,13 @@ public class Printer {
      */
     private String getDifficultyString(String currentDifficulty) {
         return centerString("Current Difficulty: "
-                            + currentDifficulty, RIGHTWIDTH);
+                + currentDifficulty, RIGHTWIDTH);
     }
 
     /**
      * Returns a row of the Tetris ASCII ART.
-     * @param row  The row of the ART to get, index 0.
+     *
+     * @param row The row of the ART to get, index 0.
      * @return The string corresponding to given row. Returns null if not a
      * valid row.
      */
