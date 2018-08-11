@@ -364,7 +364,7 @@ public class Game {
             usernameToWrite += " ";
         }
         if (usernameToWrite.length() > 7) {
-            usernameToWrite.substring(0, 7);
+            usernameToWrite = usernameToWrite.substring(0, 7);
         }
         //this is the string that needs to be written to the text file
         String newUserScore = username + Long.toString(gameScore);
