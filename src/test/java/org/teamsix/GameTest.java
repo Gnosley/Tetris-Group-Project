@@ -66,18 +66,18 @@ public class GameTest {
           
             boolean fileExists = true;
             try {
-                Scanner input1 = new Scanner (new File ("Highscore.txt"));
+                Scanner input1 = new Scanner (new File ("HighScore.txt"));
             }
             catch (FileNotFoundException e) {
                 try {
-                    Scanner input2 = new Scanner (new File ("Highscore.txt"));
+                    Scanner input2 = new Scanner (new File ("HighScore.txt"));
                 }
                 catch (FileNotFoundException ex) {
                     fileExists = false;
                 }
             }
             finally {
-                Assert.assertEquals("The file does not exists and is not created.", fileExists, true);
+                Assert.assertEquals("The file does not exists and is not created.", true, fileExists);
             }
         }        
 }
