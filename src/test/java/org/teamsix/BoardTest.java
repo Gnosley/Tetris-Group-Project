@@ -33,11 +33,11 @@ public class BoardTest {
         TetrominoFactory tetrominoFactory = new TetrominoFactory("EASY", 0, 0);
         Tetromino t1 = tetrominoFactory.getTetromino(5,10,1,false);
         boolean clearCheck1 = b1.checkMove(t1);
-        Assert.assertSame("Move should be valid", clearCheck1, true);
+        Assert.assertSame("Move should be valid", true, clearCheck1);
         b1.updateBoard(t1);
         Tetromino t2 = tetrominoFactory.getTetrominoCopy(t1);
         boolean clearCheck2 = b1.checkMove(t2);
-        Assert.assertSame("Move should be invalid", clearCheck2, false);
+        Assert.assertSame("Move should be invalid", false, clearCheck2);
 
     }
 
@@ -47,10 +47,10 @@ public class BoardTest {
         TetrominoFactory tetrominoFactory = new TetrominoFactory("EASY", 0, 0);
         Tetromino t1 = tetrominoFactory.getTetromino(5,3,1,false);
         boolean overCheck1 = b1.isGameDone();
-        Assert.assertSame("Board is playable - game is not over", overCheck1, false);
+        Assert.assertSame("Board is playable - game is not over", false, overCheck1);
         b1.updateBoard(t1);
         boolean overCheck2 = b1.isGameDone();
-        Assert.assertSame("Board no longer playable - Game is over", overCheck2, true);
+        Assert.assertSame("Board no longer playable - Game is over", true, overCheck2);
 
     }
 }
