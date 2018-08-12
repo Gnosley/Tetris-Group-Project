@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -61,7 +62,7 @@ public class TetrisController {
     private Text highScore;
 
     @FXML
-    private Text gameOverText;
+    private Label gameOverText;
 
     @FXML
     private Text startGameText;
@@ -210,7 +211,8 @@ public class TetrisController {
 
                     //Sequence of code that runs when a new game is started after a gameover
                     if (gameDone) {
-                        gameOverText.setText(" ");
+//                        gameOverText.setText(" ");
+                        gameOverText.setVisible(false);
                         clearRows();
                         playArea.getChildren().remove(nextTetrominoGraphic);
                         gameDone = false;
@@ -321,7 +323,8 @@ public class TetrisController {
         //Displays Game Over text if the game has ended
         if(gameDone) {
             game.writeScoreToFile();
-            gameOverText.setText("Game Over");
+//            gameOverText.setText("Game Over");
+            gameOverText.setVisible(true);
             gameOverText.toFront();
             startGameText.setLayoutX(43);
             startGameText.setLayoutY(35);

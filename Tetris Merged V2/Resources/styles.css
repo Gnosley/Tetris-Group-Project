@@ -60,8 +60,8 @@
 .txt-gameover {
     -fx-font-family: Century Gothic;
     -fx-fill: #ffffff;
-    -fx-font-size: 64px;
-    -fx-view-order: 1.0;
+    -fx-font-size: 48px;
+    -fx-view-order: -1.0;
 }
 
 .btn-tetris {

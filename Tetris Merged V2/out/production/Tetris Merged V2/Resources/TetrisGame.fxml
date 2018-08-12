@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -68,7 +70,7 @@
             <Image url="@Border-top@2x.png" />
          </image>
       </ImageView>
-      <Text fx:id="gameOverText" fill="RED" layoutX="120.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-gameover" text=" ">
+      <Text fx:id="gameOverTextOld" fill="RED" layoutX="120.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-gameover" text=" ">
          <font>
             <Font size="64.0" />
          </font>
@@ -146,5 +148,11 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <MediaView fitHeight="200.0" fitWidth="200.0" layoutX="6.0" />
+      <Label fx:id="gameOverText" layoutX="185.0" layoutY="280.0" style="-fx-background-color: white;" text=" Game Over " textFill="#c92c2c" visible="false">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
