@@ -3,7 +3,7 @@
 }
 
 .btn-primary {
-    -fx-font-family: Impact;
+    -fx-font-family: Century Gothic;
 
 }
 
@@ -16,7 +16,7 @@
 }
 
 .btn-secondary {
-    -fx-font-family: Impact;
+    -fx-font-family: Century Gothic;
 }
 
 .btn-secondary Rectangle {
@@ -40,7 +40,7 @@
 }
 
 .heading-settings {
-    -fx-font-family: Impact;
+    -fx-font-family: Century Gothic;
     -fx-fill: #c4f0f5;
     -fx-font-size: 18px;
 }
@@ -66,7 +66,7 @@
 
 .btn-tetris {
     -fx-font-size: 13px;
-    -fx-font-family: Impact;
+    -fx-font-family: Century Gothic;
 
 }
 

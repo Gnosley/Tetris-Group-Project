@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -73,8 +71,6 @@ public class TetrisController {
     private StackPane ghostTetrominoGraphic;
     private StackPane storedTetrominoGraphic;
 
-    private long startTime = 0;
-
     private Game game;
     private Timer timer;
     private static GameSettings gameSettings;
@@ -96,11 +92,12 @@ public class TetrisController {
     private int storedBoxLayoutX = 50;
     private int storedBoxLayoutY = 60;
 
+
+
     /**
      * Initializes values when Tetris window opens
      */
     public void initialize() {
-        this.blockFXArray = new Rectangle[24][10];
         newGame = true;
         Timer timer = new Timer();
         this.timer = timer;
@@ -172,63 +169,57 @@ public class TetrisController {
 
             //Enter: New Game
             if (event.getCode().equals(gameSettings.getControls()[7])) {
-                if (newGame) {
-
-                    currentDifficultyText.setText(gameSettings.getLevel());
-                    currentUser.setText(gameSettings.getUser());
-
-
+                //Sequence of code that runs when a new game is started for first time or after a gameover
+                if(newGame || gameDone) {
                     Game game = new Game(gameSettings.getUser(), gameSettings.getLevel());
                     this.game = game;
+                    startGameText.setText(" ");
 
-                    String musicFile = "src/TetrisTheme.wav";
-                    Media tetrisTheme = new Media(new File(musicFile).toURI().toString());
-                    this.themePlayer = new MediaPlayer(tetrisTheme);
-                    // Play the media once the stage is shown
-                    themePlayer.setRate(0.97+(gameSettings.getDropSpeedLevel()/10.0)*0.3);
-                    themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                    themePlayer.play();
+                    //Sequence of code that runs when a new game is started for first time
+                    if (newGame) {
+                        currentDifficultyText.setText(gameSettings.getLevel());
+                        currentUser.setText(gameSettings.getUser());
 
-                    highScoreUser.setText(game.getHighScoreName());
-                    highScore.setText(": " + game.getHighScore());
+                        String musicFile = "src/TetrisTheme.wav";
+                        Media tetrisTheme = new Media(new File(musicFile).toURI().toString());
+                        this.themePlayer = new MediaPlayer(tetrisTheme);
+                        // Play the media at the desired rate on a loop
+                        themePlayer.setRate(0.85 + (gameSettings.getDropSpeedLevel() / 10.0) * 0.3);
+                        themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                        themePlayer.play();
 
-                    this.clearingRowsObs = new SimpleBooleanProperty();
+                        highScoreUser.setText(game.getHighScoreName());
+                        highScore.setText(": " + game.getHighScore());
 
-                    clearingRowsObs.setValue(false);
-                    clearingRowsObs.addListener(new ChangeListener<Boolean>() {
-                        public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
-                            if (new_val == true) {
-                                clearingRowsObs.setValue(false);
-                                clearingRows = false;
+                        clearingRowsObs = new SimpleBooleanProperty();
 
-                                generateTetromino();
-                                dropPieces();
+                        clearingRowsObs.setValue(false);
+                        clearingRowsObs.addListener(new ChangeListener<Boolean>() {
+                            public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
+                                if (new_val == true) {
+                                    clearingRowsObs.setValue(false);
+                                    clearingRows = false;
+
+                                    generateTetromino();
+                                    dropPieces();
+                                }
                             }
-                        }
-                    });
+                        });
+                        newGame = false;
+                    }
 
-                    startGameText.setText(" ");
-                    startTime = System.currentTimeMillis();
-                    generateTetromino();
-                    dropPieces();
-                    newGame = false;
-                }
+                    //Sequence of code that runs when a new game is started after a gameover
+                    if (gameDone) {
+                        gameOverText.setText(" ");
+                        clearRows();
+                        playArea.getChildren().remove(nextTetrominoGraphic);
+                        gameDone = false;
+                    }
 
-                if (gameDone) {
-                    System.out.println(gameSettings.getLevel());
-                    startGameText.setText(" ");
-                    startTime = System.currentTimeMillis();
-                    Game game = new Game(gameSettings.getUser(), gameSettings.getLevel());
-                    this.game = game;
-                    gameOverText.setText(" ");
-
-                    clearRows();
-                    playArea.getChildren().remove(nextTetrominoGraphic);
+                    //Sequence of code that runs when a new game is started for first time or after a gameover
                     this.blockFXArray = new Rectangle[24][10];
-
                     generateTetromino();
                     dropPieces();
-                    gameDone = false;
                 }
             }
         }
@@ -279,8 +270,6 @@ public class TetrisController {
         boolean canMove = game.tryMove(moveType);
         boolean removeStored = false;
 
-        Block[][] oldBoard = game.getPreClearedBoard();
-
         //Checks if a row needs to be cleared. Sets boolean value and cancels the current timer
         if(game.getRowsToClear().size() > 0) {
             clearingRows = true;
@@ -295,7 +284,7 @@ public class TetrisController {
         }
 
         //Remove the existing Tetromino graphics if the move was a drop, a hold, or if canMove is false
-        if (moveType == 'f' || moveType == 'w' || !canMove) {
+        if (moveType == 'f' || moveType == 'w' || (!canMove && moveType == 's')) {
             //Remove the stored Tetromino graphic only if a hold move was input
             if(moveType == 'w') {
                 removeStored = true;
@@ -309,18 +298,18 @@ public class TetrisController {
         }
 
         //generate new Tetromino graphics and update the board if the move was a drop, a hold, or if canMove is false
-        if (moveType == 'f' || moveType == 'w' || !canMove) {
+        if (moveType == 'f' || moveType == 'w' || (!canMove && moveType == 's')) {
             gameStats.setText(game.getPieceStats()[0] + "\n" + game.getPieceStats()[1] + "\n"
                     + game.getPieceStats()[2] + "\n" + game.getPieceStats()[3] + "\n" + game.getPieceStats()[4]
                     + "\n" + game.getPieceStats()[5] + "\n" + game.getPieceStats()[6]);
 
             //Clears block graphics from a row
             if (game.getRowsToClear().size() > 0) {
-                updateBoardFX(oldBoard);
-                clearRows(oldBoard);
+                updateBoardFX(game.getPreClearedBoard());
+                clearRows(game.getPreClearedBoard());
             } else {
                 //Updates the board block graphics
-                updateBoardFX();
+                updateBoardFX(game.getBoard());
             }
 
             if(!gameDone && !clearingRows) {
@@ -479,30 +468,14 @@ public class TetrisController {
     }
 
     /**
-     * Updates all blocks on the grid. Matches blocks with the current board object
-     */
-    public void updateBoardFX() {
-        Block[][] currentBoard = game.getBoard();
-        for(int row = 0; row < currentBoard.length; row++){
-            for(int col = 0; col < currentBoard[0].length; col++){
-                if (currentBoard[row][col] != null) {
-                    int blockColor = currentBoard[row][col].getColor();
-                    int[] screenCoords = getScreenCoordinates(row,col);
-                    addBlock(screenCoords[0], screenCoords[1], blockColor);
-                }
-            }
-        }
-    }
-
-    /**
      * Updates all blocks on the grid to match the board before a line was cleared.
      * Matches blocks with the previous board object
      */
-    public void updateBoardFX(Block[][] oldBoard) {
-        for(int row = 0; row < oldBoard.length; row++){
-            for(int col = 0; col < oldBoard[0].length; col++){
-                if (oldBoard[row][col] != null) {
-                    int blockColor = oldBoard[row][col].getColor();
+    public void updateBoardFX(Block[][] board) {
+        for(int row = 0; row < board.length; row++){
+            for(int col = 0; col < board[0].length; col++){
+                if (board[row][col] != null) {
+                    int blockColor = board[row][col].getColor();
                     int[] screenCoords = getScreenCoordinates(row,col);
                     addBlock(screenCoords[0], screenCoords[1], blockColor);
                 }
@@ -547,7 +520,7 @@ public class TetrisController {
         linesClearedText.setText(Long.toString(game.getLinesCleared()));
 
         //Update the block graphics on the board
-        updateBoardFX();
+        updateBoardFX(game.getBoard());
         //Resets the array of rows to clear
         game.resetRowsToClear();
     }
@@ -560,7 +533,7 @@ public class TetrisController {
         game.getRowsToClear();
 
         //Creates new thread to perform the ClearLines Class animation
-        ClearLines C1 = new ClearLines(game.getBoard(), oldBoard, game.getRowsToClear(), blockFXArray, playArea);
+        ClearLines C1 = new ClearLines(game.getBoard(), game.getRowsToClear(), blockFXArray, playArea);
         C1.start();
 
         //Update score and lines cleared text
@@ -704,12 +677,13 @@ public class TetrisController {
             }
         });
 
-        themePlayer.stop();
+        if(themePlayer != null) {
+            themePlayer.stop();
+        }
 
         //Closes previous window
         final Node source = (Node) event.getSource();
         final Stage previousStage = (Stage) source.getScene().getWindow();
         previousStage.close();
     }
-
 }

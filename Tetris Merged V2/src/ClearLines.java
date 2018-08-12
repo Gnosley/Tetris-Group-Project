@@ -20,7 +20,7 @@ public class ClearLines implements Runnable {
     private Block[][] currentBoard;
     private Block[][] oldBoard;
 
-    ClearLines(Block[][] currentBoard, Block[][] oldBoard, ArrayList<Integer> rowsToClear, Rectangle[][] blockFXArray, AnchorPane playArea) {
+    ClearLines(Block[][] currentBoard, ArrayList<Integer> rowsToClear, Rectangle[][] blockFXArray, AnchorPane playArea) {
         this.rowsToClear = new ArrayList<>(rowsToClear);
         this.blockFXArray = blockFXArray;
         this.playArea = playArea;

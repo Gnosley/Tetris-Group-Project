@@ -4,22 +4,17 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -36,9 +31,6 @@ public class MenuController {
     private Rectangle controlsButtonStandard;
 
     @FXML
-    private Rectangle newGame;
-
-    @FXML
     private Text controlsText1;
 
     @FXML
@@ -50,9 +42,7 @@ public class MenuController {
     private Rectangle currentDropSpeedButton = dropSpeedButton1;
     private Rectangle currentLevelButton = EASY;
     private Rectangle currentControlsButton = controlsButtonStandard;
-    //private int currentDifficulty;
     private GameSettings gameSettings;
-    private int dropSpeed;
 
     /**
      * Initializes values when Menu window opens
@@ -79,7 +69,6 @@ public class MenuController {
      */
     @FXML
     protected void handleNewGameButtonAction(MouseEvent event) {
-//        newGame.setFill(Color.web("ff481e"));
         try {
             loadGame(event);
         } catch (IOException e) {
@@ -179,14 +168,10 @@ public class MenuController {
         if(((Rectangle) event.getTarget()).getId().equals("controlsButtonStandard")) {
             controlsText1.setText("LEFT: Left\nRIGHT: Right\nUP: Rotate CW\nX: Rotate CCW");
             controlsText2.setText("DOWN: Soft Drop\nSPACE: Hard Drop\nC: Hold");
-//            controlsText1.setWrappingWidth(100);
-//            controlsText2.setWrappingWidth(117);
         }
         if(((Rectangle) event.getTarget()).getId().equals("controlsButtonWASD")) {
             controlsText1.setText("A: Left\nD: Right\nE: Rotate CW\nQ: Rotate CCW");
             controlsText2.setText("S: Soft Drop\nF: Hard Drop\nW: Hold");
-//            controlsText1.setWrappingWidth(95);
-//            controlsText2.setWrappingWidth(85);
         }
     }
 
