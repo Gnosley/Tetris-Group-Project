@@ -7,6 +7,9 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.*;
 
+/**
+ * JUnit tests for the Console class
+ **/ 
 public class ConsoleTest {
 
     @Test

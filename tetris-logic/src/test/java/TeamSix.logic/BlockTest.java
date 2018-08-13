@@ -3,8 +3,12 @@ package TeamSix.logic;
 import junit.framework.Assert;
 import org.junit.Test;
 
+/**
+ * JUnit testing for the Block class
+ **/
 public class BlockTest {
 
+    //tests for correct y block position
     @Test
     public void testGetBlockYPositionGetsBlockYPosition() {
         Block b1 = new Block(0, 0, 3, false);
@@ -13,6 +17,7 @@ public class BlockTest {
         Assert.assertEquals("getYPosition does not return yPosition", 20, b2.getYPosition());
     }
 
+    //test for the correct x block position
     @Test
     public void testGetBlockXPositionGetsBlockXPosition() {
         Block b1 = new Block(0, 0, 0, false);
@@ -21,6 +26,7 @@ public class BlockTest {
         Assert.assertEquals("getXPosition does not return xPosition", 4, b2.getXPosition());
     }
 
+    //tests for the correct colour of the block
     @Test
     public void testGetBlockColorGetsBlockColor() {
         Block b1 = new Block(2, 0, 0, false);
@@ -29,6 +35,7 @@ public class BlockTest {
         Assert.assertEquals("getColor does not return color", 6, b2.getColor());
     }
 
+    //tests for the correct ghost state
     @Test
     public void testGetBlockIsGhostGetsGhostBool() {
         Block b1 = new Block(0, 0, 0, false);
@@ -37,6 +44,7 @@ public class BlockTest {
         Assert.assertEquals("Get ghost does not return isGhost", true, b2.getIsGhost());
     }
 
+    //tests for the correct copying through the copy constructor
     @Test
     public void testBlockConstructorConstructsBlock() {
         Block b1 = new Block(0, 0, 0, false);
@@ -54,6 +62,7 @@ public class BlockTest {
 
     }
 
+    //tests for the correct setting of colour after construction
     @Test
     public void testSetColorSetsColor() {
         Block b1 = new Block(3, 7, 2, false);
@@ -76,6 +85,7 @@ public class BlockTest {
         Assert.assertEquals("Block color is not set properly.", 6, b2.getColor());
     }
 
+    //tests for the correct setting of ghost state after construction
     @Test
     public void testSetIsGhostSetsIsGhost() {
         Block b1 = new Block(3, 7, 2, false);
@@ -115,7 +125,7 @@ public class BlockTest {
         Assert.assertEquals("Block yPosition is not set properly.", 5, b2.getYPosition());
     }
 
-
+    //tests the return functionality of a copied block
     @Test
     public void testCopyConstructorReturnsCopy() {
 
