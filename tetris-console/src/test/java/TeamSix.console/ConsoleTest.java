@@ -8,8 +8,8 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * JUnit tests for the Game class
- **/
+ * JUnit tests for the Console class
+ **/ 
 public class ConsoleTest {
 
     @Test
