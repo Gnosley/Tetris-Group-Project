@@ -1,5 +1,6 @@
 # Created By
 Jesse Francis, Natalie Dean, Dustin Doell, Stephen Ng, Murray Evans
+
 Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2) 
 
 # Installing Maven
@@ -70,10 +71,10 @@ install the game.
 
 # Testing
 The majority of tests are stored in the `tetris-logic` module.
-They are in the `Tetris-Group-Project\tetris-logic\src\test\java\Team-Six.logic\` directory.
+They are in the `Tetris-Group-Project\tetris-logic\src\test\java\TeamSix.logic\` directory.
 
 There is also one test in the `tetris-console` module.
-It is located at `Tetris-Group-Project\tetris-console\src\test\java\Team-Six.console\ConsoleTest.java`
+It is located at `Tetris-Group-Project\tetris-console\src\test\java\TeamSix.console\ConsoleTest.java`
 
 #### To Test:
 Make sure your command prompt is at `Tetris-Group-Project` as in step 2. of _Running The Project_.
