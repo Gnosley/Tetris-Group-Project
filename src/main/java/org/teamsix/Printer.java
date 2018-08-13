@@ -314,6 +314,7 @@ public class Printer {
 
             // add the holding box
             else if (i >= HOLDTOP && i <= HOLDBOT) {
+
                 String holdString = getHoldBoxString(i - HOLDTOP, holdArray,
                                                      isHoldMoveAvailable);
                 // calculate the spacing needed before the hold box
@@ -412,6 +413,9 @@ public class Printer {
                 case 13:
                 case 14:
                     arrayOfRows[r] = getNextBoxString(nextArray, r - 9);
+                    int padSize = stripANSI(arrayOfRows[r]).length();
+                    padSize = RIGHTWIDTH - padSize;
+                    arrayOfRows[r] += generatePadding(padSize);
                     break;
                 case 19:
                     arrayOfRows[r] = getDifficultyString(currentDifficulty);
@@ -426,7 +430,7 @@ public class Printer {
     }
 
     /**
-     * Returns the current time TODO
+     * Returns the current time UNIMPLEMENTED
      *
      * @return A pretty string representing the current time.
      */
