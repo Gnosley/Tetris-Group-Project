@@ -330,11 +330,14 @@ public class Game {
         this.updateLinesCleared(numLinesCleared);
         this.updateGameScore(numLinesCleared);
         board.resetNumLinesCleared();
+
+        if(!board.isGameDone()){    //checks to see if game is over
         this.currentTetromino = this.nextTetromino;
         this.nextTetromino = tetrominoFactory.getTetromino(); // initialize a new random Tetromino
         this.ghostTetromino = tetrominoFactory.getTetrominoCopy(currentTetromino, true);
         this.ghostTetromino = positionGhost(board);
         isHoldMoveAvailable = true; //resets ability to hold piece
+        }
     }
 
     /**
