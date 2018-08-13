@@ -1,4 +1,4 @@
-#Installing Maven
+# Installing Maven
  1. Go to [The Maven Download Page](https://maven.apache.org/download.cgi) and download 
  [apache-maven-3.5.4-bin.zip](http://apache.mirror.rafal.ca/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip)
  2. Unzip to a location of your choosing. i.e., `C:\Program Files\apache-maven-3.5.4\`
