@@ -84,7 +84,7 @@ public class Board {
      * @return boolean indicating if new position is clear
      */
     public boolean checkMove(Tetromino movedTetromino) {
-        boolean canMove = false;
+        boolean canMove = true;
         boolean[] checkArray = new boolean[4];
         Block[] tetrominoBlockArray = movedTetromino.getBlockArray();
         for (int b = 0; b < tetrominoBlockArray.length; b++) {
@@ -98,17 +98,19 @@ public class Board {
                                           // move for the specific block is
                                           // valid.
                 }
-            } else {
+            }
+            else {
                 // one of the blocks is outside of the bounds of the board
-                return canMove = false;
+                return !canMove;
             }
         }
+
         for (int i = 0; i < checkArray.length; i++) {
             if (!checkArray[i]) { // check for invalid move
-                return canMove = false;
+                return !canMove;
             }
         }
-        return canMove = true; // otherwise, return move is valid
+        return canMove; // otherwise, return move is valid
     }
 
     /**
