@@ -1,3 +1,7 @@
+# Created By
+Jesse Francis, Natalie Dean, Dustin Doell, Stephen Ng, Murray Evans
+Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2) 
+
 # Installing Maven
  1. Go to [The Maven Download Page](https://maven.apache.org/download.cgi) and download 
  [apache-maven-3.5.4-bin.zip](http://apache.mirror.rafal.ca/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip)
