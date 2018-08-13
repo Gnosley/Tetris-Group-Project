@@ -100,6 +100,7 @@ public class BlockTest {
     }
 
     @Test
+    //tests for the correct setting of block's x position
     public void testSetXPositionSetsXPosition() {
         Block b1 = new Block(3, 7, 2, false);
         Block b2 = new Block(3, 7, 2, true);
@@ -113,6 +114,7 @@ public class BlockTest {
     }
 
     @Test
+    //tests for the correct setting of block's y position
     public void testSetYPositionSetsYPosition() {
         Block b1 = new Block(3, 7, 2, false);
         Block b2 = new Block(3, 7, 2, true);
