@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This class executes code to create the clear lines animation
+ */
 public class ClearLines implements Runnable {
 
     private AnchorPane playArea;
@@ -140,6 +143,9 @@ public class ClearLines implements Runnable {
         });
     }
 
+    /**
+     * Starts the thread
+     */
     public void start () {
         if (t == null) {
             t = new Thread (this);

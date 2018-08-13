@@ -181,6 +181,7 @@ public class TetrisController {
                         currentDifficultyText.setText(gameSettings.getLevel());
                         currentUser.setText(gameSettings.getUser());
 
+                        //Load the tetris theme .wav file into a MediaPlayer object
                         String musicFile = "src/TetrisTheme.wav";
                         Media tetrisTheme = new Media(new File(musicFile).toURI().toString());
                         this.themePlayer = new MediaPlayer(tetrisTheme);
@@ -189,11 +190,12 @@ public class TetrisController {
                         themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
                         themePlayer.play();
 
+                        //Set high score texts
                         highScoreUser.setText(game.getHighScoreName());
                         highScore.setText(": " + game.getHighScore());
 
+                        //Observable value listener that runs a sequence of code when the ClearLines function ends
                         clearingRowsObs = new SimpleBooleanProperty();
-
                         clearingRowsObs.setValue(false);
                         clearingRowsObs.addListener(new ChangeListener<Boolean>() {
                             public void changed(ObservableValue ov, Boolean old_val, Boolean new_val) {
@@ -206,12 +208,12 @@ public class TetrisController {
                                 }
                             }
                         });
+
                         newGame = false;
                     }
 
                     //Sequence of code that runs when a new game is started after a gameover
                     if (gameDone) {
-//                        gameOverText.setText(" ");
                         gameOverText.setVisible(false);
                         clearRows();
                         playArea.getChildren().remove(nextTetrominoGraphic);
@@ -323,7 +325,6 @@ public class TetrisController {
         //Displays Game Over text if the game has ended
         if(gameDone) {
             game.writeScoreToFile();
-//            gameOverText.setText("Game Over");
             gameOverText.setVisible(true);
             gameOverText.toFront();
             startGameText.setLayoutX(43);
@@ -557,6 +558,7 @@ public class TetrisController {
 
         String[] tetrominoColor = new String[]{"1eeaff","fffe21","ff1ee6","1eff5e" ,"ff1e1e","231eff","ff8c1e"};
 
+        //Loads the block FXML file
         Rectangle block = null;
         try {
             block = FXMLLoader.load(getClass().getResource("Resources/Block.fxml"));
@@ -566,11 +568,13 @@ public class TetrisController {
 
         int[] gridCoords = getGridCoordinates(layoutY, layoutX);
 
+        //Adds the block if the location in the blockFXArray is null
         if (blockFXArray[gridCoords[1]][gridCoords[0]] == null){
             playArea.getChildren().add(block);
             blockFXArray[gridCoords[1]][gridCoords[0]] = block;
         }
 
+        //Sets the blocks new location
         block.setLayoutX(layoutX);
         block.setLayoutY(layoutY);
         block.setFill(Color.web(tetrominoColor[blockColor]));
@@ -588,6 +592,7 @@ public class TetrisController {
 
         String[] tetrominoColor = new String[]{"1eeaff","fffe21","ff1ee6","1eff5e" ,"ff1e1e","231eff","ff8c1e"};
 
+        //Loads the block FXML file
         Rectangle block = null;
         try {
             block = FXMLLoader.load(getClass().getResource("Resources/Block.fxml"));
@@ -597,11 +602,13 @@ public class TetrisController {
 
         int[] gridCoords = getGridCoordinates(layoutY, layoutX);
 
+        //Adds the block if the location in the blockFXArray is null
         if (blockFXArray[gridCoords[1]][gridCoords[0]] == null){
             playArea.getChildren().add(block);
             blockFXArray[gridCoords[1]][gridCoords[0]] = block;
         }
 
+        //Sets the blocks new location
         block.setLayoutX(layoutX);
         block.setLayoutY(layoutY);
         block.setFill(Color.web(tetrominoColor[blockColor]));
@@ -680,6 +687,7 @@ public class TetrisController {
             }
         });
 
+        //Stops the music if it is currently playing
         if(themePlayer != null) {
             themePlayer.stop();
         }
