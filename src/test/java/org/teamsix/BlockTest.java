@@ -8,42 +8,42 @@ public class BlockTest {
     @Test
     public void testGetBlockYPositionGetsBlockYPosition() {
         Block b1 = new Block(0, 0, 3, false);
-        Assert.assertEquals("getYPosition does not return yPosition",b1.getYPosition(), 3);
+        Assert.assertEquals("getYPosition does not return yPosition", 3, b1.getYPosition());
         Block b2 = new Block(0, 0, 20, false);
-        Assert.assertEquals("getYPosition does not return yPosition",b2.getYPosition(), 20);
+        Assert.assertEquals("getYPosition does not return yPosition", 20, b2.getYPosition());
     }
 
     @Test
     public void testGetBlockXPositionGetsBlockXPosition() {
         Block b1 = new Block(0, 0, 0, false);
-        Assert.assertEquals("getXPosition does not return xPosition",b1.getXPosition(), 0);
+        Assert.assertEquals("getXPosition does not return xPosition", 0, b1.getXPosition());
         Block b2 = new Block(0, 4, 0, false);
-        Assert.assertEquals("getXPosition does not return xPosition",b2.getXPosition(), 4);
+        Assert.assertEquals("getXPosition does not return xPosition", 4, b2.getXPosition());
     }
 
     @Test
     public void testGetBlockColorGetsBlockColor() {
         Block b1 = new Block(2, 0, 0, false);
-        Assert.assertEquals("getColor does not return color",b1.getColor(), 2);
+        Assert.assertEquals("getColor does not return color", 2, b1.getColor());
         Block b2 = new Block(6, 0, 0, false);
-        Assert.assertEquals("getColor does not return color",b2.getColor(), 6);
+        Assert.assertEquals("getColor does not return color", 6, b2.getColor());
     }
 
     @Test
     public void testGetBlockIsGhostGetsGhostBool() {
         Block b1 = new Block(0, 0, 0, false);
-        Assert.assertEquals("Get ghost does not return isGhost",b1.getIsGhost(), false);
+        Assert.assertEquals("Get ghost does not return isGhost", false, b1.getIsGhost());
         Block b2 = new Block(0, 0, 0, true);
-        Assert.assertEquals("Get ghost does not return isGhost",b2.getIsGhost(), true);
+        Assert.assertEquals("Get ghost does not return isGhost", true, b2.getIsGhost());
     }
 
     @Test
     public void testBlockConstructorConstructsBlock() {
         Block b1 = new Block(0, 0, 0, false);
-        Assert.assertEquals("Color is not properly set in constructor.",b1.getColor(), 0);
-        Assert.assertEquals("xPosition is not properly set in constructor.",b1.getXPosition(), 0);
-        Assert.assertEquals("yPosition is not properly set in constructor.",b1.getYPosition(), 0);
-        Assert.assertEquals("isGhost is not properly set in constructor.",b1.getIsGhost(), false);
+        Assert.assertEquals("Color is not properly set in constructor.", 0, b1.getColor());
+        Assert.assertEquals("xPosition is not properly set in constructor.", 0, b1.getXPosition());
+        Assert.assertEquals("yPosition is not properly set in constructor.", 0, b1.getYPosition());
+        Assert.assertEquals("isGhost is not properly set in constructor.", false, b1.getIsGhost());
 
 
         Block b2 = new Block(6, 6, 6, true);
@@ -73,7 +73,7 @@ public class BlockTest {
         b2.setColor(-5);
         Assert.assertEquals("Block initialized with color 3, setColor() accepts color < 0", 0, b2.getColor());
         b2.setColor(6);
-        Assert.assertEquals("Block color is not set properly.", b2.getColor(), 6);
+        Assert.assertEquals("Block color is not set properly.", 6, b2.getColor());
     }
 
     @Test
@@ -83,10 +83,10 @@ public class BlockTest {
         b1.setIsGhost(true);
         b2.setIsGhost(false);
 
-        Assert.assertEquals("Block isGhost is not set properly.", b1.getIsGhost(), true);
-        Assert.assertEquals("Block isGhost is not set properly.", b2.getIsGhost(), false);
+        Assert.assertEquals("Block isGhost is not set properly.", true, b1.getIsGhost());
+        Assert.assertEquals("Block isGhost is not set properly.", false, b2.getIsGhost());
         b2.setIsGhost(true);
-        Assert.assertEquals("Block isGhost is not set properly.", b2.getIsGhost(), true);
+        Assert.assertEquals("Block isGhost is not set properly.", true, b2.getIsGhost());
     }
 
     @Test
@@ -109,10 +109,10 @@ public class BlockTest {
         b1.setYPosition(10);
         b2.setYPosition(0);
 
-        Assert.assertEquals("Block yPosition is not set properly.", b1.getYPosition(), 10);
-        Assert.assertEquals("Block yPosition is not set properly.", b2.getYPosition(), 0);
+        Assert.assertEquals("Block yPosition is not set properly.", 10, b1.getYPosition());
+        Assert.assertEquals("Block yPosition is not set properly.", 0, b2.getYPosition());
         b2.setYPosition(5);
-        Assert.assertEquals("Block yPosition is not set properly.", b2.getYPosition(), 5);
+        Assert.assertEquals("Block yPosition is not set properly.", 5, b2.getYPosition());
     }
 
 
