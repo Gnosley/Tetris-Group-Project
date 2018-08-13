@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane fx:id="OTetromino" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="40.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TeamSix.gui.TetrisController">
+   <children>
+      <Rectangle fx:id="tetrisBlock1" arcHeight="5.0" arcWidth="5.0" fill="#fffe21" focusTraversable="true" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_LEFT">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle fx:id="tetrisBlock4" arcHeight="5.0" arcWidth="5.0" fill="#fffe21" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="BOTTOM_RIGHT">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle fx:id="tetrisBlock2" arcHeight="5.0" arcWidth="5.0" fill="#fffe21" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="TOP_RIGHT" />
+      <Rectangle fx:id="tetrisBlock3" arcHeight="5.0" arcWidth="5.0" fill="#fffe21" height="20.0" stroke="BLACK" strokeType="INSIDE" width="20.0" StackPane.alignment="BOTTOM_LEFT">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </Rectangle>
+   </children>
+</StackPane>

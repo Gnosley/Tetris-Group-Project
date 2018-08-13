@@ -1,0 +1,84 @@
+.main {
+    -fx-background-color: #4b1df1;
+}
+
+.btn-primary {
+    -fx-font-family: Century Gothic;
+
+}
+
+.btn-primary Text {
+    -fx-fill: #000000;
+}
+
+.btn-primary Rectangle {
+    -fx-fill: #1f93ff;
+}
+
+.btn-secondary {
+    -fx-font-family: Century Gothic;
+}
+
+.btn-secondary Rectangle {
+    -fx-fill: #ff481e;
+}
+
+.btn-secondary Text {
+    -fx-fill: #000000;
+}
+
+.btn-lg {
+    -fx-font-size: 18px;
+}
+
+.btn-md {
+    -fx-font-size: 13px;
+}
+
+.btn-sm {
+    -fx-font-size: 13px;
+}
+
+.heading-settings {
+    -fx-font-family: Century Gothic;
+    -fx-fill: #c4f0f5;
+    -fx-font-size: 18px;
+}
+
+.txt-controls {
+    -fx-line-spacing: 3;
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 13px;
+}
+
+.heading-tetris {
+    -fx-font-family: Century Gothic;
+    -fx-fill: #ffffff;
+    -fx-font-size: 18px;
+}
+
+.txt-gameover {
+    -fx-font-family: Century Gothic;
+    -fx-fill: #ffffff;
+    -fx-font-size: 48px;
+    -fx-view-order: -1.0;
+}
+
+.btn-tetris {
+    -fx-font-size: 13px;
+    -fx-font-family: Century Gothic;
+
+}
+
+.btn-tetris Text {
+    -fx-fill: #000000;
+}
+
+.btn-tetris Rectangle {
+    -fx-fill: #1f93ff;
+}
+
+.btn-tetris Rectangle: hover {
+    -fx-fill: #155982;
+
+}
