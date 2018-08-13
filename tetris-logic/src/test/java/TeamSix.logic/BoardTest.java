@@ -3,8 +3,12 @@ package TeamSix.logic;
 import junit.framework.Assert;
 import org.junit.Test;
 
+/**
+ * JUnit tests for the Board class
+ **/
 public class BoardTest {
-
+    
+    //tests the updating functionality of Board
     @Test
     public void testBoardUpdateMethod(){
         Board b1 = new Board();
@@ -16,6 +20,7 @@ public class BoardTest {
             b1.getCurrentBoard()[5][5], b2.getCurrentBoard()[5][5]);
     }
 
+    //tests the getter method of Board as to prevent privacy leaks
     @Test
     public void testBoardGetterMethodPrivacy(){
         Board b1 = new Board();
@@ -27,6 +32,7 @@ public class BoardTest {
         Assert.assertNotSame("Privacy leak", ba1[10][5], ba2[10][5]);
     }
 
+    //tests the ability to check for a proper movement of tetrominos on the Board
     @Test
     public void testBoardCheckMoveMethod(){
         Board b1 = new Board();
@@ -41,6 +47,7 @@ public class BoardTest {
 
     }
 
+    //tests when the game is done and how the Board responds
     @Test
     public void testBoardIsGameDoneMethod(){
         Board b1 = new Board();

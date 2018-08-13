@@ -8,6 +8,9 @@ import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * JUnit tests for the Game class
+ **/
 public class GameTest {
         
         //test for when holding is available
