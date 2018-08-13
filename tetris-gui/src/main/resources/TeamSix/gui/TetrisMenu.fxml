@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="580.0" styleClass="main" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TeamSix.gui.MenuController">
+   <children>
+      <ImageView fitHeight="300.0" fitWidth="400.0" layoutX="90.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Tetris.png" />
+         </image>
+      </ImageView>
+      <StackPane layoutX="190.0" layoutY="185.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="200.0">
+         <children>
+            <Rectangle fx:id="newGame" arcHeight="5.0" arcWidth="5.0" height="50.0" onMouseClicked="#handleNewGameButtonAction" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" styleClass="btn-primary, btn-lg" width="200.0" StackPane.alignment="CENTER">
+               <effect>
+                  <Bloom />
+               </effect></Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="New Game" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-lg" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="60.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="250.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-secondary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="100.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="140.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="180.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="220.0" layoutY="300.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton5" arcHeight="5.0" arcWidth="5.0" fill="#124c51" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="60.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="6" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="100.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="7" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="140.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="8" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="180.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="9" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="220.0" layoutY="340.0" prefHeight="40.0" prefWidth="40.0">
+         <children>
+            <Rectangle fx:id="dropSpeedButton10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickDropSpeed" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="40.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <Text layoutX="60.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Drop Speed:">
+      </Text>
+      <Text layoutX="60.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Controls:" />
+      <StackPane layoutX="320.0" layoutY="300.0" prefHeight="40.0" prefWidth="60.0">
+         <children>
+            <Rectangle fx:id="EASY" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="250.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-secondary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="380.0" layoutY="300.0" prefHeight="40.0" prefWidth="60.0">
+         <children>
+            <Rectangle fx:id="MEDIUM" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Medium" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="440.0" layoutY="300.0" prefHeight="40.0" prefWidth="60.0">
+         <children>
+            <Rectangle fx:id="HARD" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutY="300.0" onMouseClicked="#mouseClickLevel" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="60.0">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Hard" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-sm" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="60.0" layoutY="430.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0">
+         <children>
+            <Rectangle fx:id="controlsButtonStandard" arcHeight="5.0" arcWidth="5.0" height="40.0" onMouseClicked="#mouseClickControls" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="CENTER">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Standard" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-secondary" />
+            <String fx:value="btn-md" />
+         </styleClass>
+      </StackPane>
+      <StackPane layoutX="160.0" layoutY="430.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0">
+         <children>
+            <Rectangle fx:id="controlsButtonWASD" arcHeight="5.0" arcWidth="5.0" height="40.0" onMouseClicked="#mouseClickControls" onMouseEntered="#mouseOverButton" onMouseExited="#mouseExitButton" stroke="BLACK" strokeType="INSIDE" width="100.0" StackPane.alignment="CENTER">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Rectangle>
+            <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="WASD" />
+         </children>
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-md" />
+         </styleClass>
+      </StackPane>
+      <Text layoutX="320.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="Difficulty:" />
+      <Text fx:id="controlsText1" fill="WHITE" layoutX="320.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="LEFT: Left&#10;RIGHT: Right&#10;UP: Rotate CW&#10;X: Rotate CCW" wrappingWidth="100.0" />
+      <Text fx:id="controlsText2" fill="WHITE" layoutX="440.0" layoutY="430.0" lineSpacing="3.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-controls" text="DOWN: Soft Drop&#10;SPACE: Hard Drop&#10;C: Hold" wrappingWidth="117.0" />
+      <TextField fx:id="userTextField" layoutX="240.0" layoutY="136.0" prefWidth="100.0" />
+      <Text layoutX="130.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading-settings" text="User Name:" />
+   </children>
+</AnchorPane>
