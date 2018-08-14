@@ -98,7 +98,7 @@
             <Text mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Menu" />
          </children>
       </StackPane>
-      <Text fx:id="gameStatsLabels" fill="WHITE" layoutX="40.0" layoutY="300.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I:&#10;O:&#10;T:&#10;S:&#10;Z:&#10;J:&#10;L:" textAlignment="RIGHT" wrappingWidth="20.0">
+      <Text fx:id="gameStatsLabels" fill="WHITE" layoutX="40.0" layoutY="300.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I:&#10;O:&#10;T:&#10;S:&#10;Z:&#10;J:&#10;L:" textAlignment="RIGHT" wrappingWidth="30.0">
          <font>
             <Font size="18.0" />
          </font>
