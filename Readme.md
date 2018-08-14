@@ -71,7 +71,14 @@ install the game.
         You may also change font size as you wish for larger or smaller graphics.
     1. To play with the gui, run `mvn -pl tetris-gui exec:java`
 
+# Viewing The Source Code
+The source code for all modules are in 
+`Tetris-Group-Project\tetris-<MODULENAME>\src\main\java\TeamSix.<MODULENAME>`
+For example, to see the Console game's source, go to 
+`Tetris-Group-Project\tetris-console\src\main\java\TeamSix.console`
 # Testing
+
+## JUnit Testing
 The majority of tests are stored in the `tetris-logic` module.
 They are in the `Tetris-Group-Project\tetris-logic\src\test\java\TeamSix.logic\` directory.
 
@@ -84,8 +91,10 @@ Then run: `mvn test` to run all the tests.
 To run a specific test, i.e., `BlockTest`, use `mvn -pl tetris-logic test -Dtest=BlockTest`. 
 Unless you want to run `ConsoleTest`, then use `mvn -pl tetris-console test -Dtest=ConsoleTest` 
 (as it is in the `tetris-console` module)
-# Viewing The Source Code
-The source code for all modules are in 
-`Tetris-Group-Project\tetris-<MODULENAME>\src\main\java\TeamSix.<MODULENAME>`
-For example, to see the Console game's source, go to 
-`Tetris-Group-Project\tetris-console\src\main\java\TeamSix.console`
+
+## Testing through the interface:
+### For Console
+1.
+### For GUI
+1.
+
