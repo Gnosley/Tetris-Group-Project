@@ -274,7 +274,7 @@ public class TetrisController {
      * Calls the tryMove function in the Game class. Updates all Tetrominos and board object
      * Calls a sequence of functions to update the board
      * Checks if the game is over to display "GAME OVER" text
-     * @param moveType
+     * @param moveType Character which defines the move type for the logic classes
      */
     public void tryMove(char moveType) {
         boolean canMove = game.tryMove(moveType);
@@ -316,7 +316,7 @@ public class TetrisController {
             //Clears block graphics from a row
             if (game.getRowsToClear().size() > 0) {
                 updateBoardFX(game.getPreClearedBoard());
-                clearRows(game.getPreClearedBoard());
+                clearLine();
             } else {
                 //Updates the board block graphics
                 updateBoardFX(game.getBoard());
@@ -457,7 +457,7 @@ public class TetrisController {
 
     /**
      * Sets the next Tetromino to the display box location. Uses offset values to align properly.
-     * @param nextTetNum
+     * @param nextTetNum Number that gives the type of the Tetromino in the next box
      */
     public void placeNextTetrominoGraphic(int nextTetNum) {
         //I,O,T,S,Z,J,L
@@ -468,7 +468,7 @@ public class TetrisController {
 
     /**
      * Sets the stored Tetromino to the display box location. Uses offset values to align properly.
-     * @param storedTetNum
+     * @param storedTetNum Number that gives the type of the stored Tetromino
      */
     public void placeStoredTetrominoGraphic(int storedTetNum) {
         //I,O,T,S,Z,J,L
@@ -480,6 +480,7 @@ public class TetrisController {
     /**
      * Updates all blocks on the grid to match the board before a line was cleared.
      * Matches blocks with the previous board object
+     * @param board Block array created by the Board logic class
      */
     public void updateBoardFX(Block[][] board) {
         for(int row = 0; row < board.length; row++){
@@ -496,6 +497,9 @@ public class TetrisController {
     /**
      * Updates all blocks on the grid. Matches blocks with the current board object
      * This overloaded method can be called from the ClearLines thread
+     * @param currentBoard Block array created by the Board logic class
+     * @param blockFXArray The block array of JavaFX Rectangles
+     * @param playArea The JavaFX AnchorPane
      */
     public void updateBoardFX(Block[][] currentBoard, Rectangle[][] blockFXArray, AnchorPane playArea) {
         for(int row = 0; row < currentBoard.length; row++){
@@ -538,8 +542,9 @@ public class TetrisController {
     /**
      * Clears rows of blocks and updates blocks on grid whenever a line is cleared.
      * Updates score
+     * Calls the ClearLines animation
      */
-    public void clearRows(Block[][] oldBoard) {
+    public void clearLine() {
         game.getRowsToClear();
 
         //Creates new thread to perform the ClearLines Class animation
@@ -556,9 +561,9 @@ public class TetrisController {
 
     /**
      * Adds blocks to the grid when a Tetromino is placed
-     * @param layoutX
-     * @param layoutY
-     * @param blockColor
+     * @param layoutX Layout X coordinate in pixels
+     * @param layoutY Layout Y coordinate in pixels
+     * @param blockColor The Tetris block color
      */
     public void addBlock(int layoutX, int layoutY, int blockColor) {
 
@@ -590,9 +595,11 @@ public class TetrisController {
     /**
      * Adds blocks to the grid when a Tetromino is placed
      * This overloaded method can be called from the ClearLines thread
-     * @param layoutX
-     * @param layoutY
-     * @param blockColor
+     * @param layoutX Layout X coordinate in pixels
+     * @param layoutY Layout Y coordinate in pixels
+     * @param blockColor The Tetris block color
+     * @param blockFXArray The block array of JavaFX Rectangles
+     * @param playArea The JavaFX AnchorPane
      */
     public void addBlock(int layoutX, int layoutY, int blockColor, Rectangle[][] blockFXArray, AnchorPane playArea) {
 
@@ -624,8 +631,8 @@ public class TetrisController {
 
     /**
      * Converts from grid coordinates to screen coordinates (pixels)
-     * @param row
-     * @param col
+     * @param row The row number of the grid cell with 0 as the top row
+     * @param col The column number of the grid cell with 0 as the leftmost column
      * @return screenCoords int array
      */
     public int[] getScreenCoordinates(int row, int col) {
@@ -639,8 +646,8 @@ public class TetrisController {
 
     /**
      * Converts from screen coordinates (pixels) to grid coordinates
-     * @param row
-     * @param col
+     * @param row The JavaFX Layout Y pixel location of the block Rectangle
+     * @param col The JavaFX Layout X pixel location of the block Rectangle
      * @return gridCoords int array
      */
     public int[] getGridCoordinates(int row, int col) {
@@ -654,7 +661,7 @@ public class TetrisController {
 
     /**
      * Setter method for the game settings
-     * @param gameSettings
+     * @param gameSettings The GameSettings object to be used by the TetrisController
      */
     public void setGameSettings(GameSettings gameSettings) {
         this.gameSettings = gameSettings;

@@ -6,6 +6,11 @@ import java.util.Arrays;
 
 import static javafx.scene.input.KeyCode.*;
 
+/**
+ * This class is used to set various settings that can be passed from the MenuController to the TetrisController
+ * These settings include drop speed, distribution level, username and controls
+ * Setter and getter methods are available to access and change the settings
+ */
 public class GameSettings {
     private int dropSpeed = 1;
     private String level = "EASY";
@@ -22,7 +27,7 @@ public class GameSettings {
     }
 
     /**
-     *
+     * The level of drop speed from 1-10
      * @return The drop speed level
      */
     public int getDropSpeedLevel() {
@@ -83,7 +88,7 @@ public class GameSettings {
 
     /**
      * Getter method for the selected controls
-     * @return User name
+     * @return Controls
      */
     public KeyCode[] getControls() {
         KeyCode[] copyControls = Arrays.copyOf (currentControls, currentControls.length);

@@ -38,6 +38,8 @@ Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2)
     1. Click `Browse...`
     2. Find where your jdk is located and select the bin directory. i.e., `C:\Program Files\Java\jdk1.8.0_181\bin`
 10. Open a command prompt and run `mvn -v` to confirm installation.
+
+    **Note: If this does not work, but you have followed the steps above then please try restarting your computer**
 # Running The Project
 1. Download the zip file from D2L and unzip to a sensible location. i.e, `C:\Users\Jesse\Documents\Projects\Tetris-Group-Project`
 2. Open a command prompt and change into the directory you have unzipped it to.
