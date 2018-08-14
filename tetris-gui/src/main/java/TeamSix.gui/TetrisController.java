@@ -184,17 +184,20 @@ public class TetrisController {
                         currentDifficultyText.setText(gameSettings.getLevel());
                         currentUser.setText(gameSettings.getUser());
 
-
+                        String musicFile = "";
                         //Load the tetris theme .wav file into a MediaPlayer object
-                        String musicFile = this.getClass().getResource(
-                                "./TetrisTheme.wav").getPath();
-                        System.out.println(musicFile);
-                        Media tetrisTheme = new Media(new File(musicFile).toURI().toString());
-                        this.themePlayer = new MediaPlayer(tetrisTheme);
-                        // Play the media at the desired rate on a loop
-                        themePlayer.setRate(0.85 + (gameSettings.getDropSpeedLevel() / 10.0) * 0.3);
-                        themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                        themePlayer.play();
+                        try {
+                            musicFile = this.getClass().getResource(
+                                    "./TetrisTheme.wav").getPath();
+                            Media tetrisTheme = new Media(new File(musicFile).toURI().toString());
+                            this.themePlayer = new MediaPlayer(tetrisTheme);
+                            // Play the media at the desired rate on a loop
+                            themePlayer.setRate(0.85 + (gameSettings.getDropSpeedLevel() / 10.0) * 0.3);
+                            themePlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                            themePlayer.play();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         //Set high score texts
                         highScoreUser.setText(game.getHighScoreName());
