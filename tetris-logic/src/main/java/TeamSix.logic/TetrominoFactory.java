@@ -90,7 +90,8 @@ public class TetrominoFactory {
     }
 
     /**
-     * Get a Tetromino of given type at given reference position.
+     * Get a Tetromino of given type at given reference position. Returns null
+     * if type does not exist.
      *
      * @param xRef    The x coordinate of the reference position.
      * @param yRef    The y coordinate of the reference position.

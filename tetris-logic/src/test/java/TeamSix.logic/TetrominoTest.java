@@ -3,6 +3,9 @@ package TeamSix.logic;
 import junit.framework.Assert;
 import org.junit.Test;
 
+/**
+ * Provides tests for Tetromino rotation
+ */
 public class TetrominoTest {
 
     @Test

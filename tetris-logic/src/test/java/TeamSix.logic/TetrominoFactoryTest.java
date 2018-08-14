@@ -4,6 +4,9 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
+/**
+ * Provides tests for the generation of tetrominos via TetrominoFactory
+ */
 public class TetrominoFactoryTest {
 
     @Test
@@ -14,16 +17,16 @@ public class TetrominoFactoryTest {
         TetrominoFactory generator = new TetrominoFactory("EASY", 0, 0);
 
         // Large sample of tetrominos
-        for (int i = 0; i <= 5005; i++) {
+        for (int i = 0; i < 7000; i++) {
             generator.getTetromino(0, 0);
         }
 
         int[] pieceStats = generator.getPieceStats();
 
         for (int j = 0; j < pieceStats.length; j++) {
-            // Because difficulty EASY, expect each piece within 5 of 715
-            // (5005/7) times
-            boolean expected = ((pieceStats[j] < 720) && (pieceStats[j] > 710));
+            // Because difficulty EASY, expect each piece within 10 of 1000
+            // (7000/7) times
+            boolean expected = ((pieceStats[j] < 1010) && (pieceStats[j] > 990));
             Assert.assertEquals(
                     "Number of pieces of a type not within specified"
                             + " range. This may be a very unlucky run. "
