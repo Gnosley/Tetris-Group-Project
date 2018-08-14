@@ -113,7 +113,7 @@ class TetrisController {
       +updateBoardFX(oldBoard : Block[][])
       +updateBoardFX(currentBoard : Block[][], blockFXArray : Rectangle[][], playArea : AnchorPane)
       +clearRows()
-      +clearRows(oldBoard : Block[][])
+      +clearLine()
       +addBlock(layoutX : int, layoutY : int, blockColor : int)
       +addBlock(layoutX : int, layoutY : int, blockColor : int, blockFXArray : Rectangle[][], playArea : AnchorPane)
       +getScreenCoordinates(row : int, col : int) : int[]
