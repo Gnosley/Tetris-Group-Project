@@ -18,10 +18,14 @@ import java.io.File;
 import java.nio.file.Paths;
 
 /**
- * Loads initial settings to start the Tetris application
+ * Loads initial settings to start the Tetris application window
  */
 public class Main extends Application {
 
+    /**
+     * Load all the inintial settings to create the Main Menu window when the application is launched
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -47,6 +51,10 @@ public class Main extends Application {
         });
     }
 
+    /**
+     * Launches the JavaFX application
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
