@@ -1,4 +1,22 @@
 Jesse  600
+       400
+       200
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+       0
+dustin 0
 Jesse  0
 Jesse  0
 USERNAM000
