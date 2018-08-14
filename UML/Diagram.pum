@@ -1,0 +1,373 @@
+@startuml
+/'
+ ' skinparam wrapWidth 600
+ '/
+
+/' GAME '/
+/'
+ ' note "Game holds the current state of the game. The TetrominoGenerator will be called each time a new Tetromino is needed, unless we need a copy(?)" as nGame
+ '/
+class Game {
+      --
+      .. Tetrominos for playing the game ..
+      -currentTetromino : Tetromino
+      -nextTetromino : Tetromino
+      -ghostTetromino : Tetromino
+      -storedTetromino : Tetromino
+      -tetrominoFactory : TetrominoFactory
+      ..
+      {static} -startingX : int
+      {static} -startingY : int
+      -gameScore : long
+      -linesCleared : long
+      -isHoldOccupied : boolean
+      -isHoldMoveAvailable : boolean
+      -board : Board
+      -username : String
+      __
+      .. Constructors ..
+      +Game()
+      +Game(username : String, difficulty : String)
+      .. Getters ..
+      +getCurrentTetromino() : Tetromino
+      +getNextTetromino() : Tetromino
+      +getGhostTetromino() : Tetromino
+      +getStoredTetromino() : Tetromino
+      +getBoard() : Board
+      +getGameScore() : long
+      +getLinesCleared() : long
+      +getPieceStats() : int[]
+      +isGameDone() : boolean
+      +getPreClearedBoard() : Block[][]
+      +getRowsToClear() : ArrayList<Integer>
+      +resetRowsToClear()
+      +getIsHoldMoveAvailable() : boolean
+      +getDifficulty() : String
+      +getUsername() : String
+      +getHighScore()
+      +getHighScoreName()
+      .. Play Methods ..
+      +tryMove( moveType : int )
+      +writeScoreToFile()
+      +updateGameScore(numLinesCleared : long)
+      -positionGhost(board : Board) : Tetromino
+      -holdMove()
+      -dropMove()
+      -commitTetrominoSequence( board : Board )
+      -updateLinesCleared( linesCleared : long )
+}
+
+/'
+ ' Game .. nGame
+ '/
+
+/' CONSOLE '/
+/'
+ ' note "Console will be what runs the text based game. It is what is currently being run in Game's main() and it will contain all jline3 related things." as nConsole
+ '/
+class Console {
+      -terminal : Terminal
+      -reader : NonBlockingReader
+      -printer : Printer
+      -game : Game
+      -isGameDone : boolean
+      -dropTimer : TimerTask
+      --
+      .. Constructor ..
+      +Console()
+      +Console(username : String, difficulty : String)
+      .. Do the game ..
+      {static} +main(args : String[])
+      -printGame()
+      -dropPieces()
+      -pauseDropping()
+      -setIsGameDone(gameDone : boolean)
+      .. Getters ..
+      +getIsGameDone()
+      {static} +getOptions() : String[]
+}
+
+/'
+ ' Console .. nConsole
+ '/
+
+/' DropTimer '/
+class DropTimer<extends java.util.TimerTask>{
+      +run()
+}
+DropTimer --+ Console
+
+/' BOARD '/
+class Board{
+      --
+      -gameBoard : Block[][]
+      -numLinesCleared : long
+      -rowsToClear : ArrayList<Integer>
+      -preClearedBoard : Block[][]
+      --
+      .. Play Methods ..
+      +updateBoard(currentTetromino : Tetromino)
+      +checkMove(movedTetromino : Tetromino) : boolean
+      +isGameDone() : boolean
+      +resetNumLinesCleared()
+      +resetRowsToClear()
+      .. Getters ..
+      +getCurrentBoard() : Block[][]
+      +getPreClearedBoard() : Block[][]
+      +getNumLinesCleared() : long
+      +getRowsToClear() : ArrayList<Integer>
+      ..
+      -copyBoard(gameBoard Block[][]) Block[][]
+      -checkBoard() : boolean
+      -checkRowFull(rowCheck : int) : boolean
+      -clearRow(rowClear : int)
+      -dropRow(rowCleared : int)
+}
+
+/' Block '/
+class Block{
+      --
+      -color : int
+      -xPosition : int
+      -yPosition : int
+      -isGhost : boolean
+      --
+      .. construtors ..
+      +Block(color : int, x : int, y : int, isGhost : boolean)
+      +Block(block : Block)
+      .. setters ..
+      +setColor(color : int)
+      +setIsGhost(isGhost : boolean)
+      +setXPosition(x : int)
+      +setYPosition(y : int)
+      .. getters ..
+      +setColor() : int
+      +setIsGhost() : boolean
+      +setXPosition() : int
+      +setYPosition() : int
+}
+
+/' ANSI '/
+class ANSI{
+      --
+      .. ANSI Escape Codes ..
+      {static} +CLEARSCREEN : String
+      {static} +RESET : String
+      {static} +BLACK : String
+      {static} +RED : String
+      {static} +GREEN : String
+      {static} +YELLOW : String
+      {static} +BLUE : String
+      {static} +PURPLE : String
+      {static} +CYAN : String
+      {static} +WHITE : String
+      {static} +BRIGHT_YELLOW : String
+      {static} +BLINK : String
+      --
+      {static} +color(colorNum : int)
+}
+
+/' Printer '/
+/'
+ ' note "If we can hold all the tetrominos in one variable, then print() could have a nicer parameter list" as nPrinter
+ '/
+class Printer {
+      +print(currentTetromino : Tetromino, \n\t...\n\tboard : Board, \n\tterminal : Terminal\n\tgameScore : long\n\tlinesCleared : long\n\tHoldAvailable : boolean\n\ttetrominoStats : int[]\n\tusername : String\n\tdifficulty : String\n\thighscore : long\n\thighscoreName : String)
+      +printHelp(terminal : Terminal)
+}
+
+note "See other UML" as graphicsNote
+
+/' GRAPHICS '/
+class TetrisController {
+}
+
+/' Tetromino Factory '/
+class TetrominoFactory{
+      --
+      {static} -rand : Random
+      -numPieces : int
+      -pieceStats : int[]
+      -defaultXRef : int
+      -defaultYRef : int
+      -difficulty : String
+      --
+      .. Constructor ..
+      +TetrominoFactory(difficulty : String, defaultX : int, defaultY : int)
+      .. Getters ..
+      +getTetromino() : Tetromino
+      +getTetromino(xRef : int, yRef : int) : Tetromino
+      +getTetromino(type : int) : Tetromino
+      +getTetromino(type : int, isGhost : boolean) : Tetromino
+      +getTetromino(xRef : int, yRef : int, type : int, isGhost : boolean) : Tetromino
+      +getTetrominoCopy(tetrominoToCopy : Tetromino) : Tetromino
+      +getTetrominoCopy(tetrominoToCopy : Tetromino, convertToGhost : boolean) : Tetromino
+      +getDifficulty() : String
+      +getPieceStats()
+      .. Helper Functions ..
+      -generateType() : int
+      -genEasyType() : int
+      -genMediumType() : int
+      -genHardType() : int
+      -updateDropRates() : double[]
+      -updateDropInterval(dropRates : double[]) : double[]
+      -determineType(dropInterval : double[], drop : double) : int
+}
+
+package Tetrominos <<Rectangle>> {
+
+
+/' Tetromino '/
+abstract Tetromino {
+         --
+         -numPieces : int
+         #tetrominoData : int[][]
+         #tetrominoArray : Block[][]
+         #xReferencePosition : int
+         #yReferencePosition : int
+         #size : int
+         #type : int
+         #rotation : int
+         #isGhost : boolean
+         #wallKickData : int[][][]
+         --
+         .. Constructors ..
+         #Tetromino(xRef : int, yRef : int, isGhost : boolean)
+         #Tetromino(tetromino : Tetromino)
+         #Tetromino(tetromino : Tetromino, convertToGhost : boolean)
+         .. Actions ..
+         +doMove(moveType : char)
+         +doMove(moveType : char, testNum : int)
+         .. Getters ..
+         +getBlockArray() : Block[]
+         +getXReference() : int
+         +getYReference() : int
+         +getSize() : int
+         +getType() : int
+         +getRotation() : int
+         +getIsGhost() : boolean
+         ..
+         #generateTetrominoArray(isGhost : boolean) : Block[]
+         #convertGhostType(toGhost : boolean)
+         #rotate(direction : char)
+         #move(direction : char)
+         #move(direction : char, distance : int)
+         #rotate(moveType : char, testNum : int)
+         -rotationToState(rotation : int) : int
+         #setBlockArray(transferArray : Block[])
+         #setRotation(rotation: int)
+
+}
+
+ package subclasses {
+left to right direction
+class ITetromino {
+      -tetrominoArray : Block[]
+      --
+      .. Constructors ..
+      +ITetromino(xRef : int, yRef : int, isGhost : boolean)
+      +ITetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+}
+
+class JTetromino {
+-tetrominoArray : Block[]
+--
+.. Constructors ..
++JTetromino(xRef : int, yRef : int, isGhost : boolean)
++JTetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+}
+
+class LTetromino {
+-tetrominoArray : Block[]
+--
+.. Constructors ..
++LTetromino(xRef : int, yRef : int, isGhost : boolean)
++LTetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+}
+
+class OTetromino {
+-tetrominoArray : Block[]
+--
+.. Constructors ..
++OTetromino(xRef : int, yRef : int, isGhost : boolean)
++OTetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+.. Overridden Method ..
+#rotate(moveType : char, testNum : int)
+}
+
+class STetromino {
+-tetrominoArray : Block[]
+--
+.. Constructors ..
++STetromino(xRef : int, yRef : int, isGhost : boolean)
++STetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+}
+
+class TTetromino {
+-tetrominoArray : Block[]
+--
+.. Constructors ..
++TTetromino(xRef : int, yRef : int, isGhost : boolean)
++TTetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+}
+
+class ZTetromino {
+-tetrominoArray : Block[]
+--
+.. Constructors ..
++ZTetromino(xRef : int, yRef : int, isGhost : boolean)
++ZTetromino(tetrominoToCopy : Tetromino, convertToGhost : boolean)
+}
+
+ }
+
+
+}
+
+
+
+
+/'
+ ' Printer .. nPrinter
+ ' Game .. nPrinter
+ '/
+ ANSI -right- Printer : provides \nhelper functions to >
+Printer -- Console : prints >
+Console -- Game : controls >
+TetrisController -right- Game : controls >
+graphicsNote -- TetrisController
+
+Board -- Block : has many >
+Tetrominos -left- Block : has 4 >
+Game -right- Board : Plays on >
+Game -- TetrominoFactory : Asks >
+TetrominoFactory -- Tetrominos : Returns >
+
+/'
+ ' ITetromino -[hidden]-> JTetromino
+ ' JTetromino -[hidden]-> LTetromino
+ ' LTetromino -[hidden]-> OTetromino
+ ' OTetromino -[hidden]-> STetromino
+ ' STetromino -[hidden]-> TTetromino
+ '/
+
+subclasses --|> Tetromino
+Tetromino -[hidden]-> subclasses
+TTetromino -[hidden]right-> ZTetromino
+ZTetromino -[hidden]right-> STetromino
+STetromino -[hidden]right-> OTetromino
+OTetromino -[hidden]right-> LTetromino
+
+/'
+ ' Tetromino <|-left- ITetromino
+ ' Tetromino <|-left- JTetromino
+ ' Tetromino <|-left- LTetromino
+ ' Tetromino <|-left- OTetromino
+ ' Tetromino <|-right- STetromino
+ ' Tetromino <|-right- TTetromino
+ ' Tetromino <|-right- ZTetromino
+ '/
+
+
+
+@enduml

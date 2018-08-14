@@ -1,0 +1,143 @@
+@startuml
+
+class ClearLines<implements Runnable> {
+      -playArea : AnchorPane
+      -t : Thread
+      -rowsToClear : ArrayList<Integer>
+      -blockFXArray : Rectangle[][]
+      -currentBoard : Block[][]
+      -oldBoard : Block[][]
+      --
+      .. Constructor ..
+      ClearLines(currentBoard : Block[][], oldBoard : Block[][], rowsToClear : ArrayList<Integer>, blockFXArray : Rectangle[][], playArea : AnchorPane)
+      ..
+      +run()
+      +start()
+}
+
+class GameSettings {
+      -dropSpeed : int
+      -level : String
+      -user : String
+      -currentControls : KeyCode[]
+      -standardControls : KeyCode[]
+      -wasdControls : KeyCode[]
+      --
+      .. Constructor ..
+      +GameSettings()
+      .. Setters ..
+      +setDropSpeed(dropSpeed : int)
+      +setLevel(level : String)
+      +setUser(user : String)
+      +setCurrentControls(currentControls : String)
+      .. Getters ..
+      +getDropSpeed() : int
+      +getLevel() : String
+      +getUser() : String
+      +getControls() : KeyCode[]
+}
+
+class Main<extends Application> {
+      +start(primaryStage : Stage)
+      {static} +main(args : String[])
+}
+
+class MenuController {
+      -dropSpeedButton1 : Rectangle
+      -EASY : Rectangle
+      -controlsButtonStandard : Rectangle
+      -newGame : Rectangle
+      -controlsText1 : Teext
+      -controlsText2 : Teext
+      -userTextField : TextField
+      -currentDropSpeedButton : Rectangle
+      -currentLevelButton : Rectangle
+      -currentControlButton : Rectangle
+      -gameSettings : GameSettings
+      -dropSpeed : int
+      +initialize()
+      #handleNewGameButtonAction(event : MouseEvent)
+      #mouseOverButton(event : MouseEvent)
+      #mouseExitButton(event : MouseEvent)
+      #mouseClickDropSpeed(event : MouseEvent)
+      -setDropSpeed(difficulty : String)
+      #mouseClickLevel(event : MouseEvent)
+      -setLevel(level : String)
+      #mouseClickControls(event : MouseEvent)
+      -loadGame(event : MouseEvent)
+}
+
+class TetrisController {
+      -playArea : AnchorPane
+      -image : ImageView
+      -scoreText : Text
+      -linesClearedText : Text
+      -gameStats : Text
+      -currentDifficultyText : Text
+      -currentUser : Text
+      -highScoreUser : Text
+      -highScore : Text
+      -gameOverText : Text
+      -startGameText : Text
+      -currentTetrominoGraphic : StackPane
+      -nextTetrominoGraphic : StackPane
+      -ghostTetrominoGraphic : StackPane
+      -storedTetrominoGraphic : StackPane
+      -startTime : long
+      -game : Game
+      -timer : Timer
+      {static} -gameSettings : GameSettings
+      -gameDone : boolean
+      -newGame : boolean
+      -clearingRows  : boolean
+      {static} -clearingRowsObs : BooleanProperty
+      -blockFXArray : Rectangle[][]
+      -boardCellWidth : int
+      -boardLayoutX : int
+      -boardLayoutY : int
+      -nextBoxLayoutX : int
+      -nextBoxLayoutY : int
+      -storedBoxLayoutX : int
+      -storedBoxLayoutY : int
+      +initialize()
+      #handleKeyboardAction(event KeyEvent)
+      +dropPieces()
+      +tryMove(moveType char)
+      +moveTetromino()
+      +removePlacedTetromino(removeStored : boolean)
+      +storeTetromino()
+      +generateTetromino()
+      +placeNextTetrominoGraphic(nextTetNum : int)
+      +placeStoredTetrominoGraphic(storedTetNum : int)
+      +updateBoardFX()
+      +updateBoardFX(oldBoard : Block[][])
+      +updateBoardFX(currentBoard : Block[][], blockFXArray : Rectangle[][], playArea : AnchorPane)
+      +clearRows()
+      +clearRows(oldBoard : Block[][])
+      +addBlock(layoutX : int, layoutY : int, blockColor : int)
+      +addBlock(layoutX : int, layoutY : int, blockColor : int, blockFXArray : Rectangle[][], playArea : AnchorPane)
+      +getScreenCoordinates(row : int, col : int) : int[]
+      +getGridCoordinates(row : int, col : int) : int[]
+      +setGameSettings(gameSettings : GameSettings)
+      {static} +setClearingRowsTrue()
+      +loadMainMenu(event : MouseEvent)
+}
+
+package Tetris_Window <<Rectangle>>{
+}
+
+class Game {
+
+}
+note "See other UML" as gameNote
+
+Main -right- Tetris_Window : loads >
+Tetris_Window -down- MenuController : controls <
+TetrisController -left- Tetris_Window : controls >
+ClearLines -up- TetrisController : controls >
+ClearLines -up- TetrisController : calls <
+GameSettings -- MenuController : sets settings in <
+GameSettings -right- TetrisController : gets settings <
+TetrisController -up- Game : controls >
+Game -right- gameNote
+@enduml
