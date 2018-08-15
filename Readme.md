@@ -10,30 +10,30 @@ Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2)
  3. Open up the control panel to `Control Panel\System and Security\System` (WIN + PAUSE)
  4. Go into `Advanced System Settings`.
  
-    ![Advanced System Settings](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/ControlPanel.PNG "Control Panel")
+    ![Advanced System Settings](Tetris%20Project%20Readme/ControlPanel.PNG "Control Panel")
  5. Press on `Environment Variables`.
  
-    ![Environment Variables](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/EnvironmentVariables.PNG "Press Environment Variables")
+    ![Environment Variables](Tetris%20Project%20Readme/EnvironmentVariables.PNG "Press Environment Variables")
  6. If you don't have a `JAVA_HOME` environment variable yet then:
     1. Press `New...`
     
-       ![New JAVAHOME Environment Variable](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/NewEnvironmentVariable.PNG "Press New Environment Variable")
+       ![New JAVAHOME Environment Variable](./Tetris%20Project%20Readme/NewEnvironmentVariable.PNG "Press New Environment Variable")
     2. Type in `JAVA_HOME` for the `Variable Name` field.
     
-       ![JAVA_HOME for Variable Name](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/NewBrowseDirectory.PNG "Press Browse Directory...")
+       ![JAVA_HOME for Variable Name](./Tetris%20Project%20Readme/NewBrowseDirectory.PNG "Press Browse Directory...")
     3. Press `Browse Directory...` and choose the directory of your JDK.
     4. Press `OK`
  7. Double click on the `Path` variable.
  
-    ![Double Click Path](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/DoubleClickPath.PNG "Double Click Path")
+    ![Double Click Path](Tetris%20Project%20Readme/DoubleClickPath.PNG "Double Click Path")
  8. Add Maven to your path:
     1. Click `Browse...`
     
-       ![Browse](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/BrowsePath.PNG "Press Browse...")
+       ![Browse](./Tetris%20Project%20Readme/BrowsePath.PNG "Press Browse...")
     2. Find where you extracted in step 2 and select the bin directory
         i.e., `C:\Program Files\apache-maven-3.5.4\bin\`
         
-        ![Bin Directory](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/SelectBin.PNG "Select Bin Directory")
+        ![Bin Directory](./Tetris%20Project%20Readme/SelectBin.PNG "Select Bin Directory")
  9. Add the JDK to your path if it is not already there:
     1. Click `Browse...`
     2. Find where your jdk is located and select the bin directory. i.e., `C:\Program Files\Java\jdk1.8.0_181\bin`
@@ -63,10 +63,10 @@ install the game.
         For smoother gameplay, 
         1. Right click the cmd window and select `properties`
         
-           ![Console Options](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/CmdOptions.PNG "Choose Properties")
+           ![Console Options](Tetris%20Project%20Readme/CmdOptions.PNG "Choose Properties")
         2. Change the `width` to `80` and the `height` to `24`
         
-           ![Window Size Options](https://github.com/Gnosley/Tetris-Group-Project/blob/MAVEN-Test/Tetris%20Project%20Readme/WindowSizeOptions.PNG "Change Console Size")
+           ![Window Size Options](Tetris%20Project%20Readme/WindowSizeOptions.PNG "Change Console Size")
         
         You may also change font size as you wish for larger or smaller graphics.
     1. To play with the gui, run `mvn -pl tetris-gui exec:java`
