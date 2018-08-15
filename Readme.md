@@ -4,6 +4,7 @@ Jesse Francis, Natalie Dean, Dustin Doell, Stephen Ng, Murray Evans
 Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2) 
 
 # Installing Maven
+ 0. Ensure you read and follow the [Maven Prerequisites For Windows](http://maven.apache.org/guides/getting-started/windows-prerequisites.html).
  1. Go to [The Maven Download Page](https://maven.apache.org/download.cgi) and download 
  [apache-maven-3.5.4-bin.zip](http://apache.mirror.rafal.ca/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip)
  2. Unzip to a location of your choosing. i.e., `C:\Program Files\apache-maven-3.5.4\`
