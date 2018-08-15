@@ -92,9 +92,4 @@ To run a specific test, i.e., `BlockTest`, use `mvn -pl tetris-logic test -Dtest
 Unless you want to run `ConsoleTest`, then use `mvn -pl tetris-console test -Dtest=ConsoleTest` 
 (as it is in the `tetris-console` module)
 
-## Testing through the interface:
-### For Console
-1.
-### For GUI
-1.
 
