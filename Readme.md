@@ -8,6 +8,7 @@ Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2)
  1. Go to [The Maven Download Page](https://maven.apache.org/download.cgi) and download 
  [apache-maven-3.5.4-bin.zip](http://apache.mirror.rafal.ca/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip)
  2. Unzip to a location of your choosing. i.e., `C:\Program Files\apache-maven-3.5.4\`
+   1. Make sure there are no spaces in the path. Maven does not like spaces.
  3. Open up the control panel to `Control Panel\System and Security\System` (WIN + PAUSE)
  4. Go into `Advanced System Settings`.
  
@@ -43,6 +44,7 @@ Final Project: CPSC 233 (Summer 2018) - Team 6 (Tutorial 2)
     **Note: If this does not work, but you have followed the steps above then please try restarting your computer**
 # Running The Project
 1. Download the zip file from D2L and unzip to a sensible location. i.e, `C:\Users\Jesse\Documents\Projects\Tetris-Group-Project`
+  1. **MAKE SURE THERE ARE NO SPACES IN THE PATH, MAVEN DOES NOT LIKE SPACES** -- see [here](http://maven.apache.org/guides/getting-started/windows-prerequisites.html) for more info.
 2. Open a command prompt and change into the directory you have unzipped it to.
     
     If you type `dir` your command prompt should look something like: 
